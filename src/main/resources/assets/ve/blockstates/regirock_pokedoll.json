@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/regirock_pokedoll" },
+        "facing=south": { "model": "ve:block/regirock_pokedoll", "y": 180 },
+        "facing=west":  { "model": "ve:block/regirock_pokedoll", "y": 270 },
+        "facing=east":  { "model": "ve:block/regirock_pokedoll", "y": 90 }
+    }
+}

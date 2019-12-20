@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "XXX",
+    "XAX",
+    "XXX"
+  ],
+  "key":
+  {
+    "X":
+	{
+      "item": "ve:airite_ingot"
+    },
+	"A":
+	{
+	  "item": "minecraft:iron_leggings"
+	}
+  },
+  "result":
+  {
+    "item": "ve:air_iron_leggings"
+  }
+}

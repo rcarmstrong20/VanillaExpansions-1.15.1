@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:smooth_smoky_quartz_stairs"
+    ]
+  },
+  "criteria":
+  {
+    "has_smooth_smoky_quartz":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:smooth_smoky_quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:smooth_smoky_quartz_stairs"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_smooth_smoky_quartz",
+      "has_the_recipe"
+    ]
+  ]
+}

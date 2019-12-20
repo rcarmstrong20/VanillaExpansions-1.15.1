@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BPB",
+    "BRB",
+    "FBF"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:brown_wool"
+    },
+	"P":
+	{
+	  "item": "minecraft:pink_wool"
+	},
+	"R":
+	{
+	  "item": "minecraft:rabbit"
+	},
+	"F":
+	{
+	  "item": "minecraft:rabbit_foot"
+	}
+  },
+  "result":
+  {
+    "item": "ve:rabbit_plush"
+  }
+}

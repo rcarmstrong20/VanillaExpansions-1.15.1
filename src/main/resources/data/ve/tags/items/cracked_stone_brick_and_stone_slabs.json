@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:cracked_stone_brick_slab",
+    "minecraft:stone_slab"
+  ]
+}

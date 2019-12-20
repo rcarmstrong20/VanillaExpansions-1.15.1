@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "tag": "minecraft:jungle_logs"
+  },
+  "result": "minecraft:jungle_planks",
+  "count": 6
+}

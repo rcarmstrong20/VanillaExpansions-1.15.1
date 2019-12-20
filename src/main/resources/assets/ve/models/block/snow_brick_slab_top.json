@@ -1,0 +1,9 @@
+{
+    "parent": "block/slab_top",
+    "textures":
+	{
+        "bottom": "ve:block/snow_bricks",
+        "top": "ve:block/snow_bricks",
+        "side": "ve:block/snow_bricks"
+    }
+}

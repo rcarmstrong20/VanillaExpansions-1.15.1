@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#",
+    "#"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:smoky_quartz_slab"
+    }
+  },
+  "result":
+  {
+    "item": "ve:chiseled_smoky_quartz_block"
+  }
+}

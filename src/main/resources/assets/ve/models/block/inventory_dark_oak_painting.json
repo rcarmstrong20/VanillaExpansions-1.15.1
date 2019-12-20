@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/inventory_painting",
+    "textures":
+	{
+        "frame": "block/dark_oak_log"
+    }
+}

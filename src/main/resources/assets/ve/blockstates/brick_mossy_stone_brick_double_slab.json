@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/brick_mossy_stone_brick_double_slab"}
+    }
+}

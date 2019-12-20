@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+		"facing=north": { "model": "ve:block/regigigas_pokedoll"},
+        "facing=south": { "model": "ve:block/regigigas_pokedoll", "y": 180, "uvlock": false },
+        "facing=west":  { "model": "ve:block/regigigas_pokedoll", "y": 270, "uvlock": false },
+        "facing=east":  { "model": "ve:block/regigigas_pokedoll", "y": 90, "uvlock": false }
+    }
+}

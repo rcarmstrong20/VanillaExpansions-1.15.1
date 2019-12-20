@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_double_slab",
+    "textures":
+	{
+        "top_slab_top": "block/mossy_cobblestone",
+        "top_slab_side": "block/mossy_cobblestone",
+        "bottom_slab_bottom": "block/diorite",
+		"bottom_slab_side": "block/diorite"
+    }
+}

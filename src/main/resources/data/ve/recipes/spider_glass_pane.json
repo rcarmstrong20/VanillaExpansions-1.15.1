@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "spider_glass_pane",
+  "pattern":
+  [
+    "SSS",
+    "SSS"
+  ],
+  "key":
+  {
+    "S":
+	{
+      "item": "ve:spider_glass"
+    }
+  },
+  "result":
+  {
+    "item": "ve:spider_glass_pane",
+	"count": 16
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/smooth_sandstone_sandstone_double_slab"}
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/nether_brick_polished_granite_double_slab"}
+    }
+}

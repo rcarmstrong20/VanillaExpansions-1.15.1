@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:ghast_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_ghast_tear":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:ghast_tear"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:ghast_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_ghast_tear",
+      "has_the_recipe"
+    ]
+  ]
+}

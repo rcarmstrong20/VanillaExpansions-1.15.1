@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WRW",
+    "FCF",
+    "YCY"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"R":
+	{
+	  "item": "minecraft:red_wool"
+	},
+	"Y":
+	{
+	  "item": "minecraft:yellow_wool"
+	},
+	"F":
+	{
+	  "item": "minecraft:feather"
+	},
+	"C":
+	{
+	  "item": "minecraft:chicken"
+	}
+  },
+  "result":
+  {
+    "item": "ve:chicken_plush"
+  }
+}

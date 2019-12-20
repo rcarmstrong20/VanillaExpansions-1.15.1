@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_double_slab",
+    "textures":
+	{
+        "top_slab_top": "ve:block/smoky_quartz_block_top",
+        "top_slab_side": "ve:block/smoky_quartz_block_slab_side",
+        "bottom_slab_bottom": "block/prismarine",
+		"bottom_slab_side": "block/prismarine"
+    }
+}

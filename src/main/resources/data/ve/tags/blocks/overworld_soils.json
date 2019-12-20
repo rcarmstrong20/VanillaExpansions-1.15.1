@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values":
+  [
+    "minecraft:farmland",
+    "ve:oak_planting_pot",
+    "ve:spruce_planting_pot",
+    "ve:birch_planting_pot",
+	"ve:jungle_planting_pot",
+	"ve:acacia_planting_pot",
+	"ve:dark_oak_planting_pot"
+  ]
+}

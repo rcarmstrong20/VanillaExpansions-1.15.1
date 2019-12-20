@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures":
+	{
+        "all": "ve:block/red_spider_glass"
+    }
+}

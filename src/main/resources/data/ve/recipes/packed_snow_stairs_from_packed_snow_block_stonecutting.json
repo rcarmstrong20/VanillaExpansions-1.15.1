@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:packed_snow_block"
+  },
+  "result": "ve:packed_snow_stairs",
+  "count": 1
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:coarse_dirt_slab",
+    "minecraft:diorite_slab"
+  ]
+}

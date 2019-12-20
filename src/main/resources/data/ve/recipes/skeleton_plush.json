@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "GLG",
+    "BLA",
+    "DLD"
+  ],
+  "key":
+  {
+    "G":
+	{
+      "item": "minecraft:gray_wool"
+    },
+	"L":
+	{
+	  "item": "minecraft:light_gray_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:bow"
+	},
+	"A":
+	{
+	  "item": "minecraft:arrow"
+	},
+	"D":
+	{
+	  "item": "minecraft:bone"
+	}
+  },
+  "result":
+  {
+    "item": "ve:skeleton_plush"
+  }
+}

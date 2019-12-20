@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/cut_red_sandstone_cobblestone_double_slab"}
+    }
+}

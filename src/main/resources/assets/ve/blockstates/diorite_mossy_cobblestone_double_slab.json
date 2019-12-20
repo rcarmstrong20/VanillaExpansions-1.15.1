@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/diorite_mossy_cobblestone_double_slab"}
+    }
+}

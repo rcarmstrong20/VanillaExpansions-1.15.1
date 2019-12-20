@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "CSC",
+    "SGS",
+    "CSC"
+  ],
+  "key":
+  {
+    "S":
+	{
+      "item": "minecraft:sugar"
+    },
+	"C":
+	{
+	  "item": "ve:cranberries"
+	},
+	"G":
+	{
+	  "item": "minecraft:glass_bottle"
+	}
+  },
+  "result":
+  {
+    "item": "ve:cranberry_sauce"
+  }
+}

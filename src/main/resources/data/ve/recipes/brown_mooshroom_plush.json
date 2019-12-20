@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "RRR",
+    "WBW",
+    "RMR"
+  ],
+  "key":
+  {
+    "R":
+	{
+      "item": "minecraft:brown_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:beef"
+	},
+	"M":
+	{
+	  "item": "minecraft:mushroom_stew"
+	}
+  },
+  "result":
+  {
+    "item": "ve:brown_mooshroom_plush"
+  }
+}

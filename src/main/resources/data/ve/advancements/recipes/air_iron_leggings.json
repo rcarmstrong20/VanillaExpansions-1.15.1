@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:air_iron_leggings"
+    ]
+  },
+  "criteria":
+  {
+    "has_airite_ingot":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:airite_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:air_iron_leggings"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_airite_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

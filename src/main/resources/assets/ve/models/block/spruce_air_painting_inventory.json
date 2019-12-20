@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/inventory_spruce_painting",
+    "textures":
+	{
+        "picture": "ve:painting/air"
+    }
+}

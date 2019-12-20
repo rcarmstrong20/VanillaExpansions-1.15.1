@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/oak_andesite_double_slab"}
+    }
+}

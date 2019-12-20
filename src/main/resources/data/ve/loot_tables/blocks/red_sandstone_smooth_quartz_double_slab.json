@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:tag",
+          "name": "ve:red_sandstone_and_smooth_quartz_slabs",
+		  "expand": false
+        }
+      ],
+      "conditions":
+	  [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

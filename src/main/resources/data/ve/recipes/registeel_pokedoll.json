@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "pokedoll",
+  "pattern":
+  [
+    "RCR",
+    "CRC",
+    "III"
+  ],
+  "key":
+  {
+    "R":
+	{
+      "item": "minecraft:redstone"
+    },
+	"C":
+	{
+	  "item": "minecraft:cyan_terracotta"
+	},
+	"I":
+	{
+	  "item": "minecraft:iron_ingot"
+	}
+  },
+  "result":
+  {
+    "item": "ve:registeel_pokedoll"
+  }
+}

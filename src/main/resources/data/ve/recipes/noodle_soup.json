@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "ve:noodle_bowl"
+    },
+	{
+	  "item": "ve:cooked_noodles"
+	},
+	{
+      "item": "ve:garlic"
+    },
+	{
+	  "item": "ve:green_onion"
+	},
+	{
+	  "item": "ve:bok_choy"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:noodle_soup"
+  }
+}

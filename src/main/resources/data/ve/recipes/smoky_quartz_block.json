@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "##",
+    "##"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:smoky_quartz"
+    }
+  },
+  "result":
+  {
+    "item": "ve:smoky_quartz_block"
+  }
+}

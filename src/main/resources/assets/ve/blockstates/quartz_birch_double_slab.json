@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/quartz_birch_double_slab"}
+    }
+}

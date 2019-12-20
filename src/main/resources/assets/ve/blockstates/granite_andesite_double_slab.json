@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/granite_andesite_double_slab"}
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/diorite_sandstone_double_slab"}
+    }
+}

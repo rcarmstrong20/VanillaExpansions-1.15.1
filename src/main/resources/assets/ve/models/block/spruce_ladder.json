@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_ladder",
+    "textures":
+	{
+		"material": "ve:block/spruce_ladder"
+    }
+}

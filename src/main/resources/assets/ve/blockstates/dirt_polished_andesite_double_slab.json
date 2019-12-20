@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/dirt_polished_andesite_double_slab"}
+    }
+}

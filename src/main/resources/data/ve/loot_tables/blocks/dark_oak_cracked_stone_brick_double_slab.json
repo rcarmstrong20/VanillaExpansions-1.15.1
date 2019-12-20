@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:tag",
+          "name": "ve:cracked_stone_brick_and_dark_oak_slabs",
+		  "expand": false
+        }
+      ],
+      "conditions":
+	  [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

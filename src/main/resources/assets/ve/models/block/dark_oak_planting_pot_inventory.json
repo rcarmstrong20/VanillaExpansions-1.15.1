@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_overworld_planting_pot_inventory",
+    "textures":
+	{
+		"pillar": "block/dark_oak_log",
+        "material": "block/dark_oak_planks"
+    }
+}

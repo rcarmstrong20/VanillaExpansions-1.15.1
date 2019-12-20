@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WGW",
+    "GSG",
+    "GIG"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"G":
+	{
+	  "item": "minecraft:gray_wool"
+	},
+	"S":
+	{
+	  "item": "minecraft:stone"
+	},
+	"I":
+	{
+	  "item": "minecraft:iron_ore"
+	}
+  },
+  "result":
+  {
+    "item": "ve:bat_plush"
+  }
+}

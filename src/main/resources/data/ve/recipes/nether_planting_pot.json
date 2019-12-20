@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WSW",
+    "WWW",
+    " B "
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:nether_brick"
+    },
+	"S":
+	{
+	  "item": "minecraft:soul_sand"
+	},
+	"B":
+	{
+	  "item": "minecraft:lava_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:nether_planting_pot"
+  }
+}

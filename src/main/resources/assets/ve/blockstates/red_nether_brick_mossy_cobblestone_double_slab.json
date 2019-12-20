@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/red_nether_brick_mossy_cobblestone_double_slab"}
+    }
+}

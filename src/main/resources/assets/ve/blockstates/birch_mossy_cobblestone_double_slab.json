@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/birch_mossy_cobblestone_double_slab"}
+    }
+}

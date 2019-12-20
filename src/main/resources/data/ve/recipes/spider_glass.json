@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "group": "spider_glass",
+  "pattern":
+  [
+    "SGS",
+    "GSG",
+    "SGS"
+  ],
+  "key":
+  {
+    "S":
+	{
+      "item": "minecraft:string"
+    },
+	"G":
+	{
+	  "item": "minecraft:glass"
+	}
+  },
+  "result":
+  {
+    "item": "ve:spider_glass",
+	"count": 4
+  }
+}

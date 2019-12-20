@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_painting_bottom",
+    "textures":
+	{
+		"frame": "block/oak_log"
+    }
+}

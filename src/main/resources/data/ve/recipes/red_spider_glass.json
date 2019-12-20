@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "group": "spider_glass",
+  "pattern":
+  [
+    "SGS",
+    "GEG",
+    "SGS"
+  ],
+  "key":
+  {
+    "S":
+	{
+      "item": "minecraft:string"
+    },
+    "E":
+	{
+      "item": "minecraft:spider_eye"
+    },
+	"G":
+	{
+	  "item": "minecraft:glass"
+	}
+  },
+  "result":
+  {
+    "item": "ve:red_spider_glass",
+	"count": 4
+  }
+}

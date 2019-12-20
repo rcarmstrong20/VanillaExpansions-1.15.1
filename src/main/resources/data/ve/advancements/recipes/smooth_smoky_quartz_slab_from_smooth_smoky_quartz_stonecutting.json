@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:smooth_smoky_quartz_slab_from_smooth_smoky_quartz_stonecutting"
+    ]
+  },
+  "criteria":
+  {
+    "has_smooth_smoky_quartz":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:smooth_smoky_quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:smooth_smoky_quartz_slab_from_smooth_smoky_quartz_stonecutting"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_smooth_smoky_quartz",
+      "has_the_recipe"
+    ]
+  ]
+}

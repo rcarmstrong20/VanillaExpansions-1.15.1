@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient":
+  {
+    "item": "ve:noodles"
+  },
+  "result": "ve:cooked_noodles",
+  "experience": 0.35,
+  "cookingtime": 600
+}

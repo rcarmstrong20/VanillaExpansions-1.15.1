@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values":
+  [
+    "minecraft:cut_sandstone_slab",
+    "minecraft:mossy_cobblestone_slab"
+  ]
+}

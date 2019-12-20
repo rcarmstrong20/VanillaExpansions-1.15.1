@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "ve:block/coarse_dirt_slab" },
+        "type=top": { "model": "ve:block/coarse_dirt_slab_top" },
+        "type=double": { "model": "block/coarse_dirt" }
+    }
+}

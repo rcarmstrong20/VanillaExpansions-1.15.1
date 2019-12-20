@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures":
+	{
+        "cross": "ve:block/green_onions_stage3"
+    }
+}

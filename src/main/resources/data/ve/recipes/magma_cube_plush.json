@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "RRR",
+    "OMO",
+    "RRR"
+  ],
+  "key":
+  {
+    "R":
+	{
+      "item": "minecraft:red_wool"
+    },
+	"O":
+	{
+	  "item": "minecraft:orange_wool"
+	},
+	"M":
+	{
+	  "item": "minecraft:magma_cream"
+	}
+  },
+  "result":
+  {
+    "item": "ve:magma_cube_plush"
+  }
+}

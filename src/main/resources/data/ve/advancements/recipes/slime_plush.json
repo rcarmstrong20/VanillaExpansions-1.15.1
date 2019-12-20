@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:slime_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_slime_ball":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:slime_ball"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:slime_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_slime_ball",
+      "has_the_recipe"
+    ]
+  ]
+}

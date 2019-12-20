@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "RBR",
+    "BFB",
+    "GRG"
+  ],
+  "key":
+  {
+    "R":
+	{
+      "item": "minecraft:red_wool"
+    },
+	"B":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"G":
+	{
+	  "item": "minecraft:gray_wool"
+	},
+	"F":
+	{
+	  "item": "minecraft:rotten_flesh"
+	}
+  },
+  "result":
+  {
+    "item": "ve:zombie_demon_plush"
+  }
+}

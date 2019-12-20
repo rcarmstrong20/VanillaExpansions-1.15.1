@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_wall",
+  "pattern":
+  [
+    "LLL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "ve:jungle_logs"
+    }
+  },
+  "result":
+  {
+    "item": "ve:jungle_wall",
+	"count": 6
+  }
+}

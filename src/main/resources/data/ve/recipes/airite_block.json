@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###",
+    "###",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:airite_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "ve:airite_block"
+  }
+}

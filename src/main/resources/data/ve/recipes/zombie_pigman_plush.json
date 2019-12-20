@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BPP",
+    "GRG",
+    "PLP"
+  ],
+  "key":
+  {
+    "P":
+	{
+      "item": "minecraft:pink_wool"
+    },
+	"B":
+	{
+	  "item": "minecraft:bone"
+	},
+	"G":
+	{
+	  "item": "minecraft:gold_nugget"
+	},
+	"R":
+	{
+	  "item": "minecraft:rotten_flesh"
+	},
+	"L":
+	{
+	  "item": "minecraft:leather_leggings"
+	}
+  },
+  "result":
+  {
+    "item": "ve:zombie_pigman_plush"
+  }
+}

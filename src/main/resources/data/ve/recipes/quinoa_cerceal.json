@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:bowl"
+    },
+	{
+	  "item": "minecraft:milk_bucket"
+	},
+	{
+	  "item": "ve:quinoa"
+	},
+	{
+	  "item": "ve:cranberries"
+	},
+	{
+	  "item": "ve:blueberries"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:quinoa_cerceal"
+  }
+}

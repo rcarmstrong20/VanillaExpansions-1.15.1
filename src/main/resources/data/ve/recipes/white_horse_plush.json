@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WWW",
+    "LLL",
+    "SWS"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"S":
+	{
+	  "item": "minecraft:light_gray_wool"
+	},
+	"L":
+	{
+	  "item": "minecraft:leather"
+	}
+  },
+  "result":
+  {
+    "item": "ve:white_horse_plush"
+  }
+}

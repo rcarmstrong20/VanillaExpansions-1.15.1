@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/inventory_oak_painting",
+    "textures":
+	{
+        "picture": "ve:painting/earth"
+    }
+}

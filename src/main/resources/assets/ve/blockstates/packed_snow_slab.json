@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "ve:block/packed_snow_slab" },
+        "type=top": { "model": "ve:block/packed_snow_slab_top" },
+        "type=double": { "model": "ve:block/packed_snow_block" }
+    }
+}

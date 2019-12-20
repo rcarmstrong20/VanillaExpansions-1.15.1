@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WSW",
+    "WWW",
+    " B "
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:obsidian"
+    },
+	"S":
+	{
+	  "item": "minecraft:end_stone"
+	},
+	"B":
+	{
+	  "item": "ve:void_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:end_planting_pot"
+  }
+}

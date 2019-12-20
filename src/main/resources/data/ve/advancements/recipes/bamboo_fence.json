@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:bamboo_fence"
+    ]
+  },
+  "criteria":
+  {
+    "has_bamboo":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:bamboo"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:bamboo_fence"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_bamboo",
+      "has_the_recipe"
+    ]
+  ]
+}

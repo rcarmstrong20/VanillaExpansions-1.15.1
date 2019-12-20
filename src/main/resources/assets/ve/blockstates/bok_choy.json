@@ -1,0 +1,13 @@
+{
+    "variants":
+	{
+        "age=0": { "model": "ve:block/bok_choy_stage0" },
+        "age=1": { "model": "ve:block/bok_choy_stage1" },
+        "age=2": { "model": "ve:block/bok_choy_stage2" },
+        "age=3": { "model": "ve:block/bok_choy_stage3" },
+        "age=4": { "model": "ve:block/bok_choy_stage4" },
+        "age=5": { "model": "ve:block/bok_choy_stage5" },
+        "age=6": { "model": "ve:block/bok_choy_stage6" },
+        "age=7": { "model": "ve:block/bok_choy_stage7" }
+    }
+}

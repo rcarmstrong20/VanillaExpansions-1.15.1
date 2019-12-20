@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/packed_snow_nether_brick_double_slab"}
+    }
+}

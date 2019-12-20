@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+		"age=0": { "model": "ve:block/garlic_stage0" },
+		"age=1": { "model": "ve:block/garlic_stage1" },
+		"age=2": { "model": "ve:block/garlic_stage2" },
+		"age=3": { "model": "ve:block/garlic_stage3" }
+    }
+}

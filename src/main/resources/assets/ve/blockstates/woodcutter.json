@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/woodcutter" },
+        "facing=south": { "model": "ve:block/woodcutter", "y": 180 },
+        "facing=west": { "model": "ve:block/woodcutter", "y": 270 },
+        "facing=east": { "model": "ve:block/woodcutter", "y": 90 }
+    }
+}

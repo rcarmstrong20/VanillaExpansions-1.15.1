@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:cranberry_sauce"
+    ]
+  },
+  "criteria":
+  {
+    "has_cranberries":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:cranberries"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:cranberry_sauce"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cranberries",
+      "has_the_recipe"
+    ]
+  ]
+}

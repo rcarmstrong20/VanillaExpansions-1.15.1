@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/slim_door_bottom_rh",
+    "textures":
+	{
+        "bottom": "ve:block/modern_door_bottom",
+        "top": "ve:block/modern_door_top"
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "minecraft:stone"
+  },
+  "result": "ve:stone_wall",
+  "count": 1
+}

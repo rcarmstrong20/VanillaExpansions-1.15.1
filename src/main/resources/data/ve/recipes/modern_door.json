@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "GG",
+    "##"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:iron_ingot"
+    },
+	"G":
+	{
+	  "item": "minecraft:glass"
+	}
+  },
+  "result":
+  {
+    "item": "ve:modern_door",
+    "count": 3
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:dark_oak_fire_painting"
+    ]
+  },
+  "criteria":
+  {
+    "has_dark_oak_logs":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "tag": "ve:dark_oak_logs"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:dark_oak_fire_painting"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_dark_oak_logs",
+      "has_the_recipe"
+    ]
+  ]
+}

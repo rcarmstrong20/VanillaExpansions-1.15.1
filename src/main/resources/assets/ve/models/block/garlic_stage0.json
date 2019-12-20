@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures":
+	{
+        "cross": "ve:block/garlic_stage0"
+    }
+}

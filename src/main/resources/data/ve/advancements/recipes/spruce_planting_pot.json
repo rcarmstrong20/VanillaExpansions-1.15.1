@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:spruce_planting_pot"
+    ]
+  },
+  "criteria":
+  {
+    "has_spruce_planks":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:spruce_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:spruce_planting_pot"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_spruce_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

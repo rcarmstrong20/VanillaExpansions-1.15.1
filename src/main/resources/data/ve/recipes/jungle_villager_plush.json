@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "HHH",
+    "YBY",
+    "GVG"
+  ],
+  "key":
+  {
+    "H":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"Y":
+	{
+	  "item": "minecraft:yellow_wool"
+	},
+	"G":
+	{
+	  "item": "minecraft:green_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"V":
+	{
+	  "item": "minecraft:vine"
+	}
+  },
+  "result":
+  {
+    "item": "ve:jungle_villager_plush"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "CSC",
+    "CAC",
+    "CCC"
+  ],
+  "key":
+  {
+    "C":
+	{
+      "item": "ve:caramel"
+    },
+	"S":
+	{
+	  "item": "minecraft:stick"
+	},
+	"A":
+	{
+	  "item": "minecraft:apple"
+	}
+  },
+  "result":
+  {
+    "item": "ve:caramel_apple"
+  }
+}

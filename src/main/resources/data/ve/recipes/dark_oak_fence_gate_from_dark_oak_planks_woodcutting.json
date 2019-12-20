@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:dark_oak_planks"
+  },
+  "result": "minecraft:dark_oak_fence_gate",
+  "count": 1
+}

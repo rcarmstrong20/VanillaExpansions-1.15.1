@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:quinoa_cerceal"
+    ]
+  },
+  "criteria":
+  {
+    "has_cooked_porkchop":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:quinoa"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:quinoa_cerceal"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cooked_porkchop",
+      "has_the_recipe"
+    ]
+  ]
+}

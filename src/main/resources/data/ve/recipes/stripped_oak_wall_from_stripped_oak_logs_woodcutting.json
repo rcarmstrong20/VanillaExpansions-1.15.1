@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "tag": "ve:stripped_oak_logs"
+  },
+  "result": "ve:stripped_oak_wall",
+  "count": 1
+}

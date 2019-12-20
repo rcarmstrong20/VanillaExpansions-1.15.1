@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_painting",
+    "textures":
+	{
+		"frame": "block/birch_log"
+    }
+}

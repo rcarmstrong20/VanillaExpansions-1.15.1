@@ -1,0 +1,13 @@
+{
+    "variants":
+	{
+		"facing=north,half=upper": { "model": "ve:block/oak_wanderer_painting_top" },
+		"facing=north,half=lower": { "model": "ve:block/oak_wanderer_painting_bottom" },
+		"facing=south,half=upper": { "model": "ve:block/oak_wanderer_painting_top", "y": 180 },
+		"facing=south,half=lower": { "model": "ve:block/oak_wanderer_painting_bottom", "y": 180 },
+		"facing=west,half=upper":  { "model": "ve:block/oak_wanderer_painting_top", "y": 270 },
+		"facing=west,half=lower":  { "model": "ve:block/oak_wanderer_painting_bottom", "y": 270 },
+		"facing=east,half=upper":  { "model": "ve:block/oak_wanderer_painting_top", "y": 90 },
+        "facing=east,half=lower":  { "model": "ve:block/oak_wanderer_painting_bottom", "y": 90 }
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:gingerbread_house"
+    ]
+  },
+  "criteria":
+  {
+    "has_ginger_root":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:ginger_root"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:gingerbread_house"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_ginger_root",
+      "has_the_recipe"
+    ]
+  ]
+}

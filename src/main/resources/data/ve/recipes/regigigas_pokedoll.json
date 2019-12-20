@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "group": "pokedoll",
+  "pattern":
+  [
+    "LGL",
+    "SQS",
+    "LGL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "minecraft:leaves"
+    },
+	"G":
+	{
+	  "item": "minecraft:gold_nugget"
+	},
+	"S":
+	{
+	  "item": "minecraft:stone_button"
+	},
+	"Q":
+	{
+	  "item": "minecraft:quartz_block"
+	}
+  },
+  "result":
+  {
+    "item": "ve:regigigas_pokedoll"
+  }
+}

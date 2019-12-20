@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "tag": "ve:jungle_logs"
+  },
+  "result": "ve:jungle_wall",
+  "count": 1
+}

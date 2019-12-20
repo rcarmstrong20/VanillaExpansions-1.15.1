@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/spruce_birch_double_slab"}
+    }
+}

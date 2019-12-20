@@ -1,0 +1,69 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:smoky_quartz_slab"
+    ]
+  },
+  "criteria":
+  {
+    "has_chiseled_smoky_quartz_block":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:chiseled_smoky_quartz_block"
+          }
+        ]
+      }
+    },
+    "has_smoky_quartz_block":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:smoky_quartz_block"
+          }
+        ]
+      }
+    },
+    "has_smoky_quartz_pillar":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:smoky_quartz_pillar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:smoky_quartz_slab"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_chiseled_smoky_quartz_block",
+      "has_smoky_quartz_block",
+      "has_smoky_quartz_pillar",
+      "has_the_recipe"
+    ]
+  ]
+}

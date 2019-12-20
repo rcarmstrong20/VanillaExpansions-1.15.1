@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:cracked_stone_brick_wall"
+    ]
+  },
+  "criteria":
+  {
+    "has_cracked_stone_bricks":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:cracked_stone_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:cracked_stone_brick_wall"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cracked_stone_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

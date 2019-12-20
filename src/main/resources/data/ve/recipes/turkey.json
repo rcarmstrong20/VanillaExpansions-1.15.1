@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:cooked_chicken"
+	},
+	{
+	  "item": "minecraft:cooked_chicken"
+	},
+	{
+      "item": "minecraft:apple"
+    },
+	{
+	  "item": "ve:cranberries"
+	},
+	{
+	  "item": "ve:bread_crumbs"
+	},
+	{
+	  "item": "ve:porkchop_bits"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:turkey"
+  }
+}

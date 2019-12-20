@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/nether_brick_diorite_double_slab"}
+    }
+}

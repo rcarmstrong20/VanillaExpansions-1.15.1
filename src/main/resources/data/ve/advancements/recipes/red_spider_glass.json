@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:red_spider_glass"
+    ]
+  },
+  "criteria":
+  {
+    "has_spider_glass":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:glass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:red_spider_glass"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_spider_glass",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_sheep_plush",
+    "textures":
+	{
+        "wool_color": "block/blue_wool"
+    }
+}

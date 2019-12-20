@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:item",
+          "name": "ve:fancy_spider_glass_pane"
+        }
+      ],
+      "conditions":
+	  [
+        {
+          "condition": "minecraft:match_tool",
+          "pspidericate":
+		  {
+            "enchantments":
+			[
+              {
+                "enchantment": "minecraft:silk_touch",
+                "levels":
+				{
+                  "min": 1
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

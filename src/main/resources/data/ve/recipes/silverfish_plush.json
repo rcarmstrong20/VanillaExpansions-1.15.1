@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "LLL",
+    "BSB",
+    "LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "item": "minecraft:light_gray_wool"
+    },
+	"B":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"S":
+	{
+	  "item": "minecraft:stone"
+	}
+  },
+  "result":
+  {
+    "item": "ve:silverfish_plush"
+  }
+}

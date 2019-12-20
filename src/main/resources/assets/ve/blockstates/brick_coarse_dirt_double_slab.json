@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/brick_coarse_dirt_double_slab"}
+    }
+}

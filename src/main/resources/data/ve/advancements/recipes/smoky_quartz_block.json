@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:smoky_quartz_block"
+    ]
+  },
+  "criteria":
+  {
+    "has_smoky_quartz":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:smoky_quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:smoky_quartz_block"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_smoky_quartz",
+      "has_the_recipe"
+    ]
+  ]
+}

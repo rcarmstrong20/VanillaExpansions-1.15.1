@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "result":
+  {
+    "item": "ve:bread_crumbs",
+	"count": 6
+  }
+}

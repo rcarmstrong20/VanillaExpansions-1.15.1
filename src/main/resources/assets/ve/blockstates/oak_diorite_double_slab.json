@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/oak_diorite_double_slab"}
+    }
+}

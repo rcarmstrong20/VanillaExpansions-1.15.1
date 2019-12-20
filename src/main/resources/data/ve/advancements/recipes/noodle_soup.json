@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:noodle_soup"
+    ]
+  },
+  "criteria":
+  {
+    "has_cooked_nooles":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:cooked_noodles"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:noodle_soup"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cooked_nooles",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:desert_villager_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_book":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:book"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:desert_villager_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_book",
+      "has_the_recipe"
+    ]
+  ]
+}

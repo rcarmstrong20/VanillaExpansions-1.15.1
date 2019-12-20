@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "glass_pane",
+  "pattern":
+  [
+    "RRR",
+    "RRR"
+  ],
+  "key":
+  {
+    "R":
+	{
+      "item": "ve:red_glass"
+    }
+  },
+  "result":
+  {
+    "item": "ve:red_glass_pane",
+	"count": 16
+  }
+}

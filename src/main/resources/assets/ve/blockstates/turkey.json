@@ -1,0 +1,12 @@
+{
+    "variants":
+	{
+        "bites=0": { "model": "ve:block/turkey" },
+        "bites=1": { "model": "ve:block/turkey_slice1" },
+        "bites=2": { "model": "ve:block/turkey_slice2" },
+        "bites=3": { "model": "ve:block/turkey_slice3" },
+        "bites=4": { "model": "ve:block/turkey_slice4" },
+        "bites=5": { "model": "ve:block/turkey_slice5" },
+        "bites=6": { "model": "ve:block/turkey_slice6" }
+    }
+}

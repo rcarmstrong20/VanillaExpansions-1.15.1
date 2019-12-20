@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_campfire",
+    "textures":
+	{
+        "litlog": "ve:block/red_campfire_log_lit",
+		"fire": "ve:block/red_campfire_fire"
+    }
+}

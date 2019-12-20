@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:squid_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_ink_sac":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:ink_sac"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:squid_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_ink_sac",
+      "has_the_recipe"
+    ]
+  ]
+}

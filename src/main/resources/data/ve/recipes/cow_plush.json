@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BBB",
+    "WIW",
+    "BMB"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:brown_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"I":
+	{
+	  "item": "minecraft:beef"
+	},
+	"M":
+	{
+	  "item": "minecraft:milk_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:cow_plush"
+  }
+}

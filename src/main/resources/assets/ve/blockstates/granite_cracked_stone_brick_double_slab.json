@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/granite_cracked_stone_brick_double_slab"}
+    }
+}

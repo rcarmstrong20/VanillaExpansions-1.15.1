@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "GGG",
+    "GIG",
+	"GGG"
+  ],
+  "key":
+  {
+    "G":
+	{
+      "item": "minecraft:glass"
+    },
+	"I":
+	{
+	  "item": "minecraft:ink_sac"
+	}
+  },
+  "result":
+  {
+    "item": "ve:glass_of_darkness",
+	"count": 8
+  }
+}

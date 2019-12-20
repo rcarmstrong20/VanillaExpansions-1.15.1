@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:spider_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_string":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:string"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:spider_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_string",
+      "has_the_recipe"
+    ]
+  ]
+}

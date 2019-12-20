@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:cracked_stone_brick_wall",
+	"ve:snow_brick_wall",
+	"ve:stone_wall",
+	"ve:oak_wall",
+	"ve:spruce_wall",
+	"ve:birch_wall",
+	"ve:jungle_wall",
+	"ve:acacia_wall",
+	"ve:dark_oak_wall",
+	"ve:stripped_oak_wall",
+	"ve:stripped_spruce_wall",
+	"ve:stripped_birch_wall",
+	"ve:stripped_jungle_wall",
+	"ve:stripped_acacia_wall",
+	"ve:stripped_dark_oak_wall",
+	"ve:quartz_wall",
+	"ve:smooth_quartz_wall",
+	"ve:smoky_quartz_wall",
+	"ve:smooth_smoky_quartz_wall",
+	"ve:bamboo_wall"
+  ]
+}

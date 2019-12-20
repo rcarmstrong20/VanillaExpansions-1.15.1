@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures":
+	{
+        "side": "ve:block/chiseled_smoky_quartz_block",
+        "end": "ve:block/chiseled_smoky_quartz_block_top"
+    }
+}

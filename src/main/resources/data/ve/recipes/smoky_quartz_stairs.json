@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "ve:chiseled_smoky_quartz_block"
+      },
+      {
+        "item": "ve:smoky_quartz_block"
+      },
+      {
+        "item": "ve:smoky_quartz_pillar"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "ve:smoky_quartz_stairs",
+    "count": 4
+  }
+}

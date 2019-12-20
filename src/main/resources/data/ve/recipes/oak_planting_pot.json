@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "overworld_planting_pot",
+  "pattern":
+  [
+    "WSW",
+    "WWW",
+    " B "
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:oak_planks"
+    },
+	"S":
+	{
+	  "item": "minecraft:dirt"
+	},
+	"B":
+	{
+	  "item": "minecraft:water_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:oak_planting_pot"
+  }
+}

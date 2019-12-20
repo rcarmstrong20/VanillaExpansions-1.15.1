@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "stripped_wooden_wall",
+  "pattern":
+  [
+    "LLL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "ve:stripped_spruce_logs"
+    }
+  },
+  "result":
+  {
+    "item": "ve:stripped_spruce_wall",
+	"count": 6
+  }
+}

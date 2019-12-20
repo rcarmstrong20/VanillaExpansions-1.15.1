@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:rabbit_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_rabbit":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:rabbit"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:rabbit_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_rabbit",
+      "has_the_recipe"
+    ]
+  ]
+}

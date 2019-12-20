@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:guardian_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_prismarine_shard":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:prismarine_shard"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:guardian_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_prismarine_shard",
+      "has_the_recipe"
+    ]
+  ]
+}

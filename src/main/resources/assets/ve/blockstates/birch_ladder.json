@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/birch_ladder" },
+        "facing=east":  { "model": "ve:block/birch_ladder", "y": 90 },
+        "facing=south": { "model": "ve:block/birch_ladder", "y": 180 },
+        "facing=west":  { "model": "ve:block/birch_ladder", "y": 270 }
+    }
+}

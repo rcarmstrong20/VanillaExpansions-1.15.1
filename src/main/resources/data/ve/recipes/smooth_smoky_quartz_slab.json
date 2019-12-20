@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:smooth_smoky_quartz"
+    }
+  },
+  "result":
+  {
+    "item": "ve:smooth_smoky_quartz_slab",
+    "count": 6
+  }
+}

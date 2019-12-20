@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/smooth_quartz_andesite_double_slab"}
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/stone_granite_double_slab"}
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_birch_painting",
+    "textures":
+	{
+        "picture": "ve:painting/fire"
+    }
+}

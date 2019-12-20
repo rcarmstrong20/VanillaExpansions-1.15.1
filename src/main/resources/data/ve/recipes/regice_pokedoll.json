@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "pokedoll",
+  "pattern":
+  [
+    "IGI",
+    "GIG",
+    "IGI"
+  ],
+  "key":
+  {
+    "I":
+	{
+      "item": "minecraft:ice"
+    },
+	"G":
+	{
+	  "item": "minecraft:gold_ingot"
+	}
+  },
+  "result":
+  {
+    "item": "ve:regice_pokedoll"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "XXX",
+    "X X"
+  ],
+  "key":
+  {
+    "X":
+	{
+      "item": "ve:ruby"
+    }
+  },
+  "result":
+  {
+    "item": "ve:ruby_helmet"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_double_slab",
+    "textures":
+	{
+        "top_slab_top": "block/smooth_stone",
+        "top_slab_side": "block/smooth_stone_slab_side",
+        "bottom_slab_bottom": "block/oak_planks",
+		"bottom_slab_side": "block/oak_planks"
+    }
+}

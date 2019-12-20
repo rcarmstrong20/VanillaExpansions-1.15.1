@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/brick_smooth_quartz_double_slab"}
+    }
+}

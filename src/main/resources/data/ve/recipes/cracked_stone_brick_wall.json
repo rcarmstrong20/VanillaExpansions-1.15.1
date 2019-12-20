@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "SSS",
+	"SSS"
+  ],
+  "key":
+  {
+    "S":
+	{
+      "item": "minecraft:cracked_stone_bricks"
+    }
+  },
+  "result":
+  {
+    "item": "ve:cracked_stone_brick_wall",
+	"count": 6
+  }
+}

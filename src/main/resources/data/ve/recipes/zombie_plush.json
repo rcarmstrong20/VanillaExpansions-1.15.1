@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "GGG",
+    "CRC",
+    "BBB"
+  ],
+  "key":
+  {
+    "G":
+	{
+      "item": "minecraft:green_wool"
+    },
+	"C":
+	{
+	  "item": "minecraft:cyan_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:blue_wool"
+	},
+	"R":
+	{
+	  "item": "minecraft:rotten_flesh"
+	}
+  },
+  "result":
+  {
+    "item": "ve:zombie_plush"
+  }
+}

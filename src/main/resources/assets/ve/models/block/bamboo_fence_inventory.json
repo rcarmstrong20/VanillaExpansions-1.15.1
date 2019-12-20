@@ -1,0 +1,74 @@
+{
+	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "ve:block/bamboo_up",
+		"texture": "ve:block/bamboo_up",
+		"texture1": "ve:block/bamboo_across"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Left post",
+			"from": [ 6, 0, 0 ],
+			"to": [ 10, 16, 4 ],
+			"faces": {
+				"down": { "uv": [ 12, 0, 15, 3 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 12, 0, 15, 3 ], "texture": "#texture" },
+				"north": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Right post",
+			"from": [ 6, 0, 12 ],
+			"to": [ 10, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 12, 0, 15, 3 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 12, 0, 15, 3 ], "texture": "#texture" },
+				"north": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 12, 0, 15, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Top bar",
+			"from": [ 7, 13, -2 ],
+			"to": [ 9, 15, 18 ],
+			"faces": {
+				"down": { "uv": [ 8, 0, 11, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 8, 16, 11, 0 ], "texture": "#texture" },
+				"north": { "uv": [ 8, 1, 10, 3 ], "texture": "#texture" },
+				"south": { "uv": [ 8, 0, 10, 1 ], "texture": "#texture" },
+				"west": { "uv": [ 16, 5, 0, 8 ], "texture": "#texture1" },
+				"east": { "uv": [ 0, 5, 16, 8 ], "texture": "#texture1" }
+			}
+		},
+		{
+			"__comment": "Lower bar",
+			"from": [ 7, 5, -2 ],
+			"to": [ 9, 7, 18 ],
+			"faces": {
+				"down": { "uv": [ 4, 16, 7, 0 ], "texture": "#texture" },
+				"up": { "uv": [ 4, 0, 7, 16 ], "texture": "#texture" },
+				"north": { "uv": [ 7, 9, 9, 11 ], "texture": "#texture1" },
+				"south": { "uv": [ 15, 9, 16, 11 ], "texture": "#texture1" },
+				"west": { "uv": [ 0, 9, 16, 12 ], "texture": "#texture1" },
+				"east": { "uv": [ 16, 9, 0, 12 ], "texture": "#texture1" }
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation":  [ 30, 135, 0 ],
+			"scale":  [ 0.625, 0.625, 0.625 ]
+		},
+		"fixed": {
+			"rotation":  [ 0, 90, 0 ],
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		}
+	}
+}

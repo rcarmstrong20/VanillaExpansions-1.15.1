@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:birch_wall"
+    ]
+  },
+  "criteria":
+  {
+    "has_birch_logs":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "tag": "ve:birch_logs"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:birch_wall"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_birch_logs",
+      "has_the_recipe"
+    ]
+  ]
+}

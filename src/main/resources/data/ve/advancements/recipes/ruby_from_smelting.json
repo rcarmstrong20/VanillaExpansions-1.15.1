@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:ruby_from_smelting"
+    ]
+  },
+  "criteria":
+  {
+    "has_nether_ruby_ore":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:nether_ruby_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:ruby_from_smelting"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_nether_ruby_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

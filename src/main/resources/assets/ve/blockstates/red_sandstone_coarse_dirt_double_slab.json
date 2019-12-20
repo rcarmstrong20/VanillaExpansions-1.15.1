@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/red_sandstone_coarse_dirt_double_slab"}
+    }
+}

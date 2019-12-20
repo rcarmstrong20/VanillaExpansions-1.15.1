@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/cobblestone_andesite_double_slab"}
+    }
+}

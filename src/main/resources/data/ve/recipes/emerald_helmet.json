@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "XXX",
+    "X X"
+  ],
+  "key":
+  {
+    "X":
+	{
+      "item": "minecraft:emerald"
+    }
+  },
+  "result":
+  {
+    "item": "ve:emerald_helmet"
+  }
+}

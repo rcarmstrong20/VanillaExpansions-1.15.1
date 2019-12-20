@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values":
+  [
+    "minecraft:acacia_slab",
+    "minecraft:quartz_slab"
+  ]
+}

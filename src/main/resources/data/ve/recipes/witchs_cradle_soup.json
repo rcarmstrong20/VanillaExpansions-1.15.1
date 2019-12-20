@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "ve:witchs_cradle_branch"
+    },
+	{
+	  "item": "ve:blood_vial"
+	},
+	{
+	  "item": "minecraft:bowl"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:witchs_cradle_soup"
+  }
+}

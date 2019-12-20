@@ -1,0 +1,59 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:airite_ingot_from_airite_block"
+    ]
+  },
+  "criteria":
+  {
+    "has_at_least_9_airite_ingot":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:airite_ingot",
+            "count":
+			{
+              "min": 9
+            }
+          }
+        ]
+      }
+    },
+    "has_airite_block":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:airite_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:airite_ingot_from_airite_block"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_at_least_9_airite_ingot",
+      "has_airite_block",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:witchs_cradle_soup"
+    ]
+  },
+  "criteria":
+  {
+    "has_witchs_cradle_branch":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:witchs_cradle_branch"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:witchs_cradle_soup"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_witchs_cradle_branch",
+      "has_the_recipe"
+    ]
+  ]
+}

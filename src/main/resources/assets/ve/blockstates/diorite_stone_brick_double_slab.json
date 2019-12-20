@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/diorite_stone_brick_double_slab"}
+    }
+}

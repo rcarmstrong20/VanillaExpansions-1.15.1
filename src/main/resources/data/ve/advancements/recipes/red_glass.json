@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:red_glass"
+    ]
+  },
+  "criteria":
+  {
+    "has_red_sand":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:red_sand"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:red_glass"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_red_sand",
+      "has_the_recipe"
+    ]
+  ]
+}

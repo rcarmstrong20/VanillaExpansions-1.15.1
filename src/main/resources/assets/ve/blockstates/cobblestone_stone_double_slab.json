@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/cobblestone_stone_double_slab"}
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:green_sheep_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_mutton":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:mutton"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:green_sheep_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_mutton",
+      "has_the_recipe"
+    ]
+  ]
+}

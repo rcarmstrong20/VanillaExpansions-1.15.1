@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "YYY",
+    "CBC",
+    "RRR"
+  ],
+  "key":
+  {
+    "Y":
+	{
+      "item": "minecraft:yellow_wool"
+    },
+	"R":
+	{
+	  "item": "minecraft:red_wool"
+	},
+	"C":
+	{
+	  "item": "minecraft:yellow_terracotta"
+	},
+	"B":
+	{
+	  "item": "minecraft:blaze_rod"
+	}
+  },
+  "result":
+  {
+    "item": "ve:blaze_plush"
+  }
+}

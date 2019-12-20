@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "LLL",
+    "LGL",
+    "BBB"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "item": "minecraft:lime_wool"
+    },
+	"B":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"G":
+	{
+	  "item": "minecraft:gunpowder"
+	}
+  },
+  "result":
+  {
+    "item": "ve:creeper_plush"
+  }
+}

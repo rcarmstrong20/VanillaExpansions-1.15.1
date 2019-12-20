@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:red_glass_pane"
+    ]
+  },
+  "criteria":
+  {
+    "has_red_glass":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:red_glass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:red_glass_pane"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_red_glass",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/oak_birch_double_slab"}
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:noodles"
+    ]
+  },
+  "criteria":
+  {
+    "has_wheat":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:wheat"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:noodles"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_wheat",
+      "has_the_recipe"
+    ]
+  ]
+}

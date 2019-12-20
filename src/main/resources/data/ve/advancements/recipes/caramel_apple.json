@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:caramel_apple"
+    ]
+  },
+  "criteria":
+  {
+    "has_caramel":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:caramel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:caramel_apple"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_caramel",
+      "has_the_recipe"
+    ]
+  ]
+}

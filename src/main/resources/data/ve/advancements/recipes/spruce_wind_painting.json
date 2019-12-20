@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:spruce_wind_painting"
+    ]
+  },
+  "criteria":
+  {
+    "has_spruce_logs":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "tag": "ve:spruce_logs"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:spruce_wind_painting"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_spruce_logs",
+      "has_the_recipe"
+    ]
+  ]
+}

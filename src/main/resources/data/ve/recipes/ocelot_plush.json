@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "YYY",
+    "YFY",
+    "YGY"
+  ],
+  "key":
+  {
+    "Y":
+	{
+      "item": "minecraft:yellow_wool"
+    },
+	"G":
+	{
+      "item": "minecraft:gray_wool"
+    },
+	"F":
+	{
+	  "tag": "ve:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "ve:ocelot_plush"
+  }
+}

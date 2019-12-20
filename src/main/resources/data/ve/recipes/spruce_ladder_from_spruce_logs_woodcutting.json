@@ -1,0 +1,9 @@
+{
+  "type": "ve:woodcutting",
+  "ingredient":
+  {
+    "item": "minecraft:spruce_planks"
+  },
+  "result": "ve:spruce_ladder",
+  "count": 1
+}

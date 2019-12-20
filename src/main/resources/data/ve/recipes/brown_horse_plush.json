@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "BBB",
+    "LLL",
+    "SBS"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:brown_wool"
+    },
+	"S":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"L":
+	{
+	  "item": "minecraft:leather"
+	}
+  },
+  "result":
+  {
+    "item": "ve:brown_horse_plush"
+  }
+}

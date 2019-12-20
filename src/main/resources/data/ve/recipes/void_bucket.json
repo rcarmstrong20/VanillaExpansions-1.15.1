@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:obsidian"
+    },
+	{
+	  "item": "minecraft:water_bucket"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:void_bucket"
+  }
+}

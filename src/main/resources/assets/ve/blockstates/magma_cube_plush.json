@@ -1,0 +1,21 @@
+{
+    "variants":
+	{
+        "facing=north,plush_stack=1":            { "model": "ve:block/one_magma_cube_plush" },
+		"facing=north,plush_stack=2":            { "model": "ve:block/two_magma_cube_plushes" },
+		"facing=north,plush_stack=3,half=lower": { "model": "ve:block/two_magma_cube_plushes" },
+		"facing=north,plush_stack=3,half=upper": { "model": "ve:block/three_magma_cube_plushes" },
+        "facing=south,plush_stack=1":            { "model": "ve:block/one_magma_cube_plush", "y": 180 },
+		"facing=south,plush_stack=2":            { "model": "ve:block/two_magma_cube_plushes", "y": 180 },
+		"facing=south,plush_stack=3,half=lower": { "model": "ve:block/two_magma_cube_plushes", "y": 180 },
+		"facing=south,plush_stack=3,half=upper": { "model": "ve:block/three_magma_cube_plushes", "y": 180 },
+        "facing=west,plush_stack=1":             { "model": "ve:block/one_magma_cube_plush", "y": 270 },
+		"facing=west,plush_stack=2":             { "model": "ve:block/two_magma_cube_plushes", "y": 270 },
+		"facing=west,plush_stack=3,half=lower":  { "model": "ve:block/two_magma_cube_plushes", "y": 270 },
+		"facing=west,plush_stack=3,half=upper":  { "model": "ve:block/three_magma_cube_plushes", "y": 270 },
+        "facing=east,plush_stack=1":             { "model": "ve:block/one_magma_cube_plush", "y": 90 },
+		"facing=east,plush_stack=2":             { "model": "ve:block/two_magma_cube_plushes", "y": 90 },
+		"facing=east,plush_stack=3,half=lower":  { "model": "ve:block/two_magma_cube_plushes", "y": 90 },
+		"facing=east,plush_stack=3,half=upper":  { "model": "ve:block/three_magma_cube_plushes", "y": 90 }
+    }
+}

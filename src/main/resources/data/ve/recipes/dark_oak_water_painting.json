@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "group": "paintings",
+  "pattern":
+  [
+    "LLL",
+    "LWL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "ve:dark_oak_logs"
+    },
+	"W":
+	{
+	  "item": "minecraft:blue_wool"
+	}
+  },
+  "result":
+  {
+    "item": "ve:dark_oak_water_painting",
+	"count": 6
+  }
+}

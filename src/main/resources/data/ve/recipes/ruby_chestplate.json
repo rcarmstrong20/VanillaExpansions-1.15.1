@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key":
+  {
+    "X":
+	{
+      "item": "ve:ruby"
+    }
+  },
+  "result":
+  {
+    "item": "ve:ruby_chestplate"
+  }
+}

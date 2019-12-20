@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "sheep_plush",
+  "pattern":
+  [
+    "WWW",
+    "WMW",
+    "TWT"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:light_gray_wool"
+    },
+	"T":
+	{
+	  "item": "minecraft:white_terracotta"
+	},
+	"M":
+	{
+	  "item": "minecraft:mutton"
+	}
+  },
+  "result":
+  {
+    "item": "ve:light_gray_sheep_plush"
+  }
+}

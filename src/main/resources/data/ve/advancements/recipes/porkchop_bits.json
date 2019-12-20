@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:porkchop_bits"
+    ]
+  },
+  "criteria":
+  {
+    "has_cooked_porkchop":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:cooked_porkchop"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:porkchop_bits"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_cooked_porkchop",
+      "has_the_recipe"
+    ]
+  ]
+}

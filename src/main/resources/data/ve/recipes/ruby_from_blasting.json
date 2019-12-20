@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient":
+  {
+    "item": "ve:nether_ruby_ore"
+  },
+  "result": "ve:ruby",
+  "experience": 1.5,
+  "cookingtime": 100
+}

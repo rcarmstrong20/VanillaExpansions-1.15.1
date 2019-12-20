@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WWW",
+    "EWE",
+    "WSW"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:black_wool"
+    },
+	"E":
+	{
+	  "item": "minecraft:spider_eye"
+	},
+	"S":
+	{
+	  "item": "minecraft:string"
+	}
+  },
+  "result":
+  {
+    "item": "ve:spider_plush"
+  }
+}

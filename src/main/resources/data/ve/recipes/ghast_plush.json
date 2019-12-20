@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WWW",
+    "GTG",
+    "WWW"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"G":
+	{
+	  "item": "minecraft:gray_wool"
+	},
+	"T":
+	{
+	  "item": "minecraft:ghast_tear"
+	}
+  },
+  "result":
+  {
+    "item": "ve:ghast_plush"
+  }
+}

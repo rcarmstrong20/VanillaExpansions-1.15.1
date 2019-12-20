@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/cut_sandstone_spruce_double_slab"}
+    }
+}

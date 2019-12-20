@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WBW",
+    "BIB",
+    "QbQ"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:blue_wool"
+    },
+	"b":
+	{
+      "item": "minecraft:black_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"Q":
+	{
+	  "item": "minecraft:quartz_slab"
+	},
+	"I":
+	{
+	  "item": "minecraft:ink_sac"
+	}
+  },
+  "result":
+  {
+    "item": "ve:squid_plush"
+  }
+}

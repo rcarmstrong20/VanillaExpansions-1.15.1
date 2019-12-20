@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/diorite_quartz_double_slab"}
+    }
+}

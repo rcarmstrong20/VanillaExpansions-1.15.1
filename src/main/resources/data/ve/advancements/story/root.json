@@ -1,0 +1,36 @@
+{
+  "display":
+  {
+    "icon":
+	{
+      "item": "ve:ruby"
+    },
+    "title":
+	{
+      "translate": "advancements.story.root.title"
+    },
+    "description":
+	{
+      "translate": "advancements.story.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "ve:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria":
+  {
+    "consumed_item":
+	{
+      "trigger": "minecraft:consume_item",
+      "conditions": {}
+    }
+  },
+  "requirements":
+  [
+    [
+      "consumed_item"
+    ]
+  ]
+}

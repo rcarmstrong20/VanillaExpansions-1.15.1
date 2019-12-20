@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/red_nether_brick_dirt_double_slab"}
+    }
+}

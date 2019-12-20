@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "quartz_wall",
+  "pattern":
+  [
+    "LLL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "result":
+  {
+    "item": "ve:quartz_wall",
+	"count": 6
+  }
+}

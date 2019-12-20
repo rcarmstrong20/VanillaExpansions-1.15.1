@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_double_slab",
+    "textures":
+	{
+        "top_slab_top": "block/sandstone_top",
+        "top_slab_side": "block/sandstone",
+        "bottom_slab_bottom": "block/nether_bricks",
+		"bottom_slab_side": "block/nether_bricks"
+    }
+}

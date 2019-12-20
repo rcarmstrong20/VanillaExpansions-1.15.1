@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "villager_plush",
+  "pattern":
+  [
+    "HHH",
+    "GBG",
+    "CLC"
+  ],
+  "key":
+  {
+    "H":
+	{
+      "item": "minecraft:terracotta"
+    },
+	"G":
+	{
+	  "item": "minecraft:green_wool"
+	},
+	"C":
+	{
+	  "item": "minecraft:brown_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:book"
+	},
+	"L":
+	{
+	  "item": "minecraft:grass"
+	}
+  },
+  "result":
+  {
+    "item": "ve:plains_villager_plush"
+  }
+}

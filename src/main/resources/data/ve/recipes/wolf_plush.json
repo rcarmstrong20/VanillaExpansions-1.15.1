@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WTW",
+    "WBW",
+    "WWW"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"T":
+	{
+	  "item": "minecraft:black_terracotta"
+	},
+	"B":
+	{
+	  "item": "minecraft:bone"
+	}
+  },
+  "result":
+  {
+    "item": "ve:wolf_plush"
+  }
+}

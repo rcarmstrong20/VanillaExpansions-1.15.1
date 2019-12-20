@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:blaze_plush"
+    ]
+  },
+  "criteria":
+  {
+    "has_blaze_rod":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:blaze_rod"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:blaze_plush"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_blaze_rod",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+    "item": "ve:airite_ore"
+  },
+  "result": "ve:airite_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

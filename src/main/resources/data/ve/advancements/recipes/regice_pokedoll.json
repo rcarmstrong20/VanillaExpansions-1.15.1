@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:regice_pokedoll"
+    ]
+  },
+  "criteria":
+  {
+    "has_ice":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:ice"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:regice_pokedoll"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_ice",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:item",
+          "functions":
+		  [
+            {
+              "function": "minecraft:set_count",
+              "conditions":
+			  [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "ve:magma_cube_plush",
+                  "properties":
+				  {
+                    "plush_stack": "2"
+                  }
+                }
+              ],
+              "count": 2
+			},
+			{
+              "function": "minecraft:set_count",
+              "conditions":
+			  [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "ve:magma_cube_plush",
+                  "properties":
+				  {
+                    "plush_stack": "3"
+                  }
+                }
+              ],
+              "count": 3
+			},
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "ve:magma_cube_plush"
+        }
+      ]
+    }
+  ]
+}

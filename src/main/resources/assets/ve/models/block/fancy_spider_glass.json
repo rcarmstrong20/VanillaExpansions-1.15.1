@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures":
+	{
+        "all": "ve:block/fancy_spider_glass"
+    }
+}

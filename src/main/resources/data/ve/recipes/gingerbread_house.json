@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "RGO",
+    "GFG",
+    "GGG"
+  ],
+  "key":
+  {
+    "G":
+	{
+      "item": "ve:gingerbread"
+    },
+	"F":
+	{
+	  "item": "ve:frosting"
+	},
+	"R":
+	{
+	  "item": "ve:red_gumdrop"
+	},
+	"O":
+	{
+	  "item": "ve:orange_gumdrop"
+	}
+  },
+  "result":
+  {
+    "item": "ve:gingerbread_house"
+  }
+}

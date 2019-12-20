@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_acacia_painting",
+    "textures":
+	{
+        "picture": "ve:painting/water"
+    }
+}

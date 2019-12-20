@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": {"model": "ve:block/petrified_oak_andesite_double_slab"}
+    }
+}

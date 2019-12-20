@@ -1,0 +1,7 @@
+{
+    "parent": "ve:block/template_mooshroom_plush",
+    "textures":
+	{
+        "body_color": "block/red_wool"
+    }
+}

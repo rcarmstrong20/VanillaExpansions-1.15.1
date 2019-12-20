@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_double_slab",
+    "textures":
+	{
+        "top_slab_top": "block/polished_andesite",
+        "top_slab_side": "ve:block/polished_andesite_slab_side",
+        "bottom_slab_bottom": "block/smooth_stone",
+		"bottom_slab_side": "block/smooth_stone_slab_side"
+    }
+}

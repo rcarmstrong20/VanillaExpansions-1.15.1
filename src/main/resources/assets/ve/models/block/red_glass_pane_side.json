@@ -1,0 +1,8 @@
+{
+    "parent": "block/template_glass_pane_side",
+    "textures":
+	{
+        "edge": "ve:block/red_glass_pane_top",
+        "pane": "ve:block/red_glass"
+    }
+}

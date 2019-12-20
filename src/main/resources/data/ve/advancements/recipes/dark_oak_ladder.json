@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:dark_oak_ladder"
+    ]
+  },
+  "criteria":
+  {
+    "has_dark_oak_planks":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "minecraft:dark_oak_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:dark_oak_ladder"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_dark_oak_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

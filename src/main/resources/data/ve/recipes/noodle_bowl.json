@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:bowl"
+    },
+	{
+	  "item": "ve:chop_sticks"
+	}
+  ],
+  "result":
+  {
+    "item": "ve:noodle_bowl"
+  }
+}
