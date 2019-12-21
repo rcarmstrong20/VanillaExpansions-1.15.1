@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.LazyValue;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public enum VeItemTier implements IItemTier
@@ -26,7 +27,7 @@ public enum VeItemTier implements IItemTier
 	private final float attackDamage;
 	/** Defines the natural enchantability factor of the material. */
 	private final int enchantability;
-	private final LazyLoadBase<Ingredient> repairMaterial;
+	private final LazyValue<Ingredient> repairMaterial;
 	
 	private VeItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
 	{
@@ -35,7 +36,7 @@ public enum VeItemTier implements IItemTier
 		this.efficiency = efficiencyIn;
 		this.attackDamage = attackDamageIn;
 		this.enchantability = enchantabilityIn;
-		this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
+		this.repairMaterial = new LazyValue<>(repairMaterialIn);
 	}
 	
 	public int getMaxUses()
