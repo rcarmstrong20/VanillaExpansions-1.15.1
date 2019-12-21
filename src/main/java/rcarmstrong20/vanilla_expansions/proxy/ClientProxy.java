@@ -1,12 +1,9 @@
 package rcarmstrong20.vanilla_expansions.proxy;
 
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
-import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeCampfireTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
-import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 
 public class ClientProxy extends CommonProxy
 {
