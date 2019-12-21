@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.BlockItem;
+import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,14 +31,28 @@ public class VeBlockAndItemColors
 	
 	private static void registerBlockColorHandlers(final BlockColors blockColors) 
 	{
-		// Use the grass color of the biome or the default grass color
+		final IBlockColor leavesColorHandler = (state, blockAccess, pos, tintIndex) ->
+		{
+			if(tintIndex == 1)
+			{
+				if (blockAccess != null && pos != null)
+				{
+					//Get the leaves color from the current biome
+					return BiomeColors.func_228361_b_(blockAccess, pos);
+				}
+				return FoliageColors.getDefault();
+			}
+			return -1;
+		};
+		
 		final IBlockColor grassColorHandler = (state, blockAccess, pos, tintIndex) ->
 		{
 			if(tintIndex == 1)
 			{
 				if (blockAccess != null && pos != null)
 				{
-					return BiomeColors.getGrassColor(blockAccess, pos);
+					//Get the grass color from the current biome
+					return BiomeColors.func_228358_a_(blockAccess, pos);
 				}
 				return GrassColors.get(0.5D, 1.0D);
 			}
@@ -48,12 +63,14 @@ public class VeBlockAndItemColors
 		{
 			if (blockAccess != null && pos != null && tintIndex == 1)
 			{
-				return BiomeColors.getWaterColor(blockAccess, pos);
+				//Get the water color from the current biome
+				return BiomeColors.func_228363_c_(blockAccess, pos);
 			}
 			return -1;
 		};
 		
-		blockColors.register(grassColorHandler, VeBlocks.enderman_plush, VeBlocks.regigigas_pokedoll);
+		blockColors.register(leavesColorHandler, VeBlocks.regirock_pokedoll);
+		blockColors.register(grassColorHandler, VeBlocks.enderman_plush);
 		blockColors.register(waterColorHandler, VeBlocks.oak_planting_pot, VeBlocks.spruce_planting_pot, VeBlocks.birch_planting_pot, VeBlocks.jungle_planting_pot, VeBlocks.dark_oak_planting_pot, VeBlocks.acacia_planting_pot);
 	}
 	
@@ -63,7 +80,8 @@ public class VeBlockAndItemColors
 		final IItemColor itemBlockColorHandler = (stack, tintIndex) -> 
 		{
 			final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
-			return blockColors.getColor(state, null, null, tintIndex);
+			//func_228054_a_ = get item colors from block
+			return blockColors.func_228054_a_(state, null, null, tintIndex);
 		};
 		
 		itemColors.register(itemBlockColorHandler, VeBlocks.enderman_plush, VeBlocks.regigigas_pokedoll);
