@@ -39,7 +39,7 @@ public class VeSevenStageCropBlock extends CropsBlock
 			world.setBlockState(pos, this.getDefaultState().with(this.getAgeProperty(), 0), 2);
 			return ActionResultType.SUCCESS;
 		}
-		return ActionResultType.FAIL;
+		return ActionResultType.PASS;
 	}
 	
 	@Override

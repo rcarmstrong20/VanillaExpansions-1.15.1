@@ -86,7 +86,7 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 			world.setBlockState(pos, this.getDefaultState().with(this.getAgeProperty(), 1), 2);
 			return ActionResultType.SUCCESS;
 		}
-		return ActionResultType.FAIL;
+		return ActionResultType.PASS;
 	}
 	
 	@Override
