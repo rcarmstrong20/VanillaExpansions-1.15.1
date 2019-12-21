@@ -3,12 +3,15 @@ package rcarmstrong20.vanilla_expansions.client.renderer.screen;
 import java.util.List;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.inventory.StonecutterScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.crafting.StonecuttingRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -49,7 +52,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer> {
     */
    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
       this.renderBackground();
-      GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+      RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
       this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
       int i = this.guiLeft;
       int j = this.guiTop;
@@ -80,20 +83,19 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer> {
       }
 
    }
+   
+   private void func_214142_b(int p_214142_1_, int p_214142_2_, int p_214142_3_)
+   {
+	   List<VeWoodCuttingRecipe> list = this.container.getRecipeList();
 
-   private void func_214142_b(int p_214142_1_, int p_214142_2_, int p_214142_3_) {
-      RenderHelper.enableGUIStandardItemLighting();
-      List<VeWoodCuttingRecipe> list = this.container.getRecipeList();
-
-      for(int i = this.recipeIndexOffset; i < p_214142_3_ && i < this.container.getRecipeListSize(); ++i) {
-         int j = i - this.recipeIndexOffset;
-         int k = p_214142_1_ + j % 4 * 16;
-         int l = j / 4;
-         int i1 = p_214142_2_ + l * 18 + 2;
-         this.minecraft.getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), k, i1);
-      }
-
-      RenderHelper.disableStandardItemLighting();
+	      for(int i = this.recipeIndexOffset; i < p_214142_3_ && i < this.container.getRecipeListSize(); ++i)
+	      {
+	         int j = i - this.recipeIndexOffset;
+	         int k = p_214142_1_ + j % 4 * 16;
+	         int l = j / 4;
+	         int i1 = p_214142_2_ + l * 18 + 2;
+	         this.minecraft.getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), k, i1);
+	      }
    }
 
    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
