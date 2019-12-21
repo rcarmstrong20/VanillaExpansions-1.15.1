@@ -5,18 +5,28 @@ import java.util.List;
 
 import com.google.common.base.Suppliers;
 
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SoupItem;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
+import rcarmstrong20.vanilla_expansions.enums.VeArmorMaterial;
+import rcarmstrong20.vanilla_expansions.enums.VeItemTier;
+import rcarmstrong20.vanilla_expansions.item.VeAxeItem;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
+import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
+import rcarmstrong20.vanilla_expansions.item.VeShovelItem;
 import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
+import rcarmstrong20.vanilla_expansions.item.VeSwordItem;
 import rcarmstrong20.vanilla_expansions.item.VeVoidBucketItem;
 
 /**
@@ -34,7 +44,6 @@ public class VeItems
 	//Vanilla Expansions Items
 	
 	public static Item ruby = register(VanillaExpansions.location("ruby"), new Item(VE_ITEMS));
-	/*
 	public static Item ruby_axe = register(VanillaExpansions.location("ruby_axe"), new VeAxeItem(VeItemTier.RUBY, 5.0F, -2.8F, new Item.Properties().addToolType(ToolType.AXE, 4).group(VanillaExpansions.VE_GROUP)));
 	public static Item ruby_pickaxe = register(VanillaExpansions.location("ruby_pickaxe"), new VePickaxeItem(VeItemTier.RUBY, 1, new Item.Properties().addToolType(ToolType.PICKAXE, 4).group(VanillaExpansions.VE_GROUP)));
 	public static Item ruby_shovel = register(VanillaExpansions.location("ruby_shovel"), new VeShovelItem(VeItemTier.RUBY, 1.5F, new Item.Properties().addToolType(ToolType.SHOVEL, 4).group(VanillaExpansions.VE_GROUP)));
@@ -74,7 +83,6 @@ public class VeItems
 	public static Item air_emerald_chestplate = register(VanillaExpansions.location("air_emerald_chestplate"), new ArmorItem(VeArmorMaterial.AIR_EMERALD, EquipmentSlotType.CHEST, VE_SINGLE_ITEMS));
 	public static Item air_emerald_leggings = register(VanillaExpansions.location("air_emerald_leggings"), new ArmorItem(VeArmorMaterial.AIR_EMERALD, EquipmentSlotType.LEGS, VE_SINGLE_ITEMS));
 	public static Item air_emerald_boots = register(VanillaExpansions.location("air_emerald_boots"), new ArmorItem(VeArmorMaterial.AIR_EMERALD, EquipmentSlotType.FEET, VE_SINGLE_ITEMS));
-	*/
 	public static Item bok_choy_seeds = register(VanillaExpansions.location("bok_choy_seeds"), new BlockNamedItem(VeBlocks.bok_choy, VE_ITEMS));
 	public static Item bok_choy = register(VanillaExpansions.location("bok_choy"), new Item(VE_ITEMS));
 	public static Item garlic = register(VanillaExpansions.location("garlic"), new BlockNamedItem(VeBlocks.garlic, VE_ITEMS));
