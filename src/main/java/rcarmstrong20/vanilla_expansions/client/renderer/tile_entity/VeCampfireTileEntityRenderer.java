@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import rcarmstrong20.vanilla_expansions.block.VeCampfireBlock;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeCampfireTileEntity;
-
+/*
 @OnlyIn(Dist.CLIENT)
 public class VeCampfireTileEntityRenderer extends TileEntityRenderer<VeCampfireTileEntity>
 {
@@ -40,4 +40,4 @@ public class VeCampfireTileEntityRenderer extends TileEntityRenderer<VeCampfireT
 		}
 	}
 }
- 
+*/
