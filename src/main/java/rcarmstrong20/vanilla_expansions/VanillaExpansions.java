@@ -5,9 +5,12 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
+import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
 @Mod("ve")
 public class VanillaExpansions
@@ -17,7 +20,7 @@ public class VanillaExpansions
 	public static final String MINECRAFT_ID = "minecraft";
 	public static final Logger LOGGER = LogManager.getLogger(VanillaExpansions.MOD_ID);
 	public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
-	//public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+	public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 	
 	public VanillaExpansions()
 	{
@@ -33,13 +36,13 @@ public class VanillaExpansions
 	{
 		
 		LOGGER.info("setup method registered");
-		//PROXY.onSetupCommon();
+		PROXY.onSetupCommon();
 	}
 	
 	private void clientRegistries(final FMLCommonSetupEvent event)
 	{
 		LOGGER.info("client method registered");
-		//PROXY.onSetupClient();
+		PROXY.onSetupClient();
 	}
 	
 	/**
