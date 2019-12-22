@@ -34,7 +34,6 @@ public class VanillaExpansions
 	
 	private void setup(final FMLCommonSetupEvent event)
 	{
-		
 		LOGGER.info("setup method registered");
 		PROXY.onSetupCommon();
 	}
