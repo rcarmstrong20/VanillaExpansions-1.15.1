@@ -178,9 +178,10 @@ public class VeTallPlushBlock extends VePlushBlock
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext)
 	{
 		BlockPos pos = useContext.getPos().up();
+		BlockState worldState = useContext.getWorld().getBlockState(pos);
 		if(useContext.getItem().getItem() == this.asItem())
 		{
-			return state.get(PLUSH_STACK) == 1 || useContext.getWorld().getBlockState(pos) == Blocks.AIR.getDefaultState() && state.get(PLUSH_STACK) < 3 ? true : false;
+			return state.get(PLUSH_STACK) == 1 || worldState == Blocks.AIR.getDefaultState() || worldState == Blocks.WATER.getDefaultState() || worldState == Blocks.LAVA.getDefaultState() && state.get(PLUSH_STACK) < 3 ? true : false;
 		}
 		return false;
 	}
