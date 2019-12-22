@@ -2,16 +2,12 @@ package rcarmstrong20.vanilla_expansions.client.renderer.screen;
 
 import java.util.List;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.screen.inventory.StonecutterScreen;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.crafting.StonecuttingRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -46,7 +42,7 @@ public class VeWoodcutterScreen extends ContainerScreen<VeWoodcutterContainer> {
       this.font.drawString(this.title.getFormattedText(), 8.0F, 4.0F, 4210752);
       this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 94), 4210752);
    }
-
+   
    /**
     * Draws the background layer of this container (behind the items).
     */
