@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.VeBlockStateProperties;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
-public class VeMultiPlushBlock extends VePlushBlock
+public class VeTallPlushBlock extends VePlushBlock
 {
 	//Block Properties
 	
@@ -137,7 +137,7 @@ public class VeMultiPlushBlock extends VePlushBlock
 	protected static final VoxelShape THREE_SLIME_EAST_MOUTH_EYE_AABB = Block.makeCuboidShape(10.5D, 2.0D, 7.0D, 10.0D, 2.5D, 7.5D);
 	protected static final VoxelShape THREE_SLIME_EAST_AABB = VoxelShapes.or(THREE_MAGMA_CUBE_EAST_AABB, THREE_SLIME_EAST_MOUTH_EYE_AABB);
 	
-	public VeMultiPlushBlock(Properties properties)
+	public VeTallPlushBlock(Properties properties)
 	{
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(PLUSH_STACK, 1));
@@ -178,7 +178,11 @@ public class VeMultiPlushBlock extends VePlushBlock
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext)
 	{
 		BlockPos pos = useContext.getPos().up();
-		return useContext.getItem().getItem() == this.asItem() && state.get(PLUSH_STACK) == 1 || useContext.getWorld().getBlockState(pos) == Blocks.AIR.getDefaultState() && state.get(PLUSH_STACK) < 3 ? true : false;
+		if(useContext.getItem().getItem() == this.asItem())
+		{
+			return state.get(PLUSH_STACK) == 1 || useContext.getWorld().getBlockState(pos) == Blocks.AIR.getDefaultState() && state.get(PLUSH_STACK) < 3 ? true : false;
+		}
+		return false;
 	}
 	
 	@Override
@@ -186,13 +190,16 @@ public class VeMultiPlushBlock extends VePlushBlock
 	{
 		if(state.has(HALF))
 		{
-			if(state.get(HALF) == DoubleBlockHalf.UPPER)
+			if(state.get(PLUSH_STACK) == 3)
 			{
-				worldIn.destroyBlock(pos.down(), false);
-			}
-			else if(state.get(HALF) == DoubleBlockHalf.LOWER)
-			{
-				worldIn.destroyBlock(pos.up(), false);
+				if(state.get(HALF) == DoubleBlockHalf.UPPER)
+				{
+					worldIn.destroyBlock(pos.down(), false);
+				}
+				else if(state.get(HALF) == DoubleBlockHalf.LOWER)
+				{
+					worldIn.destroyBlock(pos.up(), false);
+				}
 			}
 			if(player.isCreative())
 			{
@@ -216,11 +223,11 @@ public class VeMultiPlushBlock extends VePlushBlock
 	{
 		if(this == VeBlocks.slime_plush)
 		{
-			return VeMultiPlushBlock.defineShapes(state, ONE_SLIME_SOUTH_AABB, ONE_AND_TWO_SLIME_SOUTH_AABB, THREE_SLIME_SOUTH_AABB, ONE_SLIME_NORTH_AABB, ONE_AND_TWO_SLIME_NORTH_AABB, THREE_SLIME_NORTH_AABB, ONE_SLIME_WEST_AABB, ONE_AND_TWO_SLIME_WEST_AABB, THREE_SLIME_WEST_AABB, ONE_SLIME_EAST_AABB, ONE_AND_TWO_SLIME_EAST_AABB, THREE_SLIME_EAST_AABB);
+			return VeTallPlushBlock.defineShapes(state, ONE_SLIME_SOUTH_AABB, ONE_AND_TWO_SLIME_SOUTH_AABB, THREE_SLIME_SOUTH_AABB, ONE_SLIME_NORTH_AABB, ONE_AND_TWO_SLIME_NORTH_AABB, THREE_SLIME_NORTH_AABB, ONE_SLIME_WEST_AABB, ONE_AND_TWO_SLIME_WEST_AABB, THREE_SLIME_WEST_AABB, ONE_SLIME_EAST_AABB, ONE_AND_TWO_SLIME_EAST_AABB, THREE_SLIME_EAST_AABB);
 		}
 		else if(this == VeBlocks.magma_cube_plush)
 		{
-			return VeMultiPlushBlock.defineShapes(state, ONE_MAGMA_CUBE_SOUTH_AABB, ONE_AND_TWO_MAGMA_CUBE_SOUTH_AABB, THREE_MAGMA_CUBE_SOUTH_AABB, ONE_MAGMA_CUBE_NORTH_AABB, ONE_AND_TWO_MAGMA_CUBE_NORTH_AABB, THREE_MAGMA_CUBE_NORTH_AABB, ONE_MAGMA_CUBE_WEST_AABB, ONE_AND_TWO_MAGMA_CUBE_WEST_AABB, THREE_MAGMA_CUBE_WEST_AABB, ONE_MAGMA_CUBE_EAST_AABB, ONE_AND_TWO_MAGMA_CUBE_EAST_AABB, THREE_MAGMA_CUBE_EAST_AABB);
+			return VeTallPlushBlock.defineShapes(state, ONE_MAGMA_CUBE_SOUTH_AABB, ONE_AND_TWO_MAGMA_CUBE_SOUTH_AABB, THREE_MAGMA_CUBE_SOUTH_AABB, ONE_MAGMA_CUBE_NORTH_AABB, ONE_AND_TWO_MAGMA_CUBE_NORTH_AABB, THREE_MAGMA_CUBE_NORTH_AABB, ONE_MAGMA_CUBE_WEST_AABB, ONE_AND_TWO_MAGMA_CUBE_WEST_AABB, THREE_MAGMA_CUBE_WEST_AABB, ONE_MAGMA_CUBE_EAST_AABB, ONE_AND_TWO_MAGMA_CUBE_EAST_AABB, THREE_MAGMA_CUBE_EAST_AABB);
 		}
 		return NORMAL_CUBE;
 	}
