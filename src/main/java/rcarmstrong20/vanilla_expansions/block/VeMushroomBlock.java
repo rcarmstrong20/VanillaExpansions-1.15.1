@@ -20,9 +20,9 @@ public class VeMushroomBlock extends MushroomBlock
 	}
 	
 	@Override
-	public boolean func_226940_a_(ServerWorld p_226940_1_, BlockPos p_226940_2_, BlockState p_226940_3_, Random p_226940_4_)
+	public boolean func_226940_a_(ServerWorld serverWorld, BlockPos blockPos, BlockState blockState, Random random)
 	{
-		p_226940_1_.removeBlock(p_226940_2_, false);
+		serverWorld.removeBlock(blockPos, false);
 		ConfiguredFeature<BigMushroomFeatureConfig, ?> configuredfeature;
 		if (this == VeBlocks.purple_mushroom)
 		{
@@ -30,12 +30,12 @@ public class VeMushroomBlock extends MushroomBlock
 		}
 		else
 		{
-			return super.func_226940_a_(p_226940_1_, p_226940_2_, p_226940_3_, p_226940_4_);
+			return super.func_226940_a_(serverWorld, blockPos, blockState, random);
 		}
-		if (configuredfeature.place(p_226940_1_, p_226940_1_.getChunkProvider().getChunkGenerator(), p_226940_4_, p_226940_2_))
+		if (configuredfeature.place(serverWorld, serverWorld.getChunkProvider().getChunkGenerator(), random, blockPos))
 		{
 			return true;
 		}
-		return false;
+		return super.func_226940_a_(serverWorld, blockPos, blockState, random);
 	}
 }
