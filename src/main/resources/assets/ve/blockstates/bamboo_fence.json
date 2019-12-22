@@ -1,7 +1,14 @@
 {
     "multipart":
 	[
-        {   "apply": { "model": "ve:block/bamboo_fence_post" }},
+        {   "apply":
+			[
+				{"model": "ve:block/bamboo1_fence_post"},
+				{"model": "ve:block/bamboo2_fence_post"},
+				{"model": "ve:block/bamboo3_fence_post"},
+				{"model": "ve:block/bamboo4_fence_post"}
+			]
+		},
         {   "when": { "north": "true" },
             "apply": { "model": "ve:block/bamboo_fence_side", "uvlock": true }
         },
