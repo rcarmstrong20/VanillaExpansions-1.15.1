@@ -29,7 +29,7 @@ import rcarmstrong20.vanilla_expansions.block.VeDoubleSlabBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeLadderBlock;
-import rcarmstrong20.vanilla_expansions.block.VeMultiPlushBlock;
+import rcarmstrong20.vanilla_expansions.block.VeTallPlushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeMushroomBlock;
 import rcarmstrong20.vanilla_expansions.block.VeNetherWartBlock;
 import rcarmstrong20.vanilla_expansions.block.VeOreBlock;
@@ -77,7 +77,7 @@ public class VeBlocks
 	public static Block brown_horse_plush = register(VanillaExpansions.location("brown_horse_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BROWN_WOOL).func_226896_b_()));
 	public static Block black_horse_plush = register(VanillaExpansions.location("black_horse_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BLACK_WOOL).func_226896_b_()));
 	public static Block purple_horse_plush = register(VanillaExpansions.location("purple_horse_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.PURPLE_WOOL).func_226896_b_()));
-	public static Block magma_cube_plush = register(VanillaExpansions.location("magma_cube_plush"), true, new VeMultiPlushBlock(Block.Properties.from(Blocks.RED_WOOL).func_226896_b_()));
+	public static Block magma_cube_plush = register(VanillaExpansions.location("magma_cube_plush"), true, new VeTallPlushBlock(Block.Properties.from(Blocks.RED_WOOL).func_226896_b_()));
 	public static Block red_mooshroom_plush = register(VanillaExpansions.location("red_mooshroom_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.RED_WOOL).func_226896_b_()));
 	public static Block brown_mooshroom_plush = register(VanillaExpansions.location("brown_mooshroom_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.RED_WOOL).func_226896_b_()));
 	public static Block ocelot_plush = register(VanillaExpansions.location("ocelot_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.YELLOW_WOOL).func_226896_b_()));
@@ -101,7 +101,7 @@ public class VeBlocks
 	public static Block black_sheep_plush = register(VanillaExpansions.location("black_sheep_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BLACK_WOOL).func_226896_b_()));
 	public static Block silverfish_plush = register(VanillaExpansions.location("silverfish_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.LIGHT_GRAY_WOOL).func_226896_b_()));
 	public static Block skeleton_plush = register(VanillaExpansions.location("skeleton_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.LIGHT_GRAY_WOOL).func_226896_b_()));
-	public static Block slime_plush = register(VanillaExpansions.location("slime_plush"), true, new VeMultiPlushBlock(Block.Properties.from(Blocks.LIME_WOOL).func_226896_b_()));
+	public static Block slime_plush = register(VanillaExpansions.location("slime_plush"), true, new VeTallPlushBlock(Block.Properties.from(Blocks.LIME_WOOL).func_226896_b_()));
 	public static Block spider_plush = register(VanillaExpansions.location("spider_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BLACK_WOOL).func_226896_b_()));
 	public static Block squid_plush = register(VanillaExpansions.location("squid_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BLUE_WOOL).func_226896_b_()));
 	public static Block plains_villager_plush = register(VanillaExpansions.location("plains_villager_plush"), true, new VePlushBlock(Block.Properties.from(Blocks.BROWN_WOOL).func_226896_b_()));
