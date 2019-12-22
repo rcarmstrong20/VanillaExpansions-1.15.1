@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "ve:block/bamboo_up",
+		"texture": "ve:block/bamboo_up"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Center post",
+			"from": [ 6, 0, 6 ],
+			"to": [ 10, 16, 10 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 3, 3 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 12, 13, 15, 16 ], "texture": "#texture", "cullface": "up" },
+				"north": { "uv": [ 4, 0, 7, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 0, 7, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 0, 7, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 0, 7, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}
