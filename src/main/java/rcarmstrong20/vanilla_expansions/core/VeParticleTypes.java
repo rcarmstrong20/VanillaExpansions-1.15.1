@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-/*
+
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VeParticleTypes
 {
@@ -32,7 +29,7 @@ public class VeParticleTypes
 		PARTICLES.add(particle);
 		return particle;
 	}
-	
+	/*
 	@SubscribeEvent
 	public static void registerParticles(final RegistryEvent.Register<ParticleType<?>> event)
 	{
@@ -40,5 +37,5 @@ public class VeParticleTypes
 		PARTICLES.clear();
 		VanillaExpansions.LOGGER.info("Particles registered.");
 	}
+	*/
 }
-*/
