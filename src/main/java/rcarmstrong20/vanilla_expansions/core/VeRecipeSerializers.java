@@ -10,14 +10,14 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodCuttingRecipe;
+import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeRecipeSerializers
 {
     private static final List<IRecipeSerializer<?>> RECIPES = new ArrayList<>();
 
-    public static final IRecipeSerializer<VeWoodCuttingRecipe> WOODCUTTING = register(VanillaExpansions.location("woodcutting"), new VeWoodCuttingRecipe.Serializer<>(VeWoodCuttingRecipe::new));
+    public static final IRecipeSerializer<VeWoodcuttingRecipe> WOODCUTTING = register(VanillaExpansions.location("woodcutting"), new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
     
 	private static <S extends IRecipeSerializer<? extends IRecipe<?>>> S register(ResourceLocation name, S recipe)
     {
