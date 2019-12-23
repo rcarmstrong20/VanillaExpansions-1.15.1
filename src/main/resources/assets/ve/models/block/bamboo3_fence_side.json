@@ -1,9 +1,9 @@
 {
 	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "block/bamboo_up",
-		"across": "block/bamboo_across",
-		"up": "block/bamboo_up"
+		"particle": "ve:block/bamboo_up",
+		"across": "ve:block/bamboo_across",
+		"up": "ve:block/bamboo_up"
 	},
 	"elements": [ 	 
 		{
