@@ -21,7 +21,7 @@ import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
 import rcarmstrong20.vanilla_expansions.core.VeRecipeTypes;
 
-public class VeWoodCuttingRecipe implements IRecipe<IInventory>
+public class VeWoodcuttingRecipe implements IRecipe<IInventory>
 {
 	protected final Ingredient ingredient;
 	protected final ItemStack result;
@@ -30,7 +30,7 @@ public class VeWoodCuttingRecipe implements IRecipe<IInventory>
 	protected final ResourceLocation id;
 	protected final String group;
 	
-	public VeWoodCuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
+	public VeWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
 	{
 		this.type = VeRecipeTypes.WOODCUTTING;
 		this.serializer = VeRecipeSerializers.WOODCUTTING;
@@ -104,7 +104,7 @@ public class VeWoodCuttingRecipe implements IRecipe<IInventory>
 		return this.type;
 	}
 	
-	public static class Serializer<T extends VeWoodCuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<T>
+	public static class Serializer<T extends VeWoodcuttingRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<T>
 	{
 		final IRecipeFactory<T> factory;
 		
@@ -151,7 +151,7 @@ public class VeWoodCuttingRecipe implements IRecipe<IInventory>
 			buffer.writeItemStack(recipe.result);
 		}
 
-		public interface IRecipeFactory<T extends VeWoodCuttingRecipe>
+		public interface IRecipeFactory<T extends VeWoodcuttingRecipe>
 		{
 			T create(ResourceLocation id, String group, Ingredient ingredient, ItemStack result);
 		}
