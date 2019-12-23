@@ -25,7 +25,7 @@
               }
             }
           ],
-          "name": "minecraft:spruce_planks"
+          "name": "minecraft:birch_planks"
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
         {
           "type": "minecraft:item",
           "weight": 2,
-          "name": "minecraft:spruce_wood"
+          "name": "minecraft:birch_wood"
         },
         {
           "type": "minecraft:item",
@@ -56,11 +56,11 @@
               }
             }
           ],
-          "name": "minecraft:cooked_salmon"
+          "name": "minecraft:cooked_mutton"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:spruce_log"
+          "name": "minecraft:birch_log"
         },
         {
           "type": "minecraft:item",
