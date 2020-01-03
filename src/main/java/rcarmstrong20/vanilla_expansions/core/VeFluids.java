@@ -66,9 +66,8 @@ public class VeFluids
 		IFluidState state = info.getFluidState();
 		if (state.getFluid() instanceof VoidFluid)
 		{
-			//GlStateManager.fogMode(GlStateManager.FogMode.EXP);
 			event.setDensity(1.0F);
 			event.setCanceled(true);
-		} 
+		}
 	}
 }
