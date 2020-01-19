@@ -9,15 +9,4 @@ public class VePaneBlock extends PaneBlock
 	{
 		super(properties);
 	}
-	/*
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		if(this == VeBlocks.red_glass_pane)
-		{
-			return BlockRenderLayer.CUTOUT;
-		}
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-	*/
 }
