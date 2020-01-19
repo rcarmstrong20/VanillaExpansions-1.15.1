@@ -2,7 +2,9 @@ package rcarmstrong20.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
@@ -16,8 +18,11 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.PlantType;
+import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
-public class VePlantingPotBlock extends VeCutoutBlock implements IWaterLoggable
+public class VePlantingPotBlock extends Block implements IWaterLoggable
 {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	
@@ -77,6 +82,25 @@ public class VePlantingPotBlock extends VeCutoutBlock implements IWaterLoggable
 	public IFluidState getFluidState(BlockState state)
 	{
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+	}
+	
+	@Override
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
+	{
+		PlantType plantType = plantable.getPlantType(world, pos);
+		Block plantBlock = plantable.getPlant(world, pos).getBlock();
+		if(this == VeBlocks.nether_planting_pot && plantType == PlantType.Nether)
+		{
+			return true;
+		}
+		else if(this == VeBlocks.oak_planting_pot || this == VeBlocks.spruce_planting_pot || this == VeBlocks.birch_planting_pot || this == VeBlocks.jungle_planting_pot || this == VeBlocks.acacia_planting_pot || this == VeBlocks.dark_oak_planting_pot)
+		{
+			if(plantBlock instanceof CropsBlock || plantBlock instanceof SweetBerryBushBlock)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
