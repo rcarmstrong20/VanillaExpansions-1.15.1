@@ -16,12 +16,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.BirchForestCabinPiece;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.BirchForestCabinStructure;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.ForestCabinPiece;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.ForestCabinStructure;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.TaigaCabinPiece;
-import rcarmstrong20.vanilla_expansions.gen.feature.structure.TaigaCabinStructure;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.CabinPiece;
+import rcarmstrong20.vanilla_expansions.gen.feature.structure.CabinStructure;
 
 /**
  * Author: rcarmstrong20
@@ -33,14 +29,10 @@ public class VeFeature
 	private static final List<IStructurePieceType> STRUCTURE_PIECES = new ArrayList<>();
 	private static final List<Structure<?>> STRUCTURES = new ArrayList<>();
 	
-	public static final IStructurePieceType TAIGA_CABIN_PIECE = register(VanillaExpansions.location("taiga_cabin"), TaigaCabinPiece::new);
-	public static final IStructurePieceType FOREST_CABIN_PIECE = register(VanillaExpansions.location("forest_cabin"), ForestCabinPiece::new);
-	public static final IStructurePieceType BIRCH_FOREST_CABIN_PIECE = register(VanillaExpansions.location("forest_cabin"), BirchForestCabinPiece::new);
+	public static final IStructurePieceType CABIN_PIECE = register(VanillaExpansions.location("cabin"), CabinPiece::new);
 	
 	public static final Feature<BigMushroomFeatureConfig> HUGE_PURPLE_MUSHROOM = register(VanillaExpansions.location("huge_purple_mushroom"), new BigRedMushroomFeature(BigMushroomFeatureConfig::deserialize));
-	public static final Structure<NoFeatureConfig> TAIGA_CABIN = register(VanillaExpansions.location("taiga_cabin"), new TaigaCabinStructure(NoFeatureConfig::deserialize));
-	public static final Structure<NoFeatureConfig> FOREST_CABIN = register(VanillaExpansions.location("forest_cabin"), new ForestCabinStructure(NoFeatureConfig::deserialize));
-	public static final Structure<NoFeatureConfig> BIRCH_FOREST_CABIN = register(VanillaExpansions.location("birch_forest_cabin"), new BirchForestCabinStructure(NoFeatureConfig::deserialize));
+	public static final Structure<NoFeatureConfig> CABIN = register(VanillaExpansions.location("cabin"), new CabinStructure(NoFeatureConfig::deserialize));
 	
 	/**
 	 * Set the registry name for the features and add them to the registry list.

@@ -10,7 +10,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SoupItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
@@ -117,12 +116,14 @@ public class VeItems
 	
 	//Vanilla Replacement Items
 	
+	/*
 	public static Item wheat_seeds = register(VanillaExpansions.vanillaLocation("wheat_seeds"), new BlockNamedItem(VeBlocks.wheat, new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static Item beetroot_seeds = register(VanillaExpansions.vanillaLocation("beetroot_seeds"), new BlockNamedItem(VeBlocks.beetroots, new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static Item nether_wart = register(VanillaExpansions.vanillaLocation("nether_wart"), new BlockNamedItem(VeBlocks.nether_wart, new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static Item carrot = register(VanillaExpansions.vanillaLocation("carrot"), new BlockNamedItem(VeBlocks.carrots, new Item.Properties().group(ItemGroup.FOOD)));
 	public static Item potato = register(VanillaExpansions.vanillaLocation("potato"), new BlockNamedItem(VeBlocks.potatoes, new Item.Properties().group(ItemGroup.FOOD)));
 	public static Item sweet_berries = register(VanillaExpansions.vanillaLocation("sweet_berries"), new BlockNamedItem(VeBlocks.sweet_berry_bush, new Item.Properties().group(ItemGroup.FOOD)));
+	*/
 	//public static Item rabbit_spawn_egg = register(VanillaExpansions.vanillaLocation("rabbit_spawn_egg"), new SpawnEggItem(VeEntityType.rabbit, 10051392, 7555121, (new Item.Properties()).group(ItemGroup.MISC)));
 	
 	/*

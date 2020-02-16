@@ -18,11 +18,4 @@ public class VeTranslucentBlock extends Block
 	{
 		return adjacentBlockState.getBlock() == this ? true : false;
 	}
-	/*
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-	*/
 }

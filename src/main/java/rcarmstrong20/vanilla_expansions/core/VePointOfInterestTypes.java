@@ -6,33 +6,26 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.ImmutableSet;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.village.PointOfInterest;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-/*
-@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+
+//@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VePointOfInterestTypes
 {
 	private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
 	
 	public static final PointOfInterestType LUMBERJACK = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, SoundEvents.ENTITY_VILLAGER_WORK_MASON, 1);
 	
-	private static Set<BlockState> getAllStates(Block block)
-	{
-		return ImmutableSet.copyOf(block.getStateContainer().getValidStates());
-	}
-	
 	private static PointOfInterestType register(String name, Set<BlockState> blockState, int p_221051_2_, @Nullable SoundEvent soundEvent, int p_221051_4_)
 	{
-		return register(name, new PointOfInterestType(name, blockState, p_221051_2_, soundEvent, p_221051_4_));
+		return register(name, new PointOfInterestType(name, blockState, p_221051_4_, null, p_221051_4_));
 	}
 	
 	private static PointOfInterestType register(String name, PointOfInterestType pointOfInterest)
@@ -50,4 +43,3 @@ public class VePointOfInterestTypes
 		VanillaExpansions.LOGGER.info("Point of Interests registered.");
 	}
 }
-*/
