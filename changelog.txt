@@ -1,3 +1,266 @@
+Build: 1.15.2-31.1.12 - Fri Feb 14 21:43:40 GMT 2020
+	williewillus:
+		Fix missing call to itemstack TER (#6445)
+
+=========
+Build: 1.15.2-31.1.11 - Fri Feb 14 21:33:36 GMT 2020
+	williewillus:
+		Fix missed modeldata passing in BlockModelRenderer (#6442)
+
+=========
+Build: 1.15.2-31.1.10 - Fri Feb 14 20:34:50 GMT 2020
+	treborx555:
+		Fix NPE when players rejoin the server in a dimension that was deleted (#6511)
+
+=========
+Build: 1.15.2-31.1.9 - Fri Feb 14 20:16:05 GMT 2020
+	loic.frasse-mathon:
+		Fix a wrong RenderState name MC-167447 (#6501)
+
+=========
+Build: 1.15.2-31.1.8 - Fri Feb 14 20:09:19 GMT 2020
+	malte0811:
+		Fixed ChunkWatchEvent.(Un)Watch not firing correctly (#6453)
+
+	ewewukek:
+		Fix wrong arguments passed to ForgeHooksClient.renderSpecificFirstPersonHand() (#6496)
+
+	12281102+Aeltumn:
+		Fix client not informing server when it attempts to interact with things, and is canceled by a client side handler.
+
+=========
+Build: 1.15.2-31.1.5 - Fri Feb 14 20:02:26 GMT 2020
+	joetarbit:
+		Fixed Food not using effect suppliers, to better support delayed initialization and registry replacements. (#6411)
+
+	Unnoen:
+		Update version and support data on README. (#6429)
+
+=========
+Build: 1.15.2-31.1.3 - Fri Feb 14 19:55:38 GMT 2020
+	hawkeboyz2:
+		Fixed displaying item names when only more sensitive version changes (#6402)
+
+=========
+Build: 1.15.2-31.1.2 - Fri Feb 14 18:28:35 GMT 2020
+	David Quintana:
+		Fix gui_light for forge's item parent models.
+
+=========
+Build: 1.15.2-31.1.1 - Thu Feb 06 22:53:49 GMT 2020
+	richard:
+		Allows custom blocks to define if they should use the fluid overlay instead of the flowing texture when in a fluid (#6493)
+
+=========
+Build: 1.15.2-31.1.0 - Mon Feb 03 21:24:29 GMT 2020
+	lex:
+		Fix a small patch misalignment.
+
+=========
+Build: 1.15.2-31.0.19 - Mon Feb 03 20:52:28 GMT 2020
+	richard:
+		Add FluidStack support to the Forge packet buffer. (#6353) (#6485)
+
+	richard:
+		Make Minecarts work with modded powered/activator rails. (#6486)
+		
+		Re-adds functionality for rails to have different maximum speeds.
+
+=========
+Build: 1.15.2-31.0.17 - Mon Feb 03 20:21:20 GMT 2020
+	ichttt:
+		Revert game data to frozen on disconnect from a remote server or when terminating a local server. Closes #6487 (#6497)
+
+=========
+Build: 1.15.2-31.0.16 - Sun Feb 02 22:11:19 GMT 2020
+	David Quintana:
+		Remove unintended changes.
+
+=========
+Build: 1.15.2-31.0.15 - Sun Feb 02 22:03:15 GMT 2020
+	David Quintana:
+		Implement fluid overlay texture rendering for custom fluids.
+
+=========
+Build: 1.15.2-31.0.14 - Thu Jan 30 06:12:15 GMT 2020
+	DaemonUmbra:
+		Fixed Attacks/Punches not Registering (#6481)
+		
+		Replaced incorrect magic number with constant
+
+=========
+Build: 1.15.2-31.0.13 - Wed Jan 29 23:46:30 GMT 2020
+	williewillus:
+		Clean up a bunch of render events (#6444)
+		
+		* Delete RenderHandEvent as RenderSpecificHandEvent can do everything it does and more. Rename RenderSpecificHandEvent to RenderHandEvent as it's now the only hand rendering event.
+		* Pass MatrixStack and IRenderTypeBuffer into the event whenever they are available. If they're available, that means we're in a batching environment and the modder should not be using the tessellator or other buffers on their own, or they risk "Already building" crashes.
+
+=========
+Build: 1.15.2-31.0.12 - Wed Jan 29 21:55:18 GMT 2020
+	Barteks2x:
+		Fix NullPointerException on java 8u242 in dev environment. (#6473)
+		
+		Java 8u242 no longer re-initializes internal sys_paths and usr_paths fields in loadLibrary when they are null, so the value can't be set to null.
+
+=========
+Build: 1.15.2-31.0.11 - Wed Jan 29 21:18:05 GMT 2020
+	12281102+Aeltumn:
+		Fix RightClickBlock code differences between client and server implementation (#6451)
+
+	williewillus:
+		Fix incorrectly ported patch for restoreBlurMipmap (#6450)
+
+=========
+Build: 1.15.2-31.0.9 - Wed Jan 29 21:11:24 GMT 2020
+	40495288+Yamahari:
+		Defer material getting for ChestTileEntityRenderer into seperate function (#6465)
+
+=========
+Build: 1.15.2-31.0.8 - Wed Jan 29 21:04:44 GMT 2020
+	37298044+Cadiboo:
+		Small Forge config fixes (#6466)
+
+=========
+Build: 1.15.2-31.0.7 - Wed Jan 29 20:50:44 GMT 2020
+	lex:
+		Fix PlayerChangedDimensionEvent using incorrect from dimension argument in ServerPlayerEntity.teleport. Closes #6457
+
+	lex:
+		Fix incorrect keybinding modifiers patch. Closes #6478
+
+	lex:
+		Fix ChunkDataEvent.Load not firing, it now fires in the aync thread. Be careful. Closes #6471
+
+=========
+Build: 1.15.2-31.0.4 - Wed Jan 29 19:31:50 GMT 2020
+	lex:
+		Fix WakeupEvent patch misalign. Closes #6474
+
+	lex:
+		Fix default mod resources loosing it's sort order.
+
+=========
+Build: 1.15.2-31.0.2 - Wed Jan 29 17:26:58 GMT 2020
+	goto.minecraft:
+		[1.15] Reimplemented the ITeleporter interface (#6404)
+
+=========
+Build: 1.15.2-31.0.1 - Thu Jan 23 21:59:18 GMT 2020
+	David Quintana:
+		Hook "gui_light" value from the model into the IBakedModel implementations.
+		Apply some of the suggestions from the 1.14 models PR.
+
+=========
+Build: 1.15.2-31.0.0 - Wed Jan 22 21:47:51 GMT 2020
+	lex:
+		1.15.2 Initial Update
+
+=========
+Build: 1.15.1-30.0.51 - Wed Jan 22 21:10:07 GMT 2020
+	ichttt:
+		Cleanup fml packages removing old deprecated classes related to GUIs/Configs and fix HoverChecker (#6437)
+		
+		Fixed ModListWidget name to avoid confusion and collision.
+		Delete CheckBox, as vanilla has it's own CheckBox now which looks much better
+		Rename ModConfigEvent.ConfigReloading to ModConfigEvent.Reloading
+
+=========
+Build: 1.15.1-30.0.50 - Wed Jan 22 20:38:22 GMT 2020
+	12281102+Aeltumn:
+		Fixed parameter name issue in ISTER rename. #6461 (#6468)
+
+=========
+Build: 1.15.1-30.0.49 - Wed Jan 22 19:56:16 GMT 2020
+	lex:
+		Fix default widget foreground color.
+
+=========
+Build: 1.15.1-30.0.48 - Wed Jan 22 19:30:35 GMT 2020
+	diesieben07:
+		Use extended version of getLightValue in all places (#6433)
+
+	Bward7864:
+		Fixed RenderTypeLookup loosing mappings for registry replacements. (#6452)
+
+	wynprice999:
+		Fixed rounding issue with entity navigation fix (#6455) (#6456)
+
+	37298044+Cadiboo:
+		Fix Widget Foreground Color not allowing pure black (#6460)
+
+	12281102+Aeltumn:
+		Updated method names referencing ItemStackTileEntityRenderer (#6461)
+
+=========
+Build: 1.15.1-30.0.43 - Wed Jan 22 19:22:15 GMT 2020
+	scottehboeh:
+		[1.15.x] Added entity nameplate rendering event hook (#6416)
+
+=========
+Build: 1.15.1-30.0.42 - Tue Jan 21 03:47:02 GMT 2020
+	tterrag:
+		Remove emissive items hook, add small utility for bakedquad lighting
+
+=========
+Build: 1.15.1-30.0.41 - Thu Jan 16 02:30:04 GMT 2020
+	David Quintana:
+		Fix breaking overlay weirdness. applyBakedNormals was not transforming the baked normals when applying them. Fixes #6432
+
+=========
+Build: 1.15.1-30.0.40 - Thu Jan 16 00:30:10 GMT 2020
+	12281102+Aeltumn:
+		[1.15] Add new InputEvent.ClickInputEvent, addresses #5802 (#6047)
+
+=========
+Build: 1.15.1-30.0.39 - Mon Jan 13 22:21:01 GMT 2020
+	David Quintana:
+		Fix dark spots in fullbright quad rendering.
+		Fix multi-layer model not declaring dependency on the particle texture.
+		Fix mistake in 2c054fca which I didn't intend to push when I did.
+
+=========
+Build: 1.15.1-30.0.38 - Mon Jan 13 18:39:06 GMT 2020
+	David Quintana:
+		Attempt to fix fullbright lighting.
+		
+		Fix lightmap value calculation.
+
+	David Quintana:
+		Fix multi-layer model loader to actually work in a sane way. No more "base" model involved, and now transforms and overrides work as expected.
+
+=========
+Build: 1.15.1-30.0.36 - Thu Jan 09 22:28:02 GMT 2020
+	tterrag:
+		Add constructor for FishBucketItem that accepts suppliers
+
+=========
+Build: 1.15.1-30.0.35 - Tue Jan 07 22:58:54 GMT 2020
+	David Quintana:
+		Fix QuadTransformer normal processing.
+
+	Choonster.2010:
+		Fix validation in RotationBuilder#angle (fixes #6323) (#6408)
+
+=========
+Build: 1.15.1-30.0.33 - Tue Jan 07 22:20:46 GMT 2020
+	richard:
+		Add support for custom nether portal frame blocks (#6389)
+
+=========
+Build: 1.15.1-30.0.32 - Tue Jan 07 21:22:49 GMT 2020
+	RANKSHANK:
+		InputEvent.RawMouseEvent fix (#6395)
+
+=========
+Build: 1.15.1-30.0.31 - Tue Jan 07 21:15:19 GMT 2020
+	DaemonUmbra:
+		Fixed Big Mushrooms not generating (#6390)
+		
+		Removed vanilla negation from Forge logic that negated the vanilla logic it was replacing
+		also ran datagen to update the dirt tag to reflect changes that were previously made in the datagen code
+
+=========
 Build: 1.15.1-30.0.30 - Mon Jan 06 00:04:17 GMT 2020
 	tterrag:
 		Fix dyes tag containing dye items instead of tags
