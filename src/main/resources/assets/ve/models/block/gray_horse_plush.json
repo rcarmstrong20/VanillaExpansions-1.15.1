@@ -2,9 +2,9 @@
     "parent": "ve:block/template_horse_plush",
     "textures":
 	{
-        "body_color": "block/gray_wool",
-		"eye_color": "block/black_wool",
-		"hoof_color": "block/black_wool",
-		"mane_tail_color": "block/white_wool"
+        "body": "block/gray_wool",
+		"eyes": "block/black_wool",
+		"hooves": "block/black_wool",
+		"hair": "block/white_wool"
     }
 }

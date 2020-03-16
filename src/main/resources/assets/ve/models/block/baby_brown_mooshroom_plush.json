@@ -1,0 +1,9 @@
+{
+    "parent": "ve:block/template_baby_mooshroom_plush",
+    "textures":
+	{
+        "body": "block/brown_wool",
+        "spots": "block/terracotta",
+        "horns": "block/terracotta"
+    }
+}

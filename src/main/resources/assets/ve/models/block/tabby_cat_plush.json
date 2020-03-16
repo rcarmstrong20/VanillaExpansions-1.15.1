@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_two_colored_cat_plush",
+    "textures":
+	{
+		"primary_body_color": "block/brown_wool",
+		"eye_color": "block/orange_wool",
+		"eye_white_color": "block/yellow_wool",
+		"secondary_body_color": "block/white_wool"
+    }
+}

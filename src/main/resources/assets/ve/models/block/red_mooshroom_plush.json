@@ -2,6 +2,8 @@
     "parent": "ve:block/template_mooshroom_plush",
     "textures":
 	{
-        "body_color": "block/red_wool"
+        "body": "block/red_wool",
+		"spots": "block/white_wool",
+		"horns": "block/gray_wool"
     }
 }

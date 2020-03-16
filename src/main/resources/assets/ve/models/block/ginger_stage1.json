@@ -1,7 +1,7 @@
 {
-    "parent": "block/crop",
+    "parent": "block/cross",
     "textures":
 	{
-        "crop": "ve:block/ginger_stage1"
+        "cross": "ve:block/ginger_stage1"
     }
 }

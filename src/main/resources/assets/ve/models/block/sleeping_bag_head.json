@@ -1,0 +1,58 @@
+{
+	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "block/blue_wool",
+		"wool": "block/blue_wool",
+		"pillow": "block/white_wool",
+		"wood": "block/spruce_planks"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box4",
+			"from": [ 1, 0, 0 ],
+			"to": [ 15, 2, 15 ],
+			"faces": {
+				"down": { "uv": [ 0.999999, 1.000001, 15, 16 ], "texture": "#wood" },
+				"north": { "uv": [ 1.000001, 14, 15, 16 ], "texture": "#wood" },
+				"south": { "uv": [ 0.999999, 14, 15, 16 ], "texture": "#wood" },
+				"west": { "uv": [ 0, 14, 15, 16 ], "texture": "#wood" },
+				"east": { "uv": [ 1.000001, 14, 16, 16 ], "texture": "#wood" }
+			}
+		},
+		{
+			"__comment": "Box5",
+			"from": [ 2, 4, 7.5 ],
+			"to": [ 14, 5.5, 14 ],
+			"faces": {
+				"up": { "uv": [ 2, 7.499998, 14, 14 ], "texture": "#pillow" },
+				"north": { "uv": [ 2, 10.5, 14, 12 ], "texture": "#pillow" },
+				"south": { "uv": [ 2, 10.5, 14, 12 ], "texture": "#pillow" },
+				"west": { "uv": [ 7.499998, 10.5, 14, 12 ], "texture": "#pillow" },
+				"east": { "uv": [ 2.000002, 10.5, 8.500002, 12 ], "texture": "#pillow" }
+			}
+		},
+		{
+			"__comment": "Box6",
+			"from": [ 1, 2, 0 ],
+			"to": [ 15, 4, 15 ],
+			"faces": {
+				"up": { "uv": [ 0.999999, 0, 15, 15 ], "texture": "#wool" },
+				"north": { "uv": [ 1.000001, 12, 15, 14 ], "texture": "#wool" },
+				"south": { "uv": [ 0.999999, 12, 15, 14 ], "texture": "#wool" },
+				"west": { "uv": [ 0, 12, 15, 14 ], "texture": "#wool" },
+				"east": { "uv": [ 1.000001, 12, 16, 14 ], "texture": "#wool" }
+			}
+		},
+		{
+			"__comment": "Box7",
+			"from": [ 2, 4, 0 ],
+			"to": [ 14, 5, 7.5 ],
+			"faces": {
+				"up": { "uv": [ 1.999998, 0, 14, 7.499999 ], "texture": "#wool" },
+				"north": { "uv": [ 2.000002, 11, 14, 12 ], "texture": "#wool" },
+				"west": { "uv": [ 0, 11, 7.499999, 12 ], "texture": "#wool" },
+				"east": { "uv": [ 8.500001, 11, 16, 12 ], "texture": "#wool" }
+			}
+		}
+	]
+}

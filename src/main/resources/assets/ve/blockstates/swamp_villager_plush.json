@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/swamp_villager_plush" },
+        "facing=south": { "model": "ve:block/swamp_villager_plush", "y": 180 },
+        "facing=west":  { "model": "ve:block/swamp_villager_plush", "y": 270 },
+        "facing=east":  { "model": "ve:block/swamp_villager_plush", "y": 90 }
+    }
+}
