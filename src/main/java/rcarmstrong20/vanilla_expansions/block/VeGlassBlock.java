@@ -13,17 +13,7 @@ public class VeGlassBlock extends GlassBlock
 	{
 		super(properties);
 	}
-	/*
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		if(this == VeBlocks.red_glass || this == VeBlocks.glass_of_darkness)
-		{
-			return BlockRenderLayer.CUTOUT;
-		}
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-	*/
+	
 	@Override
 	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{

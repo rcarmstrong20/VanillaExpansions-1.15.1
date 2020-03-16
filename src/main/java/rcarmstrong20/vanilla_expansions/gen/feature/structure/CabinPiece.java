@@ -1,7 +1,11 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -28,7 +32,7 @@ import rcarmstrong20.vanilla_expansions.core.VeFeature;
  */
 public class CabinPiece extends TemplateStructurePiece
 {
-	//You can store whatever you want in this class, just make sure it is saved and loaded from nbt when it needs to be
+	private List<Block> flower_pots = Arrays.asList(Blocks.POTTED_DANDELION, Blocks.POTTED_POPPY, Blocks.POTTED_BLUE_ORCHID, Blocks.POTTED_ALLIUM, Blocks.POTTED_AZURE_BLUET, Blocks.POTTED_RED_TULIP, Blocks.POTTED_ORANGE_TULIP, Blocks.POTTED_WHITE_TULIP, Blocks.POTTED_PINK_TULIP, Blocks.POTTED_OXEYE_DAISY, Blocks.POTTED_CORNFLOWER, Blocks.POTTED_LILY_OF_THE_VALLEY);
 	private final ResourceLocation templateResource;
 	private final Rotation rotation;
 	
@@ -91,15 +95,19 @@ public class CabinPiece extends TemplateStructurePiece
 	{
 		if("taiga_cabin_chest".equals(function))
 		{
-			LockableLootTileEntity.setLootTable(world, rand, pos.down(), VanillaExpansions.location("chests/taiga_cabin"));
+			LockableLootTileEntity.setLootTable(world, rand, pos.down(), new ResourceLocation(VanillaExpansions.MOD_ID, "chests/taiga_cabin"));
 		}
 		else if("forest_cabin_chest".equals(function))
 		{
-			LockableLootTileEntity.setLootTable(world, rand, pos.down(), VanillaExpansions.location("chests/forest_cabin"));
+			LockableLootTileEntity.setLootTable(world, rand, pos.down(), new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
 		}
 		else if("birch_forest_cabin_chest".equals(function))
 		{
-			LockableLootTileEntity.setLootTable(world, rand, pos.down(), VanillaExpansions.location("chests/birch_forest_cabin"));
+			LockableLootTileEntity.setLootTable(world, rand, pos.down(), new ResourceLocation(VanillaExpansions.MOD_ID, "chests/birch_forest_cabin"));
+		}
+		else if("cabin_flowers".equals(function))
+		{
+			world.setBlockState(pos.down(), flower_pots.get(rand.nextInt(flower_pots.size())).getDefaultState(), 3);
 		}
 	}
 	

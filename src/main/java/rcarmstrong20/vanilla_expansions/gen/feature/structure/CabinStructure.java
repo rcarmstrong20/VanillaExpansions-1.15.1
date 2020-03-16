@@ -99,15 +99,15 @@ public class CabinStructure extends ScatteredStructure<NoFeatureConfig>
 			ResourceLocation templateResource = null;
 			if(isBiome(biome, VeBiomes.TAIGA_BIOMES))
 			{
-				templateResource = VanillaExpansions.location("taiga_cabin");
+				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
 			}
 			else if(biome == Biomes.FOREST)
 			{
-				templateResource = VanillaExpansions.location("forest_cabin");
+				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "forest_cabin");
 			}
 			else if(isBiome(biome, VeBiomes.BIRCH_FOREST_BIOMES))
 			{
-				templateResource = VanillaExpansions.location("birch_forest_cabin");
+				templateResource = new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
 			}
 			
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];

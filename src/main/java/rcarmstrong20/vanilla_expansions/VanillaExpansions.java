@@ -10,18 +10,20 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
+import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -34,7 +36,6 @@ public class VanillaExpansions
 {
 	public static Object modInstance;
 	public static final String MOD_ID = "ve";
-	public static final String MINECRAFT_ID = "minecraft";
 	public static final Logger LOGGER = LogManager.getLogger(VanillaExpansions.MOD_ID);
 	public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
 	public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
@@ -59,22 +60,6 @@ public class VanillaExpansions
 	{
 		LOGGER.info("client method registered");
 		PROXY.onSetupClient();
-	}
-	
-	/**
-	 * Get the resource location ve:name
-	 */
-	public static ResourceLocation location(String name)
-	{
-		return new ResourceLocation(VanillaExpansions.MOD_ID, name);
-	}
-	
-	/**
-	 * Get the resource location minecraft:name
-	 */
-	public static ResourceLocation vanillaLocation(String name)
-	{
-		return new ResourceLocation(VanillaExpansions.MINECRAFT_ID, name);
 	}
 	
 	@SubscribeEvent
@@ -130,5 +115,36 @@ public class VanillaExpansions
 		world.setBlockState(pos, state.with(age, 0), 2);
 		Block.spawnDrops(state, world, pos);
 		world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F);
+	}
+	
+	/*
+	 * Controls the behavior of changing a white bunny to a killer bunny.
+	 */
+	
+	@SubscribeEvent
+	public void onNameBunnyEntity(final PlayerInteractEvent.EntityInteractSpecific event)
+	{
+		if(event.getTarget() instanceof RabbitEntity)
+		{
+			RabbitEntity rabbit = (RabbitEntity) event.getTarget();
+			ItemStack itemStack = event.getItemStack();
+			
+			if(rabbit.getRabbitType() == 1 || rabbit.getRabbitType() == 99)
+			{
+				if(itemStack.getItem() == Items.NAME_TAG && itemStack.hasDisplayName())
+				{
+					if("The Killer Bunny".equals(itemStack.getDisplayName().getUnformattedComponentText()))
+					{
+						rabbit.setRabbitType(99);
+						rabbit.getRabbitType();
+					}
+					else
+					{
+						rabbit.setRabbitType(1);
+						rabbit.getRabbitType();
+					}
+				}
+			}
+		}
 	}
 }

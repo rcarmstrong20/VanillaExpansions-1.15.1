@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.PlantType;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 
@@ -61,5 +62,11 @@ public class VeBerryBushBlock extends SweetBerryBushBlock
 		{
 			super.onEntityCollision(state, worldIn, pos, entityIn);
 		}
+	}
+	
+	@Override
+	public PlantType getPlantType(IBlockReader world, BlockPos pos)
+	{
+		return PlantType.Plains;
 	}
 }

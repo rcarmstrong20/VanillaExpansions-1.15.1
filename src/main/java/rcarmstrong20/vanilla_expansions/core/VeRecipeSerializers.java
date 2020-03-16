@@ -15,13 +15,13 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeRecipeSerializers
 {
-    private static final List<IRecipeSerializer<?>> RECIPES = new ArrayList<>();
+	private static final List<IRecipeSerializer<?>> RECIPES = new ArrayList<>();
 
-    public static final IRecipeSerializer<VeWoodcuttingRecipe> WOODCUTTING = register(VanillaExpansions.location("woodcutting"), new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
+    public static final IRecipeSerializer<VeWoodcuttingRecipe> WOODCUTTING = register("woodcutting", new VeWoodcuttingRecipe.Serializer<>(VeWoodcuttingRecipe::new));
     
-	private static <S extends IRecipeSerializer<? extends IRecipe<?>>> S register(ResourceLocation name, S recipe)
+	private static <S extends IRecipeSerializer<? extends IRecipe<?>>> S register(String name, S recipe)
     {
-        recipe.setRegistryName(name);
+        recipe.setRegistryName(new ResourceLocation(VanillaExpansions.MOD_ID, name));
         RECIPES.add(recipe);
         return recipe;
     }

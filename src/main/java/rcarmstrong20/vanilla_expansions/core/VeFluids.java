@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
@@ -25,12 +24,12 @@ public class VeFluids
 {
 	private static final List<Fluid> FLUIDS = new ArrayList<>();
 	
-	public static final Fluid VOID = register(VanillaExpansions.location("void"), new VoidFluid.Source());
-	public static final FlowingFluid FLOWING_VOID = register(VanillaExpansions.location("flowing_void"), new VoidFluid.Flowing());
+	public static final Fluid VOID = register("void", new VoidFluid.Source());
+	public static final FlowingFluid FLOWING_VOID = register("flowing_void", new VoidFluid.Flowing());
 	
-	private static FlowingFluid register(ResourceLocation location, FlowingFluid fluid)
+	private static FlowingFluid register(String name, FlowingFluid fluid)
 	{
-		fluid.setRegistryName(location);
+		fluid.setRegistryName(VanillaExpansions.MOD_ID, name);
 		FLUIDS.add(fluid);
 		return fluid;
 	}

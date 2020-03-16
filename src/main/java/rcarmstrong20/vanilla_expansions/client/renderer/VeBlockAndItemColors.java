@@ -31,20 +31,7 @@ public class VeBlockAndItemColors
 	
 	private static void registerBlockColorHandlers(final BlockColors blockColors) 
 	{
-		final IBlockColor leavesColorHandler = (state, blockAccess, pos, tintIndex) ->
-		{
-			if(tintIndex == 1)
-			{
-				if (blockAccess != null && pos != null)
-				{
-					//Get the leaves color from the current biome
-					return BiomeColors.func_228361_b_(blockAccess, pos);
-				}
-				return FoliageColors.getDefault();
-			}
-			return -1;
-		};
-		
+		// Use the grass color of the biome or the default grass color
 		final IBlockColor grassColorHandler = (state, blockAccess, pos, tintIndex) ->
 		{
 			if(tintIndex == 1)
@@ -59,6 +46,20 @@ public class VeBlockAndItemColors
 			return -1;
 		};
 		
+		final IBlockColor leavesColorHandler = (state, blockAccess, pos, tintIndex) ->
+		{
+			if(tintIndex == 1)
+			{
+				if (blockAccess != null && pos != null)
+				{
+					//Get the leaves color from the current biome
+					return BiomeColors.func_228361_b_(blockAccess, pos);
+				}
+				return FoliageColors.getDefault();
+			}
+			return -1;
+		};
+		
 		final IBlockColor waterColorHandler = (state, blockAccess, pos, tintIndex) ->
 		{
 			if (blockAccess != null && pos != null && tintIndex == 1)
@@ -69,8 +70,8 @@ public class VeBlockAndItemColors
 			return -1;
 		};
 		
-		blockColors.register(leavesColorHandler, VeBlocks.regirock_pokedoll);
 		blockColors.register(grassColorHandler, VeBlocks.enderman_plush);
+		blockColors.register(leavesColorHandler, VeBlocks.regirock_pokedoll);
 		blockColors.register(waterColorHandler, VeBlocks.oak_planting_pot, VeBlocks.spruce_planting_pot, VeBlocks.birch_planting_pot, VeBlocks.jungle_planting_pot, VeBlocks.dark_oak_planting_pot, VeBlocks.acacia_planting_pot);
 	}
 	
@@ -80,7 +81,8 @@ public class VeBlockAndItemColors
 		final IItemColor itemBlockColorHandler = (stack, tintIndex) -> 
 		{
 			final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
-			//func_228054_a_ = get item colors from block
+			
+			//func_228054_a_ get items the colors from the block's colors
 			return blockColors.func_228054_a_(state, null, null, tintIndex);
 		};
 		

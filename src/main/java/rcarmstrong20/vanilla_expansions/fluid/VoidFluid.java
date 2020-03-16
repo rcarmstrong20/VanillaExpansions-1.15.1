@@ -1,24 +1,36 @@
 package rcarmstrong20.vanilla_expansions.fluid;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.item.Item;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidAttributes;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeFluids;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 
-public class VoidFluid extends WaterFluid
+public abstract class VoidFluid extends WaterFluid
 {
 	@Override
 	public Fluid getFlowingFluid()
@@ -41,32 +53,12 @@ public class VoidFluid extends WaterFluid
 	@Override
 	public boolean func_215665_a(IFluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction)
 	{
-		return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
+		return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.VOID);
 	}
 	
 	protected FluidAttributes createAttributes()
 	{
-		FluidAttributes.Builder builder = FluidAttributes.builder(VanillaExpansions.location("block/void_still"), VanillaExpansions.location("block/void_flow"));
-		
-		builder.luminosity(20).density(1000).viscosity(3000);
-		return builder.build((Fluid)this);
-	}
-	/*
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random)
-	{
-		if (!state.isSource() && !state.get(FALLING))
-		{
-			if (random.nextInt(64) == 0)
-			{
-				worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
-			}
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)((float)pos.getX() + random.nextFloat()), (double)((float)pos.getY() + random.nextFloat()), (double)((float)pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
-		}	
+		return FluidAttributes.builder(new ResourceLocation(VanillaExpansions.MOD_ID, "block/void_still"), new ResourceLocation(VanillaExpansions.MOD_ID, "block/void_flow")).luminosity(20).density(1000).viscosity(3000).build(this);
 	}
 	
 	@Nullable
@@ -75,7 +67,7 @@ public class VoidFluid extends WaterFluid
 	{
 		return VeParticleTypes.DRIPPING_VOID;
 	}
-	*/
+	
 	@Override
 	public BlockState getBlockState(IFluidState state)
 	{
@@ -95,15 +87,20 @@ public class VoidFluid extends WaterFluid
 	}
 	
 	@Override
-	public boolean isSource(IFluidState state)
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random)
 	{
-		return this.getStillFluid() != null ? true : false;
-	}
-	
-	@Override
-	public int getLevel(IFluidState state)
-	{
-		return this.getStillFluid() != null ? 8 : WaterFluid.getLevelFromState(state);
+		if (!state.isSource() && !state.get(FALLING))
+		{
+			if (random.nextInt(64) == 0)
+			{
+				worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
+			}
+		}
+		else if (random.nextInt(10) == 0)
+		{
+			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)((float)pos.getX() + random.nextFloat()), (double)((float)pos.getY() + random.nextFloat()), (double)((float)pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
+		}	
 	}
 	
 	public static class Flowing extends VoidFluid

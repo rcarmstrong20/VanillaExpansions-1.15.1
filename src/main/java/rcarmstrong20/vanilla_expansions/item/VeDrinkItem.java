@@ -11,7 +11,6 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public class VeDrinkItem extends Item
 {
-
 	public VeDrinkItem(Properties properties)
 	{
 		super(properties);

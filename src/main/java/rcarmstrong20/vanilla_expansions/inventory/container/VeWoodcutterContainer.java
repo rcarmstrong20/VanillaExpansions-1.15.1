@@ -28,8 +28,8 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 public class VeWoodcutterContainer extends Container
 {
-	private final IWorldPosCallable worldPosCallable;
-	private final IntReferenceHolder field_217089_h = IntReferenceHolder.single();
+	private final IWorldPosCallable WORLD_POS_CALLABLE;
+	private final IntReferenceHolder SINGLE_INTERFACE_HOLDER = IntReferenceHolder.single();
 	private final World world;
 	private List<VeWoodcuttingRecipe> recipes = Lists.newArrayList();
 	private ItemStack itemStack = ItemStack.EMPTY;
@@ -61,7 +61,7 @@ public class VeWoodcutterContainer extends Container
 	public VeWoodcutterContainer(int p_i50060_1_, PlayerInventory playerInventory, final IWorldPosCallable worldPosCallable)
 	{
 		super(VeContainerTypes.WOODCUTTER, p_i50060_1_);
-		this.worldPosCallable = worldPosCallable;
+		this.WORLD_POS_CALLABLE = worldPosCallable;
 		this.world = playerInventory.player.world;
 		this.slot1 = this.addSlot(new Slot(this.inventory, 0, 20, 33));
 		this.slot2 = this.addSlot(new Slot(this.inventoryResult, 1, 143, 33) {
@@ -107,13 +107,13 @@ public class VeWoodcutterContainer extends Container
 		{
 			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
-		this.trackInt(this.field_217089_h);
+		this.trackInt(this.SINGLE_INTERFACE_HOLDER);
 	}
 	
 	@OnlyIn(Dist.CLIENT)
 	public int func_217073_e()
 	{
-		return this.field_217089_h.get();
+		return this.SINGLE_INTERFACE_HOLDER.get();
 	}
 	
 	@OnlyIn(Dist.CLIENT)
@@ -140,7 +140,7 @@ public class VeWoodcutterContainer extends Container
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn)
 	{
-		return isWithinUsableDistance(this.worldPosCallable, playerIn, VeBlocks.woodcutter);
+		return isWithinUsableDistance(this.WORLD_POS_CALLABLE, playerIn, VeBlocks.woodcutter);
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class VeWoodcutterContainer extends Container
 	{
 		if (id >= 0 && id < this.recipes.size())
 		{
-			this.field_217089_h.set(id);
+			this.SINGLE_INTERFACE_HOLDER.set(id);
 			this.func_217082_i();
 		}
 		return true;
@@ -174,7 +174,7 @@ public class VeWoodcutterContainer extends Container
 	private void updateAvailableRecipes(IInventory p_217074_1_, ItemStack p_217074_2_)
 	{
 		this.recipes.clear();
-		this.field_217089_h.set(-1);
+		this.SINGLE_INTERFACE_HOLDER.set(-1);
 		this.slot2.putStack(ItemStack.EMPTY);
 		if (!p_217074_2_.isEmpty())
 		{
@@ -186,7 +186,7 @@ public class VeWoodcutterContainer extends Container
 	{
 		if (!this.recipes.isEmpty())
 		{
-			VeWoodcuttingRecipe woodcuttingrecipe = this.recipes.get(this.field_217089_h.get());
+			VeWoodcuttingRecipe woodcuttingrecipe = this.recipes.get(this.SINGLE_INTERFACE_HOLDER.get());
 			this.slot2.putStack(woodcuttingrecipe.getCraftingResult(this.inventory));
 		}
 		else
@@ -289,7 +289,7 @@ public class VeWoodcutterContainer extends Container
 	{
 		super.onContainerClosed(playerIn);
 		this.inventoryResult.removeStackFromSlot(1);
-		this.worldPosCallable.consume((p_217079_2_, p_217079_3_) ->
+		this.WORLD_POS_CALLABLE.consume((p_217079_2_, p_217079_3_) ->
 		{
 			this.clearContainer(playerIn, playerIn.world, this.inventory);
 		});

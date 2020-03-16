@@ -10,10 +10,12 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 
 public enum VeItemTier implements IItemTier
 {
-	EMERALD(2, 650, 6.0F, 2.0F, 22, () -> {
+	EMERALD(2, 650, 6.0F, 2.0F, 22, () ->
+	{
 		return Ingredient.fromItems(Items.EMERALD);
 	}),
-	RUBY(4, 2872, 8.0F, 4.0F, 10, () -> {
+	RUBY(4, 2872, 8.0F, 4.0F, 10, () ->
+	{
 		return Ingredient.fromItems(VeItems.ruby);
 	});
 	

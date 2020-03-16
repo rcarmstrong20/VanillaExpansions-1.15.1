@@ -3,10 +3,13 @@ package rcarmstrong20.vanilla_expansions.proxy;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.entity.merchant.villager.VillagerTrades;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
+import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 
 public class ClientProxy extends CommonProxy
 {
@@ -15,8 +18,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.onSetupClient();
 		VeBlockAndItemColors.registerColorHandlers();
-		//this.registerParticleFactories();
-		//this.registerTileEntityRenders();
+		this.registerTrades();
 		this.registerScreenFactories();
 		this.registerRenders();
 	}
@@ -29,18 +31,32 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.UNDERVOID, VeUndervoidParticle.Factory::new);
 	}
 	*/
+	
+	/*
+	 * Register the screen factories for the containers.
+	 */
 	private void registerScreenFactories()
 	{
 		ScreenManager.registerFactory(VeContainerTypes.WOODCUTTER, VeWoodcutterScreen::new);
 	}
+	
+	/*
+	 * Add the new trade lists to the vanilla ones along with the corresponding profession for registry.
+	 */
+	private void registerTrades()
+	{
+		VillagerTrades.field_221239_a.put(VeVillagerProfessions.LUMBERJACK, VeVillagerTrades.LUMBERJACK_TRADES);
+	}
+	
 	/*
 	private void registerTileEntityRenders()
 	{
-		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.campfire, new VeCampfireTileEntityRenderer(TileEntityRendererDispatcher.instance));
+		ClientRegistry.bindTileEntitySpecialRenderer(VeCampfireTileEntity.class, new VeCampfireTileEntityRenderer());
 	}
 	*/
+	
 	/**
-	 * Get the render layers for the blocks
+	 * Register the render layers for each block.
 	 */
 	private void registerRenders()
 	{

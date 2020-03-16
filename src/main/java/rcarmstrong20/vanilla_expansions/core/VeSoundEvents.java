@@ -23,7 +23,7 @@ public class VeSoundEvents
 	
 	private static SoundEvent register(String name)
     {
-		ResourceLocation location = VanillaExpansions.location(name);
+		ResourceLocation location = new ResourceLocation(VanillaExpansions.MOD_ID, name);
         SoundEvent event = new SoundEvent(location);
         event.setRegistryName(location);
         SOUNDS.add(event);
