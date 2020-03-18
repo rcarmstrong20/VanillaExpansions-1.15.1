@@ -19,7 +19,7 @@
                   "block": "ve:slime_plush",
                   "properties":
 				  {
-                    "plush_stack": "2"
+                    "plush_stack_size": "2"
                   }
                 }
               ],
@@ -34,7 +34,7 @@
                   "block": "ve:slime_plush",
                   "properties":
 				  {
-                    "plush_stack": "3"
+                    "plush_stack_size": "3"
                   }
                 }
               ],

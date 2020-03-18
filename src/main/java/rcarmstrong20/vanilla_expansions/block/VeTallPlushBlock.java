@@ -89,7 +89,7 @@ public class VeTallPlushBlock extends VePlushBlock
 	protected static final VoxelShape TWO_SLIME_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, TWO_SLIME_NORTH_SHAPE);
 	protected static final VoxelShape TWO_SLIME_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, TWO_SLIME_NORTH_SHAPE);
 	
-	//Three Slime Bunding Boxes
+	//Three Slime Bouding Boxes
 	
 	protected static final VoxelShape THREE_SLIME_NORTH_MOUTH_EYE_SHAPE = Block.makeCuboidShape(7.0D, 2.0D, 6.0D, 7.5D, 2.5D, 5.5D);
 	protected static final VoxelShape THREE_SLIME_NORTH_SHAPE = VoxelShapes.or(THREE_MAGMA_CUBE_NORTH_SHAPE, THREE_SLIME_NORTH_MOUTH_EYE_SHAPE);

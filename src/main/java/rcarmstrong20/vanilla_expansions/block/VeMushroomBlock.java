@@ -7,10 +7,10 @@ import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.server.ServerWorld;
 import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
-import rcarmstrong20.vanilla_expansions.core.VeFeature;
 
 public class VeMushroomBlock extends MushroomBlock
 {
@@ -26,7 +26,7 @@ public class VeMushroomBlock extends MushroomBlock
 		ConfiguredFeature<BigMushroomFeatureConfig, ?> configuredfeature;
 		if (this == VeBlocks.purple_mushroom)
 		{
-			configuredfeature = VeFeature.HUGE_PURPLE_MUSHROOM.func_225566_b_(VeBiomes.HUGE_PURPLE_MUSHROOM_CONFIG);
+			configuredfeature = Feature.HUGE_RED_MUSHROOM.withConfiguration(VeBiomes.BIG_PURPLE_MUSHROOM_CONFIG);
 		}
 		else
 		{

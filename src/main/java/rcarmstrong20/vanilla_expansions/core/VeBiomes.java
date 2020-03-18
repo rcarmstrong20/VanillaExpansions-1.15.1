@@ -60,27 +60,27 @@ public class VeBiomes
 	public static final BlockState WITCHS_CRADLE = VeBlocks.witchs_cradle.getDefaultState().with(VeBerryBushBlock.AGE, 3);
 	public static final BlockState VOID_LIQUID = VeBlocks.void_liquid.getDefaultState();
 	public static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
-	public static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purple_mushroom_block.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(true)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
+	public static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purple_mushroom_block.getDefaultState().with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
 	public static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(false)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
-	public static final BlockClusterFeatureConfig BLUEBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(BLUEBERRY_BUSH), new SimpleBlockPlacer())).func_227315_a_(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().func_227322_d_();
-	public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(CRANBERRY_BUSH), new SimpleBlockPlacer())).func_227315_a_(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().func_227322_d_();
-	public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(WITCHS_CRADLE), new SimpleBlockPlacer())).func_227315_a_(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().func_227322_d_();
-	public static final BigMushroomFeatureConfig HUGE_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
+	public static final BlockClusterFeatureConfig BLUEBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(BLUEBERRY_BUSH), new SimpleBlockPlacer())).tries(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
+	public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(CRANBERRY_BUSH), new SimpleBlockPlacer())).tries(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
+	public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(WITCHS_CRADLE), new SimpleBlockPlacer())).tries(64).func_227316_a_(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
+	public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
 	
 	@SubscribeEvent
 	public static void registerBiomes(final RegistryEvent.Register<Biome> event)
 	{
-		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, AIRITE_ORE, 9)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(20, 0, 0, 64))), COLD_BIOMES);
-		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_SMOKY_QUARTZ_ORE, 14)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(16, 10, 20, 128))), NETHER_BIOMES);
-		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.func_225566_b_(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_RUBY_ORE, 8)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(1, 0, 0, 16))), NETHER_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(BLUEBERRY_BUSH_CONFIG).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(1))), FOREST_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(BLUEBERRY_BUSH_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP_DOUBLE.func_227446_a_(new ChanceConfig(12))), FOREST_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(CRANBERRY_BUSH_CONFIG).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(2))), FOREST_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(CRANBERRY_BUSH_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP_DOUBLE.func_227446_a_(new ChanceConfig(14))), FOREST_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.func_225566_b_(new TwoFeatureChoiceConfig(VeFeature.HUGE_PURPLE_MUSHROOM.func_225566_b_(HUGE_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_BROWN_MUSHROOM.func_225566_b_(HUGE_PURPLE_MUSHROOM_CONFIG))).func_227228_a_(Placement.COUNT_HEIGHTMAP.func_227446_a_(new FrequencyConfig(1))), DARK_FOREST_BIOMES);
-		addFeature(Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.func_225566_b_(WITCHS_CRADLE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP_DOUBLE.func_227446_a_(new ChanceConfig(10))), SWAMP_BIOMES);
-		addFeature(Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(VOID_LIQUID)).func_227228_a_(Placement.WATER_LAKE.func_227446_a_(new ChanceConfig(4))), END_CITY_BIOMES);
-		addFeatureToAll(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, AIRITE_ORE, 9)).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(20, 0, 0, 64))), COLD_BIOMES);
+		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_SMOKY_QUARTZ_ORE, 14)).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))), NETHER_BIOMES);
+		addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_RUBY_ORE, 8)).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))), NETHER_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))), FOREST_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(12))), FOREST_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))), FOREST_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(14))), FOREST_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(WITCHS_CRADLE_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(10))), SWAMP_BIOMES);
+		addFeature(Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(1))), DARK_FOREST_BIOMES);
+		addFeature(Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VOID_LIQUID)).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))), END_CITY_BIOMES);
+		addFeatureToAll(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		addStructure(VeFeature.CABIN, IFeatureConfig.NO_FEATURE_CONFIG, CABIN_BIOMES);
 		
 		VanillaExpansions.LOGGER.info("Biome Features registered.");
@@ -123,7 +123,7 @@ public class VeBiomes
 		{
 			if(biome != null)
 			{
-				biome.func_226711_a_(structure.func_225566_b_(config));
+				biome.addStructure(structure.withConfiguration(config));
 			}
 		}
 	}

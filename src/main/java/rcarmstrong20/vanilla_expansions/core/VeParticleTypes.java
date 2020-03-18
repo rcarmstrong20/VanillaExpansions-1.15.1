@@ -19,7 +19,7 @@ public class VeParticleTypes
 	public static final BasicParticleType DRIPPING_VOID = register("dripping_void", false);
 	public static final BasicParticleType FALLING_VOID = register("falling_void", false);
 	public static final BasicParticleType LANDING_VOID = register("landing_void", false);
-	public static final BasicParticleType UNDERVOID = register("undervoid", false);
+	public static final BasicParticleType UNDERVOID = register("undervoid", true);
 	
 	private static BasicParticleType register(String name, boolean alwaysShow)
 	{

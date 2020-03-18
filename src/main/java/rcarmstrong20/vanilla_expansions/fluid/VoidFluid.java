@@ -15,7 +15,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
@@ -29,6 +28,7 @@ import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeFluids;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
+import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
 public abstract class VoidFluid extends WaterFluid
 {
@@ -50,8 +50,21 @@ public abstract class VoidFluid extends WaterFluid
 		return VeItems.void_bucket;
 	}
 	
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random)
+	{
+		if (random.nextInt(400) == 0)
+		{
+			worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, VeSoundEvents.BLOCK_VOID_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.25F, random.nextFloat() + 0.5F, false);
+		}
+		else if (random.nextInt(10) == 0)
+		{
+			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + (double)random.nextFloat(), (double)pos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
+		}
+	}
+	
 	@Override
-	public boolean func_215665_a(IFluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction)
+	public boolean canDisplace(IFluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction)
 	{
 		return direction == Direction.DOWN && !fluid.isIn(VeFluidTags.VOID);
 	}
@@ -84,23 +97,6 @@ public abstract class VoidFluid extends WaterFluid
 	public int getTickRate(IWorldReader p_205569_1_)
 	{
 		return 10;
-	}
-	
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random)
-	{
-		if (!state.isSource() && !state.get(FALLING))
-		{
-			if (random.nextInt(64) == 0)
-			{
-				worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
-			}
-		}
-		else if (random.nextInt(10) == 0)
-		{
-			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)((float)pos.getX() + random.nextFloat()), (double)((float)pos.getY() + random.nextFloat()), (double)((float)pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
-		}	
 	}
 	
 	public static class Flowing extends VoidFluid

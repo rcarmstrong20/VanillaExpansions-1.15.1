@@ -92,7 +92,7 @@ public class VeCampfireTileEntity extends TileEntity implements IClearable, ITic
          Random random = world.rand;
          if (random.nextFloat() < 0.11F) {
             for(int i = 0; i < random.nextInt(2) + 2; ++i) {
-               VeCampfireBlock.func_220098_a(world, blockpos, this.getBlockState().get(VeCampfireBlock.SIGNAL_FIRE), false);
+               VeCampfireBlock.spawnSmokeParticles(world, blockpos, this.getBlockState().get(VeCampfireBlock.SIGNAL_FIRE), false);
             }
          }
 

@@ -43,7 +43,7 @@ public class VeTurkeyBlock extends CakeBlock
 	}
 	
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult BlockRayTrace)
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult BlockRayTrace)
 	{
 		if (world.isRemote)
 		{

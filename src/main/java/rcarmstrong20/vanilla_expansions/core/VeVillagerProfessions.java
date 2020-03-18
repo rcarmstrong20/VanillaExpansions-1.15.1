@@ -29,23 +29,12 @@ public class VeVillagerProfessions
 	private static VillagerProfession register(String id, String name, PointOfInterestType pointOfInterest, SoundEvent sound)
 	{
 		VillagerProfession profession = null;
+		
 		try
 		{
 			profession = VILLAGER_POFESSION_CONSTRUCTOR.newInstance(id + ":" + name, pointOfInterest, ImmutableSet.of(), ImmutableSet.of(), sound);
 		}
-		catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		}
-		catch (InvocationTargetException e)
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
 			e.printStackTrace();
 		}

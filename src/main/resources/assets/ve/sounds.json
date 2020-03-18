@@ -1,4 +1,5 @@
 {
 	"block.mushroom_bounce": {"category": "blocks", "subtitle": "Mushroom bounces", "sounds": [{"name": "ve:block/mushroom_bounce", "stream": false}]},
+	"block.void_ambient": {"category": "blocks", "subtitle": "Void speaks", "sounds": [{"name": "ve:block/void_ambient", "stream": true}]},
 	"ui.woodcutter.take_result": {"category": "blocks", "subtitle": "Woodcutter cuts", "sounds": [{"name": "ve:ui/woodcutter/take_result", "stream": false}]}
 }

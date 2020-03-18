@@ -38,8 +38,7 @@ public class VeBlockAndItemColors
 			{
 				if (blockAccess != null && pos != null)
 				{
-					//Get the grass color from the current biome
-					return BiomeColors.func_228358_a_(blockAccess, pos);
+					return BiomeColors.getGrassColor(blockAccess, pos);
 				}
 				return GrassColors.get(0.5D, 1.0D);
 			}
@@ -52,8 +51,7 @@ public class VeBlockAndItemColors
 			{
 				if (blockAccess != null && pos != null)
 				{
-					//Get the leaves color from the current biome
-					return BiomeColors.func_228361_b_(blockAccess, pos);
+					return BiomeColors.getFoliageColor(blockAccess, pos);
 				}
 				return FoliageColors.getDefault();
 			}
@@ -65,7 +63,7 @@ public class VeBlockAndItemColors
 			if (blockAccess != null && pos != null && tintIndex == 1)
 			{
 				//Get the water color from the current biome
-				return BiomeColors.func_228363_c_(blockAccess, pos);
+				return BiomeColors.getWaterColor(blockAccess, pos);
 			}
 			return -1;
 		};
@@ -77,13 +75,12 @@ public class VeBlockAndItemColors
 	
 	private static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors) 
 	{
-		// Use the Block's color handler for an ItemBlock
+		// Use the Block's color for the ItemBlock
 		final IItemColor itemBlockColorHandler = (stack, tintIndex) -> 
 		{
 			final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
 			
-			//func_228054_a_ get items the colors from the block's colors
-			return blockColors.func_228054_a_(state, null, null, tintIndex);
+			return blockColors.getColor(state, null, null, tintIndex);
 		};
 		
 		itemColors.register(itemBlockColorHandler, VeBlocks.enderman_plush, VeBlocks.regigigas_pokedoll);
