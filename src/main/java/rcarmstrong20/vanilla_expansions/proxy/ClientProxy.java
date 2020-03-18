@@ -88,6 +88,9 @@ public class ClientProxy extends CommonProxy
 		RenderTypeLookup.setRenderLayer(VeBlocks.blueberry_bush, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.cranberry_bush, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.witchs_cradle, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.regice_pokedoll, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.regirock_pokedoll, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.registeel_pokedoll, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.regigigas_pokedoll, RenderType.getCutout());
 	}
 }
