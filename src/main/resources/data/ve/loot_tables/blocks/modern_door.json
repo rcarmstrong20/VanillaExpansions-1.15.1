@@ -8,6 +8,17 @@
 	  [
         {
           "type": "minecraft:item",
+          "conditions":
+		  [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "ve:modern_door",
+              "properties":
+			  {
+                "half": "lower"
+              }
+            }
+          ],
           "name": "ve:modern_door"
         }
       ],

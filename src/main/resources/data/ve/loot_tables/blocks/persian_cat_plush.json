@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:item",
+          "name": "ve:persian_cat_plush"
+        }
+      ],
+      "conditions":
+	  [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
