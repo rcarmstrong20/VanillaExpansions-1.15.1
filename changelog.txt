@@ -1,3 +1,17 @@
+Build: 1.15.2-31.1.27 - Sat Mar 21 00:06:03 GMT 2020
+	cpw:
+		Fix cycle happening in noteblock even though we're setting the new value as well..
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.15.2-31.1.26 - Fri Mar 20 21:35:06 GMT 2020
+	cpw:
+		Add a progress message for atlas textures. Fills a big time gap on bigger packs.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
 Build: 1.15.2-31.1.25 - Tue Mar 17 09:41:49 GMT 2020
 	bjfccb:
 		Remove ArrowEntity patch, vanilla fixed MC-107941

@@ -25,10 +25,6 @@ public class VeSevenStageCropBlock extends CropsBlock
     	{
     		return VeItems.bok_choy_seeds;
     	}
-    	else if(block == VeBlocks.ginger)
-    	{
-    		return VeItems.ginger_root;
-    	}
     	else if(block == VeBlocks.quinoa)
     	{
     		return VeItems.quinoa;

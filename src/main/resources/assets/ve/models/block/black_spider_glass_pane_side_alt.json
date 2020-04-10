@@ -1,0 +1,8 @@
+{
+    "parent": "block/template_glass_pane_side_alt",
+    "textures":
+	{
+        "edge": "ve:block/black_spider_glass_pane_top",
+        "pane": "ve:block/black_spider_glass"
+    }
+}

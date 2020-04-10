@@ -4,10 +4,14 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
+import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCampfireTileEntityRenderer;
+import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeDoubleSlabTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
+import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 
@@ -20,6 +24,7 @@ public class ClientProxy extends CommonProxy
 		VeBlockAndItemColors.registerColorHandlers();
 		this.registerTrades();
 		this.registerScreenFactories();
+		this.registerTileEntityRenderers();
 		this.registerRenders();
 	}
 	
@@ -28,11 +33,20 @@ public class ClientProxy extends CommonProxy
 	 */
 	private void registerScreenFactories()
 	{
-		ScreenManager.registerFactory(VeContainerTypes.WOODCUTTER, VeWoodcutterScreen::new);
+		ScreenManager.registerFactory(VeContainerTypes.woodcutter, VeWoodcutterScreen::new);
 	}
 	
 	/*
-	 * Add the new trade lists to the vanilla ones along with the corresponding profession for registry.
+	 * Bind the tile entities to their renders.
+	 */
+	private void registerTileEntityRenderers()
+	{
+		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.colored_campfire, VeColoredCampfireTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.double_slab, VeDoubleSlabTileEntityRenderer::new);
+	}
+	
+	/*
+	 * Add the new trade lists to the vanilla trade list along with the corresponding profession for registry.
 	 */
 	private void registerTrades()
 	{
@@ -44,9 +58,8 @@ public class ClientProxy extends CommonProxy
 	 */
 	private void registerRenders()
 	{
-		RenderTypeLookup.setRenderLayer(VeBlocks.enderman_plush, RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(VeBlocks.airite_block, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.airite_ore, RenderType.getTranslucent());
+		//Register cutout and cutout mipped renders
+		
 		RenderTypeLookup.setRenderLayer(VeBlocks.red_glass, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.red_glass_pane, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.spruce_ladder, RenderType.getCutout());
@@ -56,12 +69,6 @@ public class ClientProxy extends CommonProxy
 		RenderTypeLookup.setRenderLayer(VeBlocks.dark_oak_ladder, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.iron_ladder, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.modern_door, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass_pane, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.red_spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.red_spider_glass_pane, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass_pane, RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(VeBlocks.purple_mushroom, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.woodcutter, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.white_campfire, RenderType.getCutout());
@@ -84,13 +91,22 @@ public class ClientProxy extends CommonProxy
 		RenderTypeLookup.setRenderLayer(VeBlocks.garlic, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.green_onions, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.quinoa, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(VeBlocks.ginger, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.blueberry_bush, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.cranberry_bush, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.witchs_cradle, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(VeBlocks.regice_pokedoll, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(VeBlocks.regirock_pokedoll, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(VeBlocks.registeel_pokedoll, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(VeBlocks.regigigas_pokedoll, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(VeBlocks.enderman_plush, RenderType.getCutoutMipped());
+		
+		//Register translucent renders
+		
+		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.spider_glass_pane, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.black_spider_glass, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.black_spider_glass_pane, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.fancy_spider_glass_pane, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass_pane, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(VeBlocks.glass_of_darkness, RenderType.getTranslucent());
 	}
 }

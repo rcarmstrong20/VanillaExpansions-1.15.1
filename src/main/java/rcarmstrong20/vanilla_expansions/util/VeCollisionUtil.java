@@ -15,9 +15,9 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 public class VeCollisionUtil
 {
 	private static final double CENTER = 0.5;
-	private static final double NINETY_DEGREES = Math.toRadians(90),
-								ONE_HUNDRED_EIGHTY_DEGREES = Math.toRadians(180),
-								TWO_HUNDRED_SEVENTY_DEGREES = Math.toRadians(270);
+	private static final double NINETY_DEGREES = Math.toRadians(90);
+	private static final double ONE_HUNDRED_EIGHTY_DEGREES = Math.toRadians(180);
+	private static final double TWO_HUNDRED_SEVENTY_DEGREES = Math.toRadians(270);
 	
 	public static VoxelShape orAll(VoxelShape... shapes)
 	{

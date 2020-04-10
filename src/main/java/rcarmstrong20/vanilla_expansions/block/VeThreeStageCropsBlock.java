@@ -42,10 +42,6 @@ public class VeThreeStageCropsBlock extends BeetrootBlock
 		{
 			return VeItems.garlic;
 		}
-		else if(this == VeBlocks.ginger)
-		{
-			return VeItems.ginger_root;
-		}
 		return Items.WHEAT_SEEDS;
 	}
 }

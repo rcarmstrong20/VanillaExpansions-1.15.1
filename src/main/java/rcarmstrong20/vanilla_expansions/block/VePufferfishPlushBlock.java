@@ -63,6 +63,20 @@ public class VePufferfishPlushBlock extends VePlushBlock
 	
 	//Pufferfish 2 Bounding Boxes
 	
+	protected static final VoxelShape PUFFERFISH_2_NORTH_BODY_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 2.0D, 13.0D, 9.0D, 12.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE = Block.makeCuboidShape(1.0D, 6.0D, 4.0D, 3.0D, 7.0D, 9.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE = Block.makeCuboidShape(13.0D, 6.0D, 4.0D, 15.0D, 7.0D, 9.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(6.5D, 3.0D, 1.5D, 9.5D, 4.0D, 2.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(4.0D, 5.0D, 1.5D, 7.0D, 6.5D, 2.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.0D, 5.0D, 1.5D, 12.0D, 6.5D, 2.0D);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_FINS_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE, PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_EYES_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE, PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE);
+	protected static final VoxelShape PUFFERFISH_2_NORTH_SHAPE = VoxelShapes.or(PUFFERFISH_2_NORTH_BODY_SHAPE, PUFFERFISH_2_NORTH_MOUTH_SHAPE, PUFFERFISH_2_NORTH_FINS_SHAPE, PUFFERFISH_2_NORTH_EYES_SHAPE);
+	
+	protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+	protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+	protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, PUFFERFISH_2_NORTH_SHAPE);
+	
 	public VePufferfishPlushBlock(Properties properties)
 	{
 		super(properties);
@@ -89,7 +103,7 @@ public class VePufferfishPlushBlock extends VePlushBlock
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
-		return VePufferfishPlushBlock.defineShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE, PUFFERFISH_0_NORTH_BODY_SHAPE, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE, PUFFERFISH_0_NORTH_BODY_SHAPE, PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE, PUFFERFISH_0_NORTH_BODY_SHAPE, PUFFERFISH_0_EAST_SHAPE, PUFFERFISH_1_EAST_SHAPE, PUFFERFISH_0_NORTH_BODY_SHAPE);
+		return VePufferfishPlushBlock.defineShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE, PUFFERFISH_2_NORTH_SHAPE, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE, PUFFERFISH_2_SOUTH_SHAPE, PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE, PUFFERFISH_2_WEST_SHAPE, PUFFERFISH_0_EAST_SHAPE, PUFFERFISH_1_EAST_SHAPE, PUFFERFISH_2_EAST_SHAPE);
 	}
 	
 	private static VoxelShape defineShapes(BlockState state, VoxelShape northPuffShape0, VoxelShape northPuffShape1, VoxelShape northPuffShape2, VoxelShape southPuffShape0, VoxelShape southPuffShape1, VoxelShape southPuffShape2, VoxelShape westPuffShape0, VoxelShape westPuffShape1, VoxelShape westPuffShape2, VoxelShape eastPuffShape0, VoxelShape eastPuffShape1, VoxelShape eastPuffShape2)

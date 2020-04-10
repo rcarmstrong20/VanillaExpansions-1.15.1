@@ -10,7 +10,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.tile_entity.VeCampfireTileEntity;
+import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
+import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
 /**
  * Author: rcarmstrong20
@@ -20,12 +21,24 @@ public class VeTileEntityType
 {
 	public static final List<TileEntityType<?>> TILE_ENTITY_TYPES = new ArrayList<>();
 	
-	public static final TileEntityType<VeCampfireTileEntity> campfire = register(VanillaExpansions.MOD_ID, "campfire", TileEntityType.Builder.create(VeCampfireTileEntity::new, VeBlocks.white_campfire, VeBlocks.orange_campfire, VeBlocks.magenta_campfire, VeBlocks.light_blue_campfire, VeBlocks.yellow_campfire, VeBlocks.lime_campfire, VeBlocks.pink_campfire, VeBlocks.gray_campfire, VeBlocks.light_gray_campfire, VeBlocks.cyan_campfire, VeBlocks.purple_campfire, VeBlocks.blue_campfire, VeBlocks.brown_campfire, VeBlocks.green_campfire, VeBlocks.red_campfire, VeBlocks.black_campfire));
+	public static TileEntityType<VeColoredCampfireTileEntity> colored_campfire = register(VanillaExpansions.MOD_ID, "colored_campfire", TileEntityType.Builder.create(VeColoredCampfireTileEntity::new, VeBlocks.white_campfire, VeBlocks.orange_campfire, VeBlocks.magenta_campfire, VeBlocks.light_blue_campfire, VeBlocks.yellow_campfire, VeBlocks.lime_campfire, VeBlocks.pink_campfire, VeBlocks.gray_campfire, VeBlocks.light_gray_campfire, VeBlocks.cyan_campfire, VeBlocks.purple_campfire, VeBlocks.blue_campfire, VeBlocks.brown_campfire, VeBlocks.green_campfire, VeBlocks.red_campfire, VeBlocks.black_campfire));
+	public static TileEntityType<VeDoubleSlabTileEntity> double_slab = register(VanillaExpansions.MOD_ID, "double_slab", TileEntityType.Builder.create(VeDoubleSlabTileEntity::new, VeBlocks.double_slab));
+	
+	@SuppressWarnings("unused")
+	private static <T extends TileEntity> TileEntityType<T> register(String name, TileEntityType.Builder<T> builder)
+	{
+		return register(new ResourceLocation(name), builder);
+	}
 	
 	private static <T extends TileEntity> TileEntityType<T> register(String id, String name, TileEntityType.Builder<T> builder)
+	{
+		return register(new ResourceLocation(id, name), builder);
+	}
+	
+	private static <T extends TileEntity> TileEntityType<T> register(ResourceLocation location, TileEntityType.Builder<T> builder)
     {
         TileEntityType<T> type = builder.build(null);
-        type.setRegistryName(new ResourceLocation(id, name));
+        type.setRegistryName(location);
         TILE_ENTITY_TYPES.add(type);
         return type;
     }
@@ -35,7 +48,7 @@ public class VeTileEntityType
     {
         TILE_ENTITY_TYPES.forEach(type -> event.getRegistry().register(type));
         TILE_ENTITY_TYPES.clear();
-        
+		
         VanillaExpansions.LOGGER.info("Tile entity types registered.");
     }
 }

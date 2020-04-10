@@ -21,7 +21,7 @@ public class VeContainerTypes
 {
 	public static final List<ContainerType<?>> CONTAINER_TYPES = new ArrayList<>();
 	
-	public static final ContainerType<VeWoodcutterContainer> WOODCUTTER = register("woodcutter", VeWoodcutterContainer::new);
+	public static ContainerType<VeWoodcutterContainer> woodcutter = register("woodcutter", VeWoodcutterContainer::new);
 	
 	private static <T extends Container> ContainerType<T> register(String name, ContainerType.IFactory<T> factory)
 	{

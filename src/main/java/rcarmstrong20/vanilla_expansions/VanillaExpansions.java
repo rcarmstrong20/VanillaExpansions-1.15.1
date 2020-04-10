@@ -58,18 +58,27 @@ public class VanillaExpansions
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
+	/*
+	 * Called on the mod's setup.
+	 */
 	private void setup(final FMLCommonSetupEvent event)
 	{
 		LOGGER.info("setup method registered");
 		PROXY.onSetupCommon();
 	}
 	
+	/*
+	 * Called exclusively on the client.
+	 */
 	private void clientRegistries(final FMLCommonSetupEvent event)
 	{
 		LOGGER.info("client method registered");
 		PROXY.onSetupClient();
 	}
 	
+	/*
+	 * This takes care of registering the particle factories.
+	 */
 	@OnlyIn(Dist.CLIENT)
 	private void onRegisterParticle(ParticleFactoryRegisterEvent event)
 	{
@@ -79,6 +88,9 @@ public class VanillaExpansions
 		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.UNDERVOID, VeUndervoidParticle.Factory::new);
 	}
 	
+	/**
+	 * Called when the player clicks a crop that is fully grown and calls the resetCropAndHarvest method.
+	 */
 	@SubscribeEvent
 	public void onRightClickBlock(final RightClickBlock event)
 	{
@@ -127,6 +139,9 @@ public class VanillaExpansions
 		}
 	}
 	
+	/*
+	 * Resets the crop back to age 0, spawns the crops drops, and plays the grass breaking sound.
+	 */
 	private static void resetCropAndHarvest(BlockState state, World world, BlockPos pos, Random random, IntegerProperty age)
 	{
 		world.setBlockState(pos, state.with(age, 0), 2);
@@ -134,10 +149,9 @@ public class VanillaExpansions
 		world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F);
 	}
 	
-	/*
-	 * Controls the behavior of changing a white bunny to a killer bunny.
+	/**
+	 * Individually tracks the naming behavior for each white or killer rabbit entity, then either sets the rabbit type to 99 or 1.
 	 */
-	
 	@SubscribeEvent
 	public void onNameBunnyEntity(final PlayerInteractEvent.EntityInteractSpecific event)
 	{

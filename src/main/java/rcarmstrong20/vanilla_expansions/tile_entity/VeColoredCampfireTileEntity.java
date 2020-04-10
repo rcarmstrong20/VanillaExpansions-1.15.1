@@ -69,9 +69,9 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
 	}
 	
 	/**
-	    * Individually tracks the cooking of each item, then spawns the finished product in-world and clears the
-	    * corresponding held item.
-	    */
+	 * Individually tracks the cooking of each item, then spawns the finished product in-world and clears the
+	 * corresponding held item.
+	 */
 	private void cookAndDrop()
 	{
 		for(int i = 0; i < this.inventory.size(); ++i)

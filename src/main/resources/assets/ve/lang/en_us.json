@@ -167,10 +167,12 @@
   "block.ve.packed_snow_slab": "Packed Snow Slab",
   "block.ve.spider_glass": "Spider Glass",
   "block.ve.spider_glass_pane": "Spider Glass Pane",
-  "block.ve.red_spider_glass": "Red Spider Glass",
-  "block.ve.red_spider_glass_pane": "Red Spider Glass Pane",
+  "block.ve.black_spider_glass": "Black Spider Glass",
+  "block.ve.black_spider_glass_pane": "Black Spider Glass Pane",
   "block.ve.fancy_spider_glass": "Fancy Spider Glass",
   "block.ve.fancy_spider_glass_pane": "Fancy Spider Glass Pane",
+  "block.ve.black_fancy_spider_glass": "Black Fancy Spider Glass",
+  "block.ve.black_fancy_spider_glass_pane": "Black Fancy Spider Glass Pane",
   "block.ve.turkey": "Turkey",
   "block.ve.purple_mushroom": "Purple Mushroom",
   "block.ve.purple_mushroom_block": "Purple Mushroom Block",
@@ -194,7 +196,9 @@
   "block.ve.bamboo_fence_gate": "Bamboo Fence Gate",
   "block.ve.bamboo_fence": "Bamboo Fence",
   "block.ve.bamboo_wall": "Bamboo Wall",  
-
+  "block.ve.snowflake_obsidian": "Snowflake Obsidian",
+  "block.ve.nephilite": "Nephilite",  
+  
   "container.woodcutter": "Woodcutter",
   
   "item.ve.ruby": "Nether Ruby",

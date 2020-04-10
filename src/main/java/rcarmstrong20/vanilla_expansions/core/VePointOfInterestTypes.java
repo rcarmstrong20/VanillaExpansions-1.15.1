@@ -33,22 +33,11 @@ public class VePointOfInterestTypes
 		{
 			return register(name, POINT_OF_INTEREST_CONSTRUCTOR.newInstance(name, blockState, p_221051_2_, p_221051_4_));
 		}
-		catch (InstantiationException e)
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
 			e.printStackTrace();
 		}
-		catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		}
-		catch (InvocationTargetException e)
-		{
-			e.printStackTrace();
-		}
+		
 		return null;
 	}
 	

@@ -1,0 +1,9 @@
+{
+    "parent": "block/stairs",
+    "textures":
+	{
+        "bottom": "ve:block/nephilite",
+        "top": "ve:block/nephilite",
+        "side": "ve:block/nephilite"
+    }
+}

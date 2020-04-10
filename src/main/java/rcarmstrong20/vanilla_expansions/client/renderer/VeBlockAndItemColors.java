@@ -69,11 +69,11 @@ public class VeBlockAndItemColors
 		};
 		
 		blockColors.register(grassColorHandler, VeBlocks.enderman_plush);
-		blockColors.register(leavesColorHandler, VeBlocks.regirock_pokedoll);
+		blockColors.register(leavesColorHandler, VeBlocks.regigigas_pokedoll);
 		blockColors.register(waterColorHandler, VeBlocks.oak_planting_pot, VeBlocks.spruce_planting_pot, VeBlocks.birch_planting_pot, VeBlocks.jungle_planting_pot, VeBlocks.dark_oak_planting_pot, VeBlocks.acacia_planting_pot);
 	}
 	
-	private static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors) 
+	public static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors) 
 	{
 		// Use the Block's color for the ItemBlock
 		final IItemColor itemBlockColorHandler = (stack, tintIndex) -> 

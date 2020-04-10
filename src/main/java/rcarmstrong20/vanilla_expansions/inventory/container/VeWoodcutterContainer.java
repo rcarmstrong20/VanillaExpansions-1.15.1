@@ -60,7 +60,7 @@ public class VeWoodcutterContainer extends Container
 	
 	public VeWoodcutterContainer(int p_i50060_1_, PlayerInventory playerInventory, final IWorldPosCallable worldPosCallable)
 	{
-		super(VeContainerTypes.WOODCUTTER, p_i50060_1_);
+		super(VeContainerTypes.woodcutter, p_i50060_1_);
 		this.WORLD_POS_CALLABLE = worldPosCallable;
 		this.world = playerInventory.player.world;
 		this.slot1 = this.addSlot(new Slot(this.inventory, 0, 20, 33));
@@ -199,7 +199,7 @@ public class VeWoodcutterContainer extends Container
 	@Override
 	public ContainerType<?> getType()
 	{
-		return VeContainerTypes.WOODCUTTER;
+		return VeContainerTypes.woodcutter;
 	}
 	
 	@OnlyIn(Dist.CLIENT)

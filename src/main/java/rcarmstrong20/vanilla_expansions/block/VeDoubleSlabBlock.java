@@ -1,53 +1,107 @@
 package rcarmstrong20.vanilla_expansions.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.World;
+import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
 public class VeDoubleSlabBlock extends Block
 {
+	public static final List<Block> INVENTORY_HOLDER = new ArrayList<Block>();
+	
 	public VeDoubleSlabBlock(Properties properties)
 	{
 		super(properties);
 	}
 	
 	@Override
+	public BlockRenderType getRenderType(BlockState state)
+	{
+		return BlockRenderType.INVISIBLE;
+	}
+	
+	@Override
+	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving)
+	{
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		
+		if(tileentity instanceof VeDoubleSlabTileEntity)
+		{
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
+			
+			//Adds the current blocks held in the holder to the tile entity's inventory
+			slabTileEntity.addItem(new ItemStack(INVENTORY_HOLDER.get(0)), 0);
+			slabTileEntity.addItem(new ItemStack(INVENTORY_HOLDER.get(1)), 1);
+			
+			//Clears the inventory holder so it can hold new items
+			INVENTORY_HOLDER.clear();
+		}
+	}
+	
+	/*
+	 * This method fills the inventory holder keeping track of what blocks the double slab is made of before the tile entity is created.
+	 */
+	public static void fillInventory(Block block1, Block block2)
+	{
+		INVENTORY_HOLDER.add(block1);
+		INVENTORY_HOLDER.add(block2);
+	}
+	
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
+	{
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		
+		if(tileentity instanceof VeDoubleSlabTileEntity && !player.isCreative())
+		{
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
+			
+			InventoryHelper.dropItems(worldIn, pos, slabTileEntity.getInventory());
+		}
+		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+	
+	/*
+	 * Get the appropriate block from the inventory depending on if the top or bottom half of the block is clicked.
+	 */
+	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
-		String double_slab_name = state.getBlock().getRegistryName().toString().substring(state.getBlock().getRegistryName().toString().indexOf(":") + 1);
-		String top_slab_registry_name = "";
-		String bottom_slab_registry_name = "";
+		TileEntity tileentity = world.getTileEntity(pos);
 		
-		//Find the appropriate slabs for the block by going through every in the slabs list. The pattern for the double slabs is bottom slab + _ + top slab.
-		
-		for(Block bottom_slab_block : VeSlabBlock.slabList())
+		if(tileentity instanceof VeDoubleSlabTileEntity)
 		{
-			for(Block top_slab_block : VeSlabBlock.slabList())
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
+			
+			if(target.getHitVec().y - pos.getY() > 0.5D)
 			{
-				String bottom_slab_name = bottom_slab_block.getRegistryName().toString().substring(bottom_slab_block.getRegistryName().toString().indexOf(":") + 1).replace("_slab", "");
-				String top_slab_name = top_slab_block.getRegistryName().toString().substring(top_slab_block.getRegistryName().toString().indexOf(":") + 1).replace("_slab", "");
-				String bottom_slab_and_top_slab_name = bottom_slab_name + "_" + top_slab_name + "_double_slab";
-				
-				if(bottom_slab_and_top_slab_name.matches(double_slab_name))
-				{
-					bottom_slab_registry_name = bottom_slab_block.getRegistryName().toString();
-					top_slab_registry_name = top_slab_block.getRegistryName().toString();
-				}
+				return slabTileEntity.getInventory().get(0);
 			}
+			return slabTileEntity.getInventory().get(1);
 		}
-		
-		//Check if you are targeting the top or bottom half of the block and return the corresponding slab.
-		
-		if(target.getHitVec().y - pos.getY() > 0.5D)
-		{
-			return new ItemStack(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(top_slab_registry_name)));
-		}
-		return new ItemStack(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(bottom_slab_registry_name)));
+		return super.getPickBlock(state, target, world, pos, player);
+	}
+	
+	@Override
+	public boolean hasTileEntity(BlockState state)
+	{
+		return true;
+	}
+	
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world)
+	{
+		return new VeDoubleSlabTileEntity();
 	}
 }
