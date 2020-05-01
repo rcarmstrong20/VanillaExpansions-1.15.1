@@ -45,7 +45,7 @@ public class VeSlabBlock extends SlabBlock
 		Block itemblock = Block.getBlockFromItem(useContext.getItem().getItem());
 		SlabType slabtype = state.get(TYPE);
 		
-		if(slabtype != SlabType.DOUBLE && state.getBlock() != itemblock)
+		if(slabtype != SlabType.DOUBLE && state.getBlock() != itemblock && itemblock instanceof VeSlabBlock)
 		{
 			if (useContext.replacingClickedOnBlock())
 			{

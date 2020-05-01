@@ -4,16 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootContext.Builder;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.ToolType;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
 public class VeDoubleSlabBlock extends Block
@@ -23,12 +30,6 @@ public class VeDoubleSlabBlock extends Block
 	public VeDoubleSlabBlock(Properties properties)
 	{
 		super(properties);
-	}
-	
-	@Override
-	public BlockRenderType getRenderType(BlockState state)
-	{
-		return BlockRenderType.INVISIBLE;
 	}
 	
 	@Override
@@ -59,6 +60,20 @@ public class VeDoubleSlabBlock extends Block
 	}
 	
 	@Override
+	public float getBlockHardness(BlockState blockState, IBlockReader worldIn, BlockPos pos)
+	{
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		
+		if(tileentity instanceof VeDoubleSlabTileEntity)
+		{
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
+			
+			return Block.getBlockFromItem(slabTileEntity.getInventory().get(0).getItem()).getDefaultState().getBlockHardness(worldIn, pos);
+		}
+		return blockHardness;
+	}
+	
+	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -67,11 +82,48 @@ public class VeDoubleSlabBlock extends Block
 		{
 			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
 			
+			//String heldItem = player.getHeldItem(player.getActiveHand()).getItem().getName().toString();
+			
+			NonNullList<ItemStack> inventory = slabTileEntity.getInventory();
+			
+			Block slab1 = Block.getBlockFromItem(inventory.get(0).getItem());
+			Block slab2 = Block.getBlockFromItem(inventory.get(1).getItem());
+			
+			Material slab1Material = slab1.getDefaultState().getMaterial();
+			Material slab2Material = slab2.getDefaultState().getMaterial();
+			
+			//if()//!slab1Material.isToolNotRequired()|| !slab2Material.isToolNotRequired())
+			//{
 			InventoryHelper.dropItems(worldIn, pos, slabTileEntity.getInventory());
+			//}
 		}
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 	
+	/*
+	@Override
+	public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
+	{
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if(tileEntity instanceof VeDoubleSlabTileEntity)
+		{
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileEntity;
+			
+			String heldItem = player.getHeldItem(player.getActiveHand()).getItem().getName().toString();
+			
+			NonNullList<ItemStack> inventory = slabTileEntity.getInventory();
+			
+			Block slab1 = Block.getBlockFromItem(inventory.get(0).getItem());
+			Block slab2 = Block.getBlockFromItem(inventory.get(1).getItem());
+			
+			Material slab1Material = slab1.getDefaultState().getMaterial();
+			Material slab2Material = slab2.getDefaultState().getMaterial();
+			
+			//return this.getHarvestTool(slab1.getDefaultState()).getName().equals(heldItem) || this.getHarvestTool(slab2.getDefaultState()).getName().equals(heldItem) ? true : false;
+		}
+		return super.canHarvestBlock(state, world, pos, player);
+	}
+	*/
 	/*
 	 * Get the appropriate block from the inventory depending on if the top or bottom half of the block is clicked.
 	 */
