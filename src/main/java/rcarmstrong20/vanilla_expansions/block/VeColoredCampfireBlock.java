@@ -71,6 +71,7 @@ public class VeColoredCampfireBlock extends CampfireBlock
 		}
 	}
 	
+	@Override
 	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn)
 	{
 		if (!state.get(BlockStateProperties.WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
