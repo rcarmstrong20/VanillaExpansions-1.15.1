@@ -91,6 +91,17 @@ public class VeItems
 	public static Item witchs_cradle_soup = register("witchs_cradle_soup", new VeSoupItem(new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(1).food(VeFoods.WITCHS_CRADLE_SOUP)));
 	public static Item glass_vial = register("glass_vial", new VeGlassVialItem(VE_ITEMS));
 	public static Item blood_vial = register("blood_vial", new VeDrinkItem(new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(16).food(VeFoods.BLOOD_VIAL)));
+	public static Item fire_painting = register("fire_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item water_painting = register("water_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item earth_painting = register("earth_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item wind_painting = register("wind_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item kebab_painting = register("kebab_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item alban_painting = register("alban_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item aztec_painting = register("aztec_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item aztec_painting2 = register("aztec_painting_two", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item bomb_painting = register("bomb_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item plant_painting = register("plant_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item wasteland_painting = register("wasteland_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{
