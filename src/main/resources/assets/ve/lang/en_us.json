@@ -198,6 +198,12 @@
   "block.ve.bamboo_wall": "Bamboo Wall",  
   "block.ve.snowflake_obsidian": "Snowflake Obsidian",
   "block.ve.nephilite": "Nephilite",  
+  "block.ve.oak_frame": "Oak Frame",
+  "block.ve.spruce_frame": "Spruce Frame",
+  "block.ve.birch_frame": "Birch Frame",
+  "block.ve.jungle_frame": "Jungle Frame",
+  "block.ve.acacia_frame": "Acacia Frame",
+  "block.ve.dark_oak_frame": "Dark Oak Frame",
   
   "container.woodcutter": "Woodcutter",
   
@@ -273,6 +279,17 @@
   "item.ve.witchs_cradle_soup": "Witch's Cradle Soup",
   "item.ve.glass_vial": "Glass Vial",
   "item.ve.blood_vial": "Blood Vial",
+  "item.ve.fire_painting": "Fire Painting",
+  "item.ve.water_painting": "Water Painting",
+  "item.ve.earth_painting": "Earth Painting",
+  "item.ve.wind_painting": "Wind Painting",
+  "item.ve.kebab_painting": "Kebab Painting",
+  "item.ve.alban_painting": "Alban Painting",
+  "item.ve.aztec_painting": "Aztec Painting",
+  "item.ve.aztec_painting_two": "Aztec Painting Two",
+  "item.ve.bomb_painting": "Bomb Painting",
+  "item.ve.plant_painting": "Plant Painting",
+  "item.ve.wasteland_painting": "Wasteland Painting",
   
   "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
   

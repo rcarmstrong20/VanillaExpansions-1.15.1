@@ -1,5 +1,5 @@
 package rcarmstrong20.vanilla_expansions.block;
-
+/*
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,7 +17,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class VeTwoHighPaintingBlock extends VeSinglePaintingBlock
+public class VeTwoHighPaintingBlock extends VeFrameBlock
 {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	
@@ -98,3 +98,4 @@ public class VeTwoHighPaintingBlock extends VeSinglePaintingBlock
 		builder.add(HALF, HORIZONTAL_FACING);
 	}
 }
+*/
