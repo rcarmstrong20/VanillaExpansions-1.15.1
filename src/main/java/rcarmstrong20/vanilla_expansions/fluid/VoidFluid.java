@@ -32,6 +32,8 @@ import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
 public abstract class VoidFluid extends WaterFluid
 {
+	private static int lastPlayed = 0;
+	
 	@Override
 	public Fluid getFlowingFluid()
 	{
@@ -53,13 +55,27 @@ public abstract class VoidFluid extends WaterFluid
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random)
 	{
-		if (random.nextInt(400) == 0)
-		{
-			worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, VeSoundEvents.BLOCK_VOID_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.25F, random.nextFloat() + 0.5F, false);
-		}
-		else if (random.nextInt(10) == 0)
+		//Spawn under void particles in the liquid when the number selected between 0 and 100 is 0.
+		if (random.nextInt(100) == 0)
 		{
 			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + (double)random.nextFloat(), (double)pos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
+		}
+		
+		if (lastPlayed == 0)
+		{
+			if(random.nextInt(200) == 0)
+			{
+				worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), VeSoundEvents.BLOCK_VOID_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 0.2F, random.nextFloat() + 0.5F, false);
+				lastPlayed += 260; //Add the amount of time that it takes to end the sound to last played.
+			}
+			else
+			{
+				lastPlayed += random.nextInt(60); //If number selected is not 0 add a random number between 0 and 60 to last played.
+			}
+		}
+		else
+		{
+			lastPlayed -= 1; //Decrease the time last played by 1 every tick.
 		}
 	}
 	
