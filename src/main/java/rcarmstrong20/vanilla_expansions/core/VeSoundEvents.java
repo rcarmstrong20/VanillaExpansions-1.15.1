@@ -20,6 +20,7 @@ public class VeSoundEvents
 	
 	public static final SoundEvent BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
 	public static final SoundEvent BLOCK_VOID_AMBIENT = register("block.void_ambient");
+	public static final SoundEvent BLOCK_VOID_HARDENS = register("block.void_hardens");
 	public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
 	
 	private static SoundEvent register(String name)
