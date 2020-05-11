@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:fire_painting",
+	"ve:water_painting",
+	"ve:earth_painting",
+	"ve:wind_painting",
+	"ve:kebab_painting",
+	"ve:alban_painting",
+	"ve:aztec_painting",
+	"ve:aztec_painting_two",
+	"ve:bomb_painting",
+	"ve:plant_painting",
+	"ve:wasteland_painting",
+	"ve:starry_night_painting",
+	"ve:the_scream_painting",
+	"ve:the_nether_painting"
+  ]
+}
