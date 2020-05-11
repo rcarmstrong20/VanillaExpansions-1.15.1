@@ -10,12 +10,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.properties.SlabType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -30,10 +33,13 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import rcarmstrong20.vanilla_expansions.block.VeDoubleSlabBlock;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
+import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
@@ -70,14 +76,14 @@ public class VanillaExpansions
 	/*
 	 * Called exclusively on the client.
 	 */
-	private void clientRegistries(final FMLCommonSetupEvent event)
+	private void clientRegistries(final FMLClientSetupEvent event)
 	{
 		LOGGER.info("client method registered");
 		PROXY.onSetupClient();
 	}
 	
 	/*
-	 * This takes care of registering the particle factories.
+	 * This takes care of registering the particle factories if they are not registered under the particle factory event there will be a bug.
 	 */
 	@OnlyIn(Dist.CLIENT)
 	private void onRegisterParticle(ParticleFactoryRegisterEvent event)
@@ -89,45 +95,54 @@ public class VanillaExpansions
 	}
 	
 	/**
-	 * Called when the player clicks a crop that is fully grown and calls the resetCropAndHarvest method.
+	 * Controls crop harvesting with right click behavior
 	 */
 	@SubscribeEvent
-	public void onRightClickBlock(final RightClickBlock event)
+	public void onRightClickCrop(final RightClickBlock event)
 	{
-		BlockState worldState = event.getWorld().getBlockState(event.getPos());
-		Item item = event.getItemStack().getItem();
+		//General variables
 		BlockPos pos = event.getPos();
 		World world = event.getWorld();
 		Random random = new Random();
+		
+		//Block and items
+		BlockState worldState = event.getWorld().getBlockState(pos);
+		Item item = event.getItemStack().getItem();
+		
+		//Crop age properties
 		IntegerProperty cropsAge = CropsBlock.AGE;
 		IntegerProperty netherWartAge = NetherWartBlock.AGE;
 		IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
 		
 		if(!event.getWorld().isRemote)
 		{
+			//If the block your clicking is a crop and your not using bone meal return true
 			if(worldState.getBlock() instanceof CropsBlock && item != Items.BONE_MEAL)
 			{
 				if(worldState.getBlock() instanceof BeetrootBlock)
 				{
-					if(worldState.get(beetrootAge) == 3)
+					//When the beet root crop is fully grown and clicked then harvest it.
+					if(worldState.get(beetrootAge) == beetrootAge.getAllowedValues().size() - 1)
 					{
-						resetCropAndHarvest(worldState, world, pos, random, beetrootAge);
+						harvestCrop(worldState, world, pos, random, beetrootAge);
 						event.setResult(Result.ALLOW);
 						event.setCanceled(true);
 					}
 				}
+				//If its not a beet root and a crop then it must be a normal 7 stage crop and if it's fully grown harvest it.
 				else if(worldState.get(cropsAge) == 7)
 				{
-					resetCropAndHarvest(worldState, world, pos, random, cropsAge);
+					harvestCrop(worldState, world, pos, random, cropsAge);
 					event.setResult(Result.ALLOW);
 					event.setCanceled(true);
 				}
 			}
+			//If its not a crop it might be nether wart and if so check if it's fully grown and if so harvest it.
 			else if(worldState.getBlock() instanceof NetherWartBlock)
 			{
 				if(worldState.get(netherWartAge) == 3)
 				{
-					resetCropAndHarvest(worldState, world, pos, random, netherWartAge);
+					harvestCrop(worldState, world, pos, random, netherWartAge);
 					event.setResult(Result.ALLOW);
 					event.setCanceled(true);
 				}
@@ -142,11 +157,71 @@ public class VanillaExpansions
 	/*
 	 * Resets the crop back to age 0, spawns the crops drops, and plays the grass breaking sound.
 	 */
-	private static void resetCropAndHarvest(BlockState state, World world, BlockPos pos, Random random, IntegerProperty age)
+	private static void harvestCrop(BlockState state, World world, BlockPos pos, Random random, IntegerProperty age)
 	{
 		world.setBlockState(pos, state.with(age, 0), 2);
 		Block.spawnDrops(state, world, pos);
 		world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F);
+	}
+	
+	/*
+	 * Controls custom slab behavior
+	 */
+	@SubscribeEvent
+	public void onRightClickSlab(final PlayerInteractEvent.RightClickBlock event)
+	{
+		BlockPos pos = event.getPos();
+		World world = event.getWorld();
+		Direction direction = event.getFace();
+		
+		BlockState worldState = event.getWorld().getBlockState(pos);
+		BlockState worldStateUp = event.getWorld().getBlockState(pos.up());
+		Item item = event.getItemStack().getItem();
+		Block itemBlock = Block.getBlockFromItem(item.getItem());
+		
+		if(worldState.getBlock() instanceof SlabBlock && itemBlock instanceof SlabBlock)
+		{
+			if(worldState.getMaterial() == itemBlock.getDefaultState().getMaterial())
+			{
+				SlabType slabtype = worldState.get(SlabBlock.TYPE);
+				
+				if(slabtype != SlabType.DOUBLE && worldState.getBlock() != itemBlock)
+				{
+					if (slabtype == SlabType.BOTTOM && direction == Direction.UP || direction.getAxis().isHorizontal())
+					{
+						System.out.print("Placed top on bottom");
+						VeDoubleSlabBlock.fillInventory(itemBlock, worldState.getBlock());
+					}
+					else if (slabtype == SlabType.TOP && direction == Direction.DOWN || direction.getAxis().isHorizontal())
+					{
+						System.out.print("Placed bottom under top");
+						VeDoubleSlabBlock.fillInventory(worldState.getBlock(), itemBlock);
+					}
+					world.setBlockState(pos, VeBlocks.double_slab.getDefaultState());
+					event.setResult(Result.ALLOW);
+					event.setCanceled(true);
+				}
+			}
+		}
+		else if(worldStateUp.getBlock() instanceof SlabBlock && itemBlock instanceof SlabBlock)
+		{
+			if(worldStateUp.getMaterial() == itemBlock.getDefaultState().getMaterial())
+			{
+				SlabType slabtypeUp = worldStateUp.get(SlabBlock.TYPE);
+				
+				if(slabtypeUp != SlabType.DOUBLE && worldState.getBlock() != itemBlock)
+				{
+					if (slabtypeUp == SlabType.TOP && direction == Direction.UP)
+					{
+						System.out.print("Placed bottom on top from bottom");
+						VeDoubleSlabBlock.fillInventory(itemBlock, worldStateUp.getBlock());
+						world.setBlockState(pos.up(), VeBlocks.double_slab.getDefaultState());
+						event.setResult(Result.ALLOW);
+						event.setCanceled(true);
+					}
+				}
+			}
+		}
 	}
 	
 	/**
@@ -168,11 +243,13 @@ public class VanillaExpansions
 					{
 						rabbit.setRabbitType(99);
 						rabbit.getRabbitType();
+						rabbit.tick();
 					}
 					else
 					{
 						rabbit.setRabbitType(1);
 						rabbit.getRabbitType();
+						rabbit.tick();
 					}
 				}
 			}
