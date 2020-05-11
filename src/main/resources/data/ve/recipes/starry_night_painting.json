@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:blue_dye"
+    },
+    {
+	  "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result": 
+  {
+	"item": "ve:starry_night_painting"
+  }
+}
