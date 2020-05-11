@@ -6,7 +6,10 @@
       "item": "minecraft:bowl"
     },
 	{
-	  "item": "ve:chop_sticks"
+	  "item": "minecraft:stick"
+	},
+	{
+	  "item": "minecraft:stick"
 	}
   ],
   "result":
