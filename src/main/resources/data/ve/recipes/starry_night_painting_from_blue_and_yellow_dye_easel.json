@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:blue_dye"
+    },
+    {
+	  "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result": "ve:starry_night_painting",
+  "count": 1
+}
