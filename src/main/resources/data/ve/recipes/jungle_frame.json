@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "frames",
+  "pattern":
+  [
+    "LLL",
+    "LSL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "ve:jungle_logs"
+    },
+	"S":
+	{
+	  "tag": "ve:stripped_jungle_logs"
+	}
+  },
+  "result":
+  {
+    "item": "ve:jungle_frame"
+  }
+}

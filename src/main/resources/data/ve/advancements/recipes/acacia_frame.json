@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards":
+  {
+    "recipes":
+	[
+      "ve:acacia_frame"
+    ]
+  },
+  "criteria":
+  {
+    "has_acacia_logs":
+	{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "tag": "ve:acacia_logs"
+          }
+        ]
+      }
+    },
+    "has_the_recipe":
+	{
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions":
+	  {
+        "recipe": "ve:acacia_earth_painting"
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "has_acacia_logs",
+      "has_the_recipe"
+    ]
+  ]
+}

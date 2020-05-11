@@ -6,17 +6,24 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -30,9 +37,10 @@ import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
-public class VeFrameBlock extends ContainerBlock// implements IWaterLoggable
+public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	
 	private static final VoxelShape PAINTING_NORTH_BACK_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
 	private static final VoxelShape PAINTING_NORTH_RIGHT_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 1.0D, 16.0D, 15.0D);
@@ -49,7 +57,7 @@ public class VeFrameBlock extends ContainerBlock// implements IWaterLoggable
 	public VeFrameBlock(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
 	}
 	
 	@Override
@@ -62,17 +70,12 @@ public class VeFrameBlock extends ContainerBlock// implements IWaterLoggable
 		{
 			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
 			
-			//If the world is not remote and the inventory slot is empty add the item and consume it
-			if (!worldIn.isRemote && frameTileEntity.getInventory().get(0) == ItemStack.EMPTY && VeItemTags.FRAMES.contains(heldItem.getItem()) && frameTileEntity.addItem(heldItem))
+			//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
+			if(!worldIn.isRemote && frameTileEntity.getInventory().get(0) == ItemStack.EMPTY && VeItemTags.PAINTINGS.contains(heldItem.getItem()))
 			{
+				frameTileEntity.addItem(heldItem);
+				worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 				return ActionResultType.CONSUME;
-			}
-			//Otherwise drop the Item and clear the frame's inventory
-			else
-			{
-				InventoryHelper.dropItems(worldIn, pos, frameTileEntity.getInventory());
-				frameTileEntity.clear();
-				return ActionResultType.SUCCESS;
 			}
 		}
 		return ActionResultType.PASS;
@@ -99,13 +102,35 @@ public class VeFrameBlock extends ContainerBlock// implements IWaterLoggable
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		IWorld iworld = context.getWorld();
+		BlockPos blockpos = context.getPos();
+		boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
+		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(flag)).with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+	}
+	
+	@Override
+	public IFluidState getFluidState(BlockState state)
+	{
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
 	}
 	
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		return facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+		if (stateIn.get(WATERLOGGED))
+		{
+			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
+		
+		if(facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
+		{
+			this.onBlockHarvested(worldIn.getWorld(), currentPos, stateIn, null);
+			return Blocks.AIR.getDefaultState();
+		}
+		else
+		{
+			return stateIn;
+		}
 	}
 	
 	@Override
@@ -159,6 +184,6 @@ public class VeFrameBlock extends ContainerBlock// implements IWaterLoggable
 	
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(FACING);
+		builder.add(FACING, WATERLOGGED);
 	}
 }

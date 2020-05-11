@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "frames",
+  "pattern":
+  [
+    "LLL",
+    "LSL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "item": "minecraft:dark_oak_log"
+    },
+	"S":
+	{
+	  "item": "minecraft:stripped_dark_oak_log"
+	}
+  },
+  "result":
+  {
+    "item": "ve:dark_oak_frame"
+  }
+}

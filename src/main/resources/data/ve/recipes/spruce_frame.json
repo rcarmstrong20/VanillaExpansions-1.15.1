@@ -1,0 +1,25 @@
+{
+  "type": "crafting_shaped",
+  "group": "frames",
+  "pattern":
+  [
+    "LLL",
+    "LSL",
+	"LLL"
+  ],
+  "key":
+  {
+    "L":
+	{
+      "tag": "ve:spruce_logs"
+    },
+	"S":
+	{
+	  "tag": "ve:stripped_spruce_logs"
+	}
+  },
+  "result":
+  {
+    "item": "ve:spruce_frame"
+  }
+}
