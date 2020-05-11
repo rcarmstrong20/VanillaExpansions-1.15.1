@@ -4,16 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.renderer.RenderState.ShadeModelState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -23,13 +30,19 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ToolType;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
-public class VeDoubleSlabBlock extends Block
+public class VeDoubleSlabBlock extends ContainerBlock
 {
 	public static final List<Block> INVENTORY_HOLDER = new ArrayList<Block>();
 	
 	public VeDoubleSlabBlock(Properties properties)
 	{
 		super(properties);
+	}
+	
+	@Override
+	public BlockRenderType getRenderType(BlockState state)
+	{
+		return BlockRenderType.MODEL;
 	}
 	
 	@Override
@@ -48,6 +61,29 @@ public class VeDoubleSlabBlock extends Block
 			//Clears the inventory holder so it can hold new items
 			INVENTORY_HOLDER.clear();
 		}
+	}
+	
+	@Override
+	public MaterialColor getMaterialColor(BlockState state, IBlockReader worldIn, BlockPos pos)
+	{
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		
+		if(tileentity instanceof VeDoubleSlabTileEntity)
+		{
+			VeDoubleSlabTileEntity slabTileEntity = (VeDoubleSlabTileEntity) tileentity;
+			ItemStack itemStack = slabTileEntity.getInventory().get(0);
+			ItemStack itemStack1 = slabTileEntity.getInventory().get(1);
+			
+			if(itemStack != ItemStack.EMPTY)
+			{
+				return Block.getBlockFromItem(itemStack.getItem()).getDefaultState().getMaterial().getColor();
+			}
+			else
+			{
+				return Block.getBlockFromItem(itemStack1.getItem()).getDefaultState().getMaterial().getColor();
+			}
+		}
+		return MaterialColor.AIR;
 	}
 	
 	/*
@@ -144,15 +180,9 @@ public class VeDoubleSlabBlock extends Block
 		}
 		return super.getPickBlock(state, target, world, pos, player);
 	}
-	
+
 	@Override
-	public boolean hasTileEntity(BlockState state)
-	{
-		return true;
-	}
-	
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world)
+	public TileEntity createNewTileEntity(IBlockReader worldIn)
 	{
 		return new VeDoubleSlabTileEntity();
 	}

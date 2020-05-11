@@ -1,5 +1,6 @@
 package rcarmstrong20.vanilla_expansions.block;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
@@ -10,12 +11,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -23,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
+import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
 public class VeFlowingVoidBlock extends FlowingFluidBlock
 {
@@ -85,7 +89,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 		{
 			worldIn.setBlockState(pos.offset(foundDirection), ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block1.getDefaultState()));
 			this.triggerMixEffects(worldIn, pos);
-			return false;
+			return true;
 		}
 		
 		//If not check to see if its a source block and if so replace the void liquid with second block.
@@ -93,7 +97,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 		{
 			worldIn.setBlockState(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block2.getDefaultState()));
 			this.triggerMixEffects(worldIn, pos);
-			return false;
+			return true;
 		}
 		
 		//If neither of these cases then place third block where the flowing void liquid is.
@@ -101,7 +105,7 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 		{
 			worldIn.setBlockState(pos, ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, block3.getDefaultState()));
 			this.triggerMixEffects(worldIn, pos);
-			return false;
+			return true;
 		}
 	}
 	
@@ -110,7 +114,9 @@ public class VeFlowingVoidBlock extends FlowingFluidBlock
 	 */
 	private void triggerMixEffects(IWorld worldIn, BlockPos pos)
 	{
-		worldIn.playEvent(1501, pos, 0);
+		Random random = new Random();
+		
+		worldIn.getWorld().playSound(null, pos, VeSoundEvents.BLOCK_VOID_HARDENS, SoundCategory.BLOCKS, random.nextFloat() * 0.2F + 1F, random.nextFloat() * 0.6F);
 	}
 	
 	@Override

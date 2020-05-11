@@ -1,6 +1,11 @@
 {
-	"variants":
+    "forge_marker": 1,
+    "defaults":
 	{
-        "": {"model": "ve:block/double_slab"}
+		"custom":
+		{
+            "flip-uv": true
+        },
+        "model": "ve:double_slab.obj"
     }
 }

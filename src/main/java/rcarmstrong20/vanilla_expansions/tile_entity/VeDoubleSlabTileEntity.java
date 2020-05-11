@@ -11,6 +11,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.client.model.data.ModelDataMap;
+import rcarmstrong20.vanilla_expansions.client.renderer.model.VeModelProperties;
 import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 
 public class VeDoubleSlabTileEntity extends TileEntity implements IClearable
@@ -47,6 +50,7 @@ public class VeDoubleSlabTileEntity extends TileEntity implements IClearable
 	@Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
     {
+		//RenderUtil.causeRenderUpdate(this.getPos());
         CompoundNBT compound = pkt.getNbtCompound();
         this.read(compound);
     }
@@ -95,5 +99,18 @@ public class VeDoubleSlabTileEntity extends TileEntity implements IClearable
 			InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
 		}
 		this.inventoryChanged();
+	}
+	
+	@Override
+	public IModelData getModelData()
+	{
+		ModelDataMap.Builder builder = new ModelDataMap.Builder();
+	    builder.withInitial(VeModelProperties.TILE_ENTITY_DOUBLE_SLAB, this);
+	    ModelDataMap data = builder.build();
+	    if (!this.getInventory().isEmpty())
+	    {
+	    	data.setData(VeModelProperties.TILE_ENTITY_DOUBLE_SLAB, this);
+	    }
+	    return (IModelData)data;
 	}
 }
