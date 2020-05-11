@@ -28,6 +28,7 @@ import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDoubleSlabBlock;
+import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
@@ -191,41 +192,12 @@ public class VeBlocks
 	public static Block dirt_stairs = register("dirt_stairs", true, new StairsBlock(() -> Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.DIRT)));
 	public static Block coarse_dirt_slab = register("coarse_dirt_slab", true, new SlabBlock(Block.Properties.from(Blocks.COARSE_DIRT)));
 	public static Block coarse_dirt_stairs = register("coarse_dirt_stairs", true, new StairsBlock(() -> Blocks.COARSE_DIRT.getDefaultState(), Block.Properties.from(Blocks.COARSE_DIRT)));
-	
 	public static Block oak_frame = register("oak_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block spruce_frame = register("spruce_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block birch_frame = register("birch_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block jungle_frame = register("jungle_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block acacia_frame = register("acacia_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block dark_oak_frame = register("dark_oak_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
-	
-	/*
-	public static Block oak_fire_painting = register("oak_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block spruce_fire_painting = register("spruce_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block birch_fire_painting = register("birch_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block jungle_fire_painting = register("jungle_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block acacia_fire_painting = register("acacia_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.ADOBE).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block dark_oak_fire_painting = register("dark_oak_fire_painting", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(0.2F).doesNotBlockMovement().sound(SoundType.WOOD)));
-	public static Block oak_water_painting = register("oak_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.oak_fire_painting)));
-	public static Block spruce_water_painting = register("spruce_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.spruce_fire_painting)));
-	public static Block birch_water_painting = register("birch_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.birch_fire_painting)));
-	public static Block jungle_water_painting = register("jungle_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.jungle_fire_painting)));
-	public static Block acacia_water_painting = register("acacia_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.acacia_fire_painting)));
-	public static Block dark_oak_water_painting = register("dark_oak_water_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.dark_oak_fire_painting)));
-	public static Block oak_earth_painting = register("oak_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.oak_fire_painting)));
-	public static Block spruce_earth_painting = register("spruce_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.spruce_fire_painting)));
-	public static Block birch_earth_painting = register("birch_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.birch_fire_painting)));
-	public static Block jungle_earth_painting = register("jungle_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.jungle_fire_painting)));
-	public static Block acacia_earth_painting = register("acacia_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.acacia_fire_painting)));
-	public static Block dark_oak_earth_painting = register("dark_oak_earth_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.dark_oak_fire_painting)));
-	public static Block oak_wind_painting = register("oak_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.oak_fire_painting)));
-	public static Block spruce_wind_painting = register("spruce_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.spruce_fire_painting)));
-	public static Block birch_wind_painting = register("birch_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.birch_fire_painting)));
-	public static Block jungle_wind_painting = register("jungle_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.jungle_fire_painting)));
-	public static Block acacia_wind_painting = register("acacia_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.acacia_fire_painting)));
-	public static Block dark_oak_wind_painting = register("dark_oak_wind_painting", true, new VeFrameBlock(Block.Properties.from(VeBlocks.dark_oak_fire_painting)));
-	*/
-	
 	//public static Block oak_wanderer_painting = register("oak_wanderer_painting", true, new VeTwoHighPaintingBlock(Block.Properties.from(VeBlocks.oak_fire_painting)));
 	public static Block snow_bricks = register("snow_bricks", true, new Block(Block.Properties.create(Material.ROCK, MaterialColor.LIGHT_BLUE).hardnessAndResistance(VeBlock.STONE_HARDNESS, VeBlock.STONE_RESISTANCE).sound(SoundType.STONE)));
 	public static Block snow_brick_stairs = register("snow_brick_stairs", true, new StairsBlock(() -> VeBlocks.snow_bricks.getDefaultState(), Block.Properties.from(VeBlocks.snow_bricks)));
@@ -274,7 +246,8 @@ public class VeBlocks
 	public static Block nephilite_slab = register("nephilite_slab", true, new SlabBlock(Block.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_stairs = register("nephilite_stairs", true, new StairsBlock(() -> VeBlocks.nephilite.getDefaultState(), Block.Properties.from(VeBlocks.nephilite)));
 	public static Block nephilite_wall = register("nephilite_wall", true, new WallBlock(Block.Properties.from(VeBlocks.nephilite)));
-	public static Block double_slab = register("double_slab", false, new VeDoubleSlabBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
+	public static Block double_slab = register("double_slab", false, new VeDoubleSlabBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
+	public static Block easel = register("easel", true, new VeEaselBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
 	
 	//Vanilla Replacements
 	

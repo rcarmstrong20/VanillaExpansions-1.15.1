@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/easel" },
+        "facing=south": { "model": "ve:block/easel", "y": 180 },
+        "facing=west":  { "model": "ve:block/easel", "y": 270 },
+        "facing=east":  { "model": "ve:block/easel", "y": 90 }
+    }
+}
