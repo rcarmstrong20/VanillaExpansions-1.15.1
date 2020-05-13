@@ -28,22 +28,25 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 public class VeWoodcutterContainer extends Container
 {
-	private final IWorldPosCallable WORLD_POS_CALLABLE;
-	private final IntReferenceHolder SINGLE_INTERFACE_HOLDER = IntReferenceHolder.single();
+	private final IWorldPosCallable worldPosCallable;
+	/** The index of the selected recipe in the GUI. */
+	private final IntReferenceHolder selectedRecipe = IntReferenceHolder.single();
 	private final World world;
 	private List<VeWoodcuttingRecipe> recipes = Lists.newArrayList();
-	private ItemStack itemStack = ItemStack.EMPTY;
-	private long field_217093_l;
-	final Slot slot1;
-	final Slot slot2;
-	private Runnable inventoryUpdateListener = () -> {};
-	
-	public final IInventory inventory = new Inventory(1)
+	/** The {@plainlink ItemStack} set in the input slot by the player. */
+	private ItemStack itemStackInput = ItemStack.EMPTY;
+	/**
+	 * Stores the game time of the last time the player took items from the the crafting result slot. This is used to
+	 * prevent the sound from being played multiple times on the same tick.
+	 */
+	private long lastOnTake;
+	final Slot inputInventorySlot;
+	/** The inventory slot that stores the output of the crafting recipe. */
+	final Slot outputInventorySlot;
+	private Runnable inventoryUpdateListener = () -> {
+	};
+	public final IInventory inputInventory = new Inventory(1)
 	{
-		/**
-		 * For tile entities, ensures the chunk containing the tile entity is saved to disk later - the game won't think
-		 * it hasn't changed and skip it.
-		 */
 		public void markDirty()
 		{
 			super.markDirty();
@@ -51,20 +54,22 @@ public class VeWoodcutterContainer extends Container
 			VeWoodcutterContainer.this.inventoryUpdateListener.run();
 		}
 	};
-	private final CraftResultInventory inventoryResult = new CraftResultInventory();
+	/** The inventory that stores the output of the crafting recipe. */
+	private final CraftResultInventory outputInventory = new CraftResultInventory();
 	
-	public VeWoodcutterContainer(int p_i50059_1_, PlayerInventory playerInventory)
+	public VeWoodcutterContainer(int windowId, PlayerInventory playerInventory)
 	{
-		this(p_i50059_1_, playerInventory, IWorldPosCallable.DUMMY);
+		this(windowId, playerInventory, IWorldPosCallable.DUMMY);
 	}
 	
-	public VeWoodcutterContainer(int p_i50060_1_, PlayerInventory playerInventory, final IWorldPosCallable worldPosCallable)
+	public VeWoodcutterContainer(int windowId, PlayerInventory playerInventory, final IWorldPosCallable worldPosCallable)
 	{
-		super(VeContainerTypes.woodcutter, p_i50060_1_);
-		this.WORLD_POS_CALLABLE = worldPosCallable;
+		super(VeContainerTypes.woodcutter, windowId);
+		this.worldPosCallable = worldPosCallable;
 		this.world = playerInventory.player.world;
-		this.slot1 = this.addSlot(new Slot(this.inventory, 0, 20, 33));
-		this.slot2 = this.addSlot(new Slot(this.inventoryResult, 1, 143, 33) {
+		this.inputInventorySlot = this.addSlot(new Slot(this.inputInventory, 0, 20, 33));
+		this.outputInventorySlot = this.addSlot(new Slot(this.outputInventory, 1, 143, 33)
+		{
 			/**
 			 * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
 			 */
@@ -75,20 +80,20 @@ public class VeWoodcutterContainer extends Container
 			
 			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack)
 			{
-				ItemStack itemstack = VeWoodcutterContainer.this.slot1.decrStackSize(1);
+				ItemStack itemstack = VeWoodcutterContainer.this.inputInventorySlot.decrStackSize(1);
 				if (!itemstack.isEmpty())
 				{
-					VeWoodcutterContainer.this.func_217082_i();
+					VeWoodcutterContainer.this.updateRecipeResultSlot();
 				}
 				
 				stack.getItem().onCreated(stack, thePlayer.world, thePlayer);
-				worldPosCallable.consume((p_216954_1_, p_216954_2_) ->
+				worldPosCallable.consume((world, blockPos) ->
 				{
-					long l = p_216954_1_.getGameTime();
-					if (VeWoodcutterContainer.this.field_217093_l != l)
+					long l = world.getGameTime();
+					if (VeWoodcutterContainer.this.lastOnTake != l)
 					{
-						p_216954_1_.playSound((PlayerEntity)null, p_216954_2_, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-						VeWoodcutterContainer.this.field_217093_l = l;
+						world.playSound((PlayerEntity)null, blockPos, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						VeWoodcutterContainer.this.lastOnTake = l;
 					}
 				});
 				return super.onTake(thePlayer, stack);
@@ -107,52 +112,27 @@ public class VeWoodcutterContainer extends Container
 		{
 			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
-		this.trackInt(this.SINGLE_INTERFACE_HOLDER);
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public int func_217073_e()
-	{
-		return this.SINGLE_INTERFACE_HOLDER.get();
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public List<VeWoodcuttingRecipe> getRecipeList()
-	{
-		return this.recipes;
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public int getRecipeListSize()
-	{
-		return this.recipes.size();
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public boolean isSlot1Empty()
-	{
-		return this.slot1.getHasStack() && !this.recipes.isEmpty();
+		
+		this.trackInt(this.selectedRecipe);
 	}
 	
 	/**
 	 * Determines whether supplied player can use this container
 	 */
-	@Override
 	public boolean canInteractWith(PlayerEntity playerIn)
 	{
-		return isWithinUsableDistance(this.WORLD_POS_CALLABLE, playerIn, VeBlocks.woodcutter);
+		return isWithinUsableDistance(this.worldPosCallable, playerIn, VeBlocks.woodcutter);
 	}
 	
 	/**
 	 * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
 	 */
-	@Override
 	public boolean enchantItem(PlayerEntity playerIn, int id)
 	{
-		if (id >= 0 && id < this.recipes.size())
+		if (id >= 0 && id < this.getRecipeList().size())
 		{
-			this.SINGLE_INTERFACE_HOLDER.set(id);
-			this.func_217082_i();
+			this.selectedRecipe.set(id);
+			this.updateRecipeResultSlot();
 		}
 		return true;
 	}
@@ -160,69 +140,65 @@ public class VeWoodcutterContainer extends Container
 	/**
 	 * Callback for when the crafting matrix is changed.
 	 */
-	@Override
 	public void onCraftMatrixChanged(IInventory inventoryIn)
 	{
-		ItemStack itemstack = this.slot1.getStack();
-		if (itemstack.getItem() != this.itemStack.getItem())
+		ItemStack itemstack = this.inputInventorySlot.getStack();
+		if (itemstack.getItem() != this.itemStackInput.getItem())
 		{
-			this.itemStack = itemstack.copy();
+			this.itemStackInput = itemstack.copy();
 			this.updateAvailableRecipes(inventoryIn, itemstack);
 		}
 	}
 	
-	private void updateAvailableRecipes(IInventory p_217074_1_, ItemStack p_217074_2_)
+	private void updateAvailableRecipes(IInventory inventoryIn, ItemStack stack)
 	{
-		this.recipes.clear();
-		this.SINGLE_INTERFACE_HOLDER.set(-1);
-		this.slot2.putStack(ItemStack.EMPTY);
-		if (!p_217074_2_.isEmpty())
+		this.getRecipeList().clear();
+		this.selectedRecipe.set(-1);
+		this.outputInventorySlot.putStack(ItemStack.EMPTY);
+		if (!stack.isEmpty())
 		{
-			this.recipes = this.world.getRecipeManager().getRecipes(VeRecipeTypes.WOODCUTTING, p_217074_1_, this.world);
+			this.setRecipeList(this.world.getRecipeManager().getRecipes(VeRecipeTypes.woodcutting, inventoryIn, this.world));
 		}
 	}
 	
-	private void func_217082_i()
+	private void updateRecipeResultSlot()
 	{
-		if (!this.recipes.isEmpty())
+		if (!this.getRecipeList().isEmpty())
 		{
-			VeWoodcuttingRecipe woodcuttingrecipe = this.recipes.get(this.SINGLE_INTERFACE_HOLDER.get());
-			this.slot2.putStack(woodcuttingrecipe.getCraftingResult(this.inventory));
+			VeWoodcuttingRecipe stonecuttingrecipe = this.getRecipeList().get(this.selectedRecipe.get());
+			this.outputInventorySlot.putStack(stonecuttingrecipe.getCraftingResult(this.inputInventory));
 		}
 		else
 		{
-			this.slot2.putStack(ItemStack.EMPTY);
+			this.outputInventorySlot.putStack(ItemStack.EMPTY);
 		}
 		this.detectAndSendChanges();
 	}
 	
-	@Override
 	public ContainerType<?> getType()
 	{
 		return VeContainerTypes.woodcutter;
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public void setInventoryUpdateListener(Runnable p_217071_1_)
+	public void setInventoryUpdateListener(Runnable listenerIn)
 	{
-		this.inventoryUpdateListener = p_217071_1_;
+		this.inventoryUpdateListener = listenerIn;
 	}
 	
 	/**
 	 * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in is
 	 * null for the initial slot that was double-clicked.
 	 */
-	@Override
 	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
 	{
-		return slotIn.inventory != this.inventoryResult && super.canMergeSlot(stack, slotIn);
+		return slotIn.inventory != this.outputInventory && super.canMergeSlot(stack, slotIn);
 	}
 	
 	/**
 	 * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player
 	 * inventory and the other inventory(s).
 	 */
-	@Override
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
@@ -239,6 +215,7 @@ public class VeWoodcutterContainer extends Container
 				{
 					return ItemStack.EMPTY;
 				}
+				
 				slot.onSlotChange(itemstack1, itemstack);
 			}
 			else if (index == 0)
@@ -248,7 +225,7 @@ public class VeWoodcutterContainer extends Container
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (this.world.getRecipeManager().getRecipe(VeRecipeTypes.WOODCUTTING, new Inventory(itemstack1), this.world).isPresent())
+			else if (this.world.getRecipeManager().getRecipe(VeRecipeTypes.woodcutting, new Inventory(itemstack1), this.world).isPresent())
 			{
 				if (!this.mergeItemStack(itemstack1, 0, 1, false))
 				{
@@ -266,15 +243,18 @@ public class VeWoodcutterContainer extends Container
 			{
 				return ItemStack.EMPTY;
 			}
+			
 			if (itemstack1.isEmpty())
 			{
 				slot.putStack(ItemStack.EMPTY);
 			}
+			
 			slot.onSlotChanged();
 			if (itemstack1.getCount() == itemstack.getCount())
 			{
 				return ItemStack.EMPTY;
 			}
+			
 			slot.onTake(playerIn, itemstack1);
 			this.detectAndSendChanges();
 		}
@@ -284,14 +264,45 @@ public class VeWoodcutterContainer extends Container
 	/**
 	 * Called when the container is closed.
 	 */
-	@Override
 	public void onContainerClosed(PlayerEntity playerIn)
 	{
 		super.onContainerClosed(playerIn);
-		this.inventoryResult.removeStackFromSlot(1);
-		this.WORLD_POS_CALLABLE.consume((p_217079_2_, p_217079_3_) ->
+		this.outputInventory.removeStackFromSlot(1);
+		this.worldPosCallable.consume((p_217079_2_, p_217079_3_) ->
 		{
-			this.clearContainer(playerIn, playerIn.world, this.inventory);
+			this.clearContainer(playerIn, playerIn.world, this.inputInventory);
 		});
+	}
+	
+	/**
+	 * Returns the index of the selected recipe.
+	 */
+	@OnlyIn(Dist.CLIENT)
+	public int getSelectedRecipe()
+	{
+		return this.selectedRecipe.get();
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public List<VeWoodcuttingRecipe> getRecipeList()
+	{
+		return this.recipes;
+	}
+	
+	public void setRecipeList(List<VeWoodcuttingRecipe> recipes)
+	{
+		this.recipes = recipes;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public int getRecipeListSize()
+	{
+		return this.recipes.size();
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public boolean hasItemsinInputSlot()
+	{
+		return this.inputInventorySlot.getHasStack() && !this.recipes.isEmpty();
 	}
 }
