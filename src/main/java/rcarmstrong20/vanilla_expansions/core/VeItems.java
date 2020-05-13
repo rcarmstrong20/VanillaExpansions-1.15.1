@@ -77,7 +77,6 @@ public class VeItems
 	public static Item cooked_noodles = register("cooked_noodles", new Item(VE_ITEMS));
 	public static Item noodle_soup = register("noodle_soup", new VeSoupItem(new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.NOODLE_SOUP)));
 	public static Item noodle_bowl = register("noodle_bowl", new Item(VE_ITEMS));
-	public static Item chop_sticks = register("chop_sticks", new Item(VE_ITEMS));
 	public static Item quinoa_cerceal = register("quinoa_cerceal", new SoupItem(new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.QUINOA_CERCEAL)));
 	public static Item smoky_quartz = register("smoky_quartz", new Item(VE_ITEMS));
 	public static Item void_bucket = register("void_bucket", new BucketItem(Suppliers.ofInstance(VeFluids.VOID), new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.VOID_BUCKET)));
@@ -102,6 +101,9 @@ public class VeItems
 	public static Item bomb_painting = register("bomb_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item plant_painting = register("plant_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item wasteland_painting = register("wasteland_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item starry_night_painting = register("starry_night_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item the_scream_painting = register("the_scream_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item nether_wastes_painting = register("nether_wastes_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{
