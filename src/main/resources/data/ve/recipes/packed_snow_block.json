@@ -2,23 +2,18 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "IS",
-    "SI"
+    "S",
+    "S"
   ],
   "key":
   {
     "S":
 	{
-      "item": "minecraft:snow_block"
-    },
-	"I":
-	{
-	  "item": "minecraft:ice"
-	}
+      "item": "ve:snow_slab"
+    }
   },
   "result":
   {
-    "item": "ve:packed_snow_block",
-	"count": 4
+    "item": "ve:packed_snow_block"
   }
 }
