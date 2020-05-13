@@ -17,16 +17,17 @@ public class VeSoupItem extends Item
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity livingEntityIn)
 	{
 		super.onItemUseFinish(stack, worldIn, livingEntityIn);
+		 Item item = this.getItem();
 		
-		if(this == VeItems.noodle_soup)
+		if(item == VeItems.noodle_soup)
 		{
 			return new ItemStack(VeItems.noodle_bowl);
 		}
-		else if(this == VeItems.void_bucket)
+		else if(item == VeItems.void_bucket)
 		{
 			return new ItemStack(Items.BUCKET);
 		}
-		else if(this == VeItems.caramel_apple)
+		else if(item == VeItems.caramel_apple)
 		{
 			return new ItemStack(Items.STICK);
 		}
