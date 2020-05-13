@@ -32,8 +32,8 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
 	
 	public VeWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result)
 	{
-		this.type = VeRecipeTypes.WOODCUTTING;
-		this.serializer = VeRecipeSerializers.WOODCUTTING;
+		this.type = VeRecipeTypes.woodcutting;
+		this.serializer = VeRecipeSerializers.woodcutting;
 		this.id = id;
 		this.group = group;
 		this.ingredient = ingredient;
