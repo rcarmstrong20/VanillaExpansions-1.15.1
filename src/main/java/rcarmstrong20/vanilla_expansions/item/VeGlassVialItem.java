@@ -21,12 +21,18 @@ public class VeGlassVialItem extends GlassBottleItem
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
 	{
-		if(stack.getItem() == VeItems.glass_vial && target instanceof MobEntity & target.getType() != EntityType.ENDER_DRAGON && target.getType() != EntityType.WITHER)
+		if(stack.getItem() == VeItems.glass_vial)
 		{
-			((MobEntity) target).playSound(SoundEvents.ITEM_BOTTLE_FILL, 1.0F, 1.0F);
-			((MobEntity) target).attackEntityFrom(DamageSource.GENERIC, 1);
-			playerIn.addItemStackToInventory(new ItemStack(VeItems.blood_vial));
-			stack.shrink(1);
+			if(target instanceof MobEntity && target.getType() != EntityType.ENDER_DRAGON && target.getType() != EntityType.WITHER)
+			{
+				MobEntity mobTarget = (MobEntity) target;
+				
+				mobTarget.playSound(SoundEvents.ITEM_BOTTLE_FILL, 1.0F, 1.0F);
+				mobTarget.attackEntityFrom(DamageSource.GENERIC, 1);
+				
+				playerIn.addItemStackToInventory(new ItemStack(VeItems.blood_vial));
+				stack.shrink(1);
+			}
 			return true;
 		}
 		return false;
