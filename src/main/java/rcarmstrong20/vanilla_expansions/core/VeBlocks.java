@@ -19,6 +19,7 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -198,12 +199,11 @@ public class VeBlocks
 	public static Block jungle_frame = register("jungle_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block acacia_frame = register("acacia_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
 	public static Block dark_oak_frame = register("dark_oak_frame", true, new VeFrameBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
-	//public static Block oak_wanderer_painting = register("oak_wanderer_painting", true, new VeTwoHighPaintingBlock(Block.Properties.from(VeBlocks.oak_fire_painting)));
-	public static Block snow_bricks = register("snow_bricks", true, new Block(Block.Properties.create(Material.ROCK, MaterialColor.LIGHT_BLUE).hardnessAndResistance(VeBlock.STONE_HARDNESS, VeBlock.STONE_RESISTANCE).sound(SoundType.STONE)));
+	public static Block snow_bricks = register("snow_bricks", true, new Block(Block.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW).hardnessAndResistance(0.6F).harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW)));
 	public static Block snow_brick_stairs = register("snow_brick_stairs", true, new StairsBlock(() -> VeBlocks.snow_bricks.getDefaultState(), Block.Properties.from(VeBlocks.snow_bricks)));
 	public static Block snow_brick_slab = register("snow_brick_slab", true, new SlabBlock(Block.Properties.from(VeBlocks.snow_bricks)));
 	public static Block snow_brick_wall = register("snow_brick_wall", true, new WallBlock(Block.Properties.from(VeBlocks.snow_bricks)));
-	public static Block packed_snow_block = register("packed_snow_block", true, new Block(Block.Properties.create(Material.SAND, MaterialColor.LIGHT_BLUE).hardnessAndResistance(VeBlock.SNOW_HARDNESS, VeBlock.SNOW_RESISTANCE).sound(SoundType.SNOW).slipperiness(0.98F)));
+	public static Block packed_snow_block = register("packed_snow_block", true, new Block(Block.Properties.create(Material.SNOW_BLOCK, MaterialColor.SNOW).hardnessAndResistance(0.4F).harvestTool(ToolType.SHOVEL).sound(SoundType.SNOW).slipperiness(0.98F)));
 	public static Block packed_snow_stairs = register("packed_snow_stairs", true, new StairsBlock(() -> VeBlocks.packed_snow_block.getDefaultState(), Block.Properties.from(VeBlocks.packed_snow_block)));
 	public static Block packed_snow_slab = register("packed_snow_slab", true, new SlabBlock(Block.Properties.from(VeBlocks.packed_snow_block)));
 	public static Block spider_glass = register("spider_glass", true, new VeGlassBlock(Block.Properties.from(Blocks.GLASS)));
@@ -240,7 +240,6 @@ public class VeBlocks
 	public static Block bamboo_fence = register("bamboo_fence", true, new FenceBlock(Block.Properties.from(Blocks.BAMBOO)));
 	public static Block bamboo_fence_gate = register("bamboo_fence_gate", true, new FenceGateBlock(Block.Properties.from(Blocks.BAMBOO)));
 	public static Block bamboo_wall = register("bamboo_wall", true, new WallBlock(Block.Properties.from(Blocks.BAMBOO)));
-	public static Block blue_sleeping_bag = register("blue_sleeping_bag", true, new VeSleepingBagBlock(DyeColor.BLUE, Block.Properties.from(Blocks.BLUE_BED)));
 	public static Block snowflake_obsidian = register("snowflake_obsidian", true, new Block(Block.Properties.from(Blocks.OBSIDIAN)));
 	public static Block nephilite = register("nephilite", true, new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(0.3F).sound(SoundType.STONE)));
 	public static Block nephilite_slab = register("nephilite_slab", true, new SlabBlock(Block.Properties.from(VeBlocks.nephilite)));
@@ -248,6 +247,9 @@ public class VeBlocks
 	public static Block nephilite_wall = register("nephilite_wall", true, new WallBlock(Block.Properties.from(VeBlocks.nephilite)));
 	public static Block double_slab = register("double_slab", false, new VeDoubleSlabBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
 	public static Block easel = register("easel", true, new VeEaselBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
+	public static Block snow_slab = register("snow_slab", true, new SlabBlock(Block.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
+	public static Block snow_stairs = register("snow_stairs", true, new StairsBlock(() -> Blocks.SNOW_BLOCK.getDefaultState(), Block.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
+	public static Block snow_wall = register("snow_wall", true, new WallBlock(Block.Properties.from(Blocks.SNOW_BLOCK).harvestTool(ToolType.SHOVEL)));
 	
 	//Vanilla Replacements
 	
@@ -289,11 +291,17 @@ public class VeBlocks
 	public static final Block DIORITE_SLAB = register("diorite_slab", true, new VeSlabBlock(Block.Properties.from(Blocks.DIORITE_SLAB)), ItemGroup.BUILDING_BLOCKS);
 	*/
 	
+	/*
+	 * Registers a normal block that has default properties.
+	 */
 	private static Block register(String name, boolean hasItemBlock, Block block)
 	{
 		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasItemBlock, block, new Item.Properties().group(VanillaExpansions.VE_GROUP));
 	}
 	
+	/*
+	 * Registers a block that can have a custom stack size.
+	 */
 	private static Block register(String name, boolean hasItemBlock, Block block, int size)
 	{
 		return register(new ResourceLocation(VanillaExpansions.MOD_ID, name), hasItemBlock, block, new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(size));
@@ -305,11 +313,17 @@ public class VeBlocks
 		return register(new ResourceLocation(name), hasItemBlock, block, new Item.Properties().group(group));
 	}
 	
+	/*
+	 * A method that gets the data from the other registry methods and is used in the register merthod that creates each list
+	 */
 	private static Block register(ResourceLocation name, boolean hasItemBlock, Block block, Item.Properties properties)
 	{
 		return register(name, hasItemBlock, block, new BlockItem(block, properties));
 	}
-  
+	
+	/*
+	 * Adds the blocks and block items to two lists
+	 */
 	private static Block register(ResourceLocation name, boolean hasItemBlock, Block block, BlockItem item)
 	{
 		block.setRegistryName(name);
@@ -322,6 +336,9 @@ public class VeBlocks
 		return block;
 	}
 	
+	/*
+	 * Registers the blocks
+	 */
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event)
 	{
@@ -330,6 +347,9 @@ public class VeBlocks
 		VanillaExpansions.LOGGER.info("Blocks registered.");
 	}
 	
+	/*
+	 * Registers the item blocks
+	 */
 	@SubscribeEvent
 	public static void registerItemBlocks(final RegistryEvent.Register<Item> event)
 	{
