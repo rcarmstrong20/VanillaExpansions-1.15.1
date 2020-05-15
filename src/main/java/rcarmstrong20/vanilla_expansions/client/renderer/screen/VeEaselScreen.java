@@ -9,7 +9,6 @@ import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.gui.screen.LoomScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -22,9 +21,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.BannerItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.tileentity.BannerTileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -36,38 +33,37 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeEaselContainer;
 import rcarmstrong20.vanilla_expansions.item.crafting.VeEaselRecipe;
-import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 @OnlyIn(Dist.CLIENT)
 public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 {
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(VanillaExpansions.MOD_ID, "textures/gui/container/easel.png");
 	private static final int field_214114_l = (BannerPattern.field_222480_O - 5 - 1 + 4 - 1) / 4;
-	private final ModelRenderer field_228188_m_;
+	private final ModelRenderer modelRenderer;
 	@Nullable
 	private List<Pair<BannerPattern, DyeColor>> field_230155_n_;
-	private ItemStack field_214119_q = ItemStack.EMPTY;
-	private ItemStack field_214120_r = ItemStack.EMPTY;
-	private ItemStack field_214121_s = ItemStack.EMPTY;
+	private ItemStack emptyStack1 = ItemStack.EMPTY;
+	private ItemStack emptyStack2 = ItemStack.EMPTY;
+	private ItemStack emptyStack3 = ItemStack.EMPTY;
 	private boolean field_214123_u;
-	private boolean field_214124_v;
+	private boolean hasItems;
 	private boolean field_214125_w;
 	private float field_214126_x;
 	private boolean field_214127_y;
 	private int field_214128_z = 1;
 	private int recipeIndexOffset;
 	
-	public VeEaselScreen(VeEaselContainer p_i51081_1_, PlayerInventory p_i51081_2_, ITextComponent p_i51081_3_)
+	public VeEaselScreen(VeEaselContainer easelContainer, PlayerInventory playerInventory, ITextComponent textComponent)
 	{
-		super(p_i51081_1_, p_i51081_2_, p_i51081_3_);
-		this.field_228188_m_ = BannerTileEntityRenderer.func_228836_a_();
-		p_i51081_1_.func_217020_a(this::func_214111_b);
+		super(easelContainer, playerInventory, textComponent);
+		this.modelRenderer = BannerTileEntityRenderer.func_228836_a_();
+		easelContainer.setInventoryUpdateListener(this::onInventoryUpdate);
 	}
 	
-	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
+	public void render(int renderX, int renderY, float renderZ)
 	{
-		super.render(p_render_1_, p_render_2_, p_render_3_);
-		this.renderHoveredToolTip(p_render_1_, p_render_2_);
+		super.render(renderX, renderY, renderZ);
+		this.renderHoveredToolTip(renderX, renderY);
 	}
 	
 	/**
@@ -89,10 +85,10 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		this.blit(i, j, 0, 0, this.xSize, this.ySize);
-		Slot slot = this.container.getSlotPaper();
-		Slot slot1 = this.container.getSlotDye();
-		Slot slot2 = this.container.getSlotDye2();
-		Slot slot3 = this.container.getOutputSlot();
+		Slot slot = this.container.getPaperInventorySlot();
+		Slot slot1 = this.container.getDyeInventorySlot();
+		Slot slot2 = this.container.getDyeInventorySlot2();
+		Slot slot3 = this.container.getOutputInventorySlot();
 		if (!slot.getHasStack())
 		{
 			this.blit(i + slot.xPos, j + slot.yPos, this.xSize, 0, 16, 16);
@@ -120,9 +116,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			matrixstack.translate(0.5D, 0.5D, 0.5D);
 			float f = 0.6666667F;
 			matrixstack.scale(0.6666667F, -0.6666667F, -0.6666667F);
-			this.field_228188_m_.rotateAngleX = 0.0F;
-			this.field_228188_m_.rotationPointY = -32.0F;
-			BannerTileEntityRenderer.func_230180_a_(matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, this.field_228188_m_, ModelBakery.LOCATION_BANNER_BASE, true, this.field_230155_n_);
+			this.modelRenderer.rotateAngleX = 0.0F;
+			this.modelRenderer.rotationPointY = -32.0F;
+			BannerTileEntityRenderer.func_230180_a_(matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, this.modelRenderer, ModelBakery.LOCATION_BANNER_BASE, true, this.field_230155_n_);
 			irendertypebuffer$impl.finish();
 		}
 		else if (this.field_214125_w)
@@ -157,44 +153,21 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			}
 		}
 		*/
-		else if (this.field_214124_v)
+		else if (this.hasItems)
 		{
 			int j2 = i + 60;
 			int l2 = j + 13;
 			this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
 			this.blit(j2, l2, 0, this.ySize, 14, 14);
-			int j3 = this.container.getIntReferenceHolder();
-			this.func_214142_b(j3, j2, l2);
+			int j3 = this.getContainer().getSelectedRecipe();
+			this.drawsRecipesItems(j3, j2, l2);
 		}
 		RenderHelper.setupGui3DDiffuseLighting();
 	}
 	
-	private void renderItem(int p_228190_1_, int p_228190_2_, int p_228190_3_)
+	private void drawsRecipesItems(int int1, int int2, int int3)
 	{
-		ItemStack itemstack = new ItemStack(Items.GRAY_BANNER);
-		CompoundNBT compoundnbt = itemstack.getOrCreateChildTag("BlockEntityTag");
-		ListNBT listnbt = (new BannerPattern.Builder()).func_222477_a(BannerPattern.BASE, DyeColor.GRAY).func_222477_a(BannerPattern.values()[p_228190_1_], DyeColor.WHITE).func_222476_a();
-		compoundnbt.put("Patterns", listnbt);
-		MatrixStack matrixstack = new MatrixStack();
-		matrixstack.push();
-		matrixstack.translate((double)((float)p_228190_2_ + 0.5F), (double)(p_228190_3_ + 16), 0.0D);
-		matrixstack.scale(6.0F, -6.0F, 1.0F);
-		matrixstack.translate(0.5D, 0.5D, 0.0D);
-		matrixstack.translate(0.5D, 0.5D, 0.5D);
-		float f = 0.6666667F;
-		matrixstack.scale(f, -f, -f);
-		IRenderTypeBuffer.Impl irendertypebuffer$impl = this.minecraft.getRenderTypeBuffers().getBufferSource();
-		this.field_228188_m_.rotateAngleX = 0.0F;
-		this.field_228188_m_.rotationPointY = -32.0F;
-		List<Pair<BannerPattern, DyeColor>> list = BannerTileEntity.func_230138_a_(DyeColor.GRAY, BannerTileEntity.func_230139_a_(itemstack));
-		BannerTileEntityRenderer.func_230180_a_(matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, this.field_228188_m_, ModelBakery.LOCATION_BANNER_BASE, true, list);
-		matrixstack.pop();
-		irendertypebuffer$impl.finish();
-	}
-	
-	private void func_214142_b(int int1, int int2, int int3)
-	{
-		List<VeEaselRecipe> list = this.container.getRecipeList();
+		List<VeEaselRecipe> list = this.getContainer().getRecipeList();
 		
 		for(int i = this.recipeIndexOffset; i < int3 && i < this.container.getRecipeListSize(); ++i)
 		{
@@ -274,9 +247,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 		return true;
 	}
 	
-	private void func_214111_b()
+	private void onInventoryUpdate()
 	{
-		ItemStack itemstack = this.container.getOutputSlot().getStack();
+		ItemStack itemstack = this.container.getOutputInventorySlot().getStack();
 		if (itemstack.isEmpty())
 		{
 			this.field_230155_n_ = null;
@@ -286,9 +259,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			this.field_230155_n_ = BannerTileEntity.func_230138_a_(((BannerItem)itemstack.getItem()).getColor(), BannerTileEntity.func_230139_a_(itemstack));
 		}
 		
-		ItemStack itemstack1 = this.container.getSlotPaper().getStack();
-		ItemStack itemstack2 = this.container.getSlotDye().getStack();
-		ItemStack itemstack3 = this.container.getSlotDye2().getStack();
+		ItemStack itemstack1 = this.container.getPaperInventorySlot().getStack();
+		ItemStack itemstack2 = this.container.getDyeInventorySlot().getStack();
+		ItemStack itemstack3 = this.container.getDyeInventorySlot2().getStack();
 		CompoundNBT compoundnbt = itemstack1.getOrCreateChildTag("BlockEntityTag");
 		this.field_214125_w = compoundnbt.contains("Patterns", 9) && !itemstack1.isEmpty() && compoundnbt.getList("Patterns", 10).size() >= 6;
 		if (this.field_214125_w)
@@ -296,15 +269,15 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			this.field_230155_n_ = null;
 		}
 		
-		if (!ItemStack.areItemStacksEqual(itemstack1, this.field_214119_q) || !ItemStack.areItemStacksEqual(itemstack2, this.field_214120_r) || !ItemStack.areItemStacksEqual(itemstack3, this.field_214121_s))
+		if (!ItemStack.areItemStacksEqual(itemstack1, this.emptyStack1) || !ItemStack.areItemStacksEqual(itemstack2, this.emptyStack2) || !ItemStack.areItemStacksEqual(itemstack3, this.emptyStack3))
 		{
 			this.field_214123_u = !itemstack1.isEmpty() && !itemstack2.isEmpty() && itemstack3.isEmpty() && !this.field_214125_w;
-			this.field_214124_v = !this.field_214125_w && !itemstack3.isEmpty() && !itemstack1.isEmpty() && !itemstack2.isEmpty();
+			this.hasItems = !this.field_214125_w && !itemstack3.isEmpty() && !itemstack1.isEmpty() && !itemstack2.isEmpty();
 		}
 		
-		this.field_214119_q = itemstack1.copy();
-		this.field_214120_r = itemstack2.copy();
-		this.field_214121_s = itemstack3.copy();
+		this.emptyStack1 = itemstack1.copy();
+		this.emptyStack2 = itemstack2.copy();
+		this.emptyStack3 = itemstack3.copy();
 	}
 	
 	/*
