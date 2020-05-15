@@ -60,7 +60,14 @@ public class VeFrameTileEntityRenderer extends TileEntityRenderer<VeFrameTileEnt
 		matrixStackIn.scale(0.874F, 0.874F, 0.874F);
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(rotation));
 		
+		/*
+		IBakedModel model = Minecraft.getInstance().getModelManager().getModel(itemStack.getItem().getRegistryName());
+		PerspectiveMapWrapper.handlePerspective(model, PerspectiveMapWrapper.getTransforms(model.getItemCameraTransforms()), TransformType.FIXED, matrixStackIn);
+		*/
+		
+		
 		Minecraft.getInstance().getItemRenderer().renderItem(itemStack, net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+		
 		matrixStackIn.pop();
 	}
 }
