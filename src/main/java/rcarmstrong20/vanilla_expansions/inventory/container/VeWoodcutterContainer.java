@@ -28,13 +28,13 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeWoodcuttingRecipe;
 
 public class VeWoodcutterContainer extends Container
 {
-	private final IWorldPosCallable worldPosCallable;
 	/** The index of the selected recipe in the GUI. */
-	private final IntReferenceHolder selectedRecipe = IntReferenceHolder.single();
-	private final World world;
+	private IntReferenceHolder selectedRecipe = IntReferenceHolder.single();
 	private List<VeWoodcuttingRecipe> recipes = Lists.newArrayList();
 	/** The {@plainlink ItemStack} set in the input slot by the player. */
 	private ItemStack itemStackInput = ItemStack.EMPTY;
+	private IWorldPosCallable worldPosCallable;
+	private World world;
 	/**
 	 * Stores the game time of the last time the player took items from the the crafting result slot. This is used to
 	 * prevent the sound from being played multiple times on the same tick.
@@ -43,8 +43,8 @@ public class VeWoodcutterContainer extends Container
 	final Slot inputInventorySlot;
 	/** The inventory slot that stores the output of the crafting recipe. */
 	final Slot outputInventorySlot;
-	private Runnable inventoryUpdateListener = () -> {
-	};
+	private Runnable inventoryUpdateListener = () -> {};
+	
 	public final IInventory inputInventory = new Inventory(1)
 	{
 		public void markDirty()
@@ -165,8 +165,8 @@ public class VeWoodcutterContainer extends Container
 	{
 		if (!this.getRecipeList().isEmpty())
 		{
-			VeWoodcuttingRecipe stonecuttingrecipe = this.getRecipeList().get(this.selectedRecipe.get());
-			this.outputInventorySlot.putStack(stonecuttingrecipe.getCraftingResult(this.inputInventory));
+			VeWoodcuttingRecipe woodcuttingRecipe = this.getRecipeList().get(this.selectedRecipe.get());
+			this.outputInventorySlot.putStack(woodcuttingRecipe.getCraftingResult(this.inputInventory));
 		}
 		else
 		{
@@ -181,9 +181,9 @@ public class VeWoodcutterContainer extends Container
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public void setInventoryUpdateListener(Runnable listenerIn)
+	public void setInventoryUpdateListener(Runnable listener)
 	{
-		this.inventoryUpdateListener = listenerIn;
+		this.inventoryUpdateListener = listener;
 	}
 	
 	/**
@@ -268,7 +268,7 @@ public class VeWoodcutterContainer extends Container
 	{
 		super.onContainerClosed(playerIn);
 		this.outputInventory.removeStackFromSlot(1);
-		this.worldPosCallable.consume((p_217079_2_, p_217079_3_) ->
+		this.worldPosCallable.consume((world, pos) ->
 		{
 			this.clearContainer(playerIn, playerIn.world, this.inputInventory);
 		});
@@ -289,6 +289,7 @@ public class VeWoodcutterContainer extends Container
 		return this.recipes;
 	}
 	
+	@OnlyIn(Dist.CLIENT)
 	public void setRecipeList(List<VeWoodcuttingRecipe> recipes)
 	{
 		this.recipes = recipes;
