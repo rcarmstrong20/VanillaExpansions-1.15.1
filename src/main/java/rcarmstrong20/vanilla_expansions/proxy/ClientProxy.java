@@ -4,11 +4,17 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.client.renderer.VeBlockAndItemColors;
+import rcarmstrong20.vanilla_expansions.client.renderer.model.VeDoubleSlabLoader;
+import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeEaselScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCampfireTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeDoubleSlabTileEntityRenderer;
+import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeFrameTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
 import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
@@ -22,10 +28,18 @@ public class ClientProxy extends CommonProxy
 	{
 		super.onSetupClient();
 		VeBlockAndItemColors.registerColorHandlers();
+		this.registerCustomModelLoaders();
 		this.registerTrades();
 		this.registerScreenFactories();
 		this.registerTileEntityRenderers();
 		this.registerRenders();
+	}
+	
+	private void registerCustomModelLoaders()
+	{
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(VanillaExpansions.MOD_ID, "models/block/double_slab"), new VeDoubleSlabLoader());
+		
+		VanillaExpansions.LOGGER.info("Registered custom model loaders.");
 	}
 	
 	/*
@@ -34,6 +48,9 @@ public class ClientProxy extends CommonProxy
 	private void registerScreenFactories()
 	{
 		ScreenManager.registerFactory(VeContainerTypes.woodcutter, VeWoodcutterScreen::new);
+		ScreenManager.registerFactory(VeContainerTypes.easel, VeEaselScreen::new);
+		
+		VanillaExpansions.LOGGER.info("Registered screen factories.");
 	}
 	
 	/*
@@ -42,7 +59,10 @@ public class ClientProxy extends CommonProxy
 	private void registerTileEntityRenderers()
 	{
 		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.colored_campfire, VeColoredCampfireTileEntityRenderer::new);
-		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.double_slab, VeDoubleSlabTileEntityRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(VeTileEntityType.frame, VeFrameTileEntityRenderer::new);
+		//ClientRegistry.bindTileEntityRenderer(VeTileEntityType.double_slab, VeDoubleSlabTileEntityRenderer::new);
+		
+		VanillaExpansions.LOGGER.info("Registered tile entity renderers.");
 	}
 	
 	/*
@@ -51,6 +71,8 @@ public class ClientProxy extends CommonProxy
 	private void registerTrades()
 	{
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.put(VeVillagerProfessions.LUMBERJACK, VeVillagerTrades.LUMBERJACK_TRADES);
+		
+		VanillaExpansions.LOGGER.info("Registered villager trades.");
 	}
 	
 	/**
@@ -108,5 +130,7 @@ public class ClientProxy extends CommonProxy
 		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass, RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(VeBlocks.black_fancy_spider_glass_pane, RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(VeBlocks.glass_of_darkness, RenderType.getTranslucent());
+		
+		VanillaExpansions.LOGGER.info("Registered Renders.");
 	}
 }
