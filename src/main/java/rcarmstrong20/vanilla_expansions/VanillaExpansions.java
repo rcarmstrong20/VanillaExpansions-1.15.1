@@ -1,24 +1,31 @@
 package rcarmstrong20.vanilla_expansions;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.ImmutableMap.Builder;
+
 import net.minecraft.block.BeetrootBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.properties.SlabType;
+import net.minecraft.tileentity.CampfireTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +43,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import rcarmstrong20.vanilla_expansions.block.VeDoubleSlabBlock;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
@@ -95,10 +101,10 @@ public class VanillaExpansions
 	}
 	
 	/**
-	 * Controls crop harvesting with right click behavior
+	 * Controls right-click crop harvesting and campfire re-coloring behavior
 	 */
 	@SubscribeEvent
-	public void onRightClickCrop(final RightClickBlock event)
+	public void onRightClickBlock(final RightClickBlock event)
 	{
 		//General variables
 		BlockPos pos = event.getPos();
@@ -107,17 +113,21 @@ public class VanillaExpansions
 		
 		//Block and items
 		BlockState worldState = event.getWorld().getBlockState(pos);
-		Item item = event.getItemStack().getItem();
+		ItemStack itemStack = event.getItemStack();
+		TileEntity tileEntity = event.getWorld().getTileEntity(pos);
 		
 		//Crop age properties
 		IntegerProperty cropsAge = CropsBlock.AGE;
 		IntegerProperty netherWartAge = NetherWartBlock.AGE;
 		IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
 		
+		//Campfire properties
+		BooleanProperty isLit = CampfireBlock.LIT;
+		
 		if(!event.getWorld().isRemote)
 		{
 			//If the block your clicking is a crop and your not using bone meal return true
-			if(worldState.getBlock() instanceof CropsBlock && item != Items.BONE_MEAL)
+			if(worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
 				if(worldState.getBlock() instanceof BeetrootBlock)
 				{
@@ -147,6 +157,38 @@ public class VanillaExpansions
 					event.setCanceled(true);
 				}
 			}
+			else if(worldState.getBlock() == Blocks.CAMPFIRE && tileEntity instanceof CampfireTileEntity)
+			{
+				Map<Item, Block> dyeToCampfire = (new Builder<Item, Block>()).put(Items.WHITE_DYE, VeBlocks.white_campfire)
+																		 	 .put(Items.ORANGE_DYE, VeBlocks.orange_campfire)
+																		     .put(Items.MAGENTA_DYE, VeBlocks.magenta_campfire)
+																		     .put(Items.LIGHT_BLUE_DYE, VeBlocks.light_blue_campfire)
+																		     .put(Items.YELLOW_DYE, VeBlocks.yellow_campfire)
+																		     .put(Items.LIME_DYE, VeBlocks.lime_campfire)
+																		     .put(Items.PINK_DYE, VeBlocks.pink_campfire)
+																		     .put(Items.GRAY_DYE, VeBlocks.gray_campfire)
+																		     .put(Items.LIGHT_GRAY_DYE, VeBlocks.light_gray_campfire)
+																		     .put(Items.CYAN_DYE, VeBlocks.cyan_campfire)
+																		     .put(Items.PURPLE_DYE, VeBlocks.purple_campfire)
+																		     .put(Items.BLUE_DYE, VeBlocks.blue_campfire)
+																		     .put(Items.BROWN_DYE, VeBlocks.brown_campfire)
+																		     .put(Items.GREEN_DYE, VeBlocks.green_campfire)
+																		     .put(Items.RED_DYE, VeBlocks.red_campfire)
+																		     .put(Items.BLACK_DYE, VeBlocks.black_campfire).build();
+				
+				CampfireTileEntity campfireTileEntity = (CampfireTileEntity) tileEntity;
+				NonNullList<ItemStack> campfireInventory = campfireTileEntity.getInventory();
+				Direction currentFacing = worldState.get(CampfireBlock.FACING);
+				
+				//Only convert if the campfire is lit, the player is holding one of the dyes, and the campfire's inventory is empty
+				if(worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem()) && campfireInventory.get(0) == ItemStack.EMPTY)
+				{
+					world.setBlockState(pos, dyeToCampfire.get(itemStack.getItem()).getDefaultState().with(CampfireBlock.FACING, currentFacing));
+					itemStack.shrink(1);
+					event.setResult(Result.ALLOW);
+					event.setCanceled(true);
+				}
+			}
 			else
 			{
 				event.setResult(Result.DEFAULT);
@@ -165,8 +207,6 @@ public class VanillaExpansions
 	}
 	
 	/*
-	 * Controls custom slab behavior
-	 */
 	@SubscribeEvent
 	public void onRightClickSlab(final PlayerInteractEvent.RightClickBlock event)
 	{
