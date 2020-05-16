@@ -2,20 +2,18 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "#  ",
-    "## ",
 	"###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "ve:snow_bricks"
+      "item": "minecraft:dirt"
     }
   },
   "result":
   {
-    "item": "ve:snow_brick_stairs",
-	"count": 4
+    "item": "ve:dirt_slab",
+	"count": 6
   }
 }

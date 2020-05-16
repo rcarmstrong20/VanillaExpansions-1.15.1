@@ -4,18 +4,20 @@
   [
     "#  ",
     "## ",
-	"###"
+    "###"
   ],
   "key":
   {
     "#":
-	{
-      "item": "ve:snow_bricks"
-    }
+	[
+      {
+        "item": "minecraft:dirt"
+      }
+    ]
   },
   "result":
   {
-    "item": "ve:snow_brick_stairs",
-	"count": 4
+    "item": "ve:dirt_stairs",
+    "count": 4
   }
 }

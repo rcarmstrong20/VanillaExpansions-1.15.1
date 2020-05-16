@@ -10,12 +10,12 @@
   {
     "#":
 	{
-      "item": "ve:fancy_spider_glass"
+      "item": "ve:black_spider_glass"
     }
   },
   "result":
   {
-    "item": "ve:fancy_spider_glass_pane",
+    "item": "ve:black_spider_glass_pane",
 	"count": 16
   }
 }

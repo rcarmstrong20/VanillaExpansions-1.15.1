@@ -3,19 +3,19 @@
   "group": "frames",
   "pattern":
   [
-    "LLL",
-    "LSL",
-	"LLL"
+    "###",
+    "#X#",
+	"###"
   ],
   "key":
   {
-    "L":
+    "#":
 	{
-      "item": "minecraft:dark_oak_log"
+      "tag": "ve:dark_oak_logs"
     },
-	"S":
+	"X":
 	{
-	  "item": "minecraft:stripped_dark_oak_log"
+	  "tag": "ve:stripped_dark_oak_logs"
 	}
   },
   "result":

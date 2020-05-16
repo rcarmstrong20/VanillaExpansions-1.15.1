@@ -2,20 +2,19 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "#  ",
-    "## ",
+    "###",
 	"###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "ve:snow_bricks"
+      "tag": "ve:snow_block"
     }
   },
   "result":
   {
-    "item": "ve:snow_brick_stairs",
-	"count": 4
+    "item": "ve:snow_wall",
+	"count": 6
   }
 }

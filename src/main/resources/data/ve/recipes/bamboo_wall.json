@@ -3,12 +3,12 @@
   "group": "wooden_wall",
   "pattern":
   [
-    "WWW",
-    "WWW"
+    "###",
+    "###"
   ],
   "key":
   {
-    "W":
+    "#":
     {
       "item": "minecraft:bamboo"
     }

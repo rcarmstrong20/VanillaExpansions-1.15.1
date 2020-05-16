@@ -3,7 +3,7 @@
   "group": "wooden_door",
   "pattern": [
     "##",
-    "GG",
+    "XX",
     "##"
   ],
   "key":
@@ -12,7 +12,7 @@
 	{
       "item": "minecraft:iron_ingot"
     },
-	"G":
+	"X":
 	{
 	  "item": "minecraft:glass"
 	}

@@ -3,12 +3,12 @@
   "group": "glass_pane",
   "pattern":
   [
-    "RRR",
-    "RRR"
+    "###",
+    "###"
   ],
   "key":
   {
-    "R":
+    "#":
 	{
       "item": "ve:red_glass"
     }

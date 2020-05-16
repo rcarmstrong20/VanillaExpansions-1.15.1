@@ -3,12 +3,12 @@
   "group": "quartz_wall",
   "pattern":
   [
-    "LLL",
-	"LLL"
+    "###",
+	"###"
   ],
   "key":
   {
-    "L":
+    "#":
 	{
       "item": "minecraft:quartz_block"
     }

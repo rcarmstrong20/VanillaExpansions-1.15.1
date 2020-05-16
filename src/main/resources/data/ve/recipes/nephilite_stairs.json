@@ -4,18 +4,20 @@
   [
     "#  ",
     "## ",
-	"###"
+    "###"
   ],
   "key":
   {
     "#":
-	{
-      "item": "ve:snow_bricks"
-    }
+	[
+      {
+        "item": "ve:nephilite"
+      }
+    ]
   },
   "result":
   {
-    "item": "ve:snow_brick_stairs",
-	"count": 4
+    "item": "ve:nephilite_stairs",
+    "count": 4
   }
 }

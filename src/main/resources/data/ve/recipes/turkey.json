@@ -1,26 +1,34 @@
 {
-  "type": "crafting_shapeless",
-  "ingredients":
+  "type": "crafting_shaped",
+  "pattern":
   [
-	{
-	  "item": "minecraft:cooked_chicken"
-	},
-	{
-	  "item": "minecraft:cooked_chicken"
-	},
-	{
-      "item": "minecraft:apple"
-    },
-	{
-	  "item": "ve:cranberries"
-	},
-	{
-	  "item": "ve:bread_crumbs"
-	},
-	{
-	  "item": "ve:porkchop_bits"
-	}
+    "CBC",
+	"PDP",
+	"ABA"
   ],
+  "key":
+  {
+    "C":
+	{
+      "item": "ve:cranberries"
+    },
+    "B":
+	{
+	  "item": "minecraft:bread"
+	},
+	"P":
+	{
+	  "item": "minecraft:cooked_porkchop"
+	},
+	"A":
+	{
+	  "item": "minecraft:apple"
+	},
+	"D":
+	{
+	  "item": "minecraft:cooked_chicken"
+	}
+  },
   "result":
   {
     "item": "ve:turkey"

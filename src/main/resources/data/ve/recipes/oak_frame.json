@@ -3,17 +3,17 @@
   "group": "frames",
   "pattern":
   [
-    "LLL",
-    "LSL",
-	"LLL"
+    "###",
+    "#X#",
+	"###"
   ],
   "key":
   {
-    "L":
+    "#":
 	{
       "tag": "ve:oak_logs"
     },
-	"S":
+	"X":
 	{
 	  "tag": "ve:stripped_oak_logs"
 	}

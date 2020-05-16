@@ -3,17 +3,17 @@
   "group": "overworld_planting_pot",
   "pattern":
   [
-    "WSW",
-    "WWW",
+    "#D#",
+    "###",
     " B "
   ],
   "key":
   {
-    "W":
+    "#":
 	{
       "item": "minecraft:dark_oak_planks"
     },
-	"S":
+	"D":
 	{
 	  "item": "minecraft:dirt"
 	},

@@ -3,12 +3,12 @@
   "group": "smoky_quartz_wall",
   "pattern":
   [
-    "LLL",
-	"LLL"
+    "###",
+	"###"
   ],
   "key":
   {
-    "L":
+    "#":
 	{
       "item": "ve:smooth_smoky_quartz"
     }

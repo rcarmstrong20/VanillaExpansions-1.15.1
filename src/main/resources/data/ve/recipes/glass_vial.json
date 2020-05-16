@@ -3,19 +3,23 @@
   "group": "wooden_wall",
   "pattern":
   [
-    "###",
+    "#X#",
+	"# #",
 	"###"
   ],
   "key":
   {
     "#":
 	{
-      "tag": "ve:acacia_logs"
+      "item": "minecraft:glass_pane"
+    },
+    "X":
+    {
+	  "tag": "minecraft:planks"
     }
   },
   "result":
   {
-    "item": "ve:acacia_wall",
-	"count": 6
+    "item": "ve:glass_vial"
   }
 }

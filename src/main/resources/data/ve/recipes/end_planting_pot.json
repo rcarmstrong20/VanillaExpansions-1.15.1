@@ -2,17 +2,17 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "WSW",
-    "WWW",
+    "#E#",
+    "###",
     " B "
   ],
   "key":
   {
-    "W":
+    "#":
 	{
       "item": "minecraft:obsidian"
     },
-	"S":
+	"E":
 	{
 	  "item": "minecraft:end_stone"
 	},

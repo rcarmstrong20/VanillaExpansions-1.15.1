@@ -3,8 +3,8 @@
   "group": "wooden_fence",
   "pattern":
   [
-    "W#W",
-    "W#W"
+    "X#X",
+    "X#X"
   ],
   "key":
   {
@@ -12,7 +12,7 @@
     {
       "item": "minecraft:string"
     },
-    "W":
+    "X":
     {
       "item": "minecraft:bamboo"
     }

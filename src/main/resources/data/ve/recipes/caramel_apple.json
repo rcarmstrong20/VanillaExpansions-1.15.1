@@ -2,13 +2,13 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "CSC",
-    "CAC",
-    "CCC"
+    "#S#",
+    "#A#",
+    "###"
   ],
   "key":
   {
-    "C":
+    "#":
 	{
       "item": "ve:caramel"
     },

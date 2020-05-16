@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "###"
+  ],
+  "key":
+  {
+    "#":
+	[
+      {
+        "item": "ve:snow_block"
+      }
+    ]
+  },
+  "result":
+  {
+    "item": "ve:snow_slab",
+    "count": 6
+  }
+}

@@ -3,24 +3,24 @@
   "group": "spider_glass",
   "pattern":
   [
-    "X#X",
+    "###",
     "#X#",
-    "X#X"
+    "###"
   ],
   "key":
   {
-    "X":
+    "#":
 	{
-      "item": "minecraft:string"
+      "item": "ve:spider_glass"
     },
-	"#":
+	"X":
 	{
-	  "item": "minecraft:glass"
+	  "item": "minecraft:black_dye"
 	}
   },
   "result":
   {
-    "item": "ve:spider_glass",
+    "item": "ve:black_spider_glass",
 	"count": 4
   }
 }

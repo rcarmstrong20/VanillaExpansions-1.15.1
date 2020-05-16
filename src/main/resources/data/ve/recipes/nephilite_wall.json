@@ -2,20 +2,19 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "#  ",
-    "## ",
+    "###",
 	"###"
   ],
   "key":
   {
     "#":
 	{
-      "item": "ve:snow_bricks"
+      "tag": "ve:nephilite"
     }
   },
   "result":
   {
-    "item": "ve:snow_brick_stairs",
-	"count": 4
+    "item": "ve:nephilite_wall",
+	"count": 6
   }
 }

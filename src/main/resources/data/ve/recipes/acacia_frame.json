@@ -3,17 +3,17 @@
   "group": "frames",
   "pattern":
   [
-    "LLL",
-    "LSL",
-	"LLL"
+    "###",
+    "#X#",
+	"###"
   ],
   "key":
   {
-    "L":
+    "#":
 	{
       "tag": "ve:acacia_logs"
     },
-	"S":
+	"X":
 	{
 	  "tag": "ve:stripped_acacia_logs"
 	}

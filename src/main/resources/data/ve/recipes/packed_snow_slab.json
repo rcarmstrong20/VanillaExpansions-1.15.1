@@ -2,11 +2,11 @@
   "type": "crafting_shaped",
   "pattern":
   [
-	"SSS"
+	"###"
   ],
   "key":
   {
-    "S":
+    "#":
 	{
       "item": "ve:packed_snow_block"
     }

@@ -2,12 +2,12 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "S",
-    "S"
+    "#",
+    "#"
   ],
   "key":
   {
-    "S":
+    "#":
 	{
       "item": "ve:snow_slab"
     }

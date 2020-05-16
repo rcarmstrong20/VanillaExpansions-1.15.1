@@ -2,13 +2,13 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "WSW",
-    "WWW",
+    "#S#",
+    "###",
     " B "
   ],
   "key":
   {
-    "W":
+    "#":
 	{
       "item": "minecraft:nether_brick"
     },

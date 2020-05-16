@@ -3,17 +3,17 @@
   "group": "wooden_ladder",
   "pattern":
   [
-    "| |",
-    "|#|",
-    "| |"
+    "# #",
+    "#X#",
+    "# #"
   ],
   "key":
   {
-    "#":
+    "X":
 	{
       "item": "minecraft:stick"
     },
-	"|":
+	"#":
 	{
 	  "item": "minecraft:acacia_planks"
 	}
