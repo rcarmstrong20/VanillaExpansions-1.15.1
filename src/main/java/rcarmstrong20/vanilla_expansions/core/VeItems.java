@@ -82,8 +82,6 @@ public class VeItems
 	public static Item void_bucket = register("void_bucket", new BucketItem(Suppliers.ofInstance(VeFluids.VOID), new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.VOID_BUCKET)));
 	public static Item caramel_apple = register("caramel_apple", new VeSoupItem(new Item.Properties().maxStackSize(1).group(VanillaExpansions.VE_GROUP).food(VeFoods.CARAMEL_APPLE)));
 	public static Item caramel = register("caramel", new Item(VE_ITEMS));
-	public static Item bread_crumbs = register("bread_crumbs", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.BREAD_CRUMBS)));
-	public static Item porkchop_bits = register("porkchop_bits", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.PORKCHOP_BITS)));
 	public static Item spruce_cone = register("spruce_cone", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.SPRUCE_CONE)));
 	public static Item forests_bounty = register("forests_bounty", new SoupItem(new Item.Properties().group(VanillaExpansions.VE_GROUP).maxStackSize(1).food(VeFoods.FORESTS_BOUNTY)));
 	public static Item witchs_cradle_branch = register("witchs_cradle_branch", new BlockNamedItem(VeBlocks.witchs_cradle, new Item.Properties().group(VanillaExpansions.VE_GROUP).food(VeFoods.WITCHS_CRADLE_BRANCH)));
