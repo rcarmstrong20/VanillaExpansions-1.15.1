@@ -2,28 +2,16 @@ package rcarmstrong20.vanilla_expansions.client.renderer.screen;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.datafixers.util.Pair;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.model.ModelBakery;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.tileentity.BannerTileEntityRenderer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.BannerItem;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.BannerPattern;
-import net.minecraft.tileentity.BannerTileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -37,33 +25,28 @@ import rcarmstrong20.vanilla_expansions.item.crafting.VeEaselRecipe;
 @OnlyIn(Dist.CLIENT)
 public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 {
-	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(VanillaExpansions.MOD_ID, "textures/gui/container/easel.png");
-	private static final int field_214114_l = (BannerPattern.field_222480_O - 5 - 1 + 4 - 1) / 4;
-	private final ModelRenderer modelRenderer;
-	@Nullable
-	private List<Pair<BannerPattern, DyeColor>> field_230155_n_;
-	private ItemStack emptyStack1 = ItemStack.EMPTY;
-	private ItemStack emptyStack2 = ItemStack.EMPTY;
-	private ItemStack emptyStack3 = ItemStack.EMPTY;
-	private boolean field_214123_u;
-	private boolean hasItems;
-	private boolean field_214125_w;
-	private float field_214126_x;
-	private boolean field_214127_y;
-	private int field_214128_z = 1;
+	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(VanillaExpansions.MOD_ID, "textures/gui/container/easel.png");
+	private float sliderProgress;
+	/** Is {@code true} if the player clicked on the scroll wheel in the GUI. */
+	private boolean clickedOnScroll;
+	/**
+	 * The index of the first recipe to display.
+	 * The number of recipes displayed at any time is 12 (4 recipes per row, and 3 rows). If the player scrolled down one
+	 * row, this value would be 4 (representing the index of the first slot on the second row).
+	 */
 	private int recipeIndexOffset;
+	private boolean hasItemsInInputSlot;
 	
-	public VeEaselScreen(VeEaselContainer easelContainer, PlayerInventory playerInventory, ITextComponent textComponent)
+	public VeEaselScreen(VeEaselContainer containerIn, PlayerInventory playerInv, ITextComponent titleIn)
 	{
-		super(easelContainer, playerInventory, textComponent);
-		this.modelRenderer = BannerTileEntityRenderer.func_228836_a_();
-		easelContainer.setInventoryUpdateListener(this::onInventoryUpdate);
+		super(containerIn, playerInv, titleIn);
+		containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
 	}
 	
-	public void render(int renderX, int renderY, float renderZ)
+	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
 	{
-		super.render(renderX, renderY, renderZ);
-		this.renderHoveredToolTip(renderX, renderY);
+		super.render(p_render_1_, p_render_2_, p_render_3_);
+		this.renderHoveredToolTip(p_render_1_, p_render_2_);
 	}
 	
 	/**
@@ -81,119 +64,101 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		this.renderBackground();
-		this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
-		int i = this.guiLeft;
-		int j = this.guiTop;
-		this.blit(i, j, 0, 0, this.xSize, this.ySize);
-		Slot slot = this.container.getPaperInventorySlot();
-		Slot slot1 = this.container.getDyeInventorySlot();
-		Slot slot2 = this.container.getDyeInventorySlot2();
-		Slot slot3 = this.container.getOutputInventorySlot();
-		if (!slot.getHasStack())
-		{
-			this.blit(i + slot.xPos, j + slot.yPos, this.xSize, 0, 16, 16);
-		}
-		
-		if (!slot1.getHasStack())
-		{
-			this.blit(i + slot1.xPos, j + slot1.yPos, this.xSize + 16, 0, 16, 16);
-		}
-		
-		if (!slot2.getHasStack())
-		{
-			this.blit(i + slot2.xPos, j + slot2.yPos, this.xSize + 32, 0, 16, 16);
-		}
-		
-		int k = (int)(41.0F * this.field_214126_x);
-		this.blit(i + 119, j + 13 + k, 232 + (this.field_214123_u ? 0 : 12), 0, 12, 15);
-		RenderHelper.setupGuiFlatDiffuseLighting();
-		if (this.field_230155_n_ != null && !this.field_214125_w)
-		{
-			IRenderTypeBuffer.Impl irendertypebuffer$impl = this.minecraft.getRenderTypeBuffers().getBufferSource();
-			MatrixStack matrixstack = new MatrixStack();
-			matrixstack.translate((double)(i + 139), (double)(j + 52), 0.0D);
-			matrixstack.scale(24.0F, -24.0F, 1.0F);
-			matrixstack.translate(0.5D, 0.5D, 0.5D);
-			float f = 0.6666667F;
-			matrixstack.scale(0.6666667F, -0.6666667F, -0.6666667F);
-			this.modelRenderer.rotateAngleX = 0.0F;
-			this.modelRenderer.rotationPointY = -32.0F;
-			BannerTileEntityRenderer.func_230180_a_(matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, this.modelRenderer, ModelBakery.LOCATION_BANNER_BASE, true, this.field_230155_n_);
-			irendertypebuffer$impl.finish();
-		}
-		else if (this.field_214125_w)
-		{
-			this.blit(i + slot3.xPos - 2, j + slot3.yPos - 2, this.xSize, 17, 17, 16);
-		}
-		/*
-		if (this.field_214123_u)
-		{
-			int i2 = i + 60;
-			int k2 = j + 13;
-			int i3 = this.field_214128_z + 16;
-			
-			for(int l = this.field_214128_z; l < i3 && l < BannerPattern.field_222480_O - 5; ++l)
-			{
-				int i1 = l - this.field_214128_z;
-				int j1 = i2 + i1 % 4 * 14;
-				int k1 = k2 + i1 / 4 * 14;
-				this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
-				int l1 = this.ySize;
-				if (l == this.container.getIntReferenceHolder())
-				{
-					l1 += 14;
-				}
-				else if (mouseX >= j1 && mouseY >= k1 && mouseX < j1 + 14 && mouseY < k1 + 14)
-				{
-					l1 += 28;
-				}
-				
-				this.blit(j1, k1, 0, l1, 14, 14);
-				this.func_228190_b_(l, j1, k1);
-			}
-		}
-		*/
-		else if (this.hasItems)
-		{
-			int j2 = i + 60;
-			int l2 = j + 13;
-			this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
-			this.blit(j2, l2, 0, this.ySize, 14, 14);
-			int j3 = this.getContainer().getSelectedRecipe();
-			this.drawsRecipesItems(j3, j2, l2);
-		}
-		RenderHelper.setupGui3DDiffuseLighting();
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.getMinecraft().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
+		int startXPos = this.guiLeft;
+		int startYPos = this.guiTop;
+		this.blit(startXPos, startYPos, 0, 0, this.xSize, this.ySize); //Background
+		int sliderProgressPos = (int)(41.0F * this.sliderProgress);
+		this.blit(startXPos + 119, startYPos + 13 + sliderProgressPos, 232 + (this.canScroll() ? 0 : 12), 0, 12, 15); //Scroll wheel
+		int l = this.guiLeft + 52;
+		int i1 = this.guiTop + 14;
+		int j1 = this.recipeIndexOffset + 12;
+		this.drawRecipesBackground(mouseX, mouseY, l, i1, j1);
+		this.drawRecipesItems(l, i1, j1);
 	}
 	
-	private void drawsRecipesItems(int int1, int int2, int int3)
+	private void drawRecipesBackground(int mouseX, int mouseY, int left, int top, int recipeIndexOffsetMax)
 	{
-		List<VeEaselRecipe> list = this.getContainer().getRecipeList();
+		int guiXPos = this.guiLeft;
+		int guiYPos = this.guiTop;
 		
-		for(int i = this.recipeIndexOffset; i < int3 && i < this.container.getRecipeListSize(); ++i)
+		Slot paperSlot = this.container.getPaperInventorySlot();
+		Slot dyeSlot1 = this.container.getDyeInventorySlot();
+		Slot dyeSlot2 = this.container.getDyeInventorySlot2();
+		
+		//Draw the paper icon when the slot is empty
+		if (!paperSlot.getHasStack())
+		{
+			this.blit(guiXPos + paperSlot.xPos, guiYPos + paperSlot.yPos, this.xSize, 0, 16, 16);
+		}
+		
+		//Draw the first dye slot icon when the slot is empty
+		if (!dyeSlot1.getHasStack())
+		{
+			this.blit(guiXPos + dyeSlot1.xPos, guiYPos + dyeSlot1.yPos, this.xSize + 16, 0, 16, 16);
+		}
+		
+		//Draw the second dye slot icon when the slot is empty
+		if (!dyeSlot2.getHasStack())
+		{
+			this.blit(guiXPos + dyeSlot2.xPos, guiYPos + dyeSlot2.yPos, this.xSize + 16, 0, 16, 16);
+		}
+		
+		int i2 = this.guiLeft + 60;
+        int k2 = this.guiTop + 13;
+		
+        //Draw the recipe buttons
+		for(int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getRecipeListSize(); ++i)
 		{
 			int j = i - this.recipeIndexOffset;
-			int k = int1 + j % 4 * 16;
-			int l = j / 4;
-			int i1 = int2 + l * 18 + 2;
-			this.minecraft.getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), k, i1);
+			int j1 = i2 + j % 4 * 14;
+			int k1 = k2 + j / 4 * 14;
+			int l1 = this.ySize;
+			if (i == this.container.getSelectedRecipe())
+			{
+				l1 += 14;
+			}
+			else if (mouseX >= j1 && mouseY >= k1 && mouseX < j1 + 14 && mouseY < k1 + 14)
+			{
+				l1 += 28;
+			}
+			this.blit(j1, k1, 0, l1, 14, 14);
+		}
+	}
+	
+	private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax)
+	{
+		List<VeEaselRecipe> list = this.container.getRecipeList();
+		
+		int i2 = this.guiLeft + 60;
+        int k2 = this.guiTop + 13;
+		
+		for(int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getRecipeListSize(); ++i)
+		{
+			int j = i - this.recipeIndexOffset;
+			int j1 = i2 + j % 4 * 14;
+			int k1 = k2 + j / 4 * 14;
+			
+			this.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), j1, k1);
 		}
 	}
 	
 	public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_)
 	{
-		this.field_214127_y = false;
-		if (this.field_214123_u)
+		this.clickedOnScroll = false;
+		if (this.hasItemsInInputSlot)
 		{
-			int i = this.guiLeft + 60;
-			int j = this.guiTop + 13;
-			int k = this.field_214128_z + 16;
+			int i = this.guiLeft + 52;
+			int j = this.guiTop + 14;
+			int k = this.recipeIndexOffset + 12;
 			
-			for(int l = this.field_214128_z; l < k; ++l)
+			for(int l = this.recipeIndexOffset; l < k; ++l)
 			{
-				int i1 = l - this.field_214128_z;
-				double d0 = p_mouseClicked_1_ - (double)(i + i1 % 4 * 14);
-				double d1 = p_mouseClicked_3_ - (double)(j + i1 / 4 * 14);
-				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D && this.container.enchantItem(this.minecraft.player, l))
+				int i1 = l - this.recipeIndexOffset;
+				double d0 = p_mouseClicked_1_ - (double)(i + i1 % 4 * 16);
+				double d1 = p_mouseClicked_3_ - (double)(j + i1 / 4 * 18);
+				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.container.enchantItem(this.minecraft.player, l))
 				{
 					Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_LOOM_SELECT_PATTERN, 1.0F));
 					this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
@@ -203,9 +168,9 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			
 			i = this.guiLeft + 119;
 			j = this.guiTop + 9;
-			if (p_mouseClicked_1_ >= (double)i && p_mouseClicked_1_ < (double)(i + 12) && p_mouseClicked_3_ >= (double)j && p_mouseClicked_3_ < (double)(j + 56))
+			if (p_mouseClicked_1_ >= (double)i && p_mouseClicked_1_ < (double)(i + 12) && p_mouseClicked_3_ >= (double)j && p_mouseClicked_3_ < (double)(j + 54))
 			{
-				this.field_214127_y = true;
+				this.clickedOnScroll = true;
 			}
 		}
 		return super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
@@ -213,20 +178,13 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 	
 	public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_)
 	{
-		if (this.field_214127_y && this.field_214123_u)
+		if (this.clickedOnScroll && this.canScroll())
 		{
-			int i = this.guiTop + 13;
-			int j = i + 56;
-			this.field_214126_x = ((float)p_mouseDragged_3_ - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
-			this.field_214126_x = MathHelper.clamp(this.field_214126_x, 0.0F, 1.0F);
-			int k = field_214114_l - 4;
-			int l = (int)((double)(this.field_214126_x * (float)k) + 0.5D);
-			if (l < 0)
-			{
-				l = 0;
-			}
-			
-			this.field_214128_z = 1 + l * 4;
+			int i = this.guiTop + 14;
+			int j = i + 54;
+			this.sliderProgress = ((float)p_mouseDragged_3_ - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
+			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
+			this.recipeIndexOffset = (int)((double)(this.sliderProgress * (float)this.getHiddenRows()) + 0.5D) * 4;
 			return true;
 		}
 		else
@@ -237,54 +195,36 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 	
 	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
 	{
-		if (this.field_214123_u)
+		if (this.canScroll())
 		{
-			int i = field_214114_l - 4;
-			this.field_214126_x = (float)((double)this.field_214126_x - p_mouseScrolled_5_ / (double)i);
-			this.field_214126_x = MathHelper.clamp(this.field_214126_x, 0.0F, 1.0F);
-			this.field_214128_z = 1 + (int)((double)(this.field_214126_x * (float)i) + 0.5D) * 4;
+			int i = this.getHiddenRows();
+			this.sliderProgress = (float)((double)this.sliderProgress - p_mouseScrolled_5_ / (double)i);
+			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
+			this.recipeIndexOffset = (int)((double)(this.sliderProgress * (float)i) + 0.5D) * 4;
 		}
 		return true;
 	}
 	
-	private void onInventoryUpdate()
+	private boolean canScroll()
 	{
-		ItemStack itemstack = this.container.getOutputInventorySlot().getStack();
-		if (itemstack.isEmpty())
-		{
-			this.field_230155_n_ = null;
-		}
-		else
-		{
-			this.field_230155_n_ = BannerTileEntity.func_230138_a_(((BannerItem)itemstack.getItem()).getColor(), BannerTileEntity.func_230139_a_(itemstack));
-		}
-		
-		ItemStack itemstack1 = this.container.getPaperInventorySlot().getStack();
-		ItemStack itemstack2 = this.container.getDyeInventorySlot().getStack();
-		ItemStack itemstack3 = this.container.getDyeInventorySlot2().getStack();
-		CompoundNBT compoundnbt = itemstack1.getOrCreateChildTag("BlockEntityTag");
-		this.field_214125_w = compoundnbt.contains("Patterns", 9) && !itemstack1.isEmpty() && compoundnbt.getList("Patterns", 10).size() >= 6;
-		if (this.field_214125_w)
-		{
-			this.field_230155_n_ = null;
-		}
-		
-		if (!ItemStack.areItemStacksEqual(itemstack1, this.emptyStack1) || !ItemStack.areItemStacksEqual(itemstack2, this.emptyStack2) || !ItemStack.areItemStacksEqual(itemstack3, this.emptyStack3))
-		{
-			this.field_214123_u = !itemstack1.isEmpty() && !itemstack2.isEmpty() && itemstack3.isEmpty() && !this.field_214125_w;
-			this.hasItems = !this.field_214125_w && !itemstack3.isEmpty() && !itemstack1.isEmpty() && !itemstack2.isEmpty();
-		}
-		
-		this.emptyStack1 = itemstack1.copy();
-		this.emptyStack2 = itemstack2.copy();
-		this.emptyStack3 = itemstack3.copy();
+		return this.hasItemsInInputSlot && this.container.getRecipeListSize() > 12;
 	}
 	
-	/*
-	 * A method from vanilla used to check if the player has clicked outside the screen.
-	 */
-	protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeftIn, int guiTopIn, int mouseButton)
+	protected int getHiddenRows()
 	{
-		return mouseX < (double)guiLeftIn || mouseY < (double)guiTopIn || mouseX >= (double)(guiLeftIn + this.xSize) || mouseY >= (double)(guiTopIn + this.ySize);
+		return (this.container.getRecipeListSize() + 4 - 1) / 4 - 3;
+	}
+	
+	/**
+	 * Called every time this screen's container is changed (is marked as dirty).
+	 */
+	private void onInventoryUpdate()
+	{
+		this.hasItemsInInputSlot = this.getContainer().hasItemsinInputSlot();
+		if (!this.hasItemsInInputSlot)
+		{
+			this.sliderProgress = 0.0F;
+			this.recipeIndexOffset = 0;
+		}
 	}
 }

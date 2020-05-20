@@ -1,9 +1,15 @@
 package rcarmstrong20.vanilla_expansions.inventory.container;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Vector;
 
 import com.google.common.collect.Lists;
 
+import it.unimi.dsi.fastutil.Arrays;
+import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftResultInventory;
@@ -63,42 +69,6 @@ public class VeEaselContainer extends Container
 	
 	private final CraftResultInventory outputInventory = new CraftResultInventory();
 	
-	/*
-	//Needed
-	private final IWorldPosCallable worldPosCallable;
-	private final IntReferenceHolder selectedRecipe = IntReferenceHolder.single();
-	private List<VeEaselRecipe> recipes = Lists.newArrayList();
-	private final Slot paperSlot;
-	private final Slot dyeSlot;
-	private final Slot dyeSlot2;
-	private final Slot outputSlot;
-	
-	private final IInventory inputInventory = new Inventory(3)
-	{
-		public void markDirty()
-		{
-			super.markDirty();
-			VeEaselContainer.this.onCraftMatrixChanged(this);
-			VeEaselContainer.this.runnable.run();
-		}
-	};
-	
-	private final IInventory outputInventory = new Inventory(1)
-	{
-		public void markDirty()
-		{
-			super.markDirty();
-			VeEaselContainer.this.runnable.run();
-		}
-	};
-	
-	//Checking
-	
-	private final World world;
-	private Runnable runnable = () -> {};
-	private long field_226622_j_;
-	*/
-	
 	public VeEaselContainer(int id, PlayerInventory playerInventory)
 	{
 		this(id, playerInventory, IWorldPosCallable.DUMMY);
@@ -154,7 +124,9 @@ public class VeEaselContainer extends Container
 			{
 				paperInventorySlot.decrStackSize(1);
 				dyeInventorySlot.decrStackSize(1);
-				if (!paperInventorySlot.getHasStack() || !dyeInventorySlot.getHasStack() || !this.getHasStack())
+				dyeInventorySlot2.decrStackSize(1);
+				
+				if (!paperInventorySlot.getHasStack() || !dyeInventorySlot.getHasStack() || !dyeInventorySlot2.getHasStack() || !this.getHasStack())
 				{
 					selectedRecipe.set(0);
 				}
@@ -220,14 +192,14 @@ public class VeEaselContainer extends Container
 				
 				else if (itemStack1.getItem() instanceof DyeItem)
 				{
-					if(ItemStack.areItemStacksEqual(this.getDyeInventorySlot().getStack(), itemStack1) || this.getDyeInventorySlot().getStack().isEmpty())
+					if(this.getDyeInventorySlot().getStack() == itemStack1 || this.getDyeInventorySlot().getStack().isEmpty())
 					{
 						if (!this.mergeItemStack(itemStack1, this.getDyeInventorySlot().getSlotIndex(), this.getDyeInventorySlot().getSlotIndex() + 1, false))
 						{
 							return ItemStack.EMPTY;
 						}
 					}
-					else if(ItemStack.areItemStacksEqual(this.getDyeInventorySlot2().getStack(), slot.getStack()) || this.getDyeInventorySlot2().getStack().isEmpty())
+					else if(this.getDyeInventorySlot2().getStack() == itemStack1 || this.getDyeInventorySlot2().getStack().isEmpty())
 					{
 						if (!this.mergeItemStack(itemStack1, this.getDyeInventorySlot2().getSlotIndex(), this.getDyeInventorySlot2().getSlotIndex() + 1, false))
 						{
@@ -271,80 +243,6 @@ public class VeEaselContainer extends Container
 		
 		return itemstack;
 	}
-	
-	/*
-	private void func_217031_j()
-	{
-		if (this.intReferenceHolder.get() > 0)
-		{
-			ItemStack itemstack = this.paperSlot.getStack();
-			ItemStack itemstack1 = this.dyeSlot.getStack();
-			ItemStack itemstack2 = ItemStack.EMPTY;
-			if (!itemstack.isEmpty() && !itemstack1.isEmpty())
-			{
-				itemstack2 = itemstack.copy();
-				itemstack2.setCount(1);
-				BannerPattern bannerpattern = BannerPattern.values()[this.intReferenceHolder.get()];
-				DyeColor dyecolor = ((DyeItem)itemstack1.getItem()).getDyeColor();
-				CompoundNBT compoundnbt = itemstack2.getOrCreateChildTag("BlockEntityTag");
-				ListNBT listnbt;
-				if (compoundnbt.contains("Patterns", 9))
-				{
-					listnbt = compoundnbt.getList("Patterns", 10);
-				}
-				else
-				{
-					listnbt = new ListNBT();
-					compoundnbt.put("Patterns", listnbt);
-				}
-				
-				CompoundNBT compoundnbt1 = new CompoundNBT();
-				compoundnbt1.putString("Pattern", bannerpattern.getHashname());
-				compoundnbt1.putInt("Color", dyecolor.getId());
-				listnbt.add(compoundnbt1);
-			}
-			
-			if (!ItemStack.areItemStacksEqual(itemstack2, this.outputSlot.getStack()))
-			{
-				this.outputSlot.putStack(itemstack2);
-			}
-		}
-	}
-	*/
-	
-	/*
-	public void onCraftMatrixChanged(IInventory inputInventory)
-	{
-		ItemStack itemstack = this.paperSlot.getStack();
-		ItemStack itemstack1 = this.dyeSlot.getStack();
-		ItemStack itemstack2 = this.dyeSlot2.getStack();
-		ItemStack itemstack3 = this.outputSlot.getStack();
-		if (itemstack3.isEmpty() || !itemstack.isEmpty() && !itemstack1.isEmpty() && this.intReferenceHolder.get() > 0 && (this.intReferenceHolder.get() < BannerPattern.field_222480_O - 5 || !itemstack2.isEmpty()))
-		{
-			if (!itemstack2.isEmpty() && itemstack2.getItem() instanceof BannerPatternItem)
-			{
-				CompoundNBT compoundnbt = itemstack.getOrCreateChildTag("BlockEntityTag");
-				boolean flag = compoundnbt.contains("Patterns", 9) && !itemstack.isEmpty() && compoundnbt.getList("Patterns", 10).size() >= 6;
-				if (flag)
-				{
-					this.intReferenceHolder.set(0);
-				}
-				else
-				{
-					this.intReferenceHolder.set(((BannerPatternItem)itemstack2.getItem()).func_219980_b().ordinal());
-				}
-			}
-		}
-		else
-		{
-			this.outputSlot.putStack(ItemStack.EMPTY);
-			this.intReferenceHolder.set(0);
-		}
-		
-		this.func_217031_j();
-		this.detectAndSendChanges();
-	}
-	*/
 	
 	public boolean canInteractWith(PlayerEntity player)
 	{

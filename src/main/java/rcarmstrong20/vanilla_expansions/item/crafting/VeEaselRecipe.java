@@ -16,7 +16,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeRecipeSerializers;
@@ -44,13 +43,13 @@ public class VeEaselRecipe implements IRecipe<IInventory>
 	@Override
 	public boolean matches(IInventory inv, World worldIn)
 	{
-		return this.ingredient.test(inv.getStackInSlot(0));
+		return this.ingredient.test(inv.getStackInSlot(0)) && this.ingredient.test(inv.getStackInSlot(1)) && this.ingredient.test(inv.getStackInSlot(2));
 	}
 	
 	@Override
 	public ItemStack getIcon()
 	{
-		return new ItemStack(VeBlocks.woodcutter);
+		return new ItemStack(VeBlocks.easel);
 	}
 	
 	@Override
@@ -130,6 +129,7 @@ public class VeEaselRecipe implements IRecipe<IInventory>
 			
 			String s1 = JSONUtils.getString(json, "result");
 			int i = JSONUtils.getInt(json, "count");
+			@SuppressWarnings("deprecation")
 			ItemStack itemstack = new ItemStack(Registry.ITEM.getOrDefault(new ResourceLocation(s1)), i);
 			return this.factory.create(recipeId, s, ingredients, itemstack);
 		}

@@ -1,5 +1,6 @@
 {
 	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
 	"textures": {
 		"particle": "block/oak_planks",
 		"planks": "block/oak_planks"
