@@ -17,6 +17,7 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.passive.RabbitEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -47,6 +48,7 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
+import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
@@ -183,6 +185,7 @@ public class VanillaExpansions
 				//Only convert if the campfire is lit, the player is holding one of the dyes, and the campfire's inventory is empty
 				if(worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem()) && campfireInventory.get(0) == ItemStack.EMPTY)
 				{
+					world.playSound((PlayerEntity)null, pos, VeSoundEvents.BLOCK_CAMPFIRE_DYED, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
 					world.setBlockState(pos, dyeToCampfire.get(itemStack.getItem()).getDefaultState().with(CampfireBlock.FACING, currentFacing));
 					itemStack.shrink(1);
 					event.setResult(Result.ALLOW);
