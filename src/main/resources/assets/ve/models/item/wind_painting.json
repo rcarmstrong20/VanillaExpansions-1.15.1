@@ -1,7 +1,7 @@
 {
-    "parent": "item/generated",
+    "parent": "ve:item/template_painting",
     "textures":
 	{
-        "layer0": "ve:item/wind_painting"
+        "painting": "ve:item/wind_painting"
     }
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "item/generated",
+    "parent": "ve:item/template_painting",
     "textures":
 	{
-        "layer0": "ve:item/nether_wastes_painting"
+        "painting": "ve:item/nether_wastes_painting"
     }
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "item/generated",
+    "parent": "ve:item/template_painting",
     "textures":
 	{
-        "layer0": "ve:item/alban_painting"
+        "painting": "ve:item/alban_painting"
     }
 }
