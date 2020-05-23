@@ -87,12 +87,12 @@ public class VeWoodcutterContainer extends Container
 				}
 				
 				stack.getItem().onCreated(stack, thePlayer.world, thePlayer);
-				worldPosCallable.consume((world, blockPos) ->
+				worldPosCallable.consume((world, pos) ->
 				{
 					long l = world.getGameTime();
 					if (VeWoodcutterContainer.this.lastOnTake != l)
 					{
-						world.playSound((PlayerEntity)null, blockPos, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						world.playSound((PlayerEntity)null, pos, VeSoundEvents.UI_WOODCUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						VeWoodcutterContainer.this.lastOnTake = l;
 					}
 				});

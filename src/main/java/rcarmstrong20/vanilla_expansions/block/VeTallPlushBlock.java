@@ -185,7 +185,7 @@ public class VeTallPlushBlock extends VePlushBlock
 		{
 			return VeTallPlushBlock.defineShapes(state, ONE_MAGMA_CUBE_NORTH_SHAPE, TWO_MAGMA_CUBE_NORTH_SHAPE, THREE_MAGMA_CUBE_NORTH_SHAPE, ONE_MAGMA_CUBE_SOUTH_SHAPE, TWO_MAGMA_CUBE_SOUTH_SHAPE, THREE_MAGMA_CUBE_SOUTH_SHAPE, ONE_MAGMA_CUBE_WEST_SHAPE, TWO_MAGMA_CUBE_WEST_SHAPE, THREE_MAGMA_CUBE_WEST_SHAPE, ONE_MAGMA_CUBE_EAST_SHAPE, TWO_MAGMA_CUBE_EAST_SHAPE, THREE_MAGMA_CUBE_EAST_SHAPE);
 		}
-		return NORMAL_CUBE;
+		return VoxelShapes.fullCube();
 	}
 	
 	private static VoxelShape defineShapes(BlockState state, VoxelShape northShape1, VoxelShape northShape2, VoxelShape northShape3, VoxelShape southShape1, VoxelShape southShape2, VoxelShape southShape3, VoxelShape westShape1, VoxelShape westShape2, VoxelShape westShape3, VoxelShape eastShape1, VoxelShape eastShape2, VoxelShape eastShape3)

@@ -1,15 +1,9 @@
 package rcarmstrong20.vanilla_expansions.inventory.container;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Vector;
 
 import com.google.common.collect.Lists;
 
-import it.unimi.dsi.fastutil.Arrays;
-import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftResultInventory;
@@ -52,6 +46,10 @@ public class VeEaselContainer extends Container
 	private Slot paperInventorySlot;
 	private Slot dyeInventorySlot;
 	private Slot dyeInventorySlot2;
+	
+	private ItemStack itemStackInput0 = ItemStack.EMPTY;
+	private ItemStack itemStackInput1 = ItemStack.EMPTY;
+	private ItemStack itemStackInput2 = ItemStack.EMPTY;
 	
 	/** The inventory slot that stores the output of the crafting recipe. */
 	private Slot outputInventorySlot;
@@ -120,17 +118,21 @@ public class VeEaselContainer extends Container
 				return false;
 			}
 			
+			/*
+			 * Called when the player takes the item from the output slot
+			 */
 			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack)
 			{
-				paperInventorySlot.decrStackSize(1);
-				dyeInventorySlot.decrStackSize(1);
-				dyeInventorySlot2.decrStackSize(1);
+				ItemStack paperItemStack = paperInventorySlot.decrStackSize(1);
+				ItemStack dyeItemStack = dyeInventorySlot.decrStackSize(1);
+				ItemStack dyeItemStack2 = dyeInventorySlot2.decrStackSize(1);
 				
-				if (!paperInventorySlot.getHasStack() || !dyeInventorySlot.getHasStack() || !dyeInventorySlot2.getHasStack() || !this.getHasStack())
+				if (!paperItemStack.isEmpty() || !dyeItemStack.isEmpty() || !dyeItemStack2.isEmpty())
 				{
-					selectedRecipe.set(0);
+					updateRecipeResultSlot();
 				}
 				
+				stack.getItem().onCreated(stack, thePlayer.world, thePlayer);
 				worldPosCallable.consume((world, pos) ->
 				{
 					long l = world.getGameTime();
@@ -168,13 +170,17 @@ public class VeEaselContainer extends Container
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
+		ItemStack dyeSlotStack = this.getDyeInventorySlot().getStack();
+		int paperSlotIndex = this.getPaperInventorySlot().getSlotIndex();
+		int dyeSlotIndex = this.getDyeInventorySlot().getSlotIndex();
+		int dyeSlot2Index = this.getDyeInventorySlot2().getSlotIndex();
 		
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack itemStack1 = slot.getStack();
 			itemstack = itemStack1.copy();
 			
-			if (index == this.getOutputInventorySlot().getSlotIndex())
+			if (index == this.outputInventorySlot.getSlotIndex())
 			{
 				if (!this.mergeItemStack(itemStack1, 4, 40, true))
 				{
@@ -183,25 +189,26 @@ public class VeEaselContainer extends Container
 				
 				slot.onSlotChange(itemStack1, itemstack);
 			}
-			else if (index != this.getPaperInventorySlot().getSlotIndex() && index != this.getDyeInventorySlot().getSlotIndex() && index != this.getDyeInventorySlot2().getSlotIndex())
+			else if (index != paperSlotIndex && index != dyeSlotIndex && index != dyeSlot2Index)
 			{
-				if (!this.mergeItemStack(itemStack1, this.getPaperInventorySlot().getSlotIndex(), this.getPaperInventorySlot().getSlotIndex() + 1, false) && this.getPaperInventorySlot().isItemValid(itemStack1))
+				if (!this.mergeItemStack(itemStack1, paperSlotIndex, paperSlotIndex + 1, false) && this.getPaperInventorySlot().isItemValid(itemStack1))
 				{
 					return ItemStack.EMPTY;
 				}
 				
-				else if (itemStack1.getItem() instanceof DyeItem)
+				if(itemStack1.getItem() instanceof DyeItem)
 				{
-					if(this.getDyeInventorySlot().getStack() == itemStack1 || this.getDyeInventorySlot().getStack().isEmpty())
+					//If the slot is empty move the dye the first dye slot or if the dye matches the dye in the slot merge the item stacks
+					if(dyeSlotStack.getItem() == itemStack1.getItem() || dyeSlotStack.isEmpty())
 					{
-						if (!this.mergeItemStack(itemStack1, this.getDyeInventorySlot().getSlotIndex(), this.getDyeInventorySlot().getSlotIndex() + 1, false))
+						if (!this.mergeItemStack(itemStack1, dyeSlotIndex, dyeSlotIndex + 1, false))
 						{
 							return ItemStack.EMPTY;
 						}
 					}
-					else if(this.getDyeInventorySlot2().getStack() == itemStack1 || this.getDyeInventorySlot2().getStack().isEmpty())
+					else
 					{
-						if (!this.mergeItemStack(itemStack1, this.getDyeInventorySlot2().getSlotIndex(), this.getDyeInventorySlot2().getSlotIndex() + 1, false))
+						if (!this.mergeItemStack(itemStack1, dyeSlot2Index, dyeSlot2Index + 1, false))
 						{
 							return ItemStack.EMPTY;
 						}
@@ -238,7 +245,8 @@ public class VeEaselContainer extends Container
 				return ItemStack.EMPTY;
 			}
 			
-			slot.onTake(playerIn, itemStack1);
+			slot.onTake(playerIn, itemstack);
+			this.detectAndSendChanges();
 		}
 		
 		return itemstack;
@@ -262,6 +270,9 @@ public class VeEaselContainer extends Container
 		return true;
 	}
 	
+	/*
+	 * Fill in the output slot for the currently selected recipe.
+	 */
 	private void updateRecipeResultSlot()
 	{
 		if (!this.getRecipeList().isEmpty())
@@ -276,6 +287,9 @@ public class VeEaselContainer extends Container
 		this.detectAndSendChanges();
 	}
 	
+	/*
+	 * Called whenever the inventory changes
+	 */
 	@Override
 	public void onCraftMatrixChanged(IInventory inventoryIn)
 	{
@@ -283,7 +297,14 @@ public class VeEaselContainer extends Container
 		ItemStack dyeItemStack = this.getDyeInventorySlot().getStack();
 		ItemStack dyeItemStack2 = this.getDyeInventorySlot2().getStack();
 		
-		this.updateAvailableRecipes(inventoryIn, paperItemStack, dyeItemStack, dyeItemStack2);
+		if(paperItemStack.getItem() != this.itemStackInput0.getItem() || dyeItemStack.getItem() != this.itemStackInput1.getItem() || dyeItemStack2.getItem() != this.itemStackInput2.getItem())
+		{
+			this.itemStackInput0 = paperItemStack.copy();
+			this.itemStackInput1 = dyeItemStack.copy();
+			this.itemStackInput2 = dyeItemStack2.copy();
+			
+			this.updateAvailableRecipes(inventoryIn, itemStackInput0, itemStackInput1, itemStackInput2);
+		}
 	}
 	
 	private void updateAvailableRecipes(IInventory inventory, ItemStack stack, ItemStack stack1, ItemStack stack2)
@@ -298,6 +319,7 @@ public class VeEaselContainer extends Container
 		}
 	}
 	
+	@Override
 	public ContainerType<?> getType()
 	{
 		return VeContainerTypes.easel;
@@ -309,11 +331,13 @@ public class VeEaselContainer extends Container
 		this.inventoryUpdateListener = listener;
 	}
 	
+	@Override
 	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
 	{
 		return slotIn.inventory != this.outputInventory && super.canMergeSlot(stack, slotIn);
 	}
 	
+	@Override
 	public void onContainerClosed(PlayerEntity playerIn)
 	{
 		super.onContainerClosed(playerIn);

@@ -2,14 +2,11 @@ package rcarmstrong20.vanilla_expansions.client.renderer.screen;
 
 import java.util.List;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
@@ -140,7 +137,7 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 			int j1 = i2 + j % 4 * 14;
 			int k1 = k2 + j / 4 * 14;
 			
-			this.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), j1, k1);
+			this.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(list.get(i).getRecipeOutput(), j1 - 1, k1 - 1);
 		}
 	}
 	
@@ -149,16 +146,16 @@ public class VeEaselScreen extends ContainerScreen<VeEaselContainer>
 		this.clickedOnScroll = false;
 		if (this.hasItemsInInputSlot)
 		{
-			int i = this.guiLeft + 52;
-			int j = this.guiTop + 14;
-			int k = this.recipeIndexOffset + 12;
+			int i = this.guiLeft + 60;
+			int j = this.guiTop + 13;
+			int k = this.recipeIndexOffset + 16;
 			
 			for(int l = this.recipeIndexOffset; l < k; ++l)
 			{
 				int i1 = l - this.recipeIndexOffset;
-				double d0 = p_mouseClicked_1_ - (double)(i + i1 % 4 * 16);
-				double d1 = p_mouseClicked_3_ - (double)(j + i1 / 4 * 18);
-				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.container.enchantItem(this.minecraft.player, l))
+				double d0 = p_mouseClicked_1_ - (double)(i + i1 % 4 * 14);
+				double d1 = p_mouseClicked_3_ - (double)(j + i1 / 4 * 14);
+				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D && this.container.enchantItem(this.minecraft.player, l))
 				{
 					Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_LOOM_SELECT_PATTERN, 1.0F));
 					this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
