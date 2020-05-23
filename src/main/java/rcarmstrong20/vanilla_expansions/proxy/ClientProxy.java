@@ -13,7 +13,6 @@ import rcarmstrong20.vanilla_expansions.client.renderer.model.VeDoubleSlabLoader
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeEaselScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.screen.VeWoodcutterScreen;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeColoredCampfireTileEntityRenderer;
-import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeDoubleSlabTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.client.renderer.tile_entity.VeFrameTileEntityRenderer;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeContainerTypes;
