@@ -4,8 +4,8 @@
   "pattern":
   [
     "TTT",
-    "GBG",
-    "CRC"
+    "RBR",
+    "YAY"
   ],
   "key":
   {
@@ -13,25 +13,25 @@
 	{
       "item": "minecraft:terracotta"
     },
-	"G":
+	"R":
 	{
-	  "item": "minecraft:green_wool"
+	  "item": "minecraft:red_wool"
 	},
-	"C":
+	"Y":
 	{
-	  "item": "minecraft:brown_wool"
+	  "item": "minecraft:yellow_wool"
 	},
 	"B":
 	{
 	  "item": "minecraft:book"
 	},
-	"R":
+	"A":
 	{
-	  "item": "minecraft:grass"
+	  "item": "minecraft:acacia_sapling"
 	}
   },
   "result":
   {
-    "item": "ve:plains_villager_plush"
+    "item": "ve:savanna_villager_plush"
   }
 }

@@ -1,11 +1,10 @@
 {
   "type": "crafting_shaped",
-  "group": "horse_plush",
   "pattern":
   [
     "BBB",
-    "LLL",
-    "SBS"
+    "BFB",
+    "BOB"
   ],
   "key":
   {
@@ -13,17 +12,17 @@
 	{
       "item": "minecraft:brown_wool"
     },
-	"S":
+	"O":
 	{
-	  "item": "minecraft:black_wool"
-	},
-	"L":
+      "item": "minecraft:orange_wool"
+    },
+	"F":
 	{
-	  "item": "minecraft:leather"
+	  "tag": "ve:raw_fishes"
 	}
   },
   "result":
   {
-    "item": "ve:brown_horse_plush"
+    "item": "ve:tabby_cat_plush"
   }
 }

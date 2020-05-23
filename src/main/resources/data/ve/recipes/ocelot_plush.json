@@ -2,8 +2,8 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "YYY",
-    "YFY",
+    "YBY",
+    "BFB",
     "YGY"
   ],
   "key":
@@ -12,9 +12,13 @@
 	{
       "item": "minecraft:yellow_wool"
     },
+    "B":
+	{
+      "item": "minecraft:brown_wool"
+    },
 	"G":
 	{
-      "item": "minecraft:gray_wool"
+      "item": "minecraft:green_wool"
     },
 	"F":
 	{

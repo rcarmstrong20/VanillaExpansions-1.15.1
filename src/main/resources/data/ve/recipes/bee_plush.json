@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "WYW",
+    "BHB",
+    "YCY"
+  ],
+  "key":
+  {
+    "W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"Y":
+	{
+	  "item": "minecraft:yellow_wool"
+	},
+	"B":
+	{
+	  "item": "minecraft:brown_wool"
+	},
+	"H":
+	{
+	  "item": "minecraft:honey_bottle"
+	},
+	"C":
+	{
+	  "item": "minecraft:honeycomb"
+	}
+  },
+  "result":
+  {
+    "item": "ve:bee_plush"
+  }
+}

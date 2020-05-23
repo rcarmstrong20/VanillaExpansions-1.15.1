@@ -6,12 +6,12 @@
 	  "item": "minecraft:paper"
     },
 	{
-      "item": "minecraft:blue_dye"
+      "item": "minecraft:brown_dye"
     },
     {
-	  "item": "minecraft:yellow_dye"
+	  "item": "minecraft:white_dye"
     }
   ],
-  "result": "ve:starry_night_painting",
+  "result": "ve:kebab_painting",
   "count": 1
 }

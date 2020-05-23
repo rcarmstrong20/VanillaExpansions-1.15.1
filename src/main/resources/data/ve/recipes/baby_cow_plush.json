@@ -1,15 +1,14 @@
 {
   "type": "crafting_shaped",
-  "group": "mooshroom_plush",
   "pattern":
   [
-    "RRR",
-    "WBW",
-    "RMR"
+    " B ",
+    "WIW",
+    " M "
   ],
   "key":
   {
-    "R":
+    "B":
 	{
       "item": "minecraft:brown_wool"
     },
@@ -17,17 +16,17 @@
 	{
 	  "item": "minecraft:white_wool"
 	},
-	"B":
+	"I":
 	{
 	  "item": "minecraft:beef"
 	},
 	"M":
 	{
-	  "item": "minecraft:mushroom_stew"
+	  "item": "minecraft:milk_bucket"
 	}
   },
   "result":
   {
-    "item": "ve:brown_mooshroom_plush"
+    "item": "ve:baby_cow_plush"
   }
 }

@@ -1,11 +1,11 @@
 {
   "type": "crafting_shaped",
-  "group": "mooshroom_plush",
+  "group": "baby_mooshroom_plush",
   "pattern":
   [
-    "RRR",
+    " R ",
     "WBW",
-    "RMR"
+    " M "
   ],
   "key":
   {
@@ -23,11 +23,11 @@
 	},
 	"M":
 	{
-	  "item": "minecraft:mushroom_stew"
+	  "item": "minecraft:brown_mushroom"
 	}
   },
   "result":
   {
-    "item": "ve:brown_mooshroom_plush"
+    "item": "ve:baby_brown_mooshroom_plush"
   }
 }

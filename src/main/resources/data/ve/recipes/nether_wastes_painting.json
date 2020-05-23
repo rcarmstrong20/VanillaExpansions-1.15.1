@@ -6,12 +6,12 @@
 	  "item": "minecraft:paper"
     },
 	{
-      "item": "minecraft:blue_dye"
+      "item": "minecraft:red_dye"
     },
     {
-	  "item": "minecraft:yellow_dye"
+	  "item": "minecraft:orange_dye"
     }
   ],
-  "result": "ve:starry_night_painting",
+  "result": "ve:nether_wastes_painting",
   "count": 1
 }

@@ -5,7 +5,7 @@
   [
     "HHH",
     "YBY",
-    "GVG"
+    "GSG"
   ],
   "key":
   {
@@ -25,9 +25,9 @@
 	{
 	  "item": "minecraft:book"
 	},
-	"V":
+	"S":
 	{
-	  "item": "minecraft:vine"
+	  "item": "minecraft:jungle_sapling"
 	}
   },
   "result":
