@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
@@ -94,7 +95,7 @@ public class VeColoredCampfireBlock extends CampfireBlock
 				TileEntity tileentity = worldIn.getTileEntity(pos);
 				((VeColoredCampfireTileEntity)tileentity).dropAllItems();
 			}
-			worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)).with(LIT, Boolean.valueOf(false)), 3);
+			worldIn.setBlockState(pos, Blocks.CAMPFIRE.getDefaultState().with(WATERLOGGED, Boolean.valueOf(true)).with(LIT, Boolean.valueOf(false)), 3);
 			worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
 			return true;
 		}
