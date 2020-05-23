@@ -1,0 +1,24 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "X  ",
+    "#X ",
+    "##X"
+  ],
+  "key":
+  {
+    "X":
+	{
+      "tag": "minecraft:wooden_slabs"
+    },
+	"#":
+	{
+	  "item": "minecraft:stick"
+	}
+  },
+  "result":
+  {
+    "item": "ve:easel"
+  }
+}

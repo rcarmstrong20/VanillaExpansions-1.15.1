@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:brown_dye"
+    },
+    {
+	  "item": "minecraft:light_gray_dye"
+    }
+  ],
+  "result": "ve:earth_painting",
+  "count": 1
+}
