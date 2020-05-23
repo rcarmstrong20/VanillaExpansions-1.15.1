@@ -2,5 +2,6 @@
 	"block.mushroom_bounce": {"category": "blocks", "subtitle": "Mushroom bounces", "sounds": [{"name": "ve:block/mushroom_bounce", "stream": false}]},
 	"block.void_ambient": {"category": "blocks", "subtitle": "Void speaks", "sounds": [{"name": "ve:block/void_ambient", "stream": true}]},
 	"block.void_hardens": {"category": "blocks", "subtitle": "Void hardens", "sounds": [{"name": "ve:block/void_hardens", "stream": false}]},
+	"block.campfire_dyed": {"category": "blocks", "subtitle": "Campfire dyed", "sounds": [{"name": "ve:block/campfire_dyed", "stream": false}]},
 	"ui.woodcutter.take_result": {"category": "blocks", "subtitle": "Woodcutter cuts", "sounds": [{"name": "ve:ui/woodcutter/take_result", "stream": false}]}
 }
