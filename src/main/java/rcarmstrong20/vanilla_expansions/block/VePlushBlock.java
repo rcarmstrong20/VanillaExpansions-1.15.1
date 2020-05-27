@@ -19,6 +19,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
@@ -719,29 +720,276 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 	//Bat Bounding Boxes
 	
 	protected static final VoxelShape BAT_NORTH_BODY_SHAPE = Block.makeCuboidShape(6.5D, 1.0D, 6.0D, 10.5D, 6.5D, 10.0D);
+	protected static final VoxelShape BAT_NORTH_HEAD_SHAPE = Block.makeCuboidShape(6.0D, 5.5D, 5.0D, 11.0D, 10.0D, 8.5D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_EAR_SHAPE = Block.makeCuboidShape(5.5D, 9.0D, 6.0D, 7.5D, 11.5D, 7.0D);
+	protected static final VoxelShape BAT_NORTH_LEFT_EAR_SHAPE = Block.makeCuboidShape(9.5D, 9.0D, 6.0D, 11.5D, 11.5D, 7.0D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 8.0D, 4.5D, 8.0D, 9.0D, 5.0D);
+	protected static final VoxelShape BAT_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.0D, 8.0D, 4.5D, 10.5D, 9.0D, 5.0D);
+	protected static final VoxelShape BAT_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(7.5D, 6.0D, 4.5D, 9.5D, 7.0D, 5.0D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_LEG_SHAPE = Block.makeCuboidShape(7.0D, 0.0D, 7.5D, 8.0D, 1.0D, 8.5D);
+	protected static final VoxelShape BAT_NORTH_LEFT_LEG_SHAPE = Block.makeCuboidShape(9.0D, 0.0D, 7.5D, 10.0D, 1.0D, 8.5D);
+	protected static final VoxelShape BAT_NORTH_LEFT_WING1_SHAPE = Block.makeCuboidShape(10.5D, 1.5D, 7.0D, 11.5D, 6.0D, 9.5D);
+	protected static final VoxelShape BAT_NORTH_LEFT_WING2_SHAPE = Block.makeCuboidShape(11.5D, 1.5D, 6.5D, 13.5D, 5.5D, 9.0D);
+	protected static final VoxelShape BAT_NORTH_LEFT_WING3_SHAPE = Block.makeCuboidShape(13.5D, 1.5D, 6.0D, 14.5D, 5.5D, 8.5D);
+	protected static final VoxelShape BAT_NORTH_LEFT_WING4_SHAPE = Block.makeCuboidShape(14.5D, 1.0D, 5.5D, 15.5D, 5.0D, 8.0D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING1_SHAPE = Block.makeCuboidShape(5.5D, 1.5D, 7.0D, 6.5D, 6.0D, 9.5D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING2_SHAPE = Block.makeCuboidShape(4.5D, 1.5D, 6.5D, 5.5D, 5.0D, 9.5D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING3_SHAPE = Block.makeCuboidShape(3.5D, 1.5D, 6.5D, 4.5D, 5.5D, 10.0D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING4_SHAPE = Block.makeCuboidShape(2.5D, 1.0D, 6.5D, 3.5D, 5.0D, 9.0D);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING5_SHAPE = Block.makeCuboidShape(1.5D, 0.5D, 5.5D, 2.5D, 4.5D, 8.5D);
 	
+	protected static final VoxelShape BAT_NORTH_EARS_SHAPE = VoxelShapes.or(BAT_NORTH_RIGHT_EAR_SHAPE, BAT_NORTH_LEFT_EAR_SHAPE);
+	protected static final VoxelShape BAT_NORTH_EYES_AND_MOUTH_SHAPE = VoxelShapes.or(BAT_NORTH_RIGHT_EYE_SHAPE, BAT_NORTH_LEFT_EYE_SHAPE, BAT_NORTH_MOUTH_SHAPE);
+	protected static final VoxelShape BAT_NORTH_LEGS_SHAPE = VoxelShapes.or(BAT_NORTH_RIGHT_LEG_SHAPE, BAT_NORTH_LEFT_LEG_SHAPE);
+	protected static final VoxelShape BAT_NORTH_LEFT_WING_SHAPE = VoxelShapes.or(BAT_NORTH_LEFT_WING1_SHAPE, BAT_NORTH_LEFT_WING2_SHAPE, BAT_NORTH_LEFT_WING3_SHAPE, BAT_NORTH_LEFT_WING4_SHAPE);
+	protected static final VoxelShape BAT_NORTH_RIGHT_WING_SHAPE = VoxelShapes.or(BAT_NORTH_RIGHT_WING1_SHAPE, BAT_NORTH_RIGHT_WING2_SHAPE, BAT_NORTH_RIGHT_WING3_SHAPE, BAT_NORTH_RIGHT_WING4_SHAPE, BAT_NORTH_RIGHT_WING5_SHAPE);
+	protected static final VoxelShape BAT_NORTH_SHAPE = VoxelShapes.or(BAT_NORTH_BODY_SHAPE, BAT_NORTH_HEAD_SHAPE, BAT_NORTH_EARS_SHAPE, BAT_NORTH_EYES_AND_MOUTH_SHAPE, BAT_NORTH_LEGS_SHAPE, BAT_NORTH_LEFT_WING_SHAPE, BAT_NORTH_RIGHT_WING_SHAPE);
 	
+	protected static final VoxelShape BAT_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, BAT_NORTH_SHAPE);
+	protected static final VoxelShape BAT_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, BAT_NORTH_SHAPE);
+	protected static final VoxelShape BAT_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, BAT_NORTH_SHAPE);
 	
+	//Bee Bounding Boxes
 	
+	protected static final VoxelShape BEE_NORTH_BODY_SHAPE = Block.makeCuboidShape(4.5D, 0.0D, 2.0D, 11.5D, 6.0D, 14.0D);
+	protected static final VoxelShape BEE_NORTH_STINGER_SHAPE = Block.makeCuboidShape(7.5D, 1.0D, 14.0D, 8.5D, 2.0D, 15.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(4.0D, 2.0D, 1.5D, 6.5D, 4.5D, 3.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(9.5D, 2.0D, 1.5D, 12.0D, 4.5D, 3.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_ANTENNA_BOTTOM_SHAPE = Block.makeCuboidShape(6.5D, 5.0D, 1.0D, 7.5D, 6.0D, 2.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_ANTENNA_TOP_SHAPE = Block.makeCuboidShape(6.5D, 6.0D, 0.0D, 7.5D, 7.0D, 1.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_ANTENNA_BOTTOM_SHAPE = Block.makeCuboidShape(9.0D, 5.0D, 1.0D, 10.0D, 6.0D, 2.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_ANTENNA_TOP_SHAPE = Block.makeCuboidShape(9.0D, 6.0D, 0.0D, 10.0D, 7.0D, 1.0D);
+	protected static final VoxelShape BEE_NORTH_FRONT_MAIN_RIGHT_LEG_SHAPE = Block.makeCuboidShape(2.5D, 0.0D, 5.0D, 4.5D, 1.0D, 6.0D);
+	protected static final VoxelShape BEE_NORTH_FRONT_BEND_RIGHT_LEG_SHAPE = Block.makeCuboidShape(1.5D, 0.0D, 4.0D, 2.5D, 1.0D, 5.0D);
+	protected static final VoxelShape BEE_NORTH_MIDDLE_FRONT_RIGHT_LEG_SHAPE = Block.makeCuboidShape(2.5D, 0.0D, 8.0D, 4.5D, 1.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_MIDDLE_BACK_RIGHT_LEG_SHAPE = Block.makeCuboidShape(3.5D, 0.0D, 9.0D, 4.5D, 1.0D, 10.0D);
+	protected static final VoxelShape BEE_NORTH_BACK_MAIN_RIGHT_LEG_SHAPE = Block.makeCuboidShape(2.5D, 0.0D, 11.0D, 4.5D, 1.0D, 12.0D);
+	protected static final VoxelShape BEE_NORTH_BACK_BEND_RIGHT_LEG_SHAPE = Block.makeCuboidShape(1.5D, 0.0D, 12.0D, 2.5D, 1.0D, 13.0D);
+	protected static final VoxelShape BEE_NORTH_FRONT_MAIN_LEFT_LEG_SHAPE = Block.makeCuboidShape(11.5D, 0.0D, 5.0D, 13.5D, 1.0D, 6.0D);
+	protected static final VoxelShape BEE_NORTH_FRONT_BEND_LEFT_LEG_SHAPE = Block.makeCuboidShape(13.5D, 0.0D, 4.0D, 14.5D, 1.0D, 5.0D);
+	protected static final VoxelShape BEE_NORTH_MIDDLE_FRONT_LEFT_LEG_SHAPE = Block.makeCuboidShape(11.5D, 0.0D, 8.0D, 13.5D, 1.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_MIDDLE_BACK_LEFT_LEG_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 9.0D, 12.5D, 1.0D, 10.0D);
+	protected static final VoxelShape BEE_NORTH_BACK_MAIN_LEFT_LEG_SHAPE = Block.makeCuboidShape(11.5D, 0.0D, 11.0D, 13.5D, 1.0D, 12.0D);
+	protected static final VoxelShape BEE_NORTH_BACK_BEND_LEFT_LEG_SHAPE = Block.makeCuboidShape(13.5D, 0.0D, 12.0D, 14.5D, 1.0D, 13.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_WING_MAIN_OUTSIDE_SHAPE = Block.makeCuboidShape(2.5D, 6.0D, 5.0D, 7.0D, 7.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_WING_MAIN_INSIDE_SHAPE = Block.makeCuboidShape(3.5D, 6.0D, 6.0D, 6.0D, 7.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_WING_END_SHAPE = Block.makeCuboidShape(2.5D, 6.0D, 9.0D, 6.0D, 7.0D, 10.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_WING_MAIN_OUTSIDE_SHAPE = Block.makeCuboidShape(9.0D, 6.0D, 5.0D, 13.5D, 7.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_WING_MAIN_INSIDE_SHAPE = Block.makeCuboidShape(10.0D, 6.0D, 6.0D, 12.5D, 7.0D, 9.0D);
+	protected static final VoxelShape BEE_NORTH_LEFT_WING_END_SHAPE = Block.makeCuboidShape(10.0D, 6.0D, 9.0D, 13.5D, 7.0D, 10.0D);
 	
-	protected static final VoxelShape BAT_NORTH_SHAPE = Block.makeCuboidShape(0.1D, 0.0D, 6.0D, 15.0D, 12.0D, 11.0D);
-	protected static final VoxelShape BAT_SOUTH_SHAPE = Block.makeCuboidShape(0.1D, 0.0D, 5.0D, 16.0D, 12.0D, 10.0D);
-	protected static final VoxelShape BAT_EAST_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 0.1D, 10.0D, 12.0D, 15.0D);
-	protected static final VoxelShape BAT_WEST_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 0.1D, 11.0D, 12.0D, 16.0D);
+	protected static final VoxelShape BEE_NORTH_RIGHT_MAIN_WING_SHAPE = VoxelShapes.combineAndSimplify(BEE_NORTH_RIGHT_WING_MAIN_OUTSIDE_SHAPE, BEE_NORTH_RIGHT_WING_MAIN_INSIDE_SHAPE, IBooleanFunction.ONLY_FIRST);
+	protected static final VoxelShape BEE_NORTH_LEFT_MAIN_WING_SHAPE = VoxelShapes.combineAndSimplify(BEE_NORTH_LEFT_WING_MAIN_OUTSIDE_SHAPE, BEE_NORTH_LEFT_WING_MAIN_INSIDE_SHAPE, IBooleanFunction.ONLY_FIRST);
+	
+	protected static final VoxelShape BEE_NORTH_EYES_SHAPE = VoxelShapes.or(BEE_NORTH_RIGHT_EYE_SHAPE, BEE_NORTH_LEFT_EYE_SHAPE);
+	protected static final VoxelShape BEE_NORTH_ANTENNAS_SHAPE = VoxelShapes.or(BEE_NORTH_RIGHT_ANTENNA_BOTTOM_SHAPE, BEE_NORTH_RIGHT_ANTENNA_TOP_SHAPE, BEE_NORTH_LEFT_ANTENNA_BOTTOM_SHAPE, BEE_NORTH_LEFT_ANTENNA_TOP_SHAPE);
+	protected static final VoxelShape BEE_NORTH_RIGHT_LEGS_SHAPE = VoxelShapes.or(BEE_NORTH_FRONT_MAIN_RIGHT_LEG_SHAPE, BEE_NORTH_FRONT_BEND_RIGHT_LEG_SHAPE, BEE_NORTH_MIDDLE_FRONT_RIGHT_LEG_SHAPE, BEE_NORTH_MIDDLE_BACK_RIGHT_LEG_SHAPE, BEE_NORTH_BACK_MAIN_RIGHT_LEG_SHAPE, BEE_NORTH_BACK_BEND_RIGHT_LEG_SHAPE);
+	protected static final VoxelShape BEE_NORTH_LEFT_LEGS_SHAPE = VoxelShapes.or(BEE_NORTH_FRONT_MAIN_LEFT_LEG_SHAPE, BEE_NORTH_FRONT_BEND_LEFT_LEG_SHAPE, BEE_NORTH_MIDDLE_FRONT_LEFT_LEG_SHAPE, BEE_NORTH_MIDDLE_BACK_LEFT_LEG_SHAPE, BEE_NORTH_BACK_MAIN_LEFT_LEG_SHAPE, BEE_NORTH_BACK_BEND_LEFT_LEG_SHAPE);
+	protected static final VoxelShape BEE_NORTH_RIGHT_WING_SHAPE = VoxelShapes.or(BEE_NORTH_RIGHT_MAIN_WING_SHAPE, BEE_NORTH_RIGHT_WING_END_SHAPE);
+	protected static final VoxelShape BEE_NORTH_LEFT_WING_SHAPE = VoxelShapes.or(BEE_NORTH_LEFT_MAIN_WING_SHAPE, BEE_NORTH_LEFT_WING_END_SHAPE);
+	protected static final VoxelShape BEE_NORTH_SHAPE = VoxelShapes.or(BEE_NORTH_BODY_SHAPE, BEE_NORTH_STINGER_SHAPE, BEE_NORTH_EYES_SHAPE, BEE_NORTH_ANTENNAS_SHAPE, BEE_NORTH_RIGHT_LEGS_SHAPE, BEE_NORTH_LEFT_LEGS_SHAPE, BEE_NORTH_RIGHT_WING_SHAPE, BEE_NORTH_LEFT_WING_SHAPE);
+	
+	protected static final VoxelShape BEE_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, BEE_NORTH_SHAPE);
+	protected static final VoxelShape BEE_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, BEE_NORTH_SHAPE);
+	protected static final VoxelShape BEE_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, BEE_NORTH_SHAPE);
+	
+	//Silverfish Bounding Boxes
+	
+	protected static final VoxelShape SILVERFISH_NORTH_HEAD_BODY_SHAPE = Block.makeCuboidShape(6.5D, 0.0D, 1.0D, 9.5D, 2.5D, 2.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_BODY_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 2.0D, 10.0D, 3.0D, 4.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BODY_SHAPE = Block.makeCuboidShape(5.5D, 0.0D, 4.0D, 10.5D, 4.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK1_BODY_SHAPE = Block.makeCuboidShape(6.5D, 0.0D, 9.0D, 9.5D, 3.0D, 11.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_BODY_SHAPE = Block.makeCuboidShape(7.0D, 0.0D, 11.0D, 9.0D, 2.0D, 12.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_TAIL_SHAPE = Block.makeCuboidShape(7.5D, 0.0D, 12.0D, 8.5D, 1.0D, 14.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_TOP_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(7.0D, 3.0D, 2.0D, 9.0D, 4.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_TOP_TUFF_TOP_SHAPE = Block.makeCuboidShape(6.0D, 4.0D, 2.0D, 7.0D, 5.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_RIGHT_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 2.0D, 6.0D, 1.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_RIGHT_TUFF_TOP_SHAPE = Block.makeCuboidShape(4.0D, 1.0D, 2.0D, 5.0D, 2.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_LEFT_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(10.0D, 0.0D, 2.0D, 11.0D, 1.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_LEFT_TUFF_TOP_SHAPE = Block.makeCuboidShape(11.0D, 1.0D, 2.0D, 12.0D, 2.0D, 3.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_TOP_BOTTOM_LEFT_TUFF_SHAPE = Block.makeCuboidShape(10.5D, 3.0D, 4.0D, 11.5D, 4.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_TOP_TOP_LEFT_TUFF_SHAPE = Block.makeCuboidShape(11.5D, 4.0D, 4.0D, 12.5D, 5.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_BOTTOM_LEFT_TUFF_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 4.0D, 12.0D, 1.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_TOP_LEFT_TUFF_SHAPE = Block.makeCuboidShape(12.0D, 1.0D, 4.0D, 13.0D, 2.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_RIGHT_TUFF_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 5.5D, 1.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_TOP_RIGHT_TUFF_SHAPE = Block.makeCuboidShape(4.5D, 4.0D, 4.0D, 5.5D, 5.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_TOP_BOTTOM_TUFF_SHAPE = Block.makeCuboidShape(6.5D, 4.0D, 4.0D, 8.5D, 5.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_FRONT_TOP_TOP_TUFF_SHAPE = Block.makeCuboidShape(8.5D, 5.0D, 4.0D, 9.5D, 7.0D, 5.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(10.5D, 1.0D, 8.0D, 12.5D, 2.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_TOP_BOTTOM_SHAPE = Block.makeCuboidShape(10.5D, 4.0D, 8.0D, 11.5D, 5.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_TOP_TOP_SHAPE = Block.makeCuboidShape(11.5D, 5.0D, 8.0D, 12.5D, 6.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BACK_RIGHT_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(4.5D, 1.0D, 8.0D, 5.5D, 2.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_BACK_RIGHT_TUFF_TOP_SHAPE = Block.makeCuboidShape(4.5D, 3.0D, 8.0D, 5.5D, 4.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_TOP_RIGHT_TUFF_BOTTOM_SHAPE = Block.makeCuboidShape(6.5D, 4.0D, 8.0D, 7.5D, 5.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_TOP_RIGHT_TUFF_TOP_SHAPE = Block.makeCuboidShape(5.5D, 5.0D, 8.0D, 6.5D, 6.0D, 9.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_LEFT_SHAPE = Block.makeCuboidShape(9.0D, 2.0D, 11.0D, 10.0D, 3.0D, 12.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_RIGHT_BOTTOM_SHAPE = Block.makeCuboidShape(5.0D, 1.0D, 11.0D, 7.0D, 2.0D, 12.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_RIGHT_TOP1_SHAPE = Block.makeCuboidShape(6.0D, 2.0D, 11.0D, 7.0D, 3.0D, 12.0D);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_RIGHT_TOP2_SHAPE = Block.makeCuboidShape(7.0D, 3.0D, 11.0D, 8.0D, 4.0D, 12.0D);
+	
+	protected static final VoxelShape SILVERFISH_NORTH_BODY_SHAPE = VoxelShapes.or(SILVERFISH_NORTH_HEAD_BODY_SHAPE, SILVERFISH_NORTH_FRONT_BODY_SHAPE, SILVERFISH_NORTH_MIDDLE_BODY_SHAPE, SILVERFISH_NORTH_BACK1_BODY_SHAPE, SILVERFISH_NORTH_BACK2_BODY_SHAPE, SILVERFISH_NORTH_TAIL_SHAPE);
+	protected static final VoxelShape SILVERFISH_NORTH_FRONT_TUFFS_SHAPE = VoxelShapes.or(SILVERFISH_NORTH_FRONT_TOP_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_FRONT_TOP_TUFF_TOP_SHAPE, SILVERFISH_NORTH_FRONT_RIGHT_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_FRONT_RIGHT_TUFF_TOP_SHAPE, SILVERFISH_NORTH_FRONT_LEFT_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_FRONT_LEFT_TUFF_TOP_SHAPE);
+	protected static final VoxelShape SILVERFISH_NORTH_MIDDLE_TUFFS_SHAPE = VoxelShapes.or(SILVERFISH_NORTH_MIDDLE_FRONT_TOP_BOTTOM_LEFT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_TOP_TOP_LEFT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_BOTTOM_LEFT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_TOP_LEFT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_BOTTOM_RIGHT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_TOP_RIGHT_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_TOP_BOTTOM_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_FRONT_TOP_TOP_TUFF_SHAPE, SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_TOP_BOTTOM_SHAPE, SILVERFISH_NORTH_MIDDLE_BACK_LEFT_TUFF_TOP_TOP_SHAPE, SILVERFISH_NORTH_MIDDLE_BACK_RIGHT_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_MIDDLE_BACK_RIGHT_TUFF_TOP_SHAPE, SILVERFISH_NORTH_MIDDLE_TOP_RIGHT_TUFF_BOTTOM_SHAPE, SILVERFISH_NORTH_MIDDLE_TOP_RIGHT_TUFF_TOP_SHAPE);
+	protected static final VoxelShape SILVERFISH_NORTH_BACK2_TUFFS_SHAPE = VoxelShapes.or(SILVERFISH_NORTH_BACK2_LEFT_SHAPE, SILVERFISH_NORTH_BACK2_RIGHT_BOTTOM_SHAPE, SILVERFISH_NORTH_BACK2_RIGHT_TOP1_SHAPE, SILVERFISH_NORTH_BACK2_RIGHT_TOP2_SHAPE);
+	protected static final VoxelShape SILVERFISH_NORTH_SHAPE = VoxelShapes.or(SILVERFISH_NORTH_BODY_SHAPE, SILVERFISH_NORTH_FRONT_TUFFS_SHAPE, SILVERFISH_NORTH_MIDDLE_TUFFS_SHAPE, SILVERFISH_NORTH_BACK2_TUFFS_SHAPE);
+	
+	protected static final VoxelShape SILVERFISH_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SILVERFISH_NORTH_SHAPE);
+	protected static final VoxelShape SILVERFISH_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SILVERFISH_NORTH_SHAPE);
+	protected static final VoxelShape SILVERFISH_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SILVERFISH_NORTH_SHAPE);
+	
+	//Villager Bounding Boxes
+	
+	protected static final VoxelShape VILLAGER_NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.5D, 9.0D, 5.5D, 10.5D, 15.0D, 11.5D);
+	protected static final VoxelShape VILLAGER_NORTH_TORSO_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 6.5D, 11.0D, 9.0D, 10.5D);
+	protected static final VoxelShape VILLAGER_NORTH_ARM_MIDDLE_SHAPE = Block.makeCuboidShape(4.5D, 5.0D, 4.5D, 11.5D, 7.5D, 6.0D);
+	protected static final VoxelShape VILLAGER_NORTH_RIGHT_ARM_SHAPE = Block.makeCuboidShape(3.5D, 5.0D, 4.5D, 4.5D, 8.0D, 8.0D);
+	protected static final VoxelShape VILLAGER_NORTH_LEFT_ARM_SHAPE = Block.makeCuboidShape(11.5D, 5.0D, 4.5D, 12.5D, 8.0D, 8.0D);
+	protected static final VoxelShape VILLAGER_NORTH_NOSE_SHAPE = Block.makeCuboidShape(7.5D, 9.0D, 4.5D, 8.5D, 11.0D, 5.5D);
+	protected static final VoxelShape VILLAGER_NORTH_MOUTH_SHAPE = Block.makeCuboidShape(7.0D, 10.0D, 5.0D, 9.0D, 10.5D, 5.5D);
+	protected static final VoxelShape VILLAGER_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 11.0D, 5.0D, 7.5D, 11.5D, 5.5D);
+	protected static final VoxelShape VILLAGER_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 11.0D, 5.0D, 9.5D, 11.5D, 5.5D);
+	protected static final VoxelShape VILLAGER_NORTH_EYEBROW_SHAPE = Block.makeCuboidShape(6.0D, 11.5D, 5.0D, 10.0D, 12.5D, 5.5D);
+	
+	protected static final VoxelShape VILLAGER_NORTH_ARM_SHAPE = VoxelShapes.or(VILLAGER_NORTH_ARM_MIDDLE_SHAPE, VILLAGER_NORTH_RIGHT_ARM_SHAPE, VILLAGER_NORTH_LEFT_ARM_SHAPE);
+	protected static final VoxelShape VILLAGER_NORTH_FACE_SHAPE = VoxelShapes.or(VILLAGER_NORTH_NOSE_SHAPE, VILLAGER_NORTH_MOUTH_SHAPE, VILLAGER_NORTH_RIGHT_EYE_SHAPE, VILLAGER_NORTH_LEFT_EYE_SHAPE, VILLAGER_NORTH_EYEBROW_SHAPE);
+	protected static final VoxelShape VILLAGER_NORTH_BODY_SHAPE = VoxelShapes.or(VILLAGER_NORTH_HEAD_SHAPE, VILLAGER_NORTH_TORSO_SHAPE, VILLAGER_NORTH_ARM_SHAPE, VILLAGER_NORTH_FACE_SHAPE);
+	
+	//Plains Villager Bounding Boxes
+	
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_COAT_BASE_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 6.0D, 11.5D, 9.0D, 11.0D);
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_COAT_NECK1_SHAPE = Block.makeCuboidShape(6.0D, 8.0D, 6.0D, 10.0D, 9.0D, 7.0D);
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_COAT_NECK2_SHAPE = Block.makeCuboidShape(6.5D, 6.0D, 6.0D, 9.5D, 8.0D, 7.0D);
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_COAT_OPENING_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 6.0D, 8.5D, 6.0D, 7.0D);
+	
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_COAT_SHAPE = VePlushBlock.cutShape(PLAINS_VILLAGER_NORTH_COAT_BASE_SHAPE, PLAINS_VILLAGER_NORTH_COAT_NECK1_SHAPE, PLAINS_VILLAGER_NORTH_COAT_NECK2_SHAPE, PLAINS_VILLAGER_NORTH_COAT_OPENING_SHAPE);
+	
+	protected static final VoxelShape PLAINS_VILLAGER_NORTH_SHAPE = VoxelShapes.or(PLAINS_VILLAGER_NORTH_COAT_SHAPE, VILLAGER_NORTH_BODY_SHAPE);
+	
+	protected static final VoxelShape PLAINS_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, PLAINS_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape PLAINS_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, PLAINS_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape PLAINS_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, PLAINS_VILLAGER_NORTH_SHAPE);
+	
+	//Desert Villager Bounding Boxes
+	
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_COAT_RIP1_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 6.0D, 5.0D, 3.0D, 7.0D);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_COAT_RIP2_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 6.0D, 6.0D, 3.5D, 6.5D);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_COAT_RIP3_SHAPE = Block.makeCuboidShape(6.0D, 2.0D, 6.0D, 6.5D, 2.5D, 6.5D);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_HAT_COTTEN_PUFF_SHAPE = Block.makeCuboidShape(7.0D, 13.0D, 7.5D, 9.0D, 16.0D, 9.5D);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_HAT_MIDDLE_SHAPE = Block.makeCuboidShape(5.0D, 13.0D, 5.0D, 11.0D, 15.5D, 12.0D);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_HAT_BRIM_SHAPE = Block.makeCuboidShape(4.5D, 13.0D, 4.5D, 11.5D, 14.0D, 12.5D);
+	
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_COAT_SHAPE = VePlushBlock.cutShape(PLAINS_VILLAGER_NORTH_COAT_SHAPE, DESERT_VILLAGER_NORTH_COAT_RIP1_SHAPE, DESERT_VILLAGER_NORTH_COAT_RIP2_SHAPE, DESERT_VILLAGER_NORTH_COAT_RIP3_SHAPE);
+	
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_HAT_SHAPE = VoxelShapes.or(DESERT_VILLAGER_NORTH_HAT_COTTEN_PUFF_SHAPE, DESERT_VILLAGER_NORTH_HAT_MIDDLE_SHAPE, DESERT_VILLAGER_NORTH_HAT_BRIM_SHAPE);
+	protected static final VoxelShape DESERT_VILLAGER_NORTH_SHAPE = VoxelShapes.or(DESERT_VILLAGER_NORTH_COAT_SHAPE, DESERT_VILLAGER_NORTH_HAT_SHAPE, VILLAGER_NORTH_BODY_SHAPE);
+	
+	protected static final VoxelShape DESERT_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, DESERT_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape DESERT_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, DESERT_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape DESERT_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, DESERT_VILLAGER_NORTH_SHAPE);
+	
+	//Jungle Villager Bounding Boxes
+	
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_COAT_BASE_SHAPE = Block.makeCuboidShape(4.5D, 1.0D, 6.0D, 11.5D, 9.0D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_LEFT_HOLE_SHAPE = Block.makeCuboidShape(11.0D, 1.0D, 6.0D, 11.5D, 2.5D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE1_SHAPE = Block.makeCuboidShape(6.0D, 1.0D, 6.0D, 11.0D, 1.5D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE2_SHAPE = Block.makeCuboidShape(6.5D, 1.5D, 6.0D, 11.0D, 2.0D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE3_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 6.0D, 11.0D, 2.5D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE4_SHAPE = Block.makeCuboidShape(8.5D, 2.5D, 6.0D, 10.5D, 3.0D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE5_SHAPE = Block.makeCuboidShape(9.5D, 3.0D, 6.0D, 10.5D, 3.5D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_FRONT_HOLE6_SHAPE = Block.makeCuboidShape(9.5D, 3.5D, 6.0D, 10.0D, 4.0D, 6.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_BACK_HOLE1_SHAPE = Block.makeCuboidShape(7.5D, 1.0D, 10.5D, 11.5D, 2.0D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_BACK_HOLE2_SHAPE = Block.makeCuboidShape(8.0D, 2.0D, 10.5D, 11.5D, 2.5D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_BACK_HOLE3_SHAPE = Block.makeCuboidShape(8.0D, 2.5D, 10.5D, 10.0D, 3.0D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_BACK_HOLE4_SHAPE = Block.makeCuboidShape(9.0D, 3.0D, 10.5D, 10.0D, 4.0D, 11.0D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_BASE_SHAPE = Block.makeCuboidShape(4.0D, 4.5D, 5.5D, 12.0D, 5.5D, 11.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_HOLE_SHAPE = Block.makeCuboidShape(4.0D, 4.5D, 8.0D, 4.5D, 5.5D, 9.5D);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_VINE_BELT_TOP_SHAPE = Block.makeCuboidShape(4.0D, 5.5D, 7.0D, 4.5D, 6.5D, 10.5D);
+	
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_COAT_SHAPE = VePlushBlock.cutShape(JUNGLE_VILLAGER_NORTH_COAT_BASE_SHAPE, PLAINS_VILLAGER_NORTH_COAT_NECK1_SHAPE, PLAINS_VILLAGER_NORTH_COAT_NECK2_SHAPE, JUNGLE_VILLAGER_NORTH_LEFT_HOLE_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE1_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE2_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE3_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE4_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE5_SHAPE, JUNGLE_VILLAGER_NORTH_FRONT_HOLE6_SHAPE, JUNGLE_VILLAGER_NORTH_BACK_HOLE1_SHAPE, JUNGLE_VILLAGER_NORTH_BACK_HOLE2_SHAPE, JUNGLE_VILLAGER_NORTH_BACK_HOLE3_SHAPE, JUNGLE_VILLAGER_NORTH_BACK_HOLE4_SHAPE);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_SHAPE = VePlushBlock.cutShape(JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_BASE_SHAPE, JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_HOLE_SHAPE);
+	
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_VINE_BELT_SHAPE = VoxelShapes.or(JUNGLE_VILLAGER_NORTH_VINE_BELT_BOTTOM_SHAPE, JUNGLE_VILLAGER_NORTH_VINE_BELT_TOP_SHAPE);
+	protected static final VoxelShape JUNGLE_VILLAGER_NORTH_SHAPE = VoxelShapes.or(VILLAGER_NORTH_BODY_SHAPE, JUNGLE_VILLAGER_NORTH_VINE_BELT_SHAPE, JUNGLE_VILLAGER_NORTH_COAT_SHAPE);
+	
+	protected static final VoxelShape JUNGLE_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, JUNGLE_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape JUNGLE_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, JUNGLE_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape JUNGLE_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, JUNGLE_VILLAGER_NORTH_SHAPE);
+	
+	//Savanna Villager Bounding Boxes
+	
+	protected static final VoxelShape SAVANNA_VILLAGER_NORTH_HEAD_BAND_SHAPE = Block.makeCuboidShape(5.0D, 13.5D, 5.0D, 11.0D, 14.0D, 12.0D);
+	protected static final VoxelShape SAVANNA_VILLAGER_NORTH_APRON_BAND_SHAPE = Block.makeCuboidShape(4.0D, 4.0D, 5.5D, 12.0D, 4.5D, 11.5D);
+	
+	protected static final VoxelShape SAVANNA_VILLAGER_NORTH_SHAPE = VoxelShapes.or(PLAINS_VILLAGER_NORTH_COAT_BASE_SHAPE, SAVANNA_VILLAGER_NORTH_HEAD_BAND_SHAPE, SAVANNA_VILLAGER_NORTH_APRON_BAND_SHAPE, VILLAGER_NORTH_BODY_SHAPE);
+	
+	protected static final VoxelShape SAVANNA_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SAVANNA_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SAVANNA_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SAVANNA_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SAVANNA_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SAVANNA_VILLAGER_NORTH_SHAPE);
+	
+	//Snow Villager Bounding Boxes
+	
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_BASE_SHAPE = Block.makeCuboidShape(4.5D, 1.5D, 6.0D, 12.0D, 9.0D, 11.0D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_NECK1_SHAPE = Block.makeCuboidShape(6.0D, 8.5D, 6.0D, 10.0D, 9.0D, 7.0D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_NECK2_SHAPE = Block.makeCuboidShape(6.5D, 8.0D, 6.0D, 9.5D, 8.5D, 7.0D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_HOLE_FRONT_BOTTOM_SHAPE = Block.makeCuboidShape(6.5D, 1.5D, 6.0D, 9.5D, 4.0D, 6.5D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_HOLE_FRONT_TOP_SHAPE = Block.makeCuboidShape(6.0D, 4.5D, 6.0D, 12.0D, 7.0D, 6.5D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_HOLE_SIDE_SHAPE = Block.makeCuboidShape(11.5D, 4.5D, 6.0D, 12.0D, 9.0D, 11.0D);
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_HAT_SHAPE = Block.makeCuboidShape(5.0D, 13.0D, 5.0D, 11.0D, 15.5D, 12.0D);
+	
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SWEATER_SHAPE = VePlushBlock.cutShape(SNOW_VILLAGER_NORTH_SWEATER_BASE_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_NECK1_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_NECK2_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_HOLE_FRONT_BOTTOM_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_HOLE_FRONT_TOP_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_HOLE_SIDE_SHAPE);
+	
+	protected static final VoxelShape SNOW_VILLAGER_NORTH_SHAPE = VoxelShapes.or(VILLAGER_NORTH_BODY_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_SHAPE, SNOW_VILLAGER_NORTH_HAT_SHAPE);
+	
+	protected static final VoxelShape SNOW_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SNOW_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SNOW_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SNOW_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SNOW_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SNOW_VILLAGER_NORTH_SHAPE);
+	
+	//Swamp Villager Bounding Boxes
+	
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_HAT_TOP_SHAPE = Block.makeCuboidShape(5.0D, 14.5D, 5.0D, 11.0D, 15.5D, 12.0D);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_HAT_SIDES_SHAPE = Block.makeCuboidShape(5.0D, 13.0D, 5.5D, 11.0D, 14.5D, 12.0D);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_HAT_BACK_SHAPE = Block.makeCuboidShape(5.5D, 11.5D, 11.5D, 10.5D, 13.0D, 12.0D);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_APRON_MAIN_SHAPE = Block.makeCuboidShape(4.0D, 2.0D, 6.0D, 12.0D, 5.0D, 11.5D);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_APRON_BAND_SHAPE = Block.makeCuboidShape(3.5D, 4.0D, 5.5D, 12.5D, 4.5D, 12.0D);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_APRON_PATCH_SHAPE = Block.makeCuboidShape(12.0D, 3.0D, 7.5D, 12.5D, 4.0D, 8.5D);
+	
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_HAT_SHAPE = VoxelShapes.or(SWAMP_VILLAGER_NORTH_HAT_TOP_SHAPE, SWAMP_VILLAGER_NORTH_HAT_SIDES_SHAPE, SWAMP_VILLAGER_NORTH_HAT_BACK_SHAPE);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_APRON_SHAPE = VoxelShapes.or(SWAMP_VILLAGER_NORTH_APRON_MAIN_SHAPE, SWAMP_VILLAGER_NORTH_APRON_BAND_SHAPE, SWAMP_VILLAGER_NORTH_APRON_PATCH_SHAPE);
+	protected static final VoxelShape SWAMP_VILLAGER_NORTH_SHAPE = VoxelShapes.or(SWAMP_VILLAGER_NORTH_HAT_SHAPE, SWAMP_VILLAGER_NORTH_APRON_SHAPE, PLAINS_VILLAGER_NORTH_COAT_SHAPE, VILLAGER_NORTH_BODY_SHAPE);
+	
+	protected static final VoxelShape SWAMP_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, SWAMP_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SWAMP_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, SWAMP_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape SWAMP_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, SWAMP_VILLAGER_NORTH_SHAPE);
+	
+	//Taiga Villager Bounding Boxes
+	
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_COAT_NECK3_SHAPE = Block.makeCuboidShape(7.5D, 7.5D, 6.0D, 8.5D, 8.0D, 7.0D);
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_COAT_BOTTOM1_SHAPE = Block.makeCuboidShape(7.0D, 2.5D, 6.0D, 9.0D, 3.0D, 7.0D);
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_COAT_BOTTOM2_SHAPE = Block.makeCuboidShape(6.0D, 2.0D, 6.0D, 10.0D, 2.5D, 7.0D);
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_BELT_STRAP_SHAPE = Block.makeCuboidShape(4.0D, 3.5D, 5.5D, 12.0D, 4.5D, 11.5D);
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_BELT_BUCKLE_SHAPE = Block.makeCuboidShape(7.0D, 3.5D, 5.0D, 9.0D, 4.5D, 5.5D);
+	
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_COAT_SHAPE = VePlushBlock.cutShape(PLAINS_VILLAGER_NORTH_COAT_BASE_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_NECK1_SHAPE, SNOW_VILLAGER_NORTH_SWEATER_NECK2_SHAPE, TAIGA_VILLAGER_NORTH_COAT_NECK3_SHAPE, TAIGA_VILLAGER_NORTH_COAT_BOTTOM1_SHAPE, TAIGA_VILLAGER_NORTH_COAT_BOTTOM2_SHAPE);
+	
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_BELT_SHAPE = VoxelShapes.or(TAIGA_VILLAGER_NORTH_BELT_STRAP_SHAPE, TAIGA_VILLAGER_NORTH_BELT_BUCKLE_SHAPE);
+	protected static final VoxelShape TAIGA_VILLAGER_NORTH_SHAPE = VoxelShapes.or(TAIGA_VILLAGER_NORTH_COAT_SHAPE, TAIGA_VILLAGER_NORTH_BELT_SHAPE, VILLAGER_NORTH_BODY_SHAPE);
+	
+	protected static final VoxelShape TAIGA_VILLAGER_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, TAIGA_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape TAIGA_VILLAGER_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, TAIGA_VILLAGER_NORTH_SHAPE);
+	protected static final VoxelShape TAIGA_VILLAGER_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, TAIGA_VILLAGER_NORTH_SHAPE);
+	
+	//Guardian Bounding Boxes
+	
+	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_HORN_SHAPE = VePlushBlock.createDiagonalShapes(6, 6.0D, 6.0D, 6.0D, 10.0D, 10.0D, 10.0D);
+	
 	
 	protected static final VoxelShape RABBIT_NORTH_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 16.0D);
 	protected static final VoxelShape RABBIT_SOUTH_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, 16.0D, 14.0D);
 	protected static final VoxelShape RABBIT_WEST_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 16.0D, 16.0D, 14.0D);
 	protected static final VoxelShape RABBIT_EAST_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-    
-	protected static final VoxelShape HORSE_Z_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 16.0D, 16.0D);
-	protected static final VoxelShape HORSE_X_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 16.0D, 12.0D);
 	
 	protected static final VoxelShape COW_Z_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 14.0D, 16.0D);
 	protected static final VoxelShape COW_X_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 14.0D, 12.0D);
-	
-	protected static final VoxelShape SILVERFISH_Z_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, 8.0D, 16.0D);
-	protected static final VoxelShape SILVERFISH_X_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 16.0D, 8.0D, 14.0D);
 	
 	protected static final VoxelShape VILLAGER_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	
@@ -887,7 +1135,6 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		{
 			return VePlushBlock.defineShapes(state, SPIDER_NORTH_SHAPE, SPIDER_SOUTH_SHAPE, SPIDER_WEST_SHAPE, SPIDER_EAST_SHAPE);
 		}
-		
 		else if(this == VeBlocks.white_horse_plush      ||
 				this == VeBlocks.gray_horse_plush       ||
 				this == VeBlocks.light_gray_horse_plush ||
@@ -897,10 +1144,9 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		{
 			return VePlushBlock.defineShapes(state, HORSE_NORTH_SHAPE, HORSE_SOUTH_SHAPE, HORSE_WEST_SHAPE, HORSE_EAST_SHAPE);
 		}
-		
 		else if(this == VeBlocks.bat_plush)
 		{
-			return VePlushBlock.defineShapes(state, BAT_NORTH_BODY_SHAPE, BAT_SOUTH_SHAPE, BAT_WEST_SHAPE, BAT_EAST_SHAPE);
+			return VePlushBlock.defineShapes(state, BAT_NORTH_SHAPE, BAT_SOUTH_SHAPE, BAT_WEST_SHAPE, BAT_EAST_SHAPE);
 		}
 		else if(this == VeBlocks.rabbit_plush)
 		{
@@ -912,26 +1158,51 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		}
 		else if(this == VeBlocks.guardian_plush)
 		{
-			return VePlushBlock.defineShapes(state, COW_Z_SHAPE, COW_Z_SHAPE, COW_X_SHAPE, COW_X_SHAPE);
+			return VePlushBlock.defineShapes(state, GUARDIAN_NORTH_RIGHT_HORN_SHAPE, COW_Z_SHAPE, COW_X_SHAPE, COW_X_SHAPE);
 		}
 		else if(this == VeBlocks.silverfish_plush)
 		{
-			return VePlushBlock.defineShapes(state, SILVERFISH_Z_SHAPE, SILVERFISH_Z_SHAPE, SILVERFISH_X_SHAPE, SILVERFISH_X_SHAPE);
+			return VePlushBlock.defineShapes(state, SILVERFISH_NORTH_SHAPE, SILVERFISH_SOUTH_SHAPE, SILVERFISH_WEST_SHAPE, SILVERFISH_EAST_SHAPE);
 		}
-		else if(this == VeBlocks.plains_villager_plush  ||
-				this == VeBlocks.desert_villager_plush  ||
-				this == VeBlocks.jungle_villager_plush  ||
-				this == VeBlocks.taiga_villager_plush   ||
-				this == VeBlocks.snow_villager_plush    ||
-				this == VeBlocks.swamp_villager_plush   ||
-				this == VeBlocks.savanna_villager_plush ||
-				this == VeBlocks.witch_plush)
+		else if(this == VeBlocks.plains_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, PLAINS_VILLAGER_NORTH_SHAPE, PLAINS_VILLAGER_SOUTH_SHAPE, PLAINS_VILLAGER_WEST_SHAPE, PLAINS_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.desert_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, DESERT_VILLAGER_NORTH_SHAPE, DESERT_VILLAGER_SOUTH_SHAPE, DESERT_VILLAGER_WEST_SHAPE, DESERT_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.savanna_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, SAVANNA_VILLAGER_NORTH_SHAPE, SAVANNA_VILLAGER_SOUTH_SHAPE, SAVANNA_VILLAGER_WEST_SHAPE, SAVANNA_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.swamp_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, SWAMP_VILLAGER_NORTH_SHAPE, SWAMP_VILLAGER_SOUTH_SHAPE, SWAMP_VILLAGER_WEST_SHAPE, SWAMP_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.snow_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, SNOW_VILLAGER_NORTH_SHAPE, SNOW_VILLAGER_SOUTH_SHAPE, SNOW_VILLAGER_WEST_SHAPE, SNOW_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.taiga_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, TAIGA_VILLAGER_NORTH_SHAPE, TAIGA_VILLAGER_SOUTH_SHAPE, TAIGA_VILLAGER_WEST_SHAPE, TAIGA_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.jungle_villager_plush)
+		{
+			return VePlushBlock.defineShapes(state, JUNGLE_VILLAGER_NORTH_SHAPE, JUNGLE_VILLAGER_SOUTH_SHAPE, JUNGLE_VILLAGER_WEST_SHAPE, JUNGLE_VILLAGER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.witch_plush)
 		{
 			return VILLAGER_SHAPE;
 		}
 		else if(this == VeBlocks.cave_spider_plush)
 		{
 			return VePlushBlock.defineShapes(state, CAVE_SPIDER_NORTH_SHAPE, CAVE_SPIDER_SOUTH_SHAPE, CAVE_SPIDER_WEST_SHAPE, CAVE_SPIDER_EAST_SHAPE);
+		}
+		else if(this == VeBlocks.bee_plush)
+		{
+			return VePlushBlock.defineShapes(state, BEE_NORTH_SHAPE, BEE_SOUTH_SHAPE, BEE_WEST_SHAPE, BEE_EAST_SHAPE);
 		}
 		return VoxelShapes.fullCube();
 	}
@@ -952,5 +1223,37 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 			default:
 				return eastShape;
 		}
+	}
+	
+	/*
+	 * Cut the first shape by the second ones
+	 */
+	private static VoxelShape cutShape(VoxelShape shape, VoxelShape... cutShapes)
+	{
+		for(int i = 0; i < cutShapes.length; i++)
+		{
+			shape = VoxelShapes.combineAndSimplify(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
+		}
+		return shape;
+	}
+	
+	private static VoxelShape createDiagonalShapes(int numberOfShapes, double minX, double minY, double minZ, double maxX, double maxY, double maxZ)
+	{
+		VoxelShape shapes = VoxelShapes.empty();
+		//double minXNew = minX;
+		//double minYNew = minY;
+		//double maxXNew = maxX;
+		//double maxYNew = maxY;
+		
+		for(int i = 0; i < numberOfShapes; i++)
+		{
+			shapes = VoxelShapes.or(shapes, Block.makeCuboidShape(minX, minY, minZ, maxX, maxY, maxZ));
+			
+			minX = maxX;
+			minY = maxY;
+			maxX *= 2;
+			maxY *= 2;
+		}
+		return shapes;
 	}
 }
