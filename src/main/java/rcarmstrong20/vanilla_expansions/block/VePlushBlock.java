@@ -19,7 +19,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
@@ -980,18 +979,106 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 	
 	//Guardian Bounding Boxes
 	
-	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_HORN_SHAPE = VePlushBlock.createDiagonalShapes(6, 6.0D, 6.0D, 6.0D, 10.0D, 10.0D, 10.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_LEFT_HORN1_SHAPE = Block.makeCuboidShape(10.5D, 7.0D, 5.0D, 12.5D, 9.5D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_LEFT_HORN2_SHAPE = Block.makeCuboidShape(11.5D, 8.5D, 5.0D, 13.5D, 10.5D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_HORN1_SHAPE = Block.makeCuboidShape(3.5D, 7.0D, 5.0D, 5.5D, 9.5D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_HORN2_SHAPE = Block.makeCuboidShape(2.5D, 8.5D, 5.0D, 4.5D, 10.5D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_FRONT_HORN1_SHAPE = Block.makeCuboidShape(7.5D, 7.0D, 1.0D, 8.5D, 9.5D, 3.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_FRONT_HORN2_SHAPE = Block.makeCuboidShape(7.5D, 8.5D, 0.0D, 8.5D, 10.5D, 2.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_BACK_HORN1_SHAPE = Block.makeCuboidShape(7.5D, 7.0D, 8.0D, 8.5D, 9.5D, 10.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_BACK_HORN2_SHAPE = Block.makeCuboidShape(7.5D, 8.5D, 9.0D, 8.5D, 10.5D, 11.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_LEFT_BOTTOM_HORN_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 5.0D, 12.0D, 2.0D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_BOTTOM_HORN_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 5.0D, 5.5D, 2.0D, 6.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_FRONT_BOTTOM_HORN_SHAPE = Block.makeCuboidShape(7.5D, 0.0D, 1.5D, 8.5D, 2.0D, 3.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_BACK_BOTTOM_HORN_SHAPE = Block.makeCuboidShape(7.5D, 0.0D, 8.0D, 8.5D, 2.0D, 9.5D);
+	protected static final VoxelShape GUARDIAN_NORTH_BODY1_SHAPE = Block.makeCuboidShape(5.5D, 1.0D, 3.0D, 10.5D, 8.0D, 8.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_BODY2_SHAPE = Block.makeCuboidShape(4.5D, 2.0D, 3.0D, 11.5D, 7.0D, 8.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_BODY3_SOLID_SHAPE = Block.makeCuboidShape(5.5D, 2.0D, 2.0D, 10.5D, 7.0D, 9.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_EYE_HOLE_SHAPE = Block.makeCuboidShape(6.5D, 4.0D, 2.0D, 9.5D, 5.0D, 3.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_EYE_SHAPE = Block.makeCuboidShape(7.5D, 4.0D, 2.5D, 8.5D, 5.0D, 3.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL1_SHAPE = Block.makeCuboidShape(6.5D, 3.0D, 9.0D, 9.5D, 6.0D, 10.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL2_SHAPE = Block.makeCuboidShape(7.0D, 3.5D, 10.0D, 9.0D, 5.5D, 12.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL3_SHAPE = Block.makeCuboidShape(7.5D, 4.0D, 12.0D, 8.5D, 5.0D, 13.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP1_SHAPE = Block.makeCuboidShape(7.0D, 3.0D, 13.0D, 9.0D, 6.0D, 14.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP2_TOP_SHAPE = Block.makeCuboidShape(7.0D, 6.0D, 14.0D, 9.0D, 7.0D, 15.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP2_MIDDLE_SHAPE = Block.makeCuboidShape(7.5D, 3.0D, 14.0D, 8.5D, 6.0D, 15.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP2_BOTTOM_SHAPE = Block.makeCuboidShape(7.0D, 2.0D, 14.0D, 9.0D, 3.0D, 15.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP3_END_TOP_SHAPE = Block.makeCuboidShape(7.5D, 5.0D, 15.0D, 8.5D, 6.0D, 15.5D);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP3_END_BOTTOM_SHAPE = Block.makeCuboidShape(7.5D, 3.0D, 15.0D, 8.5D, 4.0D, 15.5D);
 	
+	protected static final VoxelShape GUARDIAN_NORTH_BODY3_SHAPE = VePlushBlock.cutShape(GUARDIAN_NORTH_BODY3_SOLID_SHAPE, GUARDIAN_NORTH_EYE_HOLE_SHAPE);
 	
-	protected static final VoxelShape RABBIT_NORTH_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 16.0D);
-	protected static final VoxelShape RABBIT_SOUTH_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, 16.0D, 14.0D);
-	protected static final VoxelShape RABBIT_WEST_SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 16.0D, 16.0D, 14.0D);
-	protected static final VoxelShape RABBIT_EAST_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	protected static final VoxelShape GUARDIAN_NORTH_LEFT_HORN_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_LEFT_HORN1_SHAPE, GUARDIAN_NORTH_LEFT_HORN2_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_RIGHT_HORN_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_RIGHT_HORN1_SHAPE, GUARDIAN_NORTH_RIGHT_HORN2_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_FRONT_HORN_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_FRONT_HORN1_SHAPE, GUARDIAN_NORTH_FRONT_HORN2_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_BACK_HORN_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_BACK_HORN1_SHAPE, GUARDIAN_NORTH_BACK_HORN2_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_BODY_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_BODY1_SHAPE, GUARDIAN_NORTH_BODY2_SHAPE, GUARDIAN_NORTH_BODY3_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_HORNS_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_LEFT_HORN_SHAPE, GUARDIAN_NORTH_RIGHT_HORN_SHAPE, GUARDIAN_NORTH_FRONT_HORN_SHAPE, GUARDIAN_NORTH_BACK_HORN_SHAPE, GUARDIAN_NORTH_LEFT_BOTTOM_HORN_SHAPE, GUARDIAN_NORTH_RIGHT_BOTTOM_HORN_SHAPE, GUARDIAN_NORTH_FRONT_BOTTOM_HORN_SHAPE, GUARDIAN_NORTH_BACK_BOTTOM_HORN_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_TAIL1_SHAPE, GUARDIAN_NORTH_TAIL2_SHAPE, GUARDIAN_NORTH_TAIL3_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_TAIL_TIP_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_TAIL_TIP1_SHAPE, GUARDIAN_NORTH_TAIL_TIP2_TOP_SHAPE, GUARDIAN_NORTH_TAIL_TIP2_MIDDLE_SHAPE, GUARDIAN_NORTH_TAIL_TIP2_BOTTOM_SHAPE, GUARDIAN_NORTH_TAIL_TIP3_END_TOP_SHAPE, GUARDIAN_NORTH_TAIL_TIP3_END_BOTTOM_SHAPE);
+	protected static final VoxelShape GUARDIAN_NORTH_SHAPE = VoxelShapes.or(GUARDIAN_NORTH_BODY_SHAPE, GUARDIAN_NORTH_HORNS_SHAPE, GUARDIAN_NORTH_TAIL_SHAPE, GUARDIAN_NORTH_TAIL_TIP_SHAPE, GUARDIAN_NORTH_EYE_SHAPE);
 	
-	protected static final VoxelShape COW_Z_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 0.0D, 12.0D, 14.0D, 16.0D);
-	protected static final VoxelShape COW_X_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 4.0D, 16.0D, 14.0D, 12.0D);
+	protected static final VoxelShape GUARDIAN_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, GUARDIAN_NORTH_SHAPE);
+	protected static final VoxelShape GUARDIAN_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, GUARDIAN_NORTH_SHAPE);
+	protected static final VoxelShape GUARDIAN_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, GUARDIAN_NORTH_SHAPE);
 	
-	protected static final VoxelShape VILLAGER_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+	//Witch Bounding Boxes
+	
+	protected static final VoxelShape WITCH_NORTH_HEAD_AND_HAT_MIDDLE_SHAPE = Block.makeCuboidShape(5.0D, 8.0D, 6.0D, 11.0D, 15.0D, 11.0D);
+	protected static final VoxelShape WITCH_NORTH_HAT_TOP_SHAPE = Block.makeCuboidShape(6.0D, 15.0D, 7.0D, 10.0D, 19.0D, 10.0D);
+	protected static final VoxelShape WITCH_NORTH_HAT_BRIM_SHAPE = Block.makeCuboidShape(4.0D, 12.0D, 5.0D, 12.0D, 13.0D, 12.0D);
+	protected static final VoxelShape WITCH_NORTH_HAT_STRAP_SHAPE = Block.makeCuboidShape(4.5D, 13.5D, 5.5D, 11.5D, 14.5D, 11.5D);
+	protected static final VoxelShape WITCH_NORTH_HAT_STRAP_ACCENT_SHAPE = Block.makeCuboidShape(7.0D, 13.0D, 5.5D, 9.0D, 15.0D, 6.0D);
+	protected static final VoxelShape WITCH_NORTH_EYEBROW_SHAPE = Block.makeCuboidShape(6.0D, 10.5D, 5.5D, 10.0D, 11.5D, 6.0D);
+	protected static final VoxelShape WITCH_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 10.0D, 5.5D, 7.5D, 10.5D, 6.0D);
+	protected static final VoxelShape WITCH_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 10.0D, 5.5D, 9.5D, 10.5D, 6.0D);
+	protected static final VoxelShape WITCH_NORTH_NOSE_SHAPE = Block.makeCuboidShape(7.5D, 8.0D, 5.0D, 8.5D, 10.0D, 6.0D);
+	protected static final VoxelShape WITCH_NORTH_NOSE_WART_SHAPE = Block.makeCuboidShape(7.5D, 8.5D, 4.5D, 8.0D, 9.0D, 5.0D);
+	protected static final VoxelShape WITCH_NORTH_TORSO_SHAPE = Block.makeCuboidShape(5.0D, 2.0D, 6.5D, 11.0D, 8.0D, 10.5D);
+	protected static final VoxelShape WITCH_NORTH_FEET_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 7.0D, 10.0D, 2.0D, 10.0D);
+	protected static final VoxelShape WITCH_NORTH_NECKTIE_MIDDLE_SHAPE = Block.makeCuboidShape(7.5D, 2.0D, 6.0D, 8.5D, 6.0D, 6.5D);
+	protected static final VoxelShape WITCH_NORTH_NECKTIE_STRAP_MIDDLE_SHAPE = Block.makeCuboidShape(7.0D, 6.0D, 6.0D, 9.0D, 7.0D, 6.5D);
+	protected static final VoxelShape WITCH_NORTH_NECKTIE_STRAP_RIGHT_SHAPE = Block.makeCuboidShape(9.0D, 7.0D, 6.0D, 10.0D, 8.0D, 6.5D);
+	protected static final VoxelShape WITCH_NORTH_NECKTIE_STRAP_LEFT_SHAPE = Block.makeCuboidShape(6.0D, 7.0D, 6.0D, 7.0D, 8.0D, 6.5D);
+	protected static final VoxelShape WITCH_NORTH_MIDDLE_ARM_SHAPE = Block.makeCuboidShape(4.0D, 4.5D, 5.0D, 12.0D, 6.5D, 6.5D);
+	protected static final VoxelShape WITCH_NORTH_RIGHT_ARM_SHAPE = Block.makeCuboidShape(4.0D, 4.5D, 5.0D, 5.0D, 7.5D, 8.0D);
+	protected static final VoxelShape WITCH_NORTH_LEFT_ARM_SHAPE = Block.makeCuboidShape(11.0D, 4.5D, 5.0D, 12.0D, 7.5D, 8.0D);
+	
+	protected static final VoxelShape WITCH_NORTH_HEAD_AND_HAT_SHAPE = VoxelShapes.or(WITCH_NORTH_HEAD_AND_HAT_MIDDLE_SHAPE, WITCH_NORTH_HAT_TOP_SHAPE, WITCH_NORTH_HAT_BRIM_SHAPE, WITCH_NORTH_HAT_STRAP_SHAPE, WITCH_NORTH_HAT_STRAP_ACCENT_SHAPE);
+	protected static final VoxelShape WITCH_NORTH_FACE_SHAPE = VoxelShapes.or(WITCH_NORTH_EYEBROW_SHAPE, WITCH_NORTH_RIGHT_EYE_SHAPE, WITCH_NORTH_LEFT_EYE_SHAPE, WITCH_NORTH_NOSE_SHAPE, WITCH_NORTH_NOSE_WART_SHAPE);
+	protected static final VoxelShape WITCH_NORTH_NECKTIE_SHAPE = VoxelShapes.or(WITCH_NORTH_NECKTIE_MIDDLE_SHAPE, WITCH_NORTH_NECKTIE_STRAP_MIDDLE_SHAPE, WITCH_NORTH_NECKTIE_STRAP_RIGHT_SHAPE, WITCH_NORTH_NECKTIE_STRAP_LEFT_SHAPE);
+	protected static final VoxelShape WITCH_NORTH_ARMS_SHAPE = VoxelShapes.or(WITCH_NORTH_MIDDLE_ARM_SHAPE, WITCH_NORTH_RIGHT_ARM_SHAPE, WITCH_NORTH_LEFT_ARM_SHAPE);
+	protected static final VoxelShape WITCH_NORTH_SHAPE = VoxelShapes.or(WITCH_NORTH_TORSO_SHAPE, WITCH_NORTH_FEET_SHAPE, WITCH_NORTH_HEAD_AND_HAT_SHAPE, WITCH_NORTH_FACE_SHAPE, WITCH_NORTH_NECKTIE_SHAPE, WITCH_NORTH_ARMS_SHAPE);
+	
+	protected static final VoxelShape WITCH_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, WITCH_NORTH_SHAPE);
+	protected static final VoxelShape WITCH_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, WITCH_NORTH_SHAPE);
+	protected static final VoxelShape WITCH_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, WITCH_NORTH_SHAPE);
+	
+	//Rabbit Bounding Boxes
+	
+	protected static final VoxelShape RABBIT_NORTH_RIGHT_EAR_SHAPE = Block.makeCuboidShape(6.0D, 10.5D, 3.0D, 7.5D, 14.0D, 4.0D);
+	protected static final VoxelShape RABBIT_NORTH_LEFT_EAR_SHAPE = Block.makeCuboidShape(8.5D, 10.5D, 3.0D, 10.0D, 14.0D, 4.0D);
+	protected static final VoxelShape RABBIT_NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.5D, 6.5D, 1.5D, 10.5D, 10.5D, 6.0D);
+	protected static final VoxelShape RABBIT_NORTH_BODY_SHAPE = Block.makeCuboidShape(5.5D, 0.0D, 3.5D, 10.5D, 8.0D, 13.0D);
+	protected static final VoxelShape RABBIT_NORTH_TAIL_SHAPE = Block.makeCuboidShape(6.5D, 1.5D, 13.0D, 9.5D, 4.5D, 15.0D);
+	protected static final VoxelShape RABBIT_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 9.0D, 1.0D, 7.5D, 10.5D, 1.5D);
+	protected static final VoxelShape RABBIT_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 9.0D, 1.0D, 9.5D, 10.5D, 1.5D);
+	protected static final VoxelShape RABBIT_NORTH_NOSE_SHAPE = Block.makeCuboidShape(7.5D, 7.5D, 1.0D, 8.5D, 8.5D, 1.5D);
+	protected static final VoxelShape RABBIT_NORTH_BACK_RIGHT_ANKLE_SHAPE = Block.makeCuboidShape(4.0D, 1.5D, 5.0D, 5.0D, 7.0D, 11.5D);
+	protected static final VoxelShape RABBIT_NORTH_BACK_LEFT_ANKLE_SHAPE = Block.makeCuboidShape(11.0D, 1.5D, 5.0D, 12.5D, 7.0D, 11.5D);
+	protected static final VoxelShape RABBIT_NORTH_BACK_RIGHT_LEG_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 5.0D, 5.5D, 1.5D, 10.5D);
+	protected static final VoxelShape RABBIT_NORTH_BACK_LEFT_LEG_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 5.0D, 13.0D, 1.5D, 10.5D);
+	protected static final VoxelShape RABBIT_NORTH_FRONT_RIGHT_LEG_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 3.5D, 5.5D, 6.5D, 5.0D);
+	protected static final VoxelShape RABBIT_NORTH_FRONT_LEFT_LEG_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 3.5D, 12.0D, 6.5D, 5.0D);
+	
+	protected static final VoxelShape RABBIT_NORTH_EARS_SHAPE = VoxelShapes.or(RABBIT_NORTH_RIGHT_EAR_SHAPE, RABBIT_NORTH_LEFT_EAR_SHAPE);
+	protected static final VoxelShape RABBIT_NORTH_EYES_SHAPE = VoxelShapes.or(RABBIT_NORTH_RIGHT_EYE_SHAPE, RABBIT_NORTH_LEFT_EYE_SHAPE);
+	protected static final VoxelShape RABBIT_NORTH_LEGS_SHAPE = VoxelShapes.or(RABBIT_NORTH_BACK_RIGHT_ANKLE_SHAPE, RABBIT_NORTH_BACK_LEFT_ANKLE_SHAPE, RABBIT_NORTH_BACK_RIGHT_LEG_SHAPE, RABBIT_NORTH_BACK_LEFT_LEG_SHAPE, RABBIT_NORTH_FRONT_RIGHT_LEG_SHAPE, RABBIT_NORTH_FRONT_LEFT_LEG_SHAPE);
+	protected static final VoxelShape RABBIT_NORTH_SHAPE = VoxelShapes.or(RABBIT_NORTH_HEAD_SHAPE, RABBIT_NORTH_BODY_SHAPE, RABBIT_NORTH_TAIL_SHAPE, RABBIT_NORTH_NOSE_SHAPE, RABBIT_NORTH_EARS_SHAPE, RABBIT_NORTH_EYES_SHAPE, RABBIT_NORTH_LEGS_SHAPE);
+	
+	protected static final VoxelShape RABBIT_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, RABBIT_NORTH_SHAPE);
+	protected static final VoxelShape RABBIT_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, RABBIT_NORTH_SHAPE);
+	protected static final VoxelShape RABBIT_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, RABBIT_NORTH_SHAPE);
 	
 	public VePlushBlock(Block.Properties properties)
 	{
@@ -1158,7 +1245,7 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		}
 		else if(this == VeBlocks.guardian_plush)
 		{
-			return VePlushBlock.defineShapes(state, GUARDIAN_NORTH_RIGHT_HORN_SHAPE, COW_Z_SHAPE, COW_X_SHAPE, COW_X_SHAPE);
+			return VePlushBlock.defineShapes(state, GUARDIAN_NORTH_SHAPE, GUARDIAN_SOUTH_SHAPE, GUARDIAN_WEST_SHAPE, GUARDIAN_EAST_SHAPE);
 		}
 		else if(this == VeBlocks.silverfish_plush)
 		{
@@ -1194,7 +1281,7 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		}
 		else if(this == VeBlocks.witch_plush)
 		{
-			return VILLAGER_SHAPE;
+			return VePlushBlock.defineShapes(state, WITCH_NORTH_SHAPE, WITCH_SOUTH_SHAPE, WITCH_WEST_SHAPE, WITCH_EAST_SHAPE);
 		}
 		else if(this == VeBlocks.cave_spider_plush)
 		{
@@ -1225,8 +1312,8 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		}
 	}
 	
-	/*
-	 * Cut the first shape by the second ones
+	/**
+	 * Use the second argument's shapes to cut smaller shapes into the first argument's shape and return the new shape
 	 */
 	private static VoxelShape cutShape(VoxelShape shape, VoxelShape... cutShapes)
 	{
@@ -1235,25 +1322,5 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 			shape = VoxelShapes.combineAndSimplify(shape, cutShapes[i], IBooleanFunction.ONLY_FIRST);
 		}
 		return shape;
-	}
-	
-	private static VoxelShape createDiagonalShapes(int numberOfShapes, double minX, double minY, double minZ, double maxX, double maxY, double maxZ)
-	{
-		VoxelShape shapes = VoxelShapes.empty();
-		//double minXNew = minX;
-		//double minYNew = minY;
-		//double maxXNew = maxX;
-		//double maxYNew = maxY;
-		
-		for(int i = 0; i < numberOfShapes; i++)
-		{
-			shapes = VoxelShapes.or(shapes, Block.makeCuboidShape(minX, minY, minZ, maxX, maxY, maxZ));
-			
-			minX = maxX;
-			minY = maxY;
-			maxX *= 2;
-			maxY *= 2;
-		}
-		return shapes;
 	}
 }
