@@ -1,17 +1,22 @@
 {
   "type": "crafting_shaped",
+  "group": "rabbit_plush",
   "pattern":
   [
-    "BPB",
-    "BRB",
-    "FBF"
+    "WPB",
+    "BRW",
+    "FWF"
   ],
   "key":
   {
     "B":
 	{
-      "item": "minecraft:brown_wool"
+      "item": "minecraft:black_wool"
     },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
 	"P":
 	{
 	  "item": "minecraft:pink_wool"
@@ -27,6 +32,6 @@
   },
   "result":
   {
-    "item": "ve:rabbit_plush"
+    "item": "ve:white_splotched_rabbit_plush"
   }
 }

@@ -118,7 +118,7 @@ public class CabinPiece extends TemplateStructurePiece
 	 * As an example, this sets the y-level to the average height of the terrain under the structure
 	 */
 	@Override
-	public boolean func_225577_a_(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, MutableBoundingBox boundingBox, ChunkPos chunkPos)
+	public boolean create(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, MutableBoundingBox boundingBox, ChunkPos chunkPos)
 	{
 		float height = 0;
 		BlockPos structureSize = this.templatePosition.add(this.template.getSize().getX() - 1, 0, this.template.getSize().getZ() - 1);
@@ -133,6 +133,6 @@ public class CabinPiece extends TemplateStructurePiece
 		
 		this.templatePosition = new BlockPos(this.templatePosition.getX(), height, this.templatePosition.getZ());
 		
-		return super.func_225577_a_(world, chunkGenerator, random, boundingBox, chunkPos);
+		return super.create(world, chunkGenerator, random, boundingBox, chunkPos);
 	}
 }

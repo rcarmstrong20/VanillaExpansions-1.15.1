@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "group": "rabbit_plush",
+  "pattern":
+  [
+    "BPB",
+    "BRB",
+    "FWF"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:black_wool"
+    },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
+	"P":
+	{
+	  "item": "minecraft:pink_wool"
+	},
+	"R":
+	{
+	  "item": "minecraft:rabbit"
+	},
+	"F":
+	{
+	  "item": "minecraft:rabbit_foot"
+	}
+  },
+  "result":
+  {
+    "item": "ve:toast_rabbit_plush"
+  }
+}

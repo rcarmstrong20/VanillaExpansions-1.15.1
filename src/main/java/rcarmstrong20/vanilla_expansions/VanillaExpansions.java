@@ -59,7 +59,7 @@ public class VanillaExpansions
 	public static final String MOD_ID = "ve";
 	public static final Logger LOGGER = LogManager.getLogger(VanillaExpansions.MOD_ID);
 	public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
-	public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+	public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 	
 	public VanillaExpansions()
 	{

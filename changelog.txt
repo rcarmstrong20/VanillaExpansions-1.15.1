@@ -1,3 +1,114 @@
+Build: 1.15.2-31.2.5 - Sun May 24 21:41:17 GMT 2020
+	cpw:
+		Improve the DistExecutor API and introduce some "almost completely" safe mechanisms to handle sided lambdas.
+		
+		In general, use sided lambdas safely by embedding them in a separately loaded class. There's a whole twitch stream
+		dedicated to investigating this problem. See link in DistExecutor if you're interested.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.15.2-31.2.4 - Sun May 24 01:25:42 GMT 2020
+	tterrag:
+		Fix typo in new registry fields' names
+		
+		Note: this is technically a breaking change. If you for some reason added code referencing these two fields in the last few hours, sorry.
+
+=========
+Build: 1.15.2-31.2.3 - Sat May 23 20:23:05 GMT 2020
+	tterrag:
+		Fix server startup query info not including new text
+
+=========
+Build: 1.15.2-31.2.2 - Sat May 23 20:08:11 GMT 2020
+	tterrag:
+		Improve look of notification GUI, improve StartupQuery API
+
+=========
+Build: 1.15.2-31.2.1 - Sat May 23 17:45:49 GMT 2020
+	tterrag:
+		Add forge registries for applicable new registry types
+		
+		Expose constructors for all forge registry entries
+		Also, remove deprecation on ItemCameraTransforms/TransformType
+
+=========
+Build: 1.15.2-31.2.0 - Fri May 15 19:34:16 GMT 2020
+	lex:
+		Bump version for new RB.
+
+=========
+Build: 1.15.2-31.1.99 - Fri May 15 19:25:51 GMT 2020
+	lex:
+		Update MCP Mappings.
+
+=========
+Build: 1.15.2-31.1.98 - Fri May 15 18:34:16 GMT 2020
+	ichttt:
+		fix test mod and add warning comment to framebuffer (#6698)
+
+=========
+Build: 1.15.2-31.1.97 - Fri May 15 18:00:19 GMT 2020
+	lex:
+		Fix incorrect argument passed in RenderPipeline potentially causing crash. #6677
+
+	lex:
+		Fix FireBlock using flammability instead of spread speed when looking for places to spread. Closes #6646
+
+=========
+Build: 1.15.2-31.1.95 - Fri May 15 17:53:00 GMT 2020
+	FunwayguyEmail:
+		Re-added patch to enable stencil buffer in net.minecraft.client.shader.Framebuffer
+		Add test for the stencil buffer feature. Only tests that it doesn't crash when enabling, for now. - giga
+
+	thesilkminer:
+		Allow Music Discs to be created with SoundEvent delegates. (#6523)
+
+=========
+Build: 1.15.2-31.1.93 - Fri May 15 17:32:12 GMT 2020
+	Edwin.mindcraft:
+		Use IProperty#getName when generating blockstate jsons (#6582)
+		
+		Close #6520 
+
+=========
+Build: 1.15.2-31.1.92 - Fri May 15 17:26:19 GMT 2020
+	David Quintana:
+		Model system fixes:
+		- Add "origin" key to determine what origin to use. This will default to the existing (broken) behaviour to avoid breaking changes.
+		- Fix interaction of transforms with variant transforms (transformation ordering).
+		- Fix OBJ loader ignoring "diffuseLighting" attribute from the json.
+		  This attribute will continue not being used if "ambientToFullbright" is on (default) to avoid breaking changes.
+
+=========
+Build: 1.15.2-31.1.91 - Fri May 15 16:38:42 GMT 2020
+	lex:
+		Fixed Partivle.onGround not updating correctly due to decompile error. Closes #6595
+
+	lex:
+		Fixed typo in registry alias writing causing infinite loop. Closes #6689
+
+=========
+Build: 1.15.2-31.1.89 - Fri May 15 14:45:46 GMT 2020
+	laughlan.cov:
+		Remove duplicate post of ChunkEvent.Load. (#6697)
+
+=========
+Build: 1.15.2-31.1.88 - Thu May 14 20:22:21 GMT 2020
+	thpetuaudletang:
+		Fix LevelChange event not firing after enchanting (#6693)
+
+=========
+Build: 1.15.2-31.1.87 - Tue May 12 22:11:53 GMT 2020
+	ichttt:
+		Fix server config directory remaining locked when integrated server is shut down. (#6644)
+
+=========
+Build: 1.15.2-31.1.86 - Tue May 12 22:02:09 GMT 2020
+	LXGaming:
+		Fix exclusion of coremods not filtering correctly when the mods directory is a symbolic link. (#6600)
+
+=========
 Build: 1.15.2-31.1.85 - Tue May 12 21:29:40 GMT 2020
 	jdk:
 		Allow Bees to use custom hives. (#6656)
