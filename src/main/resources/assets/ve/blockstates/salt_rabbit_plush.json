@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "facing=north": { "model": "ve:block/salt_rabbit_plush" },
+        "facing=south": { "model": "ve:block/salt_rabbit_plush", "y": 180 },
+        "facing=west":  { "model": "ve:block/salt_rabbit_plush", "y": 270 },
+        "facing=east":  { "model": "ve:block/salt_rabbit_plush", "y": 90 }
+    }
+}

@@ -1573,10 +1573,10 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 	protected static final VoxelShape RABBIT_NORTH_HEAD_SHAPE = Block.makeCuboidShape(5.5D, 6.5D, 1.5D, 10.5D, 10.5D, 6.0D);
 	protected static final VoxelShape RABBIT_NORTH_BODY_SHAPE = Block.makeCuboidShape(5.5D, 0.0D, 3.5D, 10.5D, 8.0D, 13.0D);
 	protected static final VoxelShape RABBIT_NORTH_TAIL_SHAPE = Block.makeCuboidShape(6.5D, 1.5D, 13.0D, 9.5D, 4.5D, 15.0D);
-	protected static final VoxelShape RABBIT_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 9.0D, 1.0D, 7.5D, 10.5D, 1.5D);
-	protected static final VoxelShape RABBIT_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 9.0D, 1.0D, 9.5D, 10.5D, 1.5D);
+	protected static final VoxelShape RABBIT_NORTH_RIGHT_EYE_SHAPE = Block.makeCuboidShape(6.5D, 8.5D, 1.0D, 7.5D, 10.0D, 1.5D);
+	protected static final VoxelShape RABBIT_NORTH_LEFT_EYE_SHAPE = Block.makeCuboidShape(8.5D, 8.5D, 1.0D, 9.5D, 10.0D, 1.5D);
 	protected static final VoxelShape RABBIT_NORTH_NOSE_SHAPE = Block.makeCuboidShape(7.5D, 7.5D, 1.0D, 8.5D, 8.5D, 1.5D);
-	protected static final VoxelShape RABBIT_NORTH_BACK_RIGHT_ANKLE_SHAPE = Block.makeCuboidShape(4.0D, 1.5D, 5.0D, 5.0D, 7.0D, 11.5D);
+	protected static final VoxelShape RABBIT_NORTH_BACK_RIGHT_ANKLE_SHAPE = Block.makeCuboidShape(3.5D, 1.5D, 5.0D, 5.5D, 7.0D, 11.5D);
 	protected static final VoxelShape RABBIT_NORTH_BACK_LEFT_ANKLE_SHAPE = Block.makeCuboidShape(11.0D, 1.5D, 5.0D, 12.5D, 7.0D, 11.5D);
 	protected static final VoxelShape RABBIT_NORTH_BACK_RIGHT_LEG_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 5.0D, 5.5D, 1.5D, 10.5D);
 	protected static final VoxelShape RABBIT_NORTH_BACK_LEFT_LEG_SHAPE = Block.makeCuboidShape(10.5D, 0.0D, 5.0D, 13.0D, 1.5D, 10.5D);
@@ -1763,7 +1763,13 @@ public class VePlushBlock extends HorizontalBlock implements IWaterLoggable
 		{
 			return VePlushBlock.defineShapes(state, BAT_NORTH_SHAPE, BAT_SOUTH_SHAPE, BAT_WEST_SHAPE, BAT_EAST_SHAPE);
 		}
-		else if(this == VeBlocks.rabbit_plush)
+		else if(this == VeBlocks.brown_rabbit_plush           ||
+				this == VeBlocks.white_rabbit_plush           ||
+				this == VeBlocks.black_rabbit_plush           ||
+				this == VeBlocks.white_splotched_rabbit_plush ||
+				this == VeBlocks.gold_rabbit_plush            ||
+				this == VeBlocks.toast_rabbit_plush           ||
+				this == VeBlocks.salt_rabbit_plush)
 		{
 			return VePlushBlock.defineShapes(state, RABBIT_NORTH_SHAPE, RABBIT_SOUTH_SHAPE, RABBIT_WEST_SHAPE, RABBIT_EAST_SHAPE);
 		}

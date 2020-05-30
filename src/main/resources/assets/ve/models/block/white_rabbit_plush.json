@@ -1,0 +1,10 @@
+{
+    "parent": "ve:block/template_rabbit_plush",
+    "textures":
+	{
+		"body": "block/white_wool",
+		"nose": "block/pink_wool",
+		"eyes": "block/red_wool",
+		"ears": "block/pink_wool"
+    }
+}

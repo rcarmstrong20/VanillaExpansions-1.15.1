@@ -93,7 +93,13 @@ public class VeBlocks
 	public static Block jellie_cat_plush = register("jellie_cat_plush", true, new VePlushBlock(Block.Properties.from(Blocks.WHITE_WOOL)));
 	public static Block black_cat_plush = register("black_cat_plush", true, new VePlushBlock(Block.Properties.from(Blocks.BLACK_WOOL)));
 	public static Block pig_plush = register("pig_plush", true, new VePlushBlock(Block.Properties.from(Blocks.PINK_WOOL)));
-	public static Block rabbit_plush = register("rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.BROWN_WOOL)));
+	public static Block brown_rabbit_plush = register("brown_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.BROWN_WOOL)));
+	public static Block white_rabbit_plush = register("white_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.WHITE_WOOL)));
+	public static Block black_rabbit_plush = register("black_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.BLACK_WOOL)));
+	public static Block white_splotched_rabbit_plush = register("white_splotched_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.WHITE_WOOL)));
+	public static Block gold_rabbit_plush = register("gold_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.YELLOW_WOOL)));
+	public static Block toast_rabbit_plush = register("toast_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.WHITE_WOOL)));
+	public static Block salt_rabbit_plush = register("salt_rabbit_plush", true, new VePlushBlock(Block.Properties.from(Blocks.BROWN_WOOL)));
 	public static Block white_sheep_plush = register("white_sheep_plush", true, new VePlushBlock(Block.Properties.from(Blocks.WHITE_WOOL)));
 	public static Block orange_sheep_plush = register("orange_sheep_plush", true, new VePlushBlock(Block.Properties.from(Blocks.ORANGE_WOOL)));
 	public static Block magenta_sheep_plush = register("magenta_sheep_plush", true, new VePlushBlock(Block.Properties.from(Blocks.MAGENTA_WOOL)));
