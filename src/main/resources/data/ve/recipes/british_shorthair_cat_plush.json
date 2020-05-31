@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "cat_plush",
+  "pattern":
+  [
+    "GGG",
+    "GFG",
+    "GBG"
+  ],
+  "key":
+  {
+    "G":
+	{
+      "item": "minecraft:light_gray_wool"
+    },
+	"B":
+	{
+	  "item": "minecraft:black_wool"
+	},
+	"F":
+	{
+	  "tag": "ve:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "ve:british_shorthair_cat_plush"
+  }
+}
