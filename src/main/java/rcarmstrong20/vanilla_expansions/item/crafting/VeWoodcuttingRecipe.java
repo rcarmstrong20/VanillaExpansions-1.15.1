@@ -80,6 +80,12 @@ public class VeWoodcuttingRecipe implements IRecipe<IInventory>
 	}
 	
 	@Override
+	public boolean isDynamic()
+	{
+		return true;
+	}
+	
+	@Override
 	public ResourceLocation getId()
 	{
 		return this.id;
