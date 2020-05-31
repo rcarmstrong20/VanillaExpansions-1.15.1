@@ -5,6 +5,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,6 @@ public class VeColoredCampfireTileEntityRenderer extends TileEntityRenderer<VeCo
 	}
 	
 	@Override
-	@SuppressWarnings("deprecation")
 	public void render(VeColoredCampfireTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
 	{
 		Direction direction = tileEntityIn.getBlockState().get(VeColoredCampfireBlock.FACING);
@@ -43,7 +43,7 @@ public class VeColoredCampfireTileEntityRenderer extends TileEntityRenderer<VeCo
 				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
 				matrixStackIn.translate(-0.3125D, -0.3125D, 0.0D);
 				matrixStackIn.scale(0.375F, 0.375F, 0.375F);
-				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+				Minecraft.getInstance().getItemRenderer().renderItem(itemstack, TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
 				matrixStackIn.pop();
 			}
 		}
