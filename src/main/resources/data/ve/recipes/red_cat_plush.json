@@ -3,24 +3,24 @@
   "group": "cat_plush",
   "pattern":
   [
-    "YBY",
-    "BFB",
-    "YGY"
+    "OOO",
+    "OFO",
+    "WGW"
   ],
   "key":
   {
-    "Y":
+    "O":
 	{
-      "item": "minecraft:yellow_wool"
-    },
-    "B":
-	{
-      "item": "minecraft:brown_wool"
+      "item": "minecraft:orange_wool"
     },
 	"G":
 	{
       "item": "minecraft:green_wool"
     },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
 	"F":
 	{
 	  "tag": "ve:raw_fishes"
@@ -28,6 +28,6 @@
   },
   "result":
   {
-    "item": "ve:ocelot_plush"
+    "item": "ve:red_cat_plush"
   }
 }

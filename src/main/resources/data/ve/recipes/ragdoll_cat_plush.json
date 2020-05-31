@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "group": "cat_plush",
+  "pattern":
+  [
+    "WGW",
+    "WFW",
+    "GBG"
+  ],
+  "key":
+  {
+	"W":
+	{
+      "item": "minecraft:white_wool"
+    },
+	"G":
+	{
+	  "item": "minecraft:light_gray_wool"
+	},
+	"B":
+	{
+      "item": "minecraft:blue_wool"
+    },
+	"F":
+	{
+	  "tag": "ve:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "ve:ragdoll_cat_plush"
+  }
+}

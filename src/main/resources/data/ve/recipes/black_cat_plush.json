@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "cat_plush",
+  "pattern":
+  [
+    "BBB",
+    "BFB",
+    "BOB"
+  ],
+  "key":
+  {
+    "B":
+	{
+      "item": "minecraft:black_wool"
+    },
+	"O":
+	{
+	  "item": "minecraft:orange_wool"
+	},
+	"F":
+	{
+	  "tag": "ve:raw_fishes"
+	}
+  },
+  "result":
+  {
+    "item": "ve:black_cat_plush"
+  }
+}

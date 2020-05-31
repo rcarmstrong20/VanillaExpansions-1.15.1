@@ -4,7 +4,7 @@
   [
     "BBB",
     "BFB",
-    "BOB"
+    "WOW"
   ],
   "key":
   {
@@ -16,6 +16,10 @@
 	{
       "item": "minecraft:orange_wool"
     },
+	"W":
+	{
+	  "item": "minecraft:white_wool"
+	},
 	"F":
 	{
 	  "tag": "ve:raw_fishes"
