@@ -2,7 +2,6 @@ package rcarmstrong20.vanilla_expansions.block;
 
 import java.util.Map;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap.Builder;
 
 import net.minecraft.block.Block;
