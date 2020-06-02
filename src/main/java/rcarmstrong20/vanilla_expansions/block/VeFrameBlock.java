@@ -1,5 +1,10 @@
 package rcarmstrong20.vanilla_expansions.block;
 
+import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap.Builder;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -7,11 +12,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -22,6 +29,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +42,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
+import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
@@ -41,23 +50,107 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 {
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	public static final BooleanProperty NORTH = SixWayBlock.NORTH;
+	public static final BooleanProperty SOUTH = SixWayBlock.SOUTH;
+	public static final BooleanProperty WEST = SixWayBlock.WEST;
+	public static final BooleanProperty EAST = SixWayBlock.EAST;
+	public static final BooleanProperty UP = SixWayBlock.UP;
+	public static final BooleanProperty DOWN = SixWayBlock.DOWN;
 	
-	private static final VoxelShape PAINTING_NORTH_BACK_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
-	private static final VoxelShape PAINTING_NORTH_RIGHT_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 1.0D, 16.0D, 15.0D);
-	private static final VoxelShape PAINTING_NORTH_LEFT_SHAPE =  Block.makeCuboidShape(15.0D, 0.0D, 14.0D, 16.0D, 16.0D, 15.0D);
-	private static final VoxelShape PAINTING_NORTH_TOP_SHAPE =  Block.makeCuboidShape(0.0D, 15.0D, 14.0D, 16.0D, 16.0D, 15.0D);
-	private static final VoxelShape PAINTING_NORTH_BOTTOM_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 1.0D, 15.0D);
+	private static final VoxelShape FRAME_NORTH_BACK_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
+	private static final VoxelShape FRAME_NORTH_RIGHT_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 1.0D, 16.0D, 15.0D);
+	private static final VoxelShape FRAME_NORTH_LEFT_SHAPE =  Block.makeCuboidShape(15.0D, 0.0D, 14.0D, 16.0D, 16.0D, 15.0D);
+	private static final VoxelShape FRAME_NORTH_TOP_SHAPE =  Block.makeCuboidShape(0.0D, 15.0D, 14.0D, 16.0D, 16.0D, 15.0D);
+	private static final VoxelShape FRAME_NORTH_BOTTOM_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 1.0D, 15.0D);
 	
-	private static final VoxelShape PAINTING_NORTH_SHAPE = VoxelShapes.or(PAINTING_NORTH_BACK_SHAPE, PAINTING_NORTH_RIGHT_SHAPE, PAINTING_NORTH_LEFT_SHAPE, PAINTING_NORTH_TOP_SHAPE, PAINTING_NORTH_BOTTOM_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE);
+	private static final VoxelShape FRAME_NORTH_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE);
+	private static final VoxelShape FRAME_NORTH_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_LEFT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_LEFT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE, FRAME_NORTH_LEFT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_RIGHT_SHAPE, FRAME_NORTH_LEFT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_BOTTOM_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_RIGHT_SHAPE, FRAME_NORTH_LEFT_SHAPE);
 	
-	private static final VoxelShape PAINTING_SOUTH_SHAPE = VeCollisionUtil.rotate180(Axis.Y, PAINTING_NORTH_SHAPE);
-	private static final VoxelShape PAINTING_WEST_SHAPE = VeCollisionUtil.rotate270(Axis.Y, PAINTING_NORTH_SHAPE);
-	private static final VoxelShape PAINTING_EAST_SHAPE = VeCollisionUtil.rotate90(Axis.Y, PAINTING_NORTH_SHAPE);
+	private static final VoxelShape FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																								 FRAME_NORTH_BOTTOM_SHAPE,
+																								 FRAME_NORTH_RIGHT_SHAPE,
+																								 FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																							   FRAME_NORTH_TOP_SHAPE,
+																							   FRAME_NORTH_BOTTOM_SHAPE,
+																							   FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																								FRAME_NORTH_TOP_SHAPE,
+																								FRAME_NORTH_BOTTOM_SHAPE,
+																								FRAME_NORTH_RIGHT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_ALL_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																		   FRAME_NORTH_RIGHT_SHAPE,
+																		   FRAME_NORTH_LEFT_SHAPE,
+																		   FRAME_NORTH_TOP_SHAPE,
+																		   FRAME_NORTH_BOTTOM_SHAPE);
+	
+	private static final VoxelShape FRAME_SOUTH_TOP_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_LEFT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_RIGHT_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_AND_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_ALL_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_ALL_SHAPE);
+	private static final VoxelShape FRAME_SOUTH_BACK_SHAPE = VeCollisionUtil.rotate180(Axis.Y, FRAME_NORTH_BACK_SHAPE);
+	
+	private static final VoxelShape FRAME_WEST_TOP_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_LEFT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_RIGHT_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_AND_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_WEST_ALL_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_ALL_SHAPE);
+	private static final VoxelShape FRAME_WEST_BACK_SHAPE = VeCollisionUtil.rotate270(Axis.Y, FRAME_NORTH_BACK_SHAPE);
+	
+	private static final VoxelShape FRAME_EAST_TOP_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_LEFT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_RIGHT_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_AND_BOTTOM_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE);
+	private static final VoxelShape FRAME_EAST_ALL_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_ALL_SHAPE);
+	private static final VoxelShape FRAME_EAST_BACK_SHAPE = VeCollisionUtil.rotate90(Axis.Y, FRAME_NORTH_BACK_SHAPE);
 	
 	public VeFrameBlock(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)).with(NORTH, false).with(SOUTH, false).with(WEST, false).with(EAST, false).with(UP, false).with(DOWN, false));
 	}
 	
 	@Override
@@ -66,19 +159,62 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		ItemStack heldItem = player.getHeldItem(handIn);
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		
+		Map<Item, Item> topPaintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting, VeItems.wanderer_painting_top)
+																	.put(VeItems.graham_painting, VeItems.graham_painting_top).build();
+		
+		Map<Item, Item> bottomPaintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting, VeItems.wanderer_painting_bottom)
+																	   .put(VeItems.graham_painting, VeItems.graham_painting_bottom).build();
+		
 		if(tileEntity instanceof VeFrameTileEntity)
 		{
 			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
-			
+			VeFrameTileEntity topFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
+			VeFrameTileEntity bottomFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
 			//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
-			if(!worldIn.isRemote && frameTileEntity.getInventory().get(0) == ItemStack.EMPTY && VeItemTags.PAINTINGS.contains(heldItem.getItem()))
+			if(!worldIn.isRemote)
 			{
-				frameTileEntity.addItem(heldItem);
-				worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-				return ActionResultType.CONSUME;
+				/*
+				if(VeItemTags.PAINTINGS.contains(heldItem.getItem()))
+				{
+					frameTileEntity.addItem(heldItem);
+					worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+					return ActionResultType.CONSUME;
+				}
+				*/
+				if(topPaintingMap.containsKey(heldItem.getItem()))
+				{
+					if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(topFrameTileEntity))
+					{
+						frameTileEntity.addItem(new ItemStack(bottomPaintingMap.get(heldItem.getItem())));
+						topFrameTileEntity.addItem(new ItemStack(topPaintingMap.get(heldItem.getItem())));
+						worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+						heldItem.shrink(1);
+						return ActionResultType.SUCCESS;
+					}
+					else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(bottomFrameTileEntity))
+					{
+						frameTileEntity.addItem(new ItemStack(topPaintingMap.get(heldItem.getItem())));
+						bottomFrameTileEntity.addItem(new ItemStack(bottomPaintingMap.get(heldItem.getItem())));
+						worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+						heldItem.shrink(1);
+						return ActionResultType.SUCCESS;
+					}
+				}
+				else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()))
+				{
+					frameTileEntity.addItem(heldItem);
+					worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+					heldItem.shrink(1);
+					return ActionResultType.SUCCESS;
+				}
 			}
 		}
 		return ActionResultType.PASS;
+	}
+	
+	private static boolean isEmpty(VeFrameTileEntity frameTileEntity)
+	{
+		return frameTileEntity.getInventory().get(0) == ItemStack.EMPTY;
 	}
 	
 	@Override
@@ -104,8 +240,11 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	{
 		IWorld iworld = context.getWorld();
 		BlockPos blockpos = context.getPos();
-		boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
-		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(flag)).with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		boolean waterLoggedFlag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
+		
+		//boolean secondaryUseFlag = context.func_225518_g_();
+		
+		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(waterLoggedFlag)).with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 	
 	@Override
@@ -117,33 +256,65 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		if (stateIn.get(WATERLOGGED))
+		boolean attachFlag = this.getBlock() == facingState.getBlock() && facingState.get(FACING) == stateIn.get(FACING);
+		
+		boolean northFlag = facing == Direction.NORTH ? attachFlag : stateIn.get(NORTH);
+        boolean eastFlag = facing == Direction.EAST ? attachFlag : stateIn.get(EAST);
+        boolean southFlag = facing == Direction.SOUTH ? attachFlag : stateIn.get(SOUTH);
+        boolean westFlag = facing == Direction.WEST ? attachFlag : stateIn.get(WEST);
+        boolean upFlag = facing == Direction.UP ? attachFlag : stateIn.get(UP);
+        boolean downFlag = facing == Direction.DOWN ? attachFlag : stateIn.get(DOWN);
+        
+        if (stateIn.get(WATERLOGGED))
 		{
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-		
-		if(facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
+		else if(facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos))
 		{
 			this.onBlockHarvested(worldIn.getWorld(), currentPos, stateIn, null);
 			return Blocks.AIR.getDefaultState();
 		}
 		else
 		{
-			return stateIn;
+			return stateIn.with(UP, Boolean.valueOf(upFlag)).with(DOWN, Boolean.valueOf(downFlag)).with(NORTH, Boolean.valueOf(northFlag)).with(EAST, Boolean.valueOf(eastFlag)).with(SOUTH, Boolean.valueOf(southFlag)).with(WEST, Boolean.valueOf(westFlag));
 		}
+		return facingState;
 	}
 	
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		TileEntity tileentity = worldIn.getTileEntity(pos);
+		VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
+		VeFrameTileEntity frameTileEntityUp = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
+		VeFrameTileEntity frameTileEntityDown = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
 		
-		if(tileentity instanceof VeFrameTileEntity)
+		Map<Item, Item> paintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting_bottom, VeItems.wanderer_painting)
+																 .put(VeItems.wanderer_painting_top, VeItems.wanderer_painting)
+																 .put(VeItems.graham_painting_bottom, VeItems.graham_painting)
+																 .put(VeItems.graham_painting_top, VeItems.graham_painting).build();
+		
+		Item inventoryItem = frameTileEntity.getInventory().get(0).getItem();
+		
+		NonNullList<ItemStack> itemDrops = NonNullList.withSize(1, new ItemStack(paintingMap.get(inventoryItem)));
+		
+		if(paintingMap.containsKey(inventoryItem))
 		{
-			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) tileentity;
-			
+			if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityUp))
+			{
+				frameTileEntityUp.getInventory().clear();
+				InventoryHelper.dropItems(worldIn, pos, itemDrops);
+			}
+			else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityDown))
+			{
+				frameTileEntityDown.getInventory().clear();
+				InventoryHelper.dropItems(worldIn, pos, itemDrops);
+			}
+		}
+		else
+		{
 			InventoryHelper.dropItems(worldIn, pos, frameTileEntity.getInventory());
 		}
+		
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 	
@@ -152,15 +323,74 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	{
 		switch((Direction)state.get(FACING))
 		{
-			case EAST:
-			default:
-				return PAINTING_EAST_SHAPE;
-			case WEST:
-				return PAINTING_WEST_SHAPE;
-			case SOUTH:
-				return PAINTING_SOUTH_SHAPE;
 			case NORTH:
-				return PAINTING_NORTH_SHAPE;
+				return defineNorthAndSouthShapes(state, FRAME_NORTH_TOP_RIM_SHAPE,
+														FRAME_NORTH_BOTTOM_RIM_SHAPE,
+														FRAME_NORTH_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_LEFT_RIM_SHAPE,
+														FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE,
+														FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE,
+														FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE,
+														FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE,
+														FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+														FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+														FRAME_NORTH_BACK_SHAPE,
+														FRAME_NORTH_ALL_SHAPE);
+			case SOUTH:
+				return defineNorthAndSouthShapes(state, FRAME_SOUTH_TOP_RIM_SHAPE,
+														FRAME_SOUTH_BOTTOM_RIM_SHAPE,
+														FRAME_SOUTH_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_LEFT_RIM_SHAPE,
+														FRAME_SOUTH_TOP_AND_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_TOP_AND_LEFT_RIM_SHAPE,
+														FRAME_SOUTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_BOTTOM_AND_LEFT_RIM_SHAPE,
+														FRAME_SOUTH_RIGHT_AND_LEFT_RIM_SHAPE,
+														FRAME_SOUTH_TOP_AND_BOTTOM_RIM_SHAPE,
+														FRAME_SOUTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+														FRAME_SOUTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+														FRAME_SOUTH_BACK_SHAPE,
+														FRAME_SOUTH_ALL_SHAPE);
+			case WEST:
+				return defineWestAndEastShapes(state, FRAME_WEST_TOP_RIM_SHAPE,
+													  FRAME_WEST_BOTTOM_RIM_SHAPE,
+													  FRAME_WEST_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_LEFT_RIM_SHAPE,
+													  FRAME_WEST_TOP_AND_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_TOP_AND_LEFT_RIM_SHAPE,
+													  FRAME_WEST_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  FRAME_WEST_RIGHT_AND_LEFT_RIM_SHAPE,
+													  FRAME_WEST_TOP_AND_BOTTOM_RIM_SHAPE,
+													  FRAME_WEST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  FRAME_WEST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  FRAME_WEST_BACK_SHAPE,
+													  FRAME_WEST_ALL_SHAPE);
+			default:
+				return defineWestAndEastShapes(state, FRAME_EAST_TOP_RIM_SHAPE,
+													  FRAME_EAST_BOTTOM_RIM_SHAPE,
+													  FRAME_EAST_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_LEFT_RIM_SHAPE,
+													  FRAME_EAST_TOP_AND_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_TOP_AND_LEFT_RIM_SHAPE,
+													  FRAME_EAST_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  FRAME_EAST_RIGHT_AND_LEFT_RIM_SHAPE,
+													  FRAME_EAST_TOP_AND_BOTTOM_RIM_SHAPE,
+													  FRAME_EAST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  FRAME_EAST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  FRAME_EAST_BACK_SHAPE,
+													  FRAME_EAST_ALL_SHAPE);
 		}
 	}
 	
@@ -184,6 +414,278 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(FACING, WATERLOGGED);
+		builder.add(FACING, WATERLOGGED, NORTH, SOUTH, WEST, EAST, UP, DOWN);
+	}
+	
+	public static VoxelShape defineNorthAndSouthShapes(BlockState state, VoxelShape frameTopRim, VoxelShape frameBottomRim, VoxelShape frameRightRim, VoxelShape frameLeftRim, VoxelShape frameTopAndRightRim, VoxelShape frameTopAndLeftRim, VoxelShape frameBottomAndRightRim, VoxelShape frameBottomAndLeftRim, VoxelShape frameRightAndLeftRim, VoxelShape frameTopAndBottomRim, VoxelShape frameTopLeftAndRightRim, VoxelShape frameBottomLeftAndRightRim, VoxelShape frameTopBottomAndLeftRim, VoxelShape frameTopBottomAndRightRim, VoxelShape frameNone, VoxelShape frameAll)
+	{
+		if(state.get(DOWN) && state.get(EAST) && state.get(UP) && state.get(WEST))
+		{
+			return frameNone;
+		}
+		else if(state.get(UP) && state.get(DOWN))
+		{
+			if(state.get(EAST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameRightRim;
+				}
+				else
+				{
+					return frameLeftRim;
+				}
+			}
+			else if(state.get(WEST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameLeftRim;
+				}
+				else
+				{
+					return frameRightRim;
+				}
+			}
+			else
+			{
+				return frameRightAndLeftRim;
+			}
+		}
+		else if(state.get(EAST) && state.get(WEST))
+		{
+			if(state.get(UP))
+			{
+				return frameBottomRim;
+			}
+			else if(state.get(DOWN))
+			{
+				return frameTopRim;
+			}
+			else
+			{
+				return frameTopAndBottomRim;
+			}
+		}
+		else if(state.get(UP))
+		{
+			if(state.get(EAST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameBottomAndRightRim;
+				}
+				else
+				{
+					return frameBottomAndLeftRim;
+				}
+			}
+			else if(state.get(WEST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameBottomAndLeftRim;
+				}
+				else
+				{
+					return frameBottomAndRightRim;
+				}
+			}
+			else
+			{
+				return frameBottomLeftAndRightRim;
+			}
+		}
+		else if(state.get(DOWN))
+		{
+			if(state.get(EAST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameTopAndRightRim;
+				}
+				else
+				{
+					return frameTopAndLeftRim;
+				}
+			}
+			else if(state.get(WEST))
+			{
+				if(state.get(FACING) == Direction.NORTH)
+				{
+					return frameTopAndLeftRim;
+				}
+				else
+				{
+					return frameTopAndRightRim;
+				}
+			}
+			else
+			{
+				return frameTopLeftAndRightRim;
+			}
+		}
+		else if(state.get(EAST))
+		{
+			if(state.get(FACING) == Direction.NORTH)
+			{
+				return frameTopBottomAndRightRim;
+			}
+			else
+			{
+				return frameTopBottomAndLeftRim;
+			}
+		}
+		else if(state.get(WEST))
+		{
+			if(state.get(FACING) == Direction.NORTH)
+			{
+				return frameTopBottomAndLeftRim;
+			}
+			else
+			{
+				return frameTopBottomAndRightRim;
+			}
+		}
+		else
+		{
+			return frameAll;
+		}
+	}
+	
+	public static VoxelShape defineWestAndEastShapes(BlockState state, VoxelShape frameTopRim, VoxelShape frameBottomRim, VoxelShape frameRightRim, VoxelShape frameLeftRim, VoxelShape frameTopAndRightRim, VoxelShape frameTopAndLeftRim, VoxelShape frameBottomAndRightRim, VoxelShape frameBottomAndLeftRim, VoxelShape frameRightAndLeftRim, VoxelShape frameTopAndBottomRim, VoxelShape frameTopLeftAndRightRim, VoxelShape frameBottomLeftAndRightRim, VoxelShape frameTopBottomAndLeftRim, VoxelShape frameTopBottomAndRightRim, VoxelShape frameNone, VoxelShape frameAll)
+	{
+		if(state.get(DOWN) && state.get(UP) && state.get(SOUTH) && state.get(NORTH))
+		{
+			return frameNone;
+		}
+		else if(state.get(UP) && state.get(DOWN))
+		{
+			if(state.get(NORTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameRightRim;
+				}
+				else
+				{
+					return frameLeftRim;
+				}
+			}
+			else if(state.get(SOUTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameLeftRim;
+				}
+				else
+				{
+					return frameRightRim;
+				}
+			}
+			else
+			{
+				return frameRightAndLeftRim;
+			}
+		}
+		else if(state.get(NORTH) && state.get(SOUTH))
+		{
+			if(state.get(UP))
+			{
+				return frameBottomRim;
+			}
+			else if(state.get(DOWN))
+			{
+				return frameTopRim;
+			}
+			else
+			{
+				return frameTopAndBottomRim;
+			}
+		}
+		else if(state.get(UP))
+		{
+			if(state.get(NORTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameBottomAndRightRim;
+				}
+				else
+				{
+					return frameBottomAndLeftRim;
+				}
+			}
+			else if(state.get(SOUTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameBottomAndLeftRim;
+				}
+				else
+				{
+					return frameBottomAndRightRim;
+				}
+			}
+			else
+			{
+				return frameBottomLeftAndRightRim;
+			}
+		}
+		else if(state.get(DOWN))
+		{
+			if(state.get(NORTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameTopAndRightRim;
+				}
+				else
+				{
+					return frameTopAndLeftRim;
+				}
+			}
+			else if(state.get(SOUTH))
+			{
+				if(state.get(FACING) == Direction.WEST)
+				{
+					return frameTopAndLeftRim;
+				}
+				else
+				{
+					return frameTopAndRightRim;
+				}
+			}
+			else
+			{
+				return frameTopLeftAndRightRim;
+			}
+		}
+		else if(state.get(NORTH))
+		{
+			if(state.get(FACING) == Direction.WEST)
+			{
+				return frameTopBottomAndRightRim;
+			}
+			else
+			{
+				return frameTopBottomAndLeftRim;
+			}
+		}
+		else if(state.get(SOUTH))
+		{
+			if(state.get(FACING) == Direction.WEST)
+			{
+				return frameTopBottomAndLeftRim;
+			}
+			else
+			{
+				return frameTopBottomAndRightRim;
+			}
+		}
+		else
+		{
+			return frameAll;
+		}
 	}
 }

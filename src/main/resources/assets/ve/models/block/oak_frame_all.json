@@ -1,5 +1,5 @@
 {
-    "parent": "ve:block/template_frame",
+    "parent": "ve:block/template_frame_all",
     "textures":
 	{
         "frame": "block/oak_log",

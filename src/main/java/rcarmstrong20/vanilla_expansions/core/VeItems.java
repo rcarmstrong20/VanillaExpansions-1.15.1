@@ -103,6 +103,12 @@ public class VeItems
 	public static Item starry_night_painting = register("starry_night_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item the_scream_painting = register("the_scream_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item nether_wastes_painting = register("nether_wastes_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item wanderer_painting = register("wanderer_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item wanderer_painting_top = register("wanderer_painting_top", new Item(new Item.Properties()));
+	public static Item wanderer_painting_bottom = register("wanderer_painting_bottom", new Item(new Item.Properties()));
+	public static Item graham_painting = register("graham_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item graham_painting_top = register("graham_painting_top", new Item(new Item.Properties()));
+	public static Item graham_painting_bottom = register("graham_painting_bottom", new Item(new Item.Properties()));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{
