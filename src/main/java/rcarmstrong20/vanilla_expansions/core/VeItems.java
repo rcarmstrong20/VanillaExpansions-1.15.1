@@ -109,6 +109,21 @@ public class VeItems
 	public static Item graham_painting = register("graham_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item graham_painting_top = register("graham_painting_top", new Item(new Item.Properties()));
 	public static Item graham_painting_bottom = register("graham_painting_bottom", new Item(new Item.Properties()));
+	public static Item courbet_painting = register("courbet_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item courbet_painting_right = register("courbet_painting_right", new Item(new Item.Properties()));
+	public static Item courbet_painting_left = register("courbet_painting_left", new Item(new Item.Properties()));
+	public static Item creebet_painting = register("creebet_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item creebet_painting_right = register("creebet_painting_right", new Item(new Item.Properties()));
+	public static Item creebet_painting_left = register("creebet_painting_left", new Item(new Item.Properties()));
+	public static Item pool_painting = register("pool_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item pool_painting_right = register("pool_painting_right", new Item(new Item.Properties()));
+	public static Item pool_painting_left = register("pool_painting_left", new Item(new Item.Properties()));
+	public static Item sea_painting = register("sea_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item sea_painting_right = register("sea_painting_right", new Item(new Item.Properties()));
+	public static Item sea_painting_left = register("sea_painting_left", new Item(new Item.Properties()));
+	public static Item sunset_painting = register("sunset_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item sunset_painting_right = register("sunset_painting_right", new Item(new Item.Properties()));
+	public static Item sunset_painting_left = register("sunset_painting_left", new Item(new Item.Properties()));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{

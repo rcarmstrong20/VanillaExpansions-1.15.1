@@ -164,42 +164,69 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		Map<Item, Item> bottomPaintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting, VeItems.wanderer_painting_bottom)
 																	   .put(VeItems.graham_painting, VeItems.graham_painting_bottom).build();
 		
+		Map<Item, Item> rightPaintingMap = (new Builder<Item, Item>()).put(VeItems.courbet_painting, VeItems.courbet_painting_right)
+																	  .put(VeItems.creebet_painting, VeItems.creebet_painting_right)
+																	  .put(VeItems.pool_painting, VeItems.pool_painting_right)
+																	  .put(VeItems.sea_painting, VeItems.sea_painting_right)
+																	  .put(VeItems.sunset_painting, VeItems.sunset_painting_right).build();
+		
+		Map<Item, Item> leftPaintingMap = (new Builder<Item, Item>()).put(VeItems.courbet_painting, VeItems.courbet_painting_left)
+																	 .put(VeItems.creebet_painting, VeItems.creebet_painting_left)
+																	 .put(VeItems.pool_painting, VeItems.pool_painting_left)
+																	 .put(VeItems.sea_painting, VeItems.sea_painting_left)
+																	 .put(VeItems.sunset_painting, VeItems.sunset_painting_left).build();
+		
 		if(tileEntity instanceof VeFrameTileEntity)
 		{
 			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
 			VeFrameTileEntity topFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
 			VeFrameTileEntity bottomFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
+			
+			VeFrameTileEntity eastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.east());
+			VeFrameTileEntity westFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.west());
+			VeFrameTileEntity northFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
+			VeFrameTileEntity southFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
+			
 			//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
 			if(!worldIn.isRemote)
 			{
-				/*
-				if(VeItemTags.PAINTINGS.contains(heldItem.getItem()))
-				{
-					frameTileEntity.addItem(heldItem);
-					worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-					return ActionResultType.CONSUME;
-				}
-				*/
-				if(topPaintingMap.containsKey(heldItem.getItem()))
+				if(topPaintingMap.containsKey(heldItem.getItem()) || bottomPaintingMap.containsKey(heldItem.getItem()))
 				{
 					if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(topFrameTileEntity))
 					{
-						frameTileEntity.addItem(new ItemStack(bottomPaintingMap.get(heldItem.getItem())));
-						topFrameTileEntity.addItem(new ItemStack(topPaintingMap.get(heldItem.getItem())));
-						worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-						heldItem.shrink(1);
+						fill2BlockPainting(worldIn, pos, frameTileEntity, topFrameTileEntity, bottomPaintingMap, topPaintingMap, heldItem);
 						return ActionResultType.SUCCESS;
 					}
 					else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(bottomFrameTileEntity))
 					{
-						frameTileEntity.addItem(new ItemStack(topPaintingMap.get(heldItem.getItem())));
-						bottomFrameTileEntity.addItem(new ItemStack(bottomPaintingMap.get(heldItem.getItem())));
-						worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-						heldItem.shrink(1);
+						fill2BlockPainting(worldIn, pos, frameTileEntity, bottomFrameTileEntity, topPaintingMap, bottomPaintingMap, heldItem);
 						return ActionResultType.SUCCESS;
 					}
 				}
-				else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()))
+				else if(rightPaintingMap.containsKey(heldItem.getItem()) || leftPaintingMap.containsKey(heldItem.getItem()))
+				{
+					if(worldIn.getBlockState(pos.east()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(eastFrameTileEntity))
+					{
+						fill2BlockPainting(worldIn, pos, frameTileEntity, eastFrameTileEntity, rightPaintingMap, leftPaintingMap, heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(worldIn.getBlockState(pos.west()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(westFrameTileEntity))
+					{
+						fill2BlockPainting(worldIn, pos, frameTileEntity, westFrameTileEntity, leftPaintingMap, rightPaintingMap, heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(worldIn.getBlockState(pos.south()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(southFrameTileEntity))
+					{
+						fill2BlockPainting(worldIn, pos, frameTileEntity, southFrameTileEntity, leftPaintingMap, rightPaintingMap, heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(worldIn.getBlockState(pos.north()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(northFrameTileEntity))
+					{
+						fill2BlockPainting(worldIn, pos, frameTileEntity, northFrameTileEntity, rightPaintingMap, leftPaintingMap, heldItem);
+						return ActionResultType.SUCCESS;
+					}
+				}
+				else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()) && isEmpty(frameTileEntity))
 				{
 					frameTileEntity.addItem(heldItem);
 					worldIn.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
@@ -211,9 +238,23 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		return ActionResultType.PASS;
 	}
 	
+	/*
+	 * A helper method that checks if the frame is empty.
+	 */
 	private static boolean isEmpty(VeFrameTileEntity frameTileEntity)
 	{
 		return frameTileEntity.getInventory().get(0) == ItemStack.EMPTY;
+	}
+	
+	/*
+	 * A helper method that fills the frames with each painting piece.
+	 */
+	private static void fill2BlockPainting(World world, BlockPos pos, VeFrameTileEntity clickedFrameTileEntity, VeFrameTileEntity secondFrameTileEntity, Map<Item, Item> clickedPaintingMap, Map<Item, Item> secondPaintingMap, ItemStack heldItem)
+	{
+		clickedFrameTileEntity.addItem(new ItemStack(clickedPaintingMap.get(heldItem.getItem())));
+		secondFrameTileEntity.addItem(new ItemStack(secondPaintingMap.get(heldItem.getItem())));
+		world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+		heldItem.shrink(1);
 	}
 	
 	@Override
@@ -287,26 +328,60 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		VeFrameTileEntity frameTileEntityUp = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
 		VeFrameTileEntity frameTileEntityDown = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
 		
-		Map<Item, Item> paintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting_bottom, VeItems.wanderer_painting)
-																 .put(VeItems.wanderer_painting_top, VeItems.wanderer_painting)
-																 .put(VeItems.graham_painting_bottom, VeItems.graham_painting)
-																 .put(VeItems.graham_painting_top, VeItems.graham_painting).build();
+		VeFrameTileEntity frameTileEntityEast = (VeFrameTileEntity) worldIn.getTileEntity(pos.east());
+		VeFrameTileEntity frameTileEntityWest = (VeFrameTileEntity) worldIn.getTileEntity(pos.west());
+		VeFrameTileEntity frameTileEntityNorth = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
+		VeFrameTileEntity frameTileEntitySouth = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
+		
+		Map<Item, Item> tallPaintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting_bottom, VeItems.wanderer_painting)
+																 	 .put(VeItems.wanderer_painting_top, VeItems.wanderer_painting)
+																 	 .put(VeItems.graham_painting_bottom, VeItems.graham_painting)
+																 	 .put(VeItems.graham_painting_top, VeItems.graham_painting).build();
+		
+		Map<Item, Item> sidePaintingMap = (new Builder<Item, Item>()).put(VeItems.courbet_painting_right, VeItems.courbet_painting)
+			 	 												   	 .put(VeItems.courbet_painting_left, VeItems.courbet_painting)
+			 	 												   	 .put(VeItems.creebet_painting_right, VeItems.creebet_painting)
+			 	 												   	 .put(VeItems.creebet_painting_left, VeItems.creebet_painting)
+			 	 												   	 .put(VeItems.pool_painting_right, VeItems.pool_painting)
+			 	 												   	 .put(VeItems.pool_painting_left, VeItems.pool_painting)
+			 	 												   	 .put(VeItems.sea_painting_right, VeItems.sea_painting)
+			 	 												   	 .put(VeItems.sea_painting_left, VeItems.sea_painting)
+			 	 												   	 .put(VeItems.sunset_painting_right, VeItems.sunset_painting)
+			 	 												   	 .put(VeItems.sunset_painting_left, VeItems.sunset_painting).build();
 		
 		Item inventoryItem = frameTileEntity.getInventory().get(0).getItem();
 		
-		NonNullList<ItemStack> itemDrops = NonNullList.withSize(1, new ItemStack(paintingMap.get(inventoryItem)));
+		NonNullList<ItemStack> tallPaintingItemDrops = NonNullList.withSize(1, new ItemStack(tallPaintingMap.get(inventoryItem)));
+		NonNullList<ItemStack> sidePaintingItemDrops = NonNullList.withSize(1, new ItemStack(sidePaintingMap.get(inventoryItem)));
 		
-		if(paintingMap.containsKey(inventoryItem))
+		if(tallPaintingMap.containsKey(inventoryItem))
 		{
 			if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityUp))
 			{
-				frameTileEntityUp.getInventory().clear();
-				InventoryHelper.dropItems(worldIn, pos, itemDrops);
+				harvest2BlockPainting(worldIn, pos, frameTileEntityUp, tallPaintingItemDrops);
 			}
 			else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityDown))
 			{
-				frameTileEntityDown.getInventory().clear();
-				InventoryHelper.dropItems(worldIn, pos, itemDrops);
+				harvest2BlockPainting(worldIn, pos, frameTileEntityDown, tallPaintingItemDrops);
+			}
+		}
+		else if(sidePaintingMap.containsKey(inventoryItem))
+		{
+			if(worldIn.getBlockState(pos.east()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityEast))
+			{
+				harvest2BlockPainting(worldIn, pos, frameTileEntityEast, sidePaintingItemDrops);
+			}
+			else if(worldIn.getBlockState(pos.west()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityWest))
+			{
+				harvest2BlockPainting(worldIn, pos, frameTileEntityWest, sidePaintingItemDrops);
+			}
+			else if(worldIn.getBlockState(pos.north()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityNorth))
+			{
+				harvest2BlockPainting(worldIn, pos, frameTileEntityNorth, sidePaintingItemDrops);
+			}
+			else if(worldIn.getBlockState(pos.south()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntitySouth))
+			{
+				harvest2BlockPainting(worldIn, pos, frameTileEntitySouth, sidePaintingItemDrops);
 			}
 		}
 		else
@@ -315,6 +390,15 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		}
 		
 		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+	
+	/*
+	 * A helper method to harvest 2 block paintings.
+	 */
+	private static void harvest2BlockPainting(World world, BlockPos pos, VeFrameTileEntity secondFrameTileEntity, NonNullList<ItemStack> drops)
+	{
+		secondFrameTileEntity.getInventory().clear();
+		InventoryHelper.dropItems(world, pos, drops);
 	}
 	
 	@Override
