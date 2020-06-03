@@ -40,6 +40,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
@@ -179,6 +180,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		if(tileEntity instanceof VeFrameTileEntity)
 		{
 			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
+			
 			VeFrameTileEntity topFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
 			VeFrameTileEntity bottomFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
 			
@@ -187,7 +189,6 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 			VeFrameTileEntity northFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
 			VeFrameTileEntity southFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
 			
-			//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
 			if(!worldIn.isRemote)
 			{
 				if(topPaintingMap.containsKey(heldItem.getItem()) || bottomPaintingMap.containsKey(heldItem.getItem()))
@@ -226,6 +227,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 						return ActionResultType.SUCCESS;
 					}
 				}
+				//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
 				else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()) && isEmpty(frameTileEntity))
 				{
 					frameTileEntity.addItem(heldItem);
@@ -247,7 +249,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	}
 	
 	/*
-	 * A helper method that fills the frames with each painting piece.
+	 * A helper method that fills the frames with each painting piece for 2 block paintings.
 	 */
 	private static void fill2BlockPainting(World world, BlockPos pos, VeFrameTileEntity clickedFrameTileEntity, VeFrameTileEntity secondFrameTileEntity, Map<Item, Item> clickedPaintingMap, Map<Item, Item> secondPaintingMap, ItemStack heldItem)
 	{
@@ -255,6 +257,28 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		secondFrameTileEntity.addItem(new ItemStack(secondPaintingMap.get(heldItem.getItem())));
 		world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
 		heldItem.shrink(1);
+	}
+	
+	/*
+	 * A helper method to check if the frame in the specified area are empty.
+	 */
+	private boolean isMultiBlockPaintingEmpty(BlockPos currentPos, World world, double rowNum, double colNum)
+	{
+		for(int col = 0; col < rowNum; col++)
+		{
+			for(int row = 0; row < colNum; row++)
+			{
+				VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) world.getTileEntity(currentPos.down(col).east(row));
+				
+				if(world.getBlockState(currentPos.down(col).east(row)).getBlock() == this.getBlock() && !isEmpty(frameTileEntity))
+				{
+					return false;
+				}
+				row += 1;
+			}
+			col += 1;
+		}
+		return true;
 	}
 	
 	@Override
@@ -282,7 +306,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		BlockPos blockpos = context.getPos();
 		boolean waterLoggedFlag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
 		
-		//boolean secondaryUseFlag = context.func_225518_g_();
+		boolean secondaryUseFlag = context.func_225518_g_();
+		
+		
 		
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(waterLoggedFlag)).with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
@@ -316,7 +342,12 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		}
 		else
 		{
-			return stateIn.with(UP, Boolean.valueOf(upFlag)).with(DOWN, Boolean.valueOf(downFlag)).with(NORTH, Boolean.valueOf(northFlag)).with(EAST, Boolean.valueOf(eastFlag)).with(SOUTH, Boolean.valueOf(southFlag)).with(WEST, Boolean.valueOf(westFlag));
+			return stateIn.with(UP, Boolean.valueOf(upFlag))
+						  .with(DOWN, Boolean.valueOf(downFlag))
+						  .with(NORTH, Boolean.valueOf(northFlag))
+						  .with(EAST, Boolean.valueOf(eastFlag))
+						  .with(SOUTH, Boolean.valueOf(southFlag))
+						  .with(WEST, Boolean.valueOf(westFlag));
 		}
 		return facingState;
 	}
@@ -407,73 +438,73 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		switch((Direction)state.get(FACING))
 		{
 			case NORTH:
-				return defineNorthAndSouthShapes(state, FRAME_NORTH_TOP_RIM_SHAPE,
-														FRAME_NORTH_BOTTOM_RIM_SHAPE,
-														FRAME_NORTH_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_LEFT_RIM_SHAPE,
-														FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE,
-														FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE,
-														FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE,
-														FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE,
-														FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
-														FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
-														FRAME_NORTH_BACK_SHAPE,
-														FRAME_NORTH_ALL_SHAPE);
+				return defineShapes(state, state.get(WEST), state.get(EAST), Direction.NORTH, FRAME_NORTH_TOP_RIM_SHAPE,
+																					 		  FRAME_NORTH_BOTTOM_RIM_SHAPE,
+																					 		  FRAME_NORTH_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_LEFT_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE,
+																					 		  FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE,
+																					 		  FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+																					 		  FRAME_NORTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																					 		  FRAME_NORTH_BACK_SHAPE,
+																					 		  FRAME_NORTH_ALL_SHAPE);
 			case SOUTH:
-				return defineNorthAndSouthShapes(state, FRAME_SOUTH_TOP_RIM_SHAPE,
-														FRAME_SOUTH_BOTTOM_RIM_SHAPE,
-														FRAME_SOUTH_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_LEFT_RIM_SHAPE,
-														FRAME_SOUTH_TOP_AND_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_TOP_AND_LEFT_RIM_SHAPE,
-														FRAME_SOUTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_BOTTOM_AND_LEFT_RIM_SHAPE,
-														FRAME_SOUTH_RIGHT_AND_LEFT_RIM_SHAPE,
-														FRAME_SOUTH_TOP_AND_BOTTOM_RIM_SHAPE,
-														FRAME_SOUTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
-														FRAME_SOUTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
-														FRAME_SOUTH_BACK_SHAPE,
-														FRAME_SOUTH_ALL_SHAPE);
+				return defineShapes(state, state.get(WEST), state.get(EAST), Direction.NORTH, FRAME_SOUTH_TOP_RIM_SHAPE,
+																							  FRAME_SOUTH_BOTTOM_RIM_SHAPE,
+																							  FRAME_SOUTH_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_LEFT_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_AND_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_AND_LEFT_RIM_SHAPE,
+																							  FRAME_SOUTH_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_BOTTOM_AND_LEFT_RIM_SHAPE,
+																							  FRAME_SOUTH_RIGHT_AND_LEFT_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_AND_BOTTOM_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+																							  FRAME_SOUTH_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																							  FRAME_SOUTH_BACK_SHAPE,
+																							  FRAME_SOUTH_ALL_SHAPE);
 			case WEST:
-				return defineWestAndEastShapes(state, FRAME_WEST_TOP_RIM_SHAPE,
-													  FRAME_WEST_BOTTOM_RIM_SHAPE,
-													  FRAME_WEST_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_LEFT_RIM_SHAPE,
-													  FRAME_WEST_TOP_AND_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_TOP_AND_LEFT_RIM_SHAPE,
-													  FRAME_WEST_BOTTOM_AND_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_BOTTOM_AND_LEFT_RIM_SHAPE,
-													  FRAME_WEST_RIGHT_AND_LEFT_RIM_SHAPE,
-													  FRAME_WEST_TOP_AND_BOTTOM_RIM_SHAPE,
-													  FRAME_WEST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
-													  FRAME_WEST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
-													  FRAME_WEST_BACK_SHAPE,
-													  FRAME_WEST_ALL_SHAPE);
+				return defineShapes(state, state.get(SOUTH), state.get(NORTH), Direction.WEST, FRAME_WEST_TOP_RIM_SHAPE,
+													  					 					   FRAME_WEST_BOTTOM_RIM_SHAPE,
+													  					 					   FRAME_WEST_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_LEFT_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_AND_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_AND_LEFT_RIM_SHAPE,
+													  					 					   FRAME_WEST_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  					 					   FRAME_WEST_RIGHT_AND_LEFT_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_AND_BOTTOM_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+													  					 					   FRAME_WEST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+													  					 					   FRAME_WEST_BACK_SHAPE,
+													  					 					   FRAME_WEST_ALL_SHAPE);
 			default:
-				return defineWestAndEastShapes(state, FRAME_EAST_TOP_RIM_SHAPE,
-													  FRAME_EAST_BOTTOM_RIM_SHAPE,
-													  FRAME_EAST_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_LEFT_RIM_SHAPE,
-													  FRAME_EAST_TOP_AND_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_TOP_AND_LEFT_RIM_SHAPE,
-													  FRAME_EAST_BOTTOM_AND_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_BOTTOM_AND_LEFT_RIM_SHAPE,
-													  FRAME_EAST_RIGHT_AND_LEFT_RIM_SHAPE,
-													  FRAME_EAST_TOP_AND_BOTTOM_RIM_SHAPE,
-													  FRAME_EAST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
-													  FRAME_EAST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
-													  FRAME_EAST_BACK_SHAPE,
-													  FRAME_EAST_ALL_SHAPE);
+				return defineShapes(state, state.get(SOUTH), state.get(NORTH), Direction.WEST, FRAME_EAST_TOP_RIM_SHAPE,
+																							   FRAME_EAST_BOTTOM_RIM_SHAPE,
+																							   FRAME_EAST_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_LEFT_RIM_SHAPE,
+																							   FRAME_EAST_TOP_AND_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_TOP_AND_LEFT_RIM_SHAPE,
+																							   FRAME_EAST_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_BOTTOM_AND_LEFT_RIM_SHAPE,
+																							   FRAME_EAST_RIGHT_AND_LEFT_RIM_SHAPE,
+																							   FRAME_EAST_TOP_AND_BOTTOM_RIM_SHAPE,
+																							   FRAME_EAST_TOP_LEFT_AND_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_TOP_BOTTOM_AND_LEFT_RIM_SHAPE,
+																							   FRAME_EAST_TOP_BOTTOM_AND_RIGHT_RIM_SHAPE,
+																							   FRAME_EAST_BACK_SHAPE,
+																							   FRAME_EAST_ALL_SHAPE);
 		}
 	}
 	
@@ -500,17 +531,17 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		builder.add(FACING, WATERLOGGED, NORTH, SOUTH, WEST, EAST, UP, DOWN);
 	}
 	
-	public static VoxelShape defineNorthAndSouthShapes(BlockState state, VoxelShape frameTopRim, VoxelShape frameBottomRim, VoxelShape frameRightRim, VoxelShape frameLeftRim, VoxelShape frameTopAndRightRim, VoxelShape frameTopAndLeftRim, VoxelShape frameBottomAndRightRim, VoxelShape frameBottomAndLeftRim, VoxelShape frameRightAndLeftRim, VoxelShape frameTopAndBottomRim, VoxelShape frameTopLeftAndRightRim, VoxelShape frameBottomLeftAndRightRim, VoxelShape frameTopBottomAndLeftRim, VoxelShape frameTopBottomAndRightRim, VoxelShape frameNone, VoxelShape frameAll)
+	public static VoxelShape defineShapes(BlockState state, Boolean firstSide, Boolean secondSide, Direction secondDirection, VoxelShape frameTopRim, VoxelShape frameBottomRim, VoxelShape frameRightRim, VoxelShape frameLeftRim, VoxelShape frameTopAndRightRim, VoxelShape frameTopAndLeftRim, VoxelShape frameBottomAndRightRim, VoxelShape frameBottomAndLeftRim, VoxelShape frameRightAndLeftRim, VoxelShape frameTopAndBottomRim, VoxelShape frameTopLeftAndRightRim, VoxelShape frameBottomLeftAndRightRim, VoxelShape frameTopBottomAndLeftRim, VoxelShape frameTopBottomAndRightRim, VoxelShape frameNone, VoxelShape frameAll)
 	{
-		if(state.get(DOWN) && state.get(EAST) && state.get(UP) && state.get(WEST))
+		if(state.get(DOWN) && state.get(UP) && secondSide && firstSide)
 		{
 			return frameNone;
 		}
 		else if(state.get(UP) && state.get(DOWN))
 		{
-			if(state.get(EAST))
+			if(secondSide)
 			{
-				if(state.get(FACING) == Direction.NORTH)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameRightRim;
 				}
@@ -519,9 +550,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 					return frameLeftRim;
 				}
 			}
-			else if(state.get(WEST))
+			else if(firstSide)
 			{
-				if(state.get(FACING) == Direction.NORTH)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameLeftRim;
 				}
@@ -535,7 +566,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 				return frameRightAndLeftRim;
 			}
 		}
-		else if(state.get(EAST) && state.get(WEST))
+		else if(secondSide && firstSide)
 		{
 			if(state.get(UP))
 			{
@@ -552,9 +583,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		}
 		else if(state.get(UP))
 		{
-			if(state.get(EAST))
+			if(secondSide)
 			{
-				if(state.get(FACING) == Direction.NORTH)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameBottomAndRightRim;
 				}
@@ -563,145 +594,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 					return frameBottomAndLeftRim;
 				}
 			}
-			else if(state.get(WEST))
+			else if(firstSide)
 			{
-				if(state.get(FACING) == Direction.NORTH)
-				{
-					return frameBottomAndLeftRim;
-				}
-				else
-				{
-					return frameBottomAndRightRim;
-				}
-			}
-			else
-			{
-				return frameBottomLeftAndRightRim;
-			}
-		}
-		else if(state.get(DOWN))
-		{
-			if(state.get(EAST))
-			{
-				if(state.get(FACING) == Direction.NORTH)
-				{
-					return frameTopAndRightRim;
-				}
-				else
-				{
-					return frameTopAndLeftRim;
-				}
-			}
-			else if(state.get(WEST))
-			{
-				if(state.get(FACING) == Direction.NORTH)
-				{
-					return frameTopAndLeftRim;
-				}
-				else
-				{
-					return frameTopAndRightRim;
-				}
-			}
-			else
-			{
-				return frameTopLeftAndRightRim;
-			}
-		}
-		else if(state.get(EAST))
-		{
-			if(state.get(FACING) == Direction.NORTH)
-			{
-				return frameTopBottomAndRightRim;
-			}
-			else
-			{
-				return frameTopBottomAndLeftRim;
-			}
-		}
-		else if(state.get(WEST))
-		{
-			if(state.get(FACING) == Direction.NORTH)
-			{
-				return frameTopBottomAndLeftRim;
-			}
-			else
-			{
-				return frameTopBottomAndRightRim;
-			}
-		}
-		else
-		{
-			return frameAll;
-		}
-	}
-	
-	public static VoxelShape defineWestAndEastShapes(BlockState state, VoxelShape frameTopRim, VoxelShape frameBottomRim, VoxelShape frameRightRim, VoxelShape frameLeftRim, VoxelShape frameTopAndRightRim, VoxelShape frameTopAndLeftRim, VoxelShape frameBottomAndRightRim, VoxelShape frameBottomAndLeftRim, VoxelShape frameRightAndLeftRim, VoxelShape frameTopAndBottomRim, VoxelShape frameTopLeftAndRightRim, VoxelShape frameBottomLeftAndRightRim, VoxelShape frameTopBottomAndLeftRim, VoxelShape frameTopBottomAndRightRim, VoxelShape frameNone, VoxelShape frameAll)
-	{
-		if(state.get(DOWN) && state.get(UP) && state.get(SOUTH) && state.get(NORTH))
-		{
-			return frameNone;
-		}
-		else if(state.get(UP) && state.get(DOWN))
-		{
-			if(state.get(NORTH))
-			{
-				if(state.get(FACING) == Direction.WEST)
-				{
-					return frameRightRim;
-				}
-				else
-				{
-					return frameLeftRim;
-				}
-			}
-			else if(state.get(SOUTH))
-			{
-				if(state.get(FACING) == Direction.WEST)
-				{
-					return frameLeftRim;
-				}
-				else
-				{
-					return frameRightRim;
-				}
-			}
-			else
-			{
-				return frameRightAndLeftRim;
-			}
-		}
-		else if(state.get(NORTH) && state.get(SOUTH))
-		{
-			if(state.get(UP))
-			{
-				return frameBottomRim;
-			}
-			else if(state.get(DOWN))
-			{
-				return frameTopRim;
-			}
-			else
-			{
-				return frameTopAndBottomRim;
-			}
-		}
-		else if(state.get(UP))
-		{
-			if(state.get(NORTH))
-			{
-				if(state.get(FACING) == Direction.WEST)
-				{
-					return frameBottomAndRightRim;
-				}
-				else
-				{
-					return frameBottomAndLeftRim;
-				}
-			}
-			else if(state.get(SOUTH))
-			{
-				if(state.get(FACING) == Direction.WEST)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameBottomAndLeftRim;
 				}
@@ -717,9 +612,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		}
 		else if(state.get(DOWN))
 		{
-			if(state.get(NORTH))
+			if(secondSide)
 			{
-				if(state.get(FACING) == Direction.WEST)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameTopAndRightRim;
 				}
@@ -728,9 +623,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 					return frameTopAndLeftRim;
 				}
 			}
-			else if(state.get(SOUTH))
+			else if(firstSide)
 			{
-				if(state.get(FACING) == Direction.WEST)
+				if(state.get(FACING) == secondDirection)
 				{
 					return frameTopAndLeftRim;
 				}
@@ -744,9 +639,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 				return frameTopLeftAndRightRim;
 			}
 		}
-		else if(state.get(NORTH))
+		else if(secondSide)
 		{
-			if(state.get(FACING) == Direction.WEST)
+			if(state.get(FACING) == secondDirection)
 			{
 				return frameTopBottomAndRightRim;
 			}
@@ -755,9 +650,9 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 				return frameTopBottomAndLeftRim;
 			}
 		}
-		else if(state.get(SOUTH))
+		else if(firstSide)
 		{
-			if(state.get(FACING) == Direction.WEST)
+			if(state.get(FACING) == secondDirection)
 			{
 				return frameTopBottomAndLeftRim;
 			}
