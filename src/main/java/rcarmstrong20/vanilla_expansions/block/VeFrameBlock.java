@@ -40,7 +40,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
@@ -63,17 +62,46 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	private static final VoxelShape FRAME_NORTH_TOP_SHAPE =  Block.makeCuboidShape(0.0D, 15.0D, 14.0D, 16.0D, 16.0D, 15.0D);
 	private static final VoxelShape FRAME_NORTH_BOTTOM_SHAPE =  Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 1.0D, 15.0D);
 	
-	private static final VoxelShape FRAME_NORTH_TOP_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE);
-	private static final VoxelShape FRAME_NORTH_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE);
-	private static final VoxelShape FRAME_NORTH_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_LEFT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_LEFT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE, FRAME_NORTH_RIGHT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_BOTTOM_SHAPE, FRAME_NORTH_LEFT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_RIGHT_SHAPE, FRAME_NORTH_LEFT_SHAPE);
-	private static final VoxelShape FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_BOTTOM_SHAPE);
-	private static final VoxelShape FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE, FRAME_NORTH_TOP_SHAPE, FRAME_NORTH_RIGHT_SHAPE, FRAME_NORTH_LEFT_SHAPE);
+	private static final VoxelShape FRAME_NORTH_TOP_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																			   FRAME_NORTH_TOP_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																				  FRAME_NORTH_BOTTOM_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																				 FRAME_NORTH_RIGHT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																				FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																						 FRAME_NORTH_TOP_SHAPE,
+																						 FRAME_NORTH_RIGHT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																						FRAME_NORTH_TOP_SHAPE,
+																						FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																							FRAME_NORTH_BOTTOM_SHAPE,
+																							FRAME_NORTH_RIGHT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_BOTTOM_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																						   FRAME_NORTH_BOTTOM_SHAPE,
+																						   FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_RIGHT_AND_LEFT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																						  FRAME_NORTH_RIGHT_SHAPE,
+																						  FRAME_NORTH_LEFT_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_AND_BOTTOM_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																						  FRAME_NORTH_TOP_SHAPE,
+																						  FRAME_NORTH_BOTTOM_SHAPE);
+	
+	private static final VoxelShape FRAME_NORTH_TOP_LEFT_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
+																							  FRAME_NORTH_TOP_SHAPE,
+																							  FRAME_NORTH_RIGHT_SHAPE,
+																							  FRAME_NORTH_LEFT_SHAPE);
 	
 	private static final VoxelShape FRAME_NORTH_BOTTOM_LEFT_AND_RIGHT_RIM_SHAPE = VoxelShapes.or(FRAME_NORTH_BACK_SHAPE,
 																								 FRAME_NORTH_BOTTOM_SHAPE,
@@ -227,7 +255,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 						return ActionResultType.SUCCESS;
 					}
 				}
-				//If the inventory slot is empty and the paintings tag contains the block add the item and consume it
+				//If the inventory slot is empty and the paintings tag contains the block add the item and consume it.
 				else if(VeItemTags.PAINTINGS.contains(heldItem.getItem()) && isEmpty(frameTileEntity))
 				{
 					frameTileEntity.addItem(heldItem);
@@ -270,7 +298,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 			{
 				VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) world.getTileEntity(currentPos.down(col).east(row));
 				
-				if(world.getBlockState(currentPos.down(col).east(row)).getBlock() == this.getBlock() && !isEmpty(frameTileEntity))
+				if(world.getBlockState(currentPos.down(col).east(row)).getBlock() != this.getBlock() && !isEmpty(frameTileEntity))
 				{
 					return false;
 				}
@@ -310,7 +338,8 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		
 		
 		
-		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(waterLoggedFlag)).with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(waterLoggedFlag))
+									 .with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 	
 	@Override

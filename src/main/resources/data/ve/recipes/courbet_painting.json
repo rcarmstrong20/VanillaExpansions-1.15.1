@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:white_dye"
+    },
+    {
+	  "item": "minecraft:black_dye"
+    }
+  ],
+  "result": "ve:courbet_painting",
+  "count": 1
+}

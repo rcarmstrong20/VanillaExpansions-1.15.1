@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_frame_all",
+    "textures":
+	{
+        "frame": "block/dark_oak_log",
+		"frame_inside": "block/stripped_dark_oak_log"
+    }
+}

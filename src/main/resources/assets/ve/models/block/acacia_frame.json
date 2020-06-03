@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_frame",
-    "textures":
-	{
-        "frame": "block/acacia_log",
-		"frame_inside": "block/stripped_acacia_log"
-    }
-}

@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:blue_dye"
+    },
+    {
+	  "item": "minecraft:black_dye"
+    }
+  ],
+  "result": "ve:sunset_painting",
+  "count": 1
+}

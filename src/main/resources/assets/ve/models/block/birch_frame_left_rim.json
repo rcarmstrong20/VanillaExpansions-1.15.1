@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_frame_left_rim",
+    "textures":
+	{
+        "frame": "block/birch_log",
+		"frame_inside": "block/stripped_birch_log"
+    }
+}

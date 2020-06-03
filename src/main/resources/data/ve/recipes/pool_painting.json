@@ -1,0 +1,17 @@
+{
+  "type": "ve:easel",
+  "ingredients":
+  [
+	{
+	  "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:blue_dye"
+    },
+    {
+	  "item": "minecraft:brown_dye"
+    }
+  ],
+  "result": "ve:pool_painting",
+  "count": 1
+}

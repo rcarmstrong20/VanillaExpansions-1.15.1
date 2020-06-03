@@ -1,0 +1,8 @@
+{
+    "parent": "ve:block/template_frame_bottom_left_and_right_rims",
+    "textures":
+	{
+        "frame": "block/jungle_log",
+		"frame_inside": "block/stripped_jungle_log"
+    }
+}
