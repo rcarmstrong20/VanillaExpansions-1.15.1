@@ -42,6 +42,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
+import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
@@ -205,6 +206,11 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 																	 .put(VeItems.sea_painting, VeItems.sea_painting_left)
 																	 .put(VeItems.sunset_painting, VeItems.sunset_painting_left).build();
 		
+		Map<Item, Item> bottomRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_right).build();
+		Map<Item, Item> bottomLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_left).build();
+		Map<Item, Item> topRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_right).build();
+		Map<Item, Item> topLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_left).build();
+		
 		if(tileEntity instanceof VeFrameTileEntity)
 		{
 			VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
@@ -217,16 +223,44 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 			VeFrameTileEntity northFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
 			VeFrameTileEntity southFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
 			
+			VeFrameTileEntity topEastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().east());
+			VeFrameTileEntity topWestFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().west());
+			VeFrameTileEntity topNorthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().north());
+			VeFrameTileEntity topSouthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().south());
+			
+			VeFrameTileEntity bottomEastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().east());
+			VeFrameTileEntity bottomWestFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().west());
+			VeFrameTileEntity bottomNorthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().north());
+			VeFrameTileEntity bottomSouthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().south());
+			
+			Block topBlock = worldIn.getBlockState(pos.up()).getBlock();
+			Block bottomBlock = worldIn.getBlockState(pos.down()).getBlock();
+			
+			Block eastBlock = worldIn.getBlockState(pos.east()).getBlock();
+			Block westBlock = worldIn.getBlockState(pos.west()).getBlock();
+			Block southBlock = worldIn.getBlockState(pos.south()).getBlock();
+			Block northBlock = worldIn.getBlockState(pos.north()).getBlock();
+			
+			Block topEastBlock = worldIn.getBlockState(pos.up().east()).getBlock();
+			Block topWestBlock = worldIn.getBlockState(pos.up().west()).getBlock();
+			Block topSouthBlock = worldIn.getBlockState(pos.up().south()).getBlock();
+			Block topNorthBlock = worldIn.getBlockState(pos.up().north()).getBlock();
+			
+			Block bottomEastBlock = worldIn.getBlockState(pos.down().east()).getBlock();
+			Block bottomWestBlock = worldIn.getBlockState(pos.down().west()).getBlock();
+			Block bottomSouthBlock = worldIn.getBlockState(pos.down().south()).getBlock();
+			Block bottomNorthBlock = worldIn.getBlockState(pos.down().north()).getBlock();
+			
 			if(!worldIn.isRemote)
 			{
 				if(topPaintingMap.containsKey(heldItem.getItem()) || bottomPaintingMap.containsKey(heldItem.getItem()))
 				{
-					if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(topFrameTileEntity))
+					if(topBlock == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(topFrameTileEntity))
 					{
 						fill2BlockPainting(worldIn, pos, frameTileEntity, topFrameTileEntity, bottomPaintingMap, topPaintingMap, heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(bottomFrameTileEntity))
+					else if(bottomBlock == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(bottomFrameTileEntity))
 					{
 						fill2BlockPainting(worldIn, pos, frameTileEntity, bottomFrameTileEntity, topPaintingMap, bottomPaintingMap, heldItem);
 						return ActionResultType.SUCCESS;
@@ -234,25 +268,196 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 				}
 				else if(rightPaintingMap.containsKey(heldItem.getItem()) || leftPaintingMap.containsKey(heldItem.getItem()))
 				{
-					if(worldIn.getBlockState(pos.east()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(eastFrameTileEntity))
+					if(eastBlock == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(eastFrameTileEntity))
 					{
-						fill2BlockPainting(worldIn, pos, frameTileEntity, eastFrameTileEntity, rightPaintingMap, leftPaintingMap, heldItem);
+						fill2BlockPainting(worldIn, pos, frameTileEntity,
+														 eastFrameTileEntity,
+														 rightPaintingMap, leftPaintingMap, heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(worldIn.getBlockState(pos.west()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(westFrameTileEntity))
+					else if(westBlock == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(westFrameTileEntity))
 					{
-						fill2BlockPainting(worldIn, pos, frameTileEntity, westFrameTileEntity, leftPaintingMap, rightPaintingMap, heldItem);
+						fill2BlockPainting(worldIn, pos, frameTileEntity,
+														 westFrameTileEntity,
+														 leftPaintingMap,
+														 rightPaintingMap,
+														 heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(worldIn.getBlockState(pos.south()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(southFrameTileEntity))
+					else if(southBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)      &&
+							isEmpty(southFrameTileEntity))
 					{
-						fill2BlockPainting(worldIn, pos, frameTileEntity, southFrameTileEntity, leftPaintingMap, rightPaintingMap, heldItem);
+						fill2BlockPainting(worldIn, pos, frameTileEntity,
+														 southFrameTileEntity,
+														 leftPaintingMap,
+														 rightPaintingMap,
+														 heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(worldIn.getBlockState(pos.north()).getBlock() == this.getBlock() && isEmpty(frameTileEntity) && isEmpty(northFrameTileEntity))
+					else if(northBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)      &&
+							isEmpty(northFrameTileEntity))
 					{
-						fill2BlockPainting(worldIn, pos, frameTileEntity, northFrameTileEntity, rightPaintingMap, leftPaintingMap, heldItem);
+						fill2BlockPainting(worldIn, pos, frameTileEntity,
+														 northFrameTileEntity,
+														 rightPaintingMap,
+														 leftPaintingMap,
+														 heldItem);
 						return ActionResultType.SUCCESS;
+					}
+				}
+				else if(bottomRightPaintingMap.containsKey(heldItem.getItem()) || bottomLeftPaintingMap.containsKey(heldItem.getItem()) || topRightPaintingMap.containsKey(heldItem.getItem()) || topLeftPaintingMap.containsKey(heldItem.getItem()))
+				{
+					if(topBlock == this.getBlock() 	   &&
+					   eastBlock == this.getBlock()    &&
+					   topEastBlock == this.getBlock() &&
+					   isEmpty(frameTileEntity)		   &&
+					   isEmpty(topFrameTileEntity)     &&
+					   isEmpty(eastFrameTileEntity)    &&
+					   isEmpty(topEastFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 topFrameTileEntity,
+														 eastFrameTileEntity,
+														 topEastFrameTileEntity,
+														 bottomRightPaintingMap,
+														 topRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 topLeftPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(bottomBlock == this.getBlock()     &&
+							eastBlock == this.getBlock()       &&
+							bottomEastBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)           &&
+							isEmpty(eastFrameTileEntity)       &&
+							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(bottomEastFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 eastFrameTileEntity,
+														 bottomFrameTileEntity,
+														 bottomEastFrameTileEntity,
+														 topRightPaintingMap,
+														 topLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(topBlock == this.getBlock()     &&
+							westBlock == this.getBlock()    &&
+							topWestBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)        &&
+							isEmpty(westFrameTileEntity)    &&
+							isEmpty(topFrameTileEntity)		&&
+							isEmpty(topWestFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 westFrameTileEntity,
+														 topFrameTileEntity,
+														 topWestFrameTileEntity,
+														 bottomLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 topLeftPaintingMap,
+														 topRightPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(bottomBlock == this.getBlock()     &&
+							westBlock == this.getBlock()       &&
+							bottomWestBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)           &&
+							isEmpty(westFrameTileEntity)       &&
+							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(bottomWestFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 westFrameTileEntity,
+														 bottomFrameTileEntity,
+														 bottomWestFrameTileEntity,
+														 topLeftPaintingMap,
+														 topRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(topBlock == this.getBlock() 	&&
+							northBlock == this.getBlock()   &&
+							topNorthBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)	    &&
+							isEmpty(topFrameTileEntity)     &&
+							isEmpty(northFrameTileEntity)   &&
+							isEmpty(topNorthFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 topFrameTileEntity,
+														 northFrameTileEntity,
+														 topNorthFrameTileEntity,
+														 bottomRightPaintingMap,
+														 topRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 topLeftPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(bottomBlock == this.getBlock()     &&
+							northBlock == this.getBlock()      &&
+							bottomNorthBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)           &&
+							isEmpty(northFrameTileEntity)      &&
+							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(bottomNorthFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 northFrameTileEntity,
+														 bottomFrameTileEntity,
+														 bottomNorthFrameTileEntity,
+														 topRightPaintingMap,
+														 topLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 heldItem);
+						return ActionResultType.SUCCESS;
+					}
+					else if(topBlock == this.getBlock()     &&
+							southBlock == this.getBlock()   &&
+							topSouthBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)        &&
+							isEmpty(southFrameTileEntity)   &&
+							isEmpty(topFrameTileEntity)		&&
+							isEmpty(topSouthFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 southFrameTileEntity,
+														 topFrameTileEntity,
+														 topSouthFrameTileEntity,
+														 bottomLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 topLeftPaintingMap,
+														 topRightPaintingMap,
+														 heldItem);
+					}
+					else if(bottomBlock == this.getBlock()     &&
+							southBlock == this.getBlock()      &&
+							bottomSouthBlock == this.getBlock() &&
+							isEmpty(frameTileEntity)           &&
+							isEmpty(southFrameTileEntity)      &&
+							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(bottomSouthFrameTileEntity))
+					{
+						fill4BlockPainting(worldIn, pos, frameTileEntity,
+														 southFrameTileEntity,
+														 bottomFrameTileEntity,
+														 bottomSouthFrameTileEntity,
+														 topLeftPaintingMap,
+														 topRightPaintingMap,
+														 bottomLeftPaintingMap,
+														 bottomRightPaintingMap,
+														 heldItem);
 					}
 				}
 				//If the inventory slot is empty and the paintings tag contains the block add the item and consume it.
@@ -288,25 +493,16 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	}
 	
 	/*
-	 * A helper method to check if the frame in the specified area are empty.
+	 * A helper method that fills the frames with each painting piece for 4 block paintings.
 	 */
-	private boolean isMultiBlockPaintingEmpty(BlockPos currentPos, World world, double rowNum, double colNum)
+	private static void fill4BlockPainting(World world, BlockPos pos, VeFrameTileEntity clickedFrame, VeFrameTileEntity secondFrame, VeFrameTileEntity thirdFrame, VeFrameTileEntity fourthFrame, Map<Item, Item> clickedPaintingMap, Map<Item, Item> secondPaintingMap, Map<Item, Item> thirdPaintingMap, Map<Item, Item> fourthPaintingMap, ItemStack heldItem)
 	{
-		for(int col = 0; col < rowNum; col++)
-		{
-			for(int row = 0; row < colNum; row++)
-			{
-				VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) world.getTileEntity(currentPos.down(col).east(row));
-				
-				if(world.getBlockState(currentPos.down(col).east(row)).getBlock() != this.getBlock() && !isEmpty(frameTileEntity))
-				{
-					return false;
-				}
-				row += 1;
-			}
-			col += 1;
-		}
-		return true;
+		clickedFrame.addItem(new ItemStack(clickedPaintingMap.get(heldItem.getItem())));
+		secondFrame.addItem(new ItemStack(secondPaintingMap.get(heldItem.getItem())));
+		thirdFrame.addItem(new ItemStack(thirdPaintingMap.get(heldItem.getItem())));
+		fourthFrame.addItem(new ItemStack(fourthPaintingMap.get(heldItem.getItem())));
+		world.playSound(null, pos, SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
+		heldItem.shrink(1);
 	}
 	
 	@Override
@@ -385,13 +581,42 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		VeFrameTileEntity frameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos);
-		VeFrameTileEntity frameTileEntityUp = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
-		VeFrameTileEntity frameTileEntityDown = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
 		
-		VeFrameTileEntity frameTileEntityEast = (VeFrameTileEntity) worldIn.getTileEntity(pos.east());
-		VeFrameTileEntity frameTileEntityWest = (VeFrameTileEntity) worldIn.getTileEntity(pos.west());
-		VeFrameTileEntity frameTileEntityNorth = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
-		VeFrameTileEntity frameTileEntitySouth = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
+		VeFrameTileEntity topFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up());
+		VeFrameTileEntity bottomFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down());
+		
+		VeFrameTileEntity eastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.east());
+		VeFrameTileEntity westFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.west());
+		VeFrameTileEntity northFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.north());
+		VeFrameTileEntity southFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.south());
+		
+		VeFrameTileEntity topEastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().east());
+		VeFrameTileEntity topWestFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().west());
+		VeFrameTileEntity topNorthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().north());
+		VeFrameTileEntity topSouthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.up().south());
+		
+		VeFrameTileEntity bottomEastFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().east());
+		VeFrameTileEntity bottomWestFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().west());
+		VeFrameTileEntity bottomNorthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().north());
+		VeFrameTileEntity bottomSouthFrameTileEntity = (VeFrameTileEntity) worldIn.getTileEntity(pos.down().south());
+		
+		Block topBlock = worldIn.getBlockState(pos.up()).getBlock();
+		Block bottomBlock = worldIn.getBlockState(pos.down()).getBlock();
+		
+		Block eastBlock = worldIn.getBlockState(pos.east()).getBlock();
+		Block westBlock = worldIn.getBlockState(pos.west()).getBlock();
+		Block southBlock = worldIn.getBlockState(pos.south()).getBlock();
+		Block northBlock = worldIn.getBlockState(pos.north()).getBlock();
+		
+		Block topEastBlock = worldIn.getBlockState(pos.up().east()).getBlock();
+		Block topWestBlock = worldIn.getBlockState(pos.up().west()).getBlock();
+		Block topSouthBlock = worldIn.getBlockState(pos.up().south()).getBlock();
+		Block topNorthBlock = worldIn.getBlockState(pos.up().north()).getBlock();
+		
+		Block bottomEastBlock = worldIn.getBlockState(pos.down().east()).getBlock();
+		Block bottomWestBlock = worldIn.getBlockState(pos.down().west()).getBlock();
+		Block bottomSouthBlock = worldIn.getBlockState(pos.down().south()).getBlock();
+		Block bottomNorthBlock = worldIn.getBlockState(pos.down().north()).getBlock();
 		
 		Map<Item, Item> tallPaintingMap = (new Builder<Item, Item>()).put(VeItems.wanderer_painting_bottom, VeItems.wanderer_painting)
 																 	 .put(VeItems.wanderer_painting_top, VeItems.wanderer_painting)
@@ -409,39 +634,152 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 			 	 												   	 .put(VeItems.sunset_painting_right, VeItems.sunset_painting)
 			 	 												   	 .put(VeItems.sunset_painting_left, VeItems.sunset_painting).build();
 		
+		Map<Item, Item> fourPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting_bottom_right, VeItems.wither_painting)
+																	 .put(VeItems.wither_painting_bottom_left, VeItems.wither_painting)
+																	 .put(VeItems.wither_painting_top_right, VeItems.wither_painting)
+																	 .put(VeItems.wither_painting_top_left, VeItems.wither_painting).build();
+		
 		Item inventoryItem = frameTileEntity.getInventory().get(0).getItem();
 		
 		NonNullList<ItemStack> tallPaintingItemDrops = NonNullList.withSize(1, new ItemStack(tallPaintingMap.get(inventoryItem)));
 		NonNullList<ItemStack> sidePaintingItemDrops = NonNullList.withSize(1, new ItemStack(sidePaintingMap.get(inventoryItem)));
+		NonNullList<ItemStack> fourPaintingItemDrops = NonNullList.withSize(1, new ItemStack(fourPaintingMap.get(inventoryItem)));
 		
 		if(tallPaintingMap.containsKey(inventoryItem))
 		{
-			if(worldIn.getBlockState(pos.up()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityUp))
+			if(topBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(topFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntityUp, tallPaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, topFrameTileEntity, tallPaintingItemDrops);
 			}
-			else if(worldIn.getBlockState(pos.down()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityDown))
+			else if(bottomBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(bottomFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntityDown, tallPaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, bottomFrameTileEntity, tallPaintingItemDrops);
 			}
 		}
 		else if(sidePaintingMap.containsKey(inventoryItem))
 		{
-			if(worldIn.getBlockState(pos.east()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityEast))
+			if(eastBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(eastFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntityEast, sidePaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, eastFrameTileEntity, sidePaintingItemDrops);
 			}
-			else if(worldIn.getBlockState(pos.west()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityWest))
+			else if(westBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(westFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntityWest, sidePaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, westFrameTileEntity, sidePaintingItemDrops);
 			}
-			else if(worldIn.getBlockState(pos.north()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntityNorth))
+			else if(northBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(northFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntityNorth, sidePaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, northFrameTileEntity, sidePaintingItemDrops);
 			}
-			else if(worldIn.getBlockState(pos.south()).getBlock() == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(frameTileEntitySouth))
+			else if(southBlock == this.getBlock() && !isEmpty(frameTileEntity) && !isEmpty(southFrameTileEntity))
 			{
-				harvest2BlockPainting(worldIn, pos, frameTileEntitySouth, sidePaintingItemDrops);
+				harvest2BlockPainting(worldIn, pos, southFrameTileEntity, sidePaintingItemDrops);
+			}
+		}
+		else if(fourPaintingMap.containsKey(inventoryItem))
+		{
+			if(topBlock == this.getBlock() 	   &&
+			   eastBlock == this.getBlock()    &&
+			   topEastBlock == this.getBlock() &&
+			   !isEmpty(frameTileEntity)	   &&
+			   !isEmpty(topFrameTileEntity)    &&
+			   !isEmpty(eastFrameTileEntity)   &&
+			   !isEmpty(topEastFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, topFrameTileEntity,
+													eastFrameTileEntity,
+													topEastFrameTileEntity,
+													fourPaintingItemDrops);
+			}
+			else if(bottomBlock == this.getBlock()     &&
+					eastBlock == this.getBlock()       &&
+					bottomEastBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)          &&
+					!isEmpty(eastFrameTileEntity)      &&
+					!isEmpty(bottomFrameTileEntity)	   &&
+					!isEmpty(bottomEastFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, eastFrameTileEntity,
+												 	bottomFrameTileEntity,
+												 	bottomEastFrameTileEntity,
+												 	fourPaintingItemDrops);
+			}
+			else if(topBlock == this.getBlock()    	&&
+					westBlock == this.getBlock()    &&
+					topWestBlock == this.getBlock()	&&
+					!isEmpty(frameTileEntity)       &&
+					!isEmpty(westFrameTileEntity)   &&
+					!isEmpty(topFrameTileEntity)	&&
+					!isEmpty(topWestFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, westFrameTileEntity,
+												 	topFrameTileEntity,
+												 	topWestFrameTileEntity,
+												 	fourPaintingItemDrops);
+			}
+			else if(bottomBlock == this.getBlock()     &&
+					westBlock == this.getBlock()       &&
+					bottomWestBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)          &&
+					!isEmpty(westFrameTileEntity)      &&
+					!isEmpty(bottomFrameTileEntity)	   &&
+					!isEmpty(bottomWestFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, westFrameTileEntity,
+												 	bottomFrameTileEntity,
+												 	bottomWestFrameTileEntity,
+												 	fourPaintingItemDrops);
+			}
+			else if(topBlock == this.getBlock() 	 &&
+					northBlock == this.getBlock()    &&
+					topNorthBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)	     &&
+					!isEmpty(topFrameTileEntity)     &&
+					!isEmpty(northFrameTileEntity)   &&
+					!isEmpty(topNorthFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, topFrameTileEntity,
+												    northFrameTileEntity,
+												    topNorthFrameTileEntity,
+												    fourPaintingItemDrops);
+			}
+			else if(bottomBlock == this.getBlock()      &&
+					northBlock == this.getBlock()       &&
+					bottomNorthBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)           &&
+					!isEmpty(northFrameTileEntity)      &&
+					!isEmpty(bottomFrameTileEntity)	    &&
+					!isEmpty(bottomNorthFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, northFrameTileEntity,
+												 	bottomFrameTileEntity,
+												 	bottomNorthFrameTileEntity,
+												 	fourPaintingItemDrops);
+			}
+			else if(topBlock == this.getBlock()      &&
+					southBlock == this.getBlock()    &&
+					topSouthBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)        &&
+					!isEmpty(southFrameTileEntity)   &&
+					!isEmpty(topFrameTileEntity)	 &&
+					!isEmpty(topSouthFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, southFrameTileEntity,
+												 	topFrameTileEntity,
+												 	topSouthFrameTileEntity,
+												 	fourPaintingItemDrops);
+			}
+			else if(bottomBlock == this.getBlock()      &&
+					southBlock == this.getBlock()       &&
+					bottomSouthBlock == this.getBlock() &&
+					!isEmpty(frameTileEntity)           &&
+					!isEmpty(southFrameTileEntity)      &&
+					!isEmpty(bottomFrameTileEntity)	    &&
+					!isEmpty(bottomSouthFrameTileEntity))
+			{
+				harvest4BlockPainting(worldIn, pos, southFrameTileEntity,
+													bottomFrameTileEntity,
+													bottomSouthFrameTileEntity,
+													fourPaintingItemDrops);
 			}
 		}
 		else
@@ -455,9 +793,20 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	/*
 	 * A helper method to harvest 2 block paintings.
 	 */
-	private static void harvest2BlockPainting(World world, BlockPos pos, VeFrameTileEntity secondFrameTileEntity, NonNullList<ItemStack> drops)
+	private static void harvest2BlockPainting(World world, BlockPos pos, VeFrameTileEntity secondFrame, NonNullList<ItemStack> drops)
 	{
-		secondFrameTileEntity.getInventory().clear();
+		secondFrame.getInventory().clear();
+		InventoryHelper.dropItems(world, pos, drops);
+	}
+	
+	/*
+	 * A helper method to harvest 4 block paintings.
+	 */
+	private static void harvest4BlockPainting(World world, BlockPos pos, VeFrameTileEntity secondFrame, VeFrameTileEntity thirdFrame, VeFrameTileEntity fourthFrame, NonNullList<ItemStack> drops)
+	{
+		secondFrame.getInventory().clear();
+		thirdFrame.getInventory().clear();
+		fourthFrame.getInventory().clear();
 		InventoryHelper.dropItems(world, pos, drops);
 	}
 	

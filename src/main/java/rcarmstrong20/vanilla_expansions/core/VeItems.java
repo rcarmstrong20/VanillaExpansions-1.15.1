@@ -124,6 +124,11 @@ public class VeItems
 	public static Item sunset_painting = register("sunset_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
 	public static Item sunset_painting_right = register("sunset_painting_right", new Item(new Item.Properties()));
 	public static Item sunset_painting_left = register("sunset_painting_left", new Item(new Item.Properties()));
+	public static Item wither_painting = register("wither_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item wither_painting_top_right = register("wither_painting_top_right", new Item(new Item.Properties()));
+	public static Item wither_painting_top_left = register("wither_painting_top_left", new Item(new Item.Properties()));
+	public static Item wither_painting_bottom_right = register("wither_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item wither_painting_bottom_left = register("wither_painting_bottom_left", new Item(new Item.Properties()));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{

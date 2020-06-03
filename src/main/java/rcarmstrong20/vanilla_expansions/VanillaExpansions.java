@@ -103,7 +103,7 @@ public class VanillaExpansions
 	}
 	
 	/**
-	 * Controls right-click crop harvesting and campfire re-coloring behavior
+	 * Controls right-click crop harvesting and campfire re-coloring behavior.
 	 */
 	@SubscribeEvent
 	public void onRightClickBlock(final RightClickBlock event)
@@ -128,7 +128,7 @@ public class VanillaExpansions
 		
 		if(!event.getWorld().isRemote)
 		{
-			//If the block your clicking is a crop and your not using bone meal return true
+			//If the block your clicking is a crop and your not using bone meal return true.
 			if(worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
 				if(worldState.getBlock() instanceof BeetrootBlock)
@@ -182,7 +182,7 @@ public class VanillaExpansions
 				NonNullList<ItemStack> campfireInventory = campfireTileEntity.getInventory();
 				Direction currentFacing = worldState.get(CampfireBlock.FACING);
 				
-				//Only convert if the campfire is lit, the player is holding one of the dyes, and the campfire's inventory is empty
+				//Only convert if the campfire is lit, the player is holding one of the dyes, and the campfire's inventory is empty.
 				if(worldState.get(isLit) && dyeToCampfire.containsKey(itemStack.getItem()) && campfireInventory.get(0) == ItemStack.EMPTY)
 				{
 					world.playSound((PlayerEntity)null, pos, VeSoundEvents.BLOCK_CAMPFIRE_DYED, SoundCategory.BLOCKS, 1.0F, 0.8F + world.rand.nextFloat() * 0.4F);
