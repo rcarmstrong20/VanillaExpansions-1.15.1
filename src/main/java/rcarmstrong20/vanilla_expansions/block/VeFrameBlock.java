@@ -42,7 +42,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
-import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
@@ -206,10 +205,33 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 																	 .put(VeItems.sea_painting, VeItems.sea_painting_left)
 																	 .put(VeItems.sunset_painting, VeItems.sunset_painting_left).build();
 		
-		Map<Item, Item> bottomRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_right).build();
-		Map<Item, Item> bottomLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_left).build();
-		Map<Item, Item> topRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_right).build();
-		Map<Item, Item> topLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_left).build();
+		Map<Item, Item> bottomRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_right)
+																			.put(VeItems.bust_painting, VeItems.bust_painting_bottom_right)
+																			.put(VeItems.match_painting, VeItems.match_painting_bottom_right)
+																			.put(VeItems.skull_and_roses_painting, VeItems.skull_and_roses_painting_bottom_right)
+																			.put(VeItems.stage_painting, VeItems.stage_painting_bottom_right)
+																			.put(VeItems.void_painting, VeItems.void_painting_bottom_right).build();
+		
+		Map<Item, Item> bottomLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_bottom_left)
+																		   .put(VeItems.bust_painting, VeItems.bust_painting_bottom_left)
+																		   .put(VeItems.match_painting, VeItems.match_painting_bottom_left)
+																		   .put(VeItems.skull_and_roses_painting, VeItems.skull_and_roses_painting_bottom_left)
+																		   .put(VeItems.stage_painting, VeItems.stage_painting_bottom_left)
+																		   .put(VeItems.void_painting, VeItems.void_painting_bottom_left).build();
+		
+		Map<Item, Item> topRightPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_right)
+																		 .put(VeItems.bust_painting, VeItems.bust_painting_top_right)
+																		 .put(VeItems.match_painting, VeItems.match_painting_top_right)
+																		 .put(VeItems.skull_and_roses_painting, VeItems.skull_and_roses_painting_top_right)
+																		 .put(VeItems.stage_painting, VeItems.stage_painting_top_right)
+																		 .put(VeItems.void_painting, VeItems.void_painting_top_right).build();
+		
+		Map<Item, Item> topLeftPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting, VeItems.wither_painting_top_left)
+																		.put(VeItems.bust_painting, VeItems.bust_painting_top_left)
+																		.put(VeItems.match_painting, VeItems.match_painting_top_left)
+																		.put(VeItems.skull_and_roses_painting, VeItems.skull_and_roses_painting_top_left)
+																		.put(VeItems.stage_painting, VeItems.stage_painting_top_left)
+																		.put(VeItems.void_painting, VeItems.void_painting_top_left).build();
 		
 		if(tileEntity instanceof VeFrameTileEntity)
 		{
@@ -385,12 +407,12 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 														 heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(topBlock == this.getBlock() 	&&
-							northBlock == this.getBlock()   &&
+					else if(topBlock == this.getBlock() 	 &&
+							northBlock == this.getBlock()    &&
 							topNorthBlock == this.getBlock() &&
-							isEmpty(frameTileEntity)	    &&
-							isEmpty(topFrameTileEntity)     &&
-							isEmpty(northFrameTileEntity)   &&
+							isEmpty(frameTileEntity)	     &&
+							isEmpty(topFrameTileEntity)      &&
+							isEmpty(northFrameTileEntity)    &&
 							isEmpty(topNorthFrameTileEntity))
 					{
 						fill4BlockPainting(worldIn, pos, frameTileEntity,
@@ -404,12 +426,12 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 														 heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(bottomBlock == this.getBlock()     &&
-							northBlock == this.getBlock()      &&
+					else if(bottomBlock == this.getBlock()      &&
+							northBlock == this.getBlock()       &&
 							bottomNorthBlock == this.getBlock() &&
-							isEmpty(frameTileEntity)           &&
-							isEmpty(northFrameTileEntity)      &&
-							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(frameTileEntity)            &&
+							isEmpty(northFrameTileEntity)       &&
+							isEmpty(bottomFrameTileEntity)	    &&
 							isEmpty(bottomNorthFrameTileEntity))
 					{
 						fill4BlockPainting(worldIn, pos, frameTileEntity,
@@ -423,12 +445,12 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 														 heldItem);
 						return ActionResultType.SUCCESS;
 					}
-					else if(topBlock == this.getBlock()     &&
-							southBlock == this.getBlock()   &&
+					else if(topBlock == this.getBlock()      &&
+							southBlock == this.getBlock()    &&
 							topSouthBlock == this.getBlock() &&
-							isEmpty(frameTileEntity)        &&
-							isEmpty(southFrameTileEntity)   &&
-							isEmpty(topFrameTileEntity)		&&
+							isEmpty(frameTileEntity)         &&
+							isEmpty(southFrameTileEntity)    &&
+							isEmpty(topFrameTileEntity)		 &&
 							isEmpty(topSouthFrameTileEntity))
 					{
 						fill4BlockPainting(worldIn, pos, frameTileEntity,
@@ -441,12 +463,12 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 														 topRightPaintingMap,
 														 heldItem);
 					}
-					else if(bottomBlock == this.getBlock()     &&
-							southBlock == this.getBlock()      &&
+					else if(bottomBlock == this.getBlock()      &&
+							southBlock == this.getBlock()       &&
 							bottomSouthBlock == this.getBlock() &&
-							isEmpty(frameTileEntity)           &&
-							isEmpty(southFrameTileEntity)      &&
-							isEmpty(bottomFrameTileEntity)	   &&
+							isEmpty(frameTileEntity)            &&
+							isEmpty(southFrameTileEntity)       &&
+							isEmpty(bottomFrameTileEntity)	    &&
 							isEmpty(bottomSouthFrameTileEntity))
 					{
 						fill4BlockPainting(worldIn, pos, frameTileEntity,
@@ -637,7 +659,27 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		Map<Item, Item> fourPaintingMap = (new Builder<Item, Item>()).put(VeItems.wither_painting_bottom_right, VeItems.wither_painting)
 																	 .put(VeItems.wither_painting_bottom_left, VeItems.wither_painting)
 																	 .put(VeItems.wither_painting_top_right, VeItems.wither_painting)
-																	 .put(VeItems.wither_painting_top_left, VeItems.wither_painting).build();
+																	 .put(VeItems.wither_painting_top_left, VeItems.wither_painting)
+																	 .put(VeItems.bust_painting_bottom_right, VeItems.bust_painting)
+																	 .put(VeItems.bust_painting_bottom_left, VeItems.bust_painting)
+																	 .put(VeItems.bust_painting_top_right, VeItems.bust_painting)
+																	 .put(VeItems.bust_painting_top_left, VeItems.bust_painting)
+																	 .put(VeItems.match_painting_bottom_right, VeItems.match_painting)
+																	 .put(VeItems.match_painting_bottom_left, VeItems.match_painting)
+																	 .put(VeItems.match_painting_top_right, VeItems.match_painting)
+																	 .put(VeItems.match_painting_top_left, VeItems.match_painting)
+																	 .put(VeItems.skull_and_roses_painting_bottom_right, VeItems.skull_and_roses_painting)
+																	 .put(VeItems.skull_and_roses_painting_bottom_left, VeItems.skull_and_roses_painting)
+																	 .put(VeItems.skull_and_roses_painting_top_right, VeItems.skull_and_roses_painting)
+																	 .put(VeItems.skull_and_roses_painting_top_left, VeItems.skull_and_roses_painting)
+																	 .put(VeItems.stage_painting_bottom_right, VeItems.stage_painting)
+																	 .put(VeItems.stage_painting_bottom_left, VeItems.stage_painting)
+																	 .put(VeItems.stage_painting_top_right, VeItems.stage_painting)
+																	 .put(VeItems.stage_painting_top_left, VeItems.stage_painting)
+																	 .put(VeItems.void_painting_bottom_right, VeItems.void_painting)
+																	 .put(VeItems.void_painting_bottom_left, VeItems.void_painting)
+																	 .put(VeItems.void_painting_top_right, VeItems.void_painting)
+																	 .put(VeItems.void_painting_top_left, VeItems.void_painting).build();
 		
 		Item inventoryItem = frameTileEntity.getInventory().get(0).getItem();
 		

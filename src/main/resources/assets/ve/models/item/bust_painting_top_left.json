@@ -1,0 +1,7 @@
+{
+    "parent": "ve:item/template_painting",
+    "textures":
+	{
+        "painting": "ve:item/bust_painting_top_left"
+    }
+}

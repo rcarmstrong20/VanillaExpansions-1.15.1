@@ -129,6 +129,31 @@ public class VeItems
 	public static Item wither_painting_top_left = register("wither_painting_top_left", new Item(new Item.Properties()));
 	public static Item wither_painting_bottom_right = register("wither_painting_bottom_right", new Item(new Item.Properties()));
 	public static Item wither_painting_bottom_left = register("wither_painting_bottom_left", new Item(new Item.Properties()));
+	public static Item bust_painting = register("bust_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item bust_painting_top_right = register("bust_painting_top_right", new Item(new Item.Properties()));
+	public static Item bust_painting_top_left = register("bust_painting_top_left", new Item(new Item.Properties()));
+	public static Item bust_painting_bottom_right = register("bust_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item bust_painting_bottom_left = register("bust_painting_bottom_left", new Item(new Item.Properties()));
+	public static Item match_painting = register("match_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item match_painting_top_right = register("match_painting_top_right", new Item(new Item.Properties()));
+	public static Item match_painting_top_left = register("match_painting_top_left", new Item(new Item.Properties()));
+	public static Item match_painting_bottom_right = register("match_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item match_painting_bottom_left = register("match_painting_bottom_left", new Item(new Item.Properties()));
+	public static Item skull_and_roses_painting = register("skull_and_roses_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item skull_and_roses_painting_top_right = register("skull_and_roses_painting_top_right", new Item(new Item.Properties()));
+	public static Item skull_and_roses_painting_top_left = register("skull_and_roses_painting_top_left", new Item(new Item.Properties()));
+	public static Item skull_and_roses_painting_bottom_right = register("skull_and_roses_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item skull_and_roses_painting_bottom_left = register("skull_and_roses_painting_bottom_left", new Item(new Item.Properties()));
+	public static Item stage_painting = register("stage_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item stage_painting_top_right = register("stage_painting_top_right", new Item(new Item.Properties()));
+	public static Item stage_painting_top_left = register("stage_painting_top_left", new Item(new Item.Properties()));
+	public static Item stage_painting_bottom_right = register("stage_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item stage_painting_bottom_left = register("stage_painting_bottom_left", new Item(new Item.Properties()));
+	public static Item void_painting = register("void_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	public static Item void_painting_top_right = register("void_painting_top_right", new Item(new Item.Properties()));
+	public static Item void_painting_top_left = register("void_painting_top_left", new Item(new Item.Properties()));
+	public static Item void_painting_bottom_right = register("void_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item void_painting_bottom_left = register("void_painting_bottom_left", new Item(new Item.Properties()));
 	
 	private static Item register(String name, int strength, String armorMaterial)
 	{
