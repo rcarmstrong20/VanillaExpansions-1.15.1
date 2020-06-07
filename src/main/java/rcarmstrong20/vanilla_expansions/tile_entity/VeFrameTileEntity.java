@@ -62,10 +62,14 @@ public class VeFrameTileEntity extends TileEntity implements IClearable
 	 */
 	public boolean addItem(ItemStack stack)
 	{
-		this.inventory.set(0, stack.split(1));
-		this.inventoryChanged();
-		
-		return true;
+		if(!stack.isEmpty())
+		{
+			this.inventory.set(0, stack.split(1));
+			this.inventoryChanged();
+			
+			return true;
+		}
+		return false;
 	}
 	
 	private void inventoryChanged()
