@@ -1,5 +1,5 @@
 {
-    "parent": "ve:block/template_frame_down_east_west",
+    "parent": "ve:block/template_frame_top_rim",
     "textures":
 	{
         "frame": "block/dark_oak_log",

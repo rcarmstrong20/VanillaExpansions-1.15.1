@@ -1,8 +1,0 @@
-{
-    "parent": "ve:block/template_frame_bottom_and_left_rims",
-    "textures":
-	{
-        "frame": "block/oak_log",
-		"frame_inside": "block/stripped_oak_log"
-    }
-}

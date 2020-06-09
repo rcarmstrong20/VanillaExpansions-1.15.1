@@ -1,7 +1,0 @@
-{
-    "parent": "ve:block/inventory_birch_painting",
-    "textures":
-	{
-        "picture": "ve:painting/fire"
-    }
-}

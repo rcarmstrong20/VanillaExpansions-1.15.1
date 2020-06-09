@@ -1,7 +1,4 @@
 {
-    "textures":
-    {
-        "particle": "block/stone"
-    }
+    "parent": "block/double_slab"
 }
 

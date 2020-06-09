@@ -1,7 +1,0 @@
-{
-    "parent": "ve:block/template_oak_painting",
-    "textures":
-	{
-        "picture": "ve:painting/earth"
-    }
-}

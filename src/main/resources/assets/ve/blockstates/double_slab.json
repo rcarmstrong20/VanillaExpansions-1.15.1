@@ -6,6 +6,6 @@
 		{
             "flip-uv": true
         },
-        "model": "ve:double_slab.obj"
+        "model": "ve:block/double_slab"
     }
 }
