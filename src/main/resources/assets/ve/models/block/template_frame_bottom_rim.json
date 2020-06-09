@@ -3,23 +3,9 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "#frame",
-		"frame": "#frame",
-		"frame_inside": "#frame_inside"
+		"frame": "#frame"
 	},
 	"elements": [ 	 
-		{
-			"__comment": "Box1",
-			"from": [ 0, 0, 15 ],
-			"to": [ 16, 16, 16 ],
-			"faces": {
-				"down": { "uv": [ 1, 0, 15, 1 ], "texture": "#frame" },
-				"up": { "uv": [ 1, 15, 15, 16 ], "texture": "#frame" },
-				"north": { "uv": [ 1, 1, 15, 15 ], "texture": "#frame_inside" },
-				"south": { "uv": [ 1, 1, 15, 15 ], "texture": "#frame" },
-				"west": { "uv": [ 15, 1, 16, 15 ], "texture": "#frame" },
-				"east": { "uv": [ 0, 1, 1, 15 ], "texture": "#frame" }
-			}
-		},
 		{
 			"__comment": "Box3",
 			"from": [ 0, 0, 14 ],
