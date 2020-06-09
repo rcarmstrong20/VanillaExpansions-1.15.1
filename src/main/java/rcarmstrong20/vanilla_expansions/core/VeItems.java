@@ -155,6 +155,17 @@ public class VeItems
 	public static Item void_painting_bottom_right = register("void_painting_bottom_right", new Item(new Item.Properties()));
 	public static Item void_painting_bottom_left = register("void_painting_bottom_left", new Item(new Item.Properties()));
 	
+	public static Item fighters_painting = register("fighters_painting", new Item(new Item.Properties().group(VanillaExpansions.VE_GROUP)));
+	
+	public static Item fighters_painting_top_right = register("fighters_painting_top_right", new Item(new Item.Properties()));
+	public static Item fighters_painting_top_right_middle = register("fighters_painting_top_right_middle", new Item(new Item.Properties()));
+	public static Item fighters_painting_top_left_middle = register("fighters_painting_top_left_middle", new Item(new Item.Properties()));
+	public static Item fighters_painting_top_left = register("fighters_painting_top_left", new Item(new Item.Properties()));
+	public static Item fighters_painting_bottom_right = register("fighters_painting_bottom_right", new Item(new Item.Properties()));
+	public static Item fighters_painting_bottom_right_middle = register("fighters_painting_bottom_right_middle", new Item(new Item.Properties()));
+	public static Item fighters_painting_bottom_left_middle = register("fighters_painting_bottom_left_middle", new Item(new Item.Properties()));
+	public static Item fighters_painting_bottom_left = register("fighters_painting_bottom_left", new Item(new Item.Properties()));
+	
 	private static Item register(String name, int strength, String armorMaterial)
 	{
 		Item item = new HorseArmorItem(strength, new ResourceLocation(VanillaExpansions.MOD_ID, "textures/entity/horse/armor/horse_armor_" + armorMaterial + ".png"), VE_SINGLE_ITEMS);
