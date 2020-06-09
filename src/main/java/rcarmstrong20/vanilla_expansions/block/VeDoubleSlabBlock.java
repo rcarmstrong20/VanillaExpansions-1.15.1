@@ -7,27 +7,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.SweetBerryBushBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.RenderState.ShadeModelState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootContext.Builder;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ToolType;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
 public class VeDoubleSlabBlock extends ContainerBlock
@@ -120,13 +108,13 @@ public class VeDoubleSlabBlock extends ContainerBlock
 			
 			//String heldItem = player.getHeldItem(player.getActiveHand()).getItem().getName().toString();
 			
-			NonNullList<ItemStack> inventory = slabTileEntity.getInventory();
+			//NonNullList<ItemStack> inventory = slabTileEntity.getInventory();
 			
-			Block slab1 = Block.getBlockFromItem(inventory.get(0).getItem());
-			Block slab2 = Block.getBlockFromItem(inventory.get(1).getItem());
+			//Block slab1 = Block.getBlockFromItem(inventory.get(0).getItem());
+			//Block slab2 = Block.getBlockFromItem(inventory.get(1).getItem());
 			
-			Material slab1Material = slab1.getDefaultState().getMaterial();
-			Material slab2Material = slab2.getDefaultState().getMaterial();
+			//Material slab1Material = slab1.getDefaultState().getMaterial();
+			//Material slab2Material = slab2.getDefaultState().getMaterial();
 			
 			//if()//!slab1Material.isToolNotRequired()|| !slab2Material.isToolNotRequired())
 			//{

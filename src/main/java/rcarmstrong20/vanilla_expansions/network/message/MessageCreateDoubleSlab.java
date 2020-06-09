@@ -1,31 +1,12 @@
 package rcarmstrong20.vanilla_expansions.network.message;
 
 import java.util.function.Supplier;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.state.IProperty;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
-import net.minecraftforge.fml.network.PacketDistributor;
-import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.network.NetworkEvent.Context;
+import rcarmstrong20.vanilla_expansions.tile_entity.VeDoubleSlabTileEntity;
 
 public class MessageCreateDoubleSlab implements IMessage<MessageCreateDoubleSlab>
 {
@@ -119,10 +100,10 @@ public class MessageCreateDoubleSlab implements IMessage<MessageCreateDoubleSlab
 		
 		if(tileEntity instanceof VeDoubleSlabTileEntity)
 		{
-			VeDoubleSlabTileEntity doubleSlabTileEntity = (VeDoubleSlabTileEntity) tileEntity;
+			//VeDoubleSlabTileEntity doubleSlabTileEntity = (VeDoubleSlabTileEntity) tileEntity;
 			
-			ItemStack itemStack = doubleSlabTileEntity.getInventory().get(0);
-			ItemStack itemStack1 = doubleSlabTileEntity.getInventory().get(1);
+			//ItemStack itemStack = doubleSlabTileEntity.getInventory().get(0);
+			//ItemStack itemStack1 = doubleSlabTileEntity.getInventory().get(1);
 			
 			
 		}
