@@ -41,7 +41,7 @@ public class VeFrameTileEntityRenderer extends TileEntityRenderer<VeFrameTileEnt
 			}
 			else if(direction == Direction.WEST)
 			{
-				renderPainting(0.9D, 0.5D, 0.5D, 90.0F, itemStack, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+				renderPainting(0.9D, 0.5D, 0.5D, 270F, itemStack, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
 			}
 			else
 			{
