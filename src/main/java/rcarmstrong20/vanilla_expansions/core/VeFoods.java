@@ -9,10 +9,13 @@ import net.minecraft.potion.Effects;
  */
 public class VeFoods
 {
-	public static final Food VOID_BUCKET = new Food.Builder().setAlwaysEdible().effect(() -> new EffectInstance(Effects.BLINDNESS, 600, 2, true, true), 1.0F)
-																			   .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 600, 2, true, true), 1.0F)
-																			   .effect(() -> new EffectInstance(Effects.WITHER, 200, 0, true, true), 1.0F)
-																			   .effect(() -> new EffectInstance(Effects.WEAKNESS, 600, 2, true, true), 1.0F).build();
+	public static final Food VOID_BUCKET = new Food.Builder()
+												   .setAlwaysEdible()
+												   .effect(() -> new EffectInstance(Effects.BLINDNESS, 600, 2, true, true), 1.0F)
+												   .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 600, 2, true, true), 1.0F)
+												   .effect(() -> new EffectInstance(Effects.WITHER, 200, 0, true, true), 1.0F)
+												   .effect(() -> new EffectInstance(Effects.WEAKNESS, 600, 1, true, true), 1.0F)
+												   .build();
 	
 	public static final Food GARLIC = new Food.Builder().hunger(4).saturation(4.3F).build();
 	public static final Food GREEN_ONION = new Food.Builder().hunger(2).saturation(2.2F).build();
@@ -24,7 +27,7 @@ public class VeFoods
 	public static final Food QUINOA_CERCEAL = new Food.Builder().hunger(12).saturation(20.5F).build();
 	public static final Food CARAMEL_APPLE = new Food.Builder().hunger(5).saturation(6.5F).build();
 	public static final Food WITCHS_CRADLE_BRANCH = new Food.Builder().hunger(4).saturation(0.6F).build();
-	public static final Food WITCHS_CRADLE_SOUP = new Food.Builder().hunger(7).saturation(0.6F).build();
+	public static final Food WITCHS_CRADLE_SOUP = new Food.Builder().hunger(7).saturation(0.6F).effect(() -> new EffectInstance(Effects.NIGHT_VISION, 1000, 0, true, true), 1.0F).build();
 	public static final Food BLOOD_VIAL = new Food.Builder().hunger(3).saturation(0.6F).build();
 	public static final Food CRANBERRIES = new Food.Builder().hunger(2).saturation(0.5F).build();
 	public static final Food CRANBERRY_SAUCE = new Food.Builder().hunger(5).saturation(1.5F).build();
