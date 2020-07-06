@@ -16,9 +16,9 @@ import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
-public class CabinStructure extends ScatteredStructure<NoFeatureConfig>
+public class VeCabinStructure extends ScatteredStructure<NoFeatureConfig>
 {
-	public CabinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
+	public VeCabinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
 	{
 		super(config);
 	}
@@ -43,7 +43,7 @@ public class CabinStructure extends ScatteredStructure<NoFeatureConfig>
 	@Override
 	public Structure.IStartFactory getStartFactory()
 	{
-		return CabinStructure.Start::new;
+		return VeCabinStructure.Start::new;
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class CabinStructure extends ScatteredStructure<NoFeatureConfig>
 			BlockPos blockPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 			//CabinPieces piece = new CabinPieces(templateManager, templateResource, blockPos, rotation);
 			//this.components.add(piece);
-			CabinPieces.init(templateManager, biome, blockPos, rotation, this.components);
+			VeCabinPieces.init(templateManager, biome, blockPos, rotation, this.components);
 			this.recalculateStructureSize();
 		}
 	}

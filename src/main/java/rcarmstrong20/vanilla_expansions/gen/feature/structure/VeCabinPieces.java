@@ -26,7 +26,7 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.VeConfig;
-import rcarmstrong20.vanilla_expansions.core.VeFeature;
+import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
  * Pieces are where the structure is actually added to the world, a structure can have one or more of them
@@ -34,12 +34,12 @@ import rcarmstrong20.vanilla_expansions.core.VeFeature;
  * Pieces are very customisable, see vanilla classes for different ways they can be used
  * This particular class layout is similar to what vanilla uses for more recent structures
  */
-public class CabinPieces
+public class VeCabinPieces
 {
 	public static void init(TemplateManager templateManager, Biome biome, BlockPos blockPos, Rotation rotation, List<StructurePiece> list)
 	{
 		ResourceLocation resourcelocation = getVariant(biome);
-		list.add(new CabinPieces.VePiece(templateManager, resourcelocation, blockPos, rotation));
+		list.add(new VeCabinPieces.VePiece(templateManager, resourcelocation, blockPos, rotation));
 	}
 	
 	private static ResourceLocation getVariant(Biome biome)
@@ -87,7 +87,7 @@ public class CabinPieces
 		 */
 		public VePiece(TemplateManager templateManager, ResourceLocation templateResource, BlockPos pos, Rotation rotation)
 		{
-			super(VeFeature.CABIN_PIECE, 0);
+			super(VeStructurePieceTypes.CABIN_PIECE, 0);
 			this.templateResource = templateResource;
 			this.rotation = rotation;
 			this.templatePosition = pos;
@@ -99,7 +99,7 @@ public class CabinPieces
 		 */
 		public VePiece(TemplateManager templateManager, CompoundNBT nbt)
 		{
-			super(VeFeature.CABIN_PIECE, nbt);
+			super(VeStructurePieceTypes.CABIN_PIECE, nbt);
 			this.templateResource = new ResourceLocation(nbt.getString("template"));
 			this.rotation = Rotation.valueOf(nbt.getString("rotation"));
 			setupTemplate(templateManager);
