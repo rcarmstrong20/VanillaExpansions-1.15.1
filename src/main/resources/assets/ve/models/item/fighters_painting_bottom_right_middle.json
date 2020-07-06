@@ -1,0 +1,7 @@
+{
+    "parent": "ve:item/template_painting",
+    "textures":
+	{
+        "painting": "ve:item/fighters_painting_bottom_right_middle"
+    }
+}
