@@ -1,0 +1,43 @@
+{
+  "parent": "ve:story/root",
+  "display": {
+    "icon":
+	{
+      "item": "ve:witchs_cradle_soup"
+    },
+    "title":
+	{
+      "translate": "advancements.ve.story.craft_witchs_cradle_soup.title"
+    },
+    "description":
+	{
+      "translate": "advancements.ve.story.craft_witchs_cradle_soup.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria":
+  {
+    "get_witchs_cradle_soup":
+    {
+      "trigger": "minecraft:inventory_changed",
+      "conditions":
+	  {
+        "items":
+		[
+          {
+            "item": "ve:witchs_cradle_soup"
+          }
+        ]
+      }
+    }
+  },
+  "requirements":
+  [
+    [
+      "get_witchs_cradle_soup"
+    ]
+  ]
+}
