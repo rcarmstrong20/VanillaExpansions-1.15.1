@@ -1,7 +1,6 @@
 package rcarmstrong20.vanilla_expansions;
 
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
+import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.client.Minecraft;
@@ -28,7 +28,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,7 +39,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -56,8 +57,8 @@ import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 public class VanillaExpansions
 {
 	public static Object modInstance;
-	public static final String MOD_ID = "ve";
 	public static final Logger LOGGER = LogManager.getLogger(VanillaExpansions.MOD_ID);
+	public static final String MOD_ID = "ve";
 	public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
 	public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 	
@@ -68,6 +69,7 @@ public class VanillaExpansions
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegistries);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegisterParticle);
+		ModLoadingContext.get().registerConfig(Type.COMMON, VeConfig.COMMON_SPEC, "ve-common.toml");
 		
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -77,7 +79,7 @@ public class VanillaExpansions
 	 */
 	private void setup(final FMLCommonSetupEvent event)
 	{
-		LOGGER.info("setup method registered");
+		VanillaExpansions.LOGGER.info("setup method registered");
 		PROXY.onSetupCommon();
 	}
 	
@@ -86,7 +88,7 @@ public class VanillaExpansions
 	 */
 	private void clientRegistries(final FMLClientSetupEvent event)
 	{
-		LOGGER.info("client method registered");
+		VanillaExpansions.LOGGER.info("client method registered");
 		PROXY.onSetupClient();
 	}
 	
@@ -111,7 +113,6 @@ public class VanillaExpansions
 		//General variables
 		BlockPos pos = event.getPos();
 		World world = event.getWorld();
-		Random random = new Random();
 		
 		//Block and items
 		BlockState worldState = event.getWorld().getBlockState(pos);
@@ -122,6 +123,7 @@ public class VanillaExpansions
 		IntegerProperty cropsAge = CropsBlock.AGE;
 		IntegerProperty netherWartAge = NetherWartBlock.AGE;
 		IntegerProperty beetrootAge = BeetrootBlock.BEETROOT_AGE;
+		IntegerProperty cocoaAge = CocoaBlock.AGE;
 		
 		//Campfire properties
 		BooleanProperty isLit = CampfireBlock.LIT;
@@ -129,32 +131,51 @@ public class VanillaExpansions
 		if(!event.getWorld().isRemote)
 		{
 			//If the block your clicking is a crop and your not using bone meal return true.
-			if(worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+			if(!VeConfig.Common.rightClickHarvestBlackList.get().contains(worldState.getBlock().getRegistryName().toString()) && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
-				if(worldState.getBlock() instanceof BeetrootBlock)
+				for(int i = 0; event.getWorld().getBlockState(pos.down(i)).getBlock() instanceof CropsBlock; i++)
 				{
-					//When the beet root crop is fully grown and clicked then harvest it.
-					if(worldState.get(beetrootAge) == beetrootAge.getAllowedValues().size() - 1)
+					if(event.getWorld().getBlockState(pos.down()) == Blocks.FARMLAND.getDefaultState())
 					{
-						harvestCrop(worldState, world, pos, random, beetrootAge);
-						event.setResult(Result.ALLOW);
-						event.setCanceled(true);
+						if(worldState.getBlock() instanceof BeetrootBlock)
+						{
+							//When the beet root crop is fully grown and clicked then harvest it.
+							if(worldState.get(beetrootAge) == getMaxAge(beetrootAge))
+							{
+								resetCrop(worldState, world, pos, beetrootAge);
+								event.setResult(Result.ALLOW);
+								event.setCanceled(true);
+							}
+						}
+						//If its not a beet root and a crop then it must be a normal 7 stage crop and if it's fully grown harvest it.
+						else if(worldState.get(cropsAge) == getMaxAge(cropsAge))
+						{
+							resetCrop(worldState, world, pos, cropsAge);
+							event.setResult(Result.ALLOW);
+							event.setCanceled(true);
+						}
 					}
-				}
-				//If its not a beet root and a crop then it must be a normal 7 stage crop and if it's fully grown harvest it.
-				else if(worldState.get(cropsAge) == 7)
-				{
-					harvestCrop(worldState, world, pos, random, cropsAge);
-					event.setResult(Result.ALLOW);
-					event.setCanceled(true);
+					else
+					{
+						Block.replaceBlock(worldState, Blocks.AIR.getDefaultState(), world, pos, 1);
+					}
 				}
 			}
 			//If its not a crop it might be nether wart and if so check if it's fully grown and if so harvest it.
 			else if(worldState.getBlock() instanceof NetherWartBlock)
 			{
-				if(worldState.get(netherWartAge) == 3)
+				if(worldState.get(netherWartAge) == getMaxAge(netherWartAge))
 				{
-					harvestCrop(worldState, world, pos, random, netherWartAge);
+					resetCrop(worldState, world, pos, netherWartAge);
+					event.setResult(Result.ALLOW);
+					event.setCanceled(true);
+				}
+			}
+			else if(worldState.getBlock() instanceof CocoaBlock)
+			{
+				if(worldState.get(cocoaAge) == getMaxAge(cocoaAge))
+				{
+					resetCrop(worldState, world, pos, cocoaAge);
 					event.setResult(Result.ALLOW);
 					event.setCanceled(true);
 				}
@@ -199,14 +220,21 @@ public class VanillaExpansions
 		}
 	}
 	
-	/*
-	 * Resets the crop back to age 0, spawns the crops drops, and plays the grass breaking sound.
+	/**
+	 * A helper method that harvests and the passed in crop.
 	 */
-	private static void harvestCrop(BlockState state, World world, BlockPos pos, Random random, IntegerProperty age)
+	private void resetCrop(BlockState state, World world, BlockPos pos, IntegerProperty age)
 	{
-		world.setBlockState(pos, state.with(age, 0), 2);
-		Block.spawnDrops(state, world, pos);
-		world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F);
+		Block.replaceBlock(state, Blocks.AIR.getDefaultState(), world, pos, 1); //If the replacement block is anything but air the blocks don't drop and play their appropriate sound.
+		world.setBlockState(pos, state.with(age, 0));
+	}
+	
+	/**
+	 * A helper method that gets the max age for the age property passed.
+	 */
+	private int getMaxAge(IntegerProperty age)
+	{
+		return age.getAllowedValues().size() - 1;
 	}
 	
 	/*
