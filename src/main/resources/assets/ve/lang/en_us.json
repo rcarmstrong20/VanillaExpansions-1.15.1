@@ -272,11 +272,14 @@
   "item.ve.sunset_painting_top": "Sunset Painting Top",
   "item.ve.sunset_painting_bottom": "Sunset Painting Bottom",
   
-  "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
+  "advancements.ve.story.craft_witchs_cradle_soup.title": "Is this even edible!?",
+  "advancements.ve.story.craft_witchs_cradle_soup.description": "Craft witchs cradle soup from a blood vile, a witchs cradle branch, and a bowl",
   
   "liquid.ve.void": "Void",
   
-  "block.minecraft.ladder": "Oak Ladder",
+  "itemGroup.ve": "Vanilla Expansions Mod",
   
-  "itemGroup.ve": "Vanilla Expansions Mod"
+  "entity.minecraft.villager.ve.lumberjack": "Lumberjack",
+  
+  "block.minecraft.ladder": "Oak Ladder"
 }
