@@ -7,6 +7,7 @@ import com.google.common.base.Suppliers;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.HoeItem;
@@ -22,7 +23,6 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.enums.VeArmorMaterial;
 import rcarmstrong20.vanilla_expansions.enums.VeItemTier;
-import rcarmstrong20.vanilla_expansions.item.VeAxeItem;
 import rcarmstrong20.vanilla_expansions.item.VeDrinkItem;
 import rcarmstrong20.vanilla_expansions.item.VeGlassVialItem;
 import rcarmstrong20.vanilla_expansions.item.VePickaxeItem;
@@ -46,7 +46,7 @@ public class VeItems
 	//Vanilla Expansions Items
 	
 	public static Item ruby = register("ruby", new Item(VE_ITEMS));
-	public static Item ruby_axe = register("ruby_axe", new VeAxeItem(VeItemTier.RUBY, 5.0F, -2.8F, new Item.Properties().addToolType(ToolType.AXE, 4).group(VanillaExpansions.VE_GROUP)));
+	public static Item ruby_axe = register("ruby_axe", new AxeItem(VeItemTier.RUBY, 5.0F, -2.8F, new Item.Properties().addToolType(ToolType.AXE, 4).group(VanillaExpansions.VE_GROUP)));
 	public static Item ruby_pickaxe = register("ruby_pickaxe", new VePickaxeItem(VeItemTier.RUBY, 1, new Item.Properties().addToolType(ToolType.PICKAXE, 4).group(VanillaExpansions.VE_GROUP)));
 	public static Item ruby_shovel = register("ruby_shovel", new VeShovelItem(VeItemTier.RUBY, 1.5F, new Item.Properties().addToolType(ToolType.SHOVEL, 4).group(VanillaExpansions.VE_GROUP)));
 	public static Item ruby_sword = register("ruby_sword", new VeSwordItem(VeItemTier.RUBY, 3, VE_SINGLE_ITEMS));
@@ -56,7 +56,7 @@ public class VeItems
 	public static Item ruby_leggings = register("ruby_leggings", new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.LEGS, VE_SINGLE_ITEMS));
 	public static Item ruby_boots = register("ruby_boots", new ArmorItem(VeArmorMaterial.RUBY, EquipmentSlotType.FEET, VE_SINGLE_ITEMS));
 	public static Item ruby_horse_armor = register("ruby_horse_armor", 12, "ruby");
-	public static Item emerald_axe = register("emerald_axe", new VeAxeItem(VeItemTier.EMERALD, 6.0F, -3.0F, new Item.Properties().addToolType(ToolType.AXE, 2).group(VanillaExpansions.VE_GROUP)));
+	public static Item emerald_axe = register("emerald_axe", new AxeItem(VeItemTier.EMERALD, 6.0F, -3.0F, new Item.Properties().addToolType(ToolType.AXE, 2).group(VanillaExpansions.VE_GROUP)));
 	public static Item emerald_pickaxe = register("emerald_pickaxe", new VePickaxeItem(VeItemTier.EMERALD, 1, new Item.Properties().addToolType(ToolType.PICKAXE, 2).group(VanillaExpansions.VE_GROUP)));
 	public static Item emerald_shovel = register("emerald_shovel", new VeShovelItem(VeItemTier.EMERALD, 2, new Item.Properties().addToolType(ToolType.SHOVEL, 2).group(VanillaExpansions.VE_GROUP)));
 	public static Item emerald_sword = register("emerald_sword", new VeSwordItem(VeItemTier.EMERALD, 4, VE_SINGLE_ITEMS));
