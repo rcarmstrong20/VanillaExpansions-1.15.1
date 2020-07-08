@@ -45,8 +45,11 @@ import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
+import rcarmstrong20.vanilla_expansions.config.VeConfig;
+import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
@@ -69,7 +72,11 @@ public class VanillaExpansions
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegistries);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegisterParticle);
-		ModLoadingContext.get().registerConfig(Type.COMMON, VeConfig.COMMON_SPEC, "ve-common.toml");
+		ModLoadingContext.get().registerConfig(Type.SERVER, VeConfig.SERVER_CONFIG);
+		ModLoadingContext.get().registerConfig(Type.CLIENT, VeConfig.CLIENT_CONFIG);
+		
+		VeConfig.loadConfig(VeConfig.SERVER_CONFIG, FMLPaths.CONFIGDIR.get().resolve("ve-server.toml").toString());
+		VeConfig.loadConfig(VeConfig.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("ve-client.toml").toString());
 		
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -131,7 +138,7 @@ public class VanillaExpansions
 		if(!event.getWorld().isRemote)
 		{
 			//If the block your clicking is a crop and your not using bone meal return true.
-			if(!VeConfig.Common.rightClickHarvestBlackList.get().contains(worldState.getBlock().getRegistryName().toString()) && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
+			if(VeCropConfig.enableRightClickHarvesting.get() && worldState.getBlock() instanceof CropsBlock && itemStack.getItem() != Items.BONE_MEAL)
 			{
 				for(int i = 0; event.getWorld().getBlockState(pos.down(i)).getBlock() instanceof CropsBlock; i++)
 				{

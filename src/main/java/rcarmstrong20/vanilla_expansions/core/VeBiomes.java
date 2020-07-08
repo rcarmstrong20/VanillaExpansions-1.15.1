@@ -10,8 +10,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage.Decoration;
@@ -36,8 +36,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
-import rcarmstrong20.vanilla_expansions.VeConfig;
 import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
+import rcarmstrong20.vanilla_expansions.config.VeFeatureGenConfig;
+import rcarmstrong20.vanilla_expansions.config.VeOreGenConfig;
 
 /*
  * Author: rcarmstrong20
@@ -45,20 +46,18 @@ import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class VeBiomes
 {
-	private static List<String> cabinBiomes = combineLists(VeConfig.Common.taigaCabinSpawnBiomes.get(),
-														   VeConfig.Common.birchForestCabinSpawnBiomes.get(),
-														   VeConfig.Common.forestCabinSpawnBiomes.get());
-	
 	public static final List<Biome> COLD_BIOMES = Arrays.asList(Biomes.MOUNTAINS, Biomes.MOUNTAIN_EDGE, Biomes.GRAVELLY_MOUNTAINS, Biomes.SNOWY_MOUNTAINS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.TAIGA_MOUNTAINS, Biomes.WOODED_MOUNTAINS, Biomes.SNOWY_TUNDRA, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.ICE_SPIKES, Biomes.FROZEN_RIVER, Biomes.FROZEN_OCEAN, Biomes.DEEP_FROZEN_OCEAN);
-	public static final List<Biome> NETHER_BIOMES = Arrays.asList(Biomes.NETHER);
 	public static final List<Biome> FOREST_BIOMES = Arrays.asList(Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.FLOWER_FOREST);
 	public static final List<Biome> DARK_FOREST_BIOMES = Arrays.asList(Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS);
-	public static final List<Biome> SWAMP_BIOMES = Arrays.asList(Biomes.SWAMP, Biomes.SWAMP_HILLS);
 	public static final List<Biome> END_CITY_BIOMES = Arrays.asList(Biomes.END_BARRENS, Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS, Biomes.SMALL_END_ISLANDS);
-	public static final List<Biome> TAIGA_BIOMES = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS, Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS);
-	public static final List<Biome> FOREST_BIOME = Arrays.asList(Biomes.FOREST);
-	public static final List<Biome> BIRCH_FOREST_BIOMES = Arrays.asList(Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
-	public static final List<Biome> CABIN_BIOMES = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS, Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.FOREST);
+	public static final List<Biome> TAIGA_CABIN_BIOMES = Arrays.asList(Biomes.TAIGA, Biomes.TAIGA_HILLS, Biomes.TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS);
+	public static final List<Biome> FOREST_CABIN_BIOME = Arrays.asList(Biomes.FOREST);
+	public static final List<Biome> BIRCH_CABIN_BIOMES = Arrays.asList(Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
+	
+	private static final List<Biome> CABIN_BIOMES = combineLists(TAIGA_CABIN_BIOMES,
+																 FOREST_CABIN_BIOME,
+																 BIRCH_CABIN_BIOMES);
+	
 	public static final BlockState NETHER_SMOKY_QUARTZ_ORE = VeBlocks.smoky_quartz_ore.getDefaultState();
 	public static final BlockState NETHER_RUBY_ORE = VeBlocks.ruby_ore.getDefaultState();
 	public static final BlockState BLUEBERRY_BUSH = VeBlocks.blueberry_bush.getDefaultState().with(VeBerryBushBlock.AGE, 3);
@@ -76,79 +75,93 @@ public class VeBiomes
 	@SubscribeEvent
 	public static void registerBiomes(final RegistryEvent.Register<Biome> event)
 	{
-		addFeature("ve:nether_smoky_quartz_ore", Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_SMOKY_QUARTZ_ORE, VeConfig.Common.netherSmokyQuartzOreVeinSize.get())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))), VeConfig.Common.netherSmokyQuartzOreSpawnBiomes.get());
-		addFeature("ve:nether_ruby_ore", Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_RUBY_ORE, VeConfig.Common.netherRubyOreVeinSize.get())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))), VeConfig.Common.netherRubyOreSpawnBiomes.get());
-		addFeature("ve:blueberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))), VeConfig.Common.blueberryBushSpawnBiomes.get());
-		addFeature("ve:blueberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(12))), VeConfig.Common.blueberryBushSpawnBiomes.get());
-		addFeature("ve:cranberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))), VeConfig.Common.cranberryBushSpawnBiomes.get());
-		addFeature("ve:cranberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(14))), VeConfig.Common.cranberryBushSpawnBiomes.get());
-		addFeature("ve:witchs_cradle", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(WITCHS_CRADLE_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(10))), VeConfig.Common.witchsCradleSpawnBiomes.get());
-		addFeature("ve:big_purple_mushroom", Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(1))), VeConfig.Common.bigPurpleMushroomSpawnBiomes.get());
-		addFeature("ve:void_lake", Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VOID_LIQUID)).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))), VeConfig.Common.voidLakeSpawnBiomes.get());
-		addFeatureToAll(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-		addStructure("ve:cabin", VeFeature.CABIN, IFeatureConfig.NO_FEATURE_CONFIG, cabinBiomes);
+		addFeature("ve:nether_smoky_quartz_ore", Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_SMOKY_QUARTZ_ORE, VeOreGenConfig.netherSmokyQuartzOreVeinSize.get())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 10, 20, 128))), VeOreGenConfig.enableNetherSmokyQuartzOreSpawns.get(), Category.NETHER);
+		addFeature("ve:nether_ruby_ore", Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, NETHER_RUBY_ORE, VeOreGenConfig.netherRubyOreVeinSize.get())).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))), VeOreGenConfig.enableNetherRubyOreSpawns.get(), Category.NETHER);
+		addFeature("ve:blueberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))), VeFeatureGenConfig.enableBlueberryBushSpawns.get(), FOREST_BIOMES);
+		addFeature("ve:blueberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(12))), VeFeatureGenConfig.enableBlueberryBushSpawns.get(), FOREST_BIOMES);
+		addFeature("ve:cranberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))), VeFeatureGenConfig.enableCranberryBushSpawns.get(), FOREST_BIOMES);
+		addFeature("ve:cranberry_bush", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(CRANBERRY_BUSH_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(14))), VeFeatureGenConfig.enableCranberryBushSpawns.get(), FOREST_BIOMES);
+		addFeature("ve:witchs_cradle", Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(WITCHS_CRADLE_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(10))), VeFeatureGenConfig.enableWitchsCradleSpawns.get(), Category.SWAMP);
+		addFeature("ve:big_purple_mushroom", Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG), Feature.HUGE_RED_MUSHROOM.withConfiguration(BIG_PURPLE_MUSHROOM_CONFIG))).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(1))), VeFeatureGenConfig.enableBigPurpleMushroomSpawns.get(), DARK_FOREST_BIOMES);
+		addFeature("ve:void_lake", Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(VOID_LIQUID)).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))), VeFeatureGenConfig.enableVoidLakeSpawns.get(), END_CITY_BIOMES);
+		addFeatureToAll(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)), VeFeatureGenConfig.enableCabinSpawns.get());
+		addStructure("ve:cabin", VeFeature.CABIN, IFeatureConfig.NO_FEATURE_CONFIG, VeFeatureGenConfig.enableCabinSpawns.get(), CABIN_BIOMES);
 		
 		VanillaExpansions.LOGGER.info("Biome Features registered.");
 	}
 	
-	private static List<String> combineLists(List<String> list1, List<String> list2, List<String> list3)
+	private static List<Biome> combineLists(List<Biome> list1, List<Biome> list2, List<Biome> list3)
 	{
-		List<String> newList = new ArrayList<String>(list1);
+		List<Biome> newList = new ArrayList<>(list1);
 		newList.addAll(list2);
 		newList.addAll(list3);
 		return newList;
 	}
 	
 	/**
-	 * Add a new feature to be spawned into the world.
+	 * Add a new feature to the spawn list for every biome that exists in a certain category.
 	 */
-	private static void addFeature(String featureName, Decoration decoration, ConfiguredFeature<?, ?> feature, List<String> biomeNames)
+	private static void addFeature(String featureName, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable, Biome.Category category)
 	{
-		for(int i = 0; i < biomeNames.size(); i++)
+		if(enable)
 		{
-			Biome biome = ForgeRegistries.BIOMES.getValue(new ResourceLocation(biomeNames.get(i)));
-			
-			if(biome != null && biome instanceof Biome)
+			for(Biome biome : ForgeRegistries.BIOMES)
 			{
-				biome.addFeature(decoration, feature);
-			}
-			else
-			{
-				VanillaExpansions.LOGGER.warn("Skipping " + biomeNames.get(i) + " as it is not a registered biome or is misspelled in the config for the feature " + featureName + ".");
+				if(biome.getCategory() == category)
+				{
+					biome.addFeature(decoration, feature);
+				}
 			}
 		}
 	}
 	
 	/**
-	 * Add a new feature to be spawned into the world.
+	 * Add a new feature to the spawn list for specific biomes.
 	 */
-	private static void addFeatureToAll(Decoration decoration, ConfiguredFeature<?, ?> featureIn)
+	private static void addFeature(String featureName, Decoration decoration, ConfiguredFeature<?, ?> feature, boolean enable, List<Biome> biomes)
 	{
-		for(Biome biome : ForgeRegistries.BIOMES)
+		if(enable)
 		{
-			if(biome != null)
+			for(Biome biome: biomes)
 			{
-				biome.addFeature(decoration, featureIn);
+				if(biome != null && biomes.contains(biome))
+				{
+					biome.addFeature(decoration, feature);
+				}
 			}
 		}
 	}
 	
 	/**
-	 * Add a new structure to be spawned into the world.
+	 * Add a new feature to all existing biomes.
 	 */
-	private static <C extends IFeatureConfig> void addStructure(String structureName, Structure<C> structure, C config, List<String> biomeNames)
+	private static void addFeatureToAll(Decoration decoration, ConfiguredFeature<?, ?> featureIn, boolean enable)
 	{
-		for(int i = 0; i < biomeNames.size(); i++)
+		if(enable)
 		{
-			Biome biome = ForgeRegistries.BIOMES.getValue(new ResourceLocation(biomeNames.get(i)));
-			
-			if(biome != null && biome instanceof Biome)
+			for(Biome biome : ForgeRegistries.BIOMES)
 			{
-				biome.addStructure(structure.withConfiguration(config));
+				if(biome != null)
+				{
+					biome.addFeature(decoration, featureIn);
+				}
 			}
-			else
+		}
+	}
+	
+	/**
+	 * Add a new structure to the spawn list for specific biomes.
+	 */
+	private static <C extends IFeatureConfig> void addStructure(String structureName, Structure<C> structure, C config, boolean enable, List<Biome> biomes)
+	{
+		if(enable)
+		{
+			for(Biome biome : biomes)
 			{
-				VanillaExpansions.LOGGER.warn("SKIPPING " + biomeNames.get(i) + " as it is not a registered biome or is misspelled in the config for the structure " + structureName + ".");
+				if(biome != null && biomes.contains(biome))
+				{
+					biome.addStructure(structure.withConfiguration(config));
+				}
 			}
 		}
 	}
@@ -157,13 +170,16 @@ public class VeBiomes
 	 * Add a new entity to be spawned into the world.
 	 */
 	@SuppressWarnings("unused")
-	private static void registerEntitySpawn(EntityType<?> entity, int weight, int maxCount, List<Biome> biomes)
+	private static void registerEntitySpawn(EntityType<?> entity, int weight, int maxCount, boolean enable, List<Biome> biomes)
 	{
-		for(Biome biome : biomes)
+		if(enable)
 		{
-			if(biome != null)
+			for(Biome biome : biomes)
 			{
-				biome.getSpawns(entity.getClassification()).add(new SpawnListEntry(entity, weight, 1, maxCount));
+				if(biome != null)
+				{
+					biome.getSpawns(entity.getClassification()).add(new SpawnListEntry(entity, weight, 1, maxCount));
+				}
 			}
 		}
 	}
