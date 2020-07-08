@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.google.common.collect.ImmutableMap.Builder;
@@ -27,7 +29,6 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -760,7 +761,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 	}
 	*/
 	
-	/*
+	/**
 	 * A helper method that checks if the frame is empty.
 	 */
 	private static boolean isEmpty(VeFrameTileEntity frameTileEntity)
@@ -779,37 +780,58 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 		itemStack.shrink(1);
 	}
 	
+	/*
+	 * Borrowed from LadderBlock
+	 */
+	private boolean canAttachTo(IBlockReader blockReader, BlockPos pos, Direction direction)
+	{
+		BlockState blockstate = blockReader.getBlockState(pos);
+		return !blockstate.canProvidePower() && blockstate.isSolidSide(blockReader, pos, direction);
+	}
+	
+	/*
+	 * Borrowed from LadderBlock
+	 */
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
-		BlockState northState = worldIn.getBlockState(pos.offset(Direction.NORTH.getOpposite()));
-		BlockState southState = worldIn.getBlockState(pos.offset(Direction.SOUTH.getOpposite()));
-		BlockState westState = worldIn.getBlockState(pos.offset(Direction.WEST.getOpposite()));
-		BlockState eastState = worldIn.getBlockState(pos.offset(Direction.EAST.getOpposite()));
-		
-		if(northState.isSolid() && state.get(FACING) == Direction.NORTH							   ||
-		   southState.isSolid() && state.get(FACING) == Direction.SOUTH 						   ||
-		   westState.isSolid() && state.get(FACING) == Direction.WEST  							   ||
-		   eastState.isSolid() && state.get(FACING) == Direction.EAST   						   ||
-		   BlockTags.SIGNS.contains(northState.getBlock()) && state.get(FACING) == Direction.NORTH ||
-		   BlockTags.SIGNS.contains(southState.getBlock()) && state.get(FACING) == Direction.SOUTH ||
-		   BlockTags.SIGNS.contains(westState.getBlock())  && state.get(FACING) == Direction.WEST  ||
-		   BlockTags.SIGNS.contains(eastState.getBlock()) && state.get(FACING) == Direction.EAST)
-		{
-			return true;
-		}
-		return false;
+		Direction direction = state.get(FACING);
+		return this.canAttachTo(worldIn, pos.offset(direction.getOpposite()), direction);
 	}
 	
+	/*
+	 * Borrowed from LadderBlock
+	 */
 	@Override
+	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		IWorld iworld = context.getWorld();
-		BlockPos blockpos = context.getPos();
-		boolean waterLoggedFlag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
+		if (!context.replacingClickedOnBlock())
+		{
+			BlockState blockstate = context.getWorld().getBlockState(context.getPos().offset(context.getFace().getOpposite()));
+			if (blockstate.getBlock() == this && blockstate.get(FACING) == context.getFace())
+			{
+				return null;
+			}
+		}
 		
-		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(waterLoggedFlag))
-									 .with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		BlockState blockstate1 = this.getDefaultState();
+		IWorldReader iworldreader = context.getWorld();
+		BlockPos blockpos = context.getPos();
+		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		
+		for(Direction direction : context.getNearestLookingDirections())
+		{
+			if (direction.getAxis().isHorizontal())
+			{
+				blockstate1 = blockstate1.with(FACING, direction.getOpposite());
+				if (blockstate1.isValidPosition(iworldreader, blockpos))
+				{
+					return blockstate1.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+				}
+			}
+		}
+		return null;
 	}
 	
 	@Override
