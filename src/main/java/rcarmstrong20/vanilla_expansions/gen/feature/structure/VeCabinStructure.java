@@ -94,8 +94,6 @@ public class VeCabinStructure extends ScatteredStructure<NoFeatureConfig>
 		{
 			Rotation rotation = Rotation.randomRotation(rand);
 			BlockPos blockPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-			//CabinPieces piece = new CabinPieces(templateManager, templateResource, blockPos, rotation);
-			//this.components.add(piece);
 			VeCabinPieces.init(templateManager, biome, blockPos, rotation, this.components);
 			this.recalculateStructureSize();
 		}
