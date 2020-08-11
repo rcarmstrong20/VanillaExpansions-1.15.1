@@ -16,10 +16,10 @@ public class VeParticleTypes
 {
 	private static final List<BasicParticleType> PARTICLES = new ArrayList<>();
 	
-	public static final BasicParticleType DRIPPING_VOID = register("dripping_void", false);
-	public static final BasicParticleType FALLING_VOID = register("falling_void", false);
-	public static final BasicParticleType LANDING_VOID = register("landing_void", false);
-	public static final BasicParticleType UNDERVOID = register("undervoid", true);
+	public static BasicParticleType dripping_void = register("dripping_void", false);
+	public static BasicParticleType falling_void = register("falling_void", false);
+	public static BasicParticleType landing_void = register("landing_void", false);
+	public static BasicParticleType undervoid = register("undervoid", true);
 	
 	private static BasicParticleType register(String name, boolean alwaysShow)
 	{

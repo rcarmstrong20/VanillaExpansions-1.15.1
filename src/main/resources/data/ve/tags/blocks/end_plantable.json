@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values":
+  [
+	"minecraft:end_stone",
+    "ve:obsidian_planting_pot"
+  ]
+}

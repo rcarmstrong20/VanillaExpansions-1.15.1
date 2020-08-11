@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "ve:block/nephilite_brick_slab" },
+        "type=top": { "model": "ve:block/nephilite_brick_slab_top" },
+        "type=double": { "model": "ve:block/nephilite_bricks" }
+	}
+}

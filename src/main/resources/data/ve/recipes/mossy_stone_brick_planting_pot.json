@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "group": "overworld_stone_planting_pot",
+  "pattern":
+  [
+    "#D#",
+    "###",
+    " B "
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "minecraft:mossy_stone_bricks"
+    },
+	"D":
+	{
+	  "item": "minecraft:dirt"
+	},
+	"B":
+	{
+	  "item": "minecraft:water_bucket"
+	}
+  },
+  "result":
+  {
+    "item": "ve:mossy_stone_brick_planting_pot"
+  }
+}

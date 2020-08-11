@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:block",
+  "pools":
+  [
+    {
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:item",
+          "name": "ve:stone_brick_planting_pot"
+        }
+      ],
+      "conditions":
+	  [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

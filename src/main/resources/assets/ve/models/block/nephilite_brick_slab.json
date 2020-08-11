@@ -1,0 +1,9 @@
+{
+    "parent": "block/slab",
+    "textures":
+	{
+        "bottom": "ve:block/nephilite_bricks",
+        "top": "ve:block/nephilite_bricks",
+        "side": "ve:block/nephilite_bricks"
+    }
+}

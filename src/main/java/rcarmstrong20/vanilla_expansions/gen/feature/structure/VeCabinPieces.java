@@ -1,12 +1,10 @@
 package rcarmstrong20.vanilla_expansions.gen.feature.structure;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -41,40 +39,31 @@ public class VeCabinPieces
 		list.add(new VeCabinPieces.VePiece(templateManager, resourcelocation, blockPos, rotation));
 	}
 	
+	/**
+	 * @param biome The current biome the player is in.
+	 * @return      A new resource location containing the cabin for the biome.
+	 */
 	private static ResourceLocation getVariant(Biome biome)
 	{
-		if(isBiome(biome, VeBiomes.TAIGA_CABIN_BIOMES))
+		String id = VanillaExpansions.MOD_ID;
+		
+		if(VeBiomes.TAIGA_CABIN_BIOMES.contains(biome))
 		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "taiga_cabin");
+			return new ResourceLocation(id, "taiga_cabin");
 		}
-		else if(isBiome(biome, VeBiomes.BIRCH_CABIN_BIOMES))
+		else if(VeBiomes.BIRCH_CABIN_BIOMES.contains(biome))
 		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "birch_forest_cabin");
+			return new ResourceLocation(id, "birch_forest_cabin");
 		}
 		else
 		{
-			return new ResourceLocation(VanillaExpansions.MOD_ID, "forest_cabin");
+			return new ResourceLocation(id, "forest_cabin");
 		}
-	}
-	
-	/**
-	 * Check to see if the current biome exists in the given list of biomes.
-	 */
-	private static boolean isBiome(Biome currentBiome, List<Biome> biomes)
-	{
-		for(Biome biome : biomes)
-		{
-			if(currentBiome == biome)
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public static class VePiece extends TemplateStructurePiece
 	{
-		private List<Block> flower_pots = Arrays.asList(Blocks.POTTED_DANDELION, Blocks.POTTED_POPPY, Blocks.POTTED_BLUE_ORCHID, Blocks.POTTED_ALLIUM, Blocks.POTTED_AZURE_BLUET, Blocks.POTTED_RED_TULIP, Blocks.POTTED_ORANGE_TULIP, Blocks.POTTED_WHITE_TULIP, Blocks.POTTED_PINK_TULIP, Blocks.POTTED_OXEYE_DAISY, Blocks.POTTED_CORNFLOWER, Blocks.POTTED_LILY_OF_THE_VALLEY);
+		//private List<Block> flower_pots = Arrays.asList(Blocks.POTTED_DANDELION, Blocks.POTTED_POPPY, Blocks.POTTED_BLUE_ORCHID, Blocks.POTTED_ALLIUM, Blocks.POTTED_AZURE_BLUET, Blocks.POTTED_RED_TULIP, Blocks.POTTED_ORANGE_TULIP, Blocks.POTTED_WHITE_TULIP, Blocks.POTTED_PINK_TULIP, Blocks.POTTED_OXEYE_DAISY, Blocks.POTTED_CORNFLOWER, Blocks.POTTED_LILY_OF_THE_VALLEY);
 		private final ResourceLocation templateResource;
 		private final Rotation rotation;
 		
@@ -149,7 +138,7 @@ public class VeCabinPieces
 			}
 			else if("cabin_flowers".equals(function))
 			{
-				world.setBlockState(pos.down(), flower_pots.get(rand.nextInt(flower_pots.size())).getDefaultState(), 3);
+				world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
 			}
 		}
 		

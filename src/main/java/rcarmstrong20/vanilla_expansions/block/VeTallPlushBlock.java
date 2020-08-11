@@ -179,15 +179,56 @@ public class VeTallPlushBlock extends VePlushBlock
 	{
 		if(this == VeBlocks.slime_plush)
 		{
-			return VeTallPlushBlock.defineShapes(state, ONE_SLIME_NORTH_SHAPE, TWO_SLIME_NORTH_SHAPE, THREE_SLIME_NORTH_SHAPE, ONE_SLIME_SOUTH_SHAPE, TWO_SLIME_SOUTH_SHAPE, THREE_SLIME_SOUTH_SHAPE, ONE_SLIME_WEST_SHAPE, TWO_SLIME_WEST_SHAPE, THREE_SLIME_WEST_SHAPE, ONE_SLIME_EAST_SHAPE, TWO_SLIME_EAST_SHAPE, THREE_SLIME_EAST_SHAPE);
+			return VeTallPlushBlock.defineShapes(state,
+												 ONE_SLIME_NORTH_SHAPE,
+												 TWO_SLIME_NORTH_SHAPE,
+												 THREE_SLIME_NORTH_SHAPE,
+												 ONE_SLIME_SOUTH_SHAPE,
+												 TWO_SLIME_SOUTH_SHAPE,
+												 THREE_SLIME_SOUTH_SHAPE,
+												 ONE_SLIME_WEST_SHAPE,
+												 TWO_SLIME_WEST_SHAPE,
+												 THREE_SLIME_WEST_SHAPE,
+												 ONE_SLIME_EAST_SHAPE,
+												 TWO_SLIME_EAST_SHAPE,
+												 THREE_SLIME_EAST_SHAPE);
 		}
 		else if(this == VeBlocks.magma_cube_plush)
 		{
-			return VeTallPlushBlock.defineShapes(state, ONE_MAGMA_CUBE_NORTH_SHAPE, TWO_MAGMA_CUBE_NORTH_SHAPE, THREE_MAGMA_CUBE_NORTH_SHAPE, ONE_MAGMA_CUBE_SOUTH_SHAPE, TWO_MAGMA_CUBE_SOUTH_SHAPE, THREE_MAGMA_CUBE_SOUTH_SHAPE, ONE_MAGMA_CUBE_WEST_SHAPE, TWO_MAGMA_CUBE_WEST_SHAPE, THREE_MAGMA_CUBE_WEST_SHAPE, ONE_MAGMA_CUBE_EAST_SHAPE, TWO_MAGMA_CUBE_EAST_SHAPE, THREE_MAGMA_CUBE_EAST_SHAPE);
+			return VeTallPlushBlock.defineShapes(state,
+												 ONE_MAGMA_CUBE_NORTH_SHAPE,
+												 TWO_MAGMA_CUBE_NORTH_SHAPE,
+												 THREE_MAGMA_CUBE_NORTH_SHAPE,
+												 ONE_MAGMA_CUBE_SOUTH_SHAPE,
+												 TWO_MAGMA_CUBE_SOUTH_SHAPE,
+												 THREE_MAGMA_CUBE_SOUTH_SHAPE,
+												 ONE_MAGMA_CUBE_WEST_SHAPE,
+												 TWO_MAGMA_CUBE_WEST_SHAPE,
+												 THREE_MAGMA_CUBE_WEST_SHAPE,
+												 ONE_MAGMA_CUBE_EAST_SHAPE,
+												 TWO_MAGMA_CUBE_EAST_SHAPE,
+												 THREE_MAGMA_CUBE_EAST_SHAPE);
 		}
 		return VoxelShapes.fullCube();
 	}
 	
+	/**
+	 * Note - Keeping the rotations as global variables results in the least amount of lag.
+	 * @param state - The current state this block is in.
+	 * @param northShape1 - The north shape for stack size 1.
+	 * @param northShape2 - The north shape for stack size 2.
+	 * @param northShape3 - The north shape for stack size 3.
+	 * @param southShape1 - The south shape for stack size 1.
+	 * @param southShape2 - The south shape for stack size 2.
+	 * @param southShape3 - The south shape for stack size 3.
+	 * @param westShape1 - The west shape for stack size 1.
+	 * @param westShape2 - The west shape for stack size 2.
+	 * @param westShape3 - The west shape for stack size 3.
+	 * @param eastShape1 - The east shape for stack size 1.
+	 * @param eastShape2 - The east shape for stack size 2.
+	 * @param eastShape3 - The east shape for stack size 3.
+	 * @return The appropriate bounding box for the given state.
+	 */
 	private static VoxelShape defineShapes(BlockState state, VoxelShape northShape1, VoxelShape northShape2, VoxelShape northShape3, VoxelShape southShape1, VoxelShape southShape2, VoxelShape southShape3, VoxelShape westShape1, VoxelShape westShape2, VoxelShape westShape3, VoxelShape eastShape1, VoxelShape eastShape2, VoxelShape eastShape3)
 	{
 		switch((Direction)state.get(HORIZONTAL_FACING))
@@ -203,6 +244,14 @@ public class VeTallPlushBlock extends VePlushBlock
 		}
 	}
 	
+	/**
+	 * @param state - The current state this block is in.
+	 * @param stackSizeShape1 - The shape for stack size 1.
+	 * @param stackSizeShape2 - The shape for stack size 2.
+	 * @param stackSizeShapeTop3 - The shape for the top of stack size 3.
+	 * @param stackSizeShapeBottom3 - The shape for the bottom of stack size 3.
+	 * @return The appropriate bounding box for the given state.
+	 */
 	private static VoxelShape getStackSizeShapes(BlockState state, VoxelShape stackSizeShape1, VoxelShape stackSizeShape2, VoxelShape stackSizeShapeTop3, VoxelShape stackSizeShapeBottom3)
 	{
 		switch((int)state.get(PLUSH_STACK_SIZE))

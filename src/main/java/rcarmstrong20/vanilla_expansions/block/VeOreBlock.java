@@ -25,7 +25,7 @@ public class VeOreBlock extends OreBlock
           {
              i = MathHelper.nextInt(RANDOM, 4, 8);
           }
-          else if (this == VeBlocks.smoky_quartz_ore) 
+          else if (this == VeBlocks.nether_smoky_quartz_ore) 
           {
              i = MathHelper.nextInt(RANDOM, 2, 5);
           }

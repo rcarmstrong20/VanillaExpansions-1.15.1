@@ -1,18 +1,22 @@
 {
-  "type": "minecraft:block",
-  "pools": [
+  "pools":
+  [
     {
       "rolls": 1,
-      "entries": [
+      "entries":
+	  [
         {
           "type": "minecraft:alternatives",
-          "children": [
+          "children":
+		  [
             {
               "type": "minecraft:item",
-              "conditions": [
+              "conditions":
+			  [
                 {
                   "condition": "minecraft:match_tool",
-                  "predicate": {
+                  "predicate":
+				  {
                     "item": "minecraft:shears"
                   }
                 }
@@ -21,18 +25,21 @@
             },
             {
               "type": "minecraft:item",
-              "conditions": [
+              "conditions":
+			  [
                 {
                   "condition": "minecraft:random_chance",
                   "chance": 0.125
                 }
               ],
-              "functions": [
+              "functions":
+			  [
                 {
                   "function": "minecraft:apply_bonus",
                   "enchantment": "minecraft:fortune",
                   "formula": "minecraft:uniform_bonus_count",
-                  "parameters": {
+                  "parameters":
+				  {
                     "bonusMultiplier": 2
                   }
                 },
@@ -41,8 +48,34 @@
                 }
               ],
               "name": "minecraft:wheat_seeds"
-            },
+            }
+          ]
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:alternatives",
+          "children":
+		  [
 			{
+              "type": "minecraft:item",
+              "conditions":
+			  [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate":
+				  {
+                    "item": "minecraft:shears"
+                  }
+                }
+              ],
+              "name": "minecraft:air"
+            },
+		    {
               "type": "minecraft:item",
               "conditions":
 			  [
@@ -68,7 +101,7 @@
               ],
               "name": "ve:garlic"
             },
-			{
+		    {
               "type": "minecraft:item",
               "conditions":
 			  [
@@ -94,7 +127,7 @@
               ],
               "name": "ve:green_onion"
             },
-			{
+		    {
               "type": "minecraft:item",
               "conditions":
 			  [
@@ -120,7 +153,7 @@
               ],
               "name": "ve:quinoa"
             },
-			{
+		    {
               "type": "minecraft:item",
               "conditions":
 			  [

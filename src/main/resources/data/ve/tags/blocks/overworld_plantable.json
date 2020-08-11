@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values":
+  [
+    "ve:stone_brick_planting_pot",
+    "ve:mossy_stone_brick_planting_pot",
+    "ve:cracked_stone_brick_planting_pot",
+	"ve:oak_planting_pot",
+	"ve:spruce_planting_pot",
+	"ve:birch_planting_pot",
+	"ve:jungle_planting_pot",
+	"ve:acacia_planting_pot",
+	"ve:dark_oak_planting_pot"
+  ]
+}

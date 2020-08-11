@@ -1,0 +1,9 @@
+{
+    "parent": "block/outer_stairs",
+    "textures":
+	{
+        "bottom": "ve:block/nephilite_bricks",
+        "top": "ve:block/nephilite_bricks",
+        "side": "ve:block/nephilite_bricks"
+    }
+}

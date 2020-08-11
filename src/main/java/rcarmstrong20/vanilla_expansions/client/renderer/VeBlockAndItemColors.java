@@ -70,7 +70,7 @@ public class VeBlockAndItemColors
 		
 		blockColors.register(grassColorHandler, VeBlocks.enderman_plush);
 		blockColors.register(leavesColorHandler, VeBlocks.regigigas_pokedoll);
-		blockColors.register(waterColorHandler, VeBlocks.oak_planting_pot, VeBlocks.spruce_planting_pot, VeBlocks.birch_planting_pot, VeBlocks.jungle_planting_pot, VeBlocks.dark_oak_planting_pot, VeBlocks.acacia_planting_pot);
+		blockColors.register(waterColorHandler, VeBlocks.stone_brick_planting_pot, VeBlocks.oak_planting_pot, VeBlocks.spruce_planting_pot, VeBlocks.birch_planting_pot, VeBlocks.jungle_planting_pot, VeBlocks.dark_oak_planting_pot, VeBlocks.acacia_planting_pot);
 	}
 	
 	public static void registerItemColorHandlers(final BlockColors blockColors, final ItemColors itemColors) 

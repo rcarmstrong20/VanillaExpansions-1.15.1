@@ -112,7 +112,7 @@ public class VeDripParticle extends SpriteTexturedParticle
 		
 		public Particle makeParticle(BasicParticleType typeIn, World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
 		{
-			VeDripping drip_particle = new VeDripParticle.VeDripping(worldIn, x, y, z, VeFluids.VOID, VeParticleTypes.FALLING_VOID);
+			VeDripping drip_particle = new VeDripParticle.VeDripping(worldIn, x, y, z, VeFluids.VOID, VeParticleTypes.falling_void);
 			drip_particle.particleGravity *= 0.01F;
 			drip_particle.maxAge = 100;
 			drip_particle.setColor(0.1F, 0.1F, 0.1F);
@@ -155,7 +155,7 @@ public class VeDripParticle extends SpriteTexturedParticle
 		
 		public Particle makeParticle(BasicParticleType typeIn, World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
 		{
-			VeFallingLiquidParticle falling_particle = new VeDripParticle.VeFallingLiquidParticle(worldIn, x, y, z, VeFluids.VOID, VeParticleTypes.LANDING_VOID);
+			VeFallingLiquidParticle falling_particle = new VeDripParticle.VeFallingLiquidParticle(worldIn, x, y, z, VeFluids.VOID, VeParticleTypes.landing_void);
 			falling_particle.setColor(0.1F, 0.1F, 0.1F);
 			falling_particle.selectSpriteRandomly(this.sprite);
 			return falling_particle;

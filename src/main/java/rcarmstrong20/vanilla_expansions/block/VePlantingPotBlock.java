@@ -2,9 +2,7 @@ package rcarmstrong20.vanilla_expansions.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CropsBlock;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
@@ -20,8 +18,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
-import rcarmstrong20.vanilla_expansions.core.VeBlocks;
+import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
 public class VePlantingPotBlock extends Block implements IWaterLoggable
 {
@@ -79,20 +76,18 @@ public class VePlantingPotBlock extends Block implements IWaterLoggable
 	@Override
 	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
 	{
-		PlantType plantType = plantable.getPlantType(world, pos);
 		Block plantBlock = plantable.getPlant(world, pos).getBlock();
-		if(this == VeBlocks.nether_planting_pot && plantType == PlantType.Nether)
-		{
-			return true;
-		}
-		else if(this == VeBlocks.oak_planting_pot || this == VeBlocks.spruce_planting_pot || this == VeBlocks.birch_planting_pot || this == VeBlocks.jungle_planting_pot || this == VeBlocks.acacia_planting_pot || this == VeBlocks.dark_oak_planting_pot)
-		{
-			if(plantBlock instanceof CropsBlock || plantBlock instanceof SweetBerryBushBlock)
-			{
-				return true;
-			}
-		}
-		return false;
+		return isValid(this.getBlock(), plantBlock);
+	}
+	
+	/**
+	 * A helper method used for checking that the plant placement is valid.
+	 */
+	private boolean isValid(Block soilBlock, Block plantBlock)
+	{
+		return VeBlockTags.NETHER_PLANTABLE.contains(this.getBlock()) && VeBlockTags.NETHER_POTTABLE.contains(plantBlock)       ||
+			   VeBlockTags.OVERWORLD_PLANTABLE.contains(this.getBlock()) && VeBlockTags.OVERWORLD_POTTABLE.contains(plantBlock) ||
+			   VeBlockTags.END_PLANTABLE.contains(this.getBlock()) && VeBlockTags.END_POTTABLE.contains(plantBlock);
 	}
 	
 	@Override

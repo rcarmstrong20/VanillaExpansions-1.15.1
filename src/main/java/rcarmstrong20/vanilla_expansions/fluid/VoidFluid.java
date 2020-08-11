@@ -58,7 +58,7 @@ public abstract class VoidFluid extends WaterFluid
 		//Spawn under void particles in the liquid when the number selected between 0 and 100 is 0.
 		if (random.nextInt(100) == 0)
 		{
-			worldIn.addParticle(VeParticleTypes.UNDERVOID, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + (double)random.nextFloat(), (double)pos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
+			worldIn.addParticle(VeParticleTypes.undervoid, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + (double)random.nextFloat(), (double)pos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
 		
 		if (lastPlayed == 0)
@@ -94,7 +94,7 @@ public abstract class VoidFluid extends WaterFluid
 	@OnlyIn(Dist.CLIENT)
 	public IParticleData getDripParticleData()
 	{
-		return VeParticleTypes.DRIPPING_VOID;
+		return VeParticleTypes.dripping_void;
 	}
 	
 	@Override

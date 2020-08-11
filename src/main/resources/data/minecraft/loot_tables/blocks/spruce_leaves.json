@@ -1,7 +1,7 @@
 {
-  "type": "minecraft:block",
-  "pools": [
-    {
+  "pools":
+  [
+	{
       "rolls": 1,
       "entries": [
         {
@@ -126,7 +126,8 @@
     },
     {
       "rolls": 1,
-      "entries": [
+      "entries":
+	  [
         {
           "type": "minecraft:item",
           "conditions": [
@@ -146,35 +147,6 @@
             }
           ],
           "name": "ve:spruce_cone"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:alternative",
-            "terms": [
-              {
-                "condition": "minecraft:match_tool",
-                "predicate": {
-                  "item": "minecraft:shears"
-                }
-              },
-              {
-                "condition": "minecraft:match_tool",
-                "predicate": {
-                  "enchantments": [
-                    {
-                      "enchantment": "minecraft:silk_touch",
-                      "levels": {
-                        "min": 1
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
         }
       ]
     }

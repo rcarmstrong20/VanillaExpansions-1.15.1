@@ -1,18 +1,23 @@
 {
   "type": "minecraft:block",
-  "pools": [
+  "pools":
+  [
     {
       "rolls": 1,
-      "entries": [
+      "entries":
+	  [
         {
           "type": "minecraft:alternatives",
-          "children": [
+          "children":
+		  [
             {
               "type": "minecraft:item",
-              "conditions": [
+              "conditions":
+			  [
                 {
                   "condition": "minecraft:match_tool",
-                  "predicate": {
+                  "predicate":
+				  {
                     "item": "minecraft:shears"
                   }
                 }
@@ -21,14 +26,16 @@
             },
             {
               "type": "minecraft:item",
-              "conditions": [
+              "conditions":
+			  [
                 {
                   "condition": "minecraft:survives_explosion"
                 },
                 {
                   "condition": "minecraft:block_state_property",
                   "block": "minecraft:tall_grass",
-                  "properties": {
+                  "properties":
+				  {
                     "half": "lower"
                   }
                 },
@@ -38,29 +45,51 @@
                 }
               ],
               "name": "minecraft:wheat_seeds"
-            },
+            }
+          ]
+        }
+      ]
+    },
+	{
+      "rolls": 1,
+      "entries":
+	  [
+        {
+          "type": "minecraft:alternatives",
+          "children":
+		  [
 			{
               "type": "minecraft:item",
               "conditions":
 			  [
                 {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.135
+                  "condition": "minecraft:match_tool",
+                  "predicate":
+				  {
+                    "item": "minecraft:shears"
+                  }
                 }
               ],
-              "functions":
+              "name": "minecraft:air"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions":
 			  [
                 {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "parameters":
+                  "condition": "minecraft:survives_explosion"
+                },
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "minecraft:tall_grass",
+                  "properties":
 				  {
-                    "bonusMultiplier": 2
+                    "half": "lower"
                   }
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.135
                 }
               ],
               "name": "ve:garlic"
@@ -70,23 +99,19 @@
               "conditions":
 			  [
                 {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.135
-                }
-              ],
-              "functions":
-			  [
+                  "condition": "minecraft:survives_explosion"
+                },
                 {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "parameters":
+                  "condition": "minecraft:block_state_property",
+                  "block": "minecraft:tall_grass",
+                  "properties":
 				  {
-                    "bonusMultiplier": 2
+                    "half": "lower"
                   }
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.135
                 }
               ],
               "name": "ve:green_onion"
@@ -96,23 +121,19 @@
               "conditions":
 			  [
                 {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.105
-                }
-              ],
-              "functions":
-			  [
+                  "condition": "minecraft:survives_explosion"
+                },
                 {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "parameters":
+                  "condition": "minecraft:block_state_property",
+                  "block": "minecraft:tall_grass",
+                  "properties":
 				  {
-                    "bonusMultiplier": 2
+                    "half": "lower"
                   }
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.105
                 }
               ],
               "name": "ve:quinoa"
@@ -122,23 +143,19 @@
               "conditions":
 			  [
                 {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.105
-                }
-              ],
-              "functions":
-			  [
+                  "condition": "minecraft:survives_explosion"
+                },
                 {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "parameters":
+                  "condition": "minecraft:block_state_property",
+                  "block": "minecraft:tall_grass",
+                  "properties":
 				  {
-                    "bonusMultiplier": 2
+                    "half": "lower"
                   }
                 },
                 {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.105
                 }
               ],
               "name": "ve:bok_choy_seeds"

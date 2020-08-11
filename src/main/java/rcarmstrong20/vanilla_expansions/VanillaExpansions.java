@@ -27,13 +27,17 @@ import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -81,7 +85,7 @@ public class VanillaExpansions
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
-	/*
+	/**
 	 * Called on the mod's setup.
 	 */
 	private void setup(final FMLCommonSetupEvent event)
@@ -90,7 +94,7 @@ public class VanillaExpansions
 		PROXY.onSetupCommon();
 	}
 	
-	/*
+	/**
 	 * Called exclusively on the client.
 	 */
 	private void clientRegistries(final FMLClientSetupEvent event)
@@ -99,16 +103,16 @@ public class VanillaExpansions
 		PROXY.onSetupClient();
 	}
 	
-	/*
+	/**
 	 * This takes care of registering the particle factories if they are not registered under the particle factory event there will be a bug.
 	 */
 	@OnlyIn(Dist.CLIENT)
 	private void onRegisterParticle(ParticleFactoryRegisterEvent event)
 	{
-		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.DRIPPING_VOID, VeDripParticle.VeDrippingVoidFactory::new);
-		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.FALLING_VOID, VeDripParticle.VeFallingVoidFactory::new);
-		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.LANDING_VOID, VeDripParticle.VeLandingVoidFactory::new);
-		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.UNDERVOID, VeUndervoidParticle.Factory::new);
+		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.dripping_void, VeDripParticle.VeDrippingVoidFactory::new);
+		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.falling_void, VeDripParticle.VeFallingVoidFactory::new);
+		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.landing_void, VeDripParticle.VeLandingVoidFactory::new);
+		Minecraft.getInstance().particles.registerFactory(VeParticleTypes.undervoid, VeUndervoidParticle.Factory::new);
 	}
 	
 	/**
@@ -242,6 +246,24 @@ public class VanillaExpansions
 	private int getMaxAge(IntegerProperty age)
 	{
 		return age.getAllowedValues().size() - 1;
+	}
+	
+	@SubscribeEvent
+	public void onLootLoad(final LootTableLoadEvent event)
+	{
+		ResourceLocation customJungleChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/jungle_temple");
+		ResourceLocation vanillaJungleChestLocation = new ResourceLocation("chests/jungle_temple");
+		ResourceLocation customDesertChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID, "chests/desert_pyramid");
+		ResourceLocation vanillaDesertChestLocation = new ResourceLocation("chests/desert_pyramid");
+		
+		if(event.getName().equals(vanillaJungleChestLocation))
+		{
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customJungleChestLocation)).build());
+		}
+		else if(event.getName().equals(vanillaDesertChestLocation))
+		{
+			event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(customDesertChestLocation)).build());
+		}
 	}
 	
 	/*

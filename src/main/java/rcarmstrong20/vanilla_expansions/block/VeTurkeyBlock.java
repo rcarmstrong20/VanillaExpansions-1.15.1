@@ -62,13 +62,17 @@ public class VeTurkeyBlock extends CakeBlock
 		return this.eatTurkey(world, pos, state, player);
 	}
 	
+	/**
+	 * If the cake can be eaten add the appropriate hunger and when it has one slice left remove it from the world.
+	 * @param world  This world.
+	 * @param pos    The block's position.
+	 * @param state  The state for the turkey.
+	 * @param player The player eating the cake.
+	 * @return Whether the cake was eaten ActionResultType.SUCCESS or ActionResultType.PASS.
+	 */
 	private ActionResultType eatTurkey(IWorld world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		if (!player.canEat(false))
-		{
-			return ActionResultType.PASS;
-		}
-		else
+		if (player.canEat(true))
 		{
 			player.getFoodStats().addStats(3, 0.5F);
 			int bites = state.get(BITES);
@@ -82,6 +86,10 @@ public class VeTurkeyBlock extends CakeBlock
 				world.removeBlock(pos, false);
 			}
 			return ActionResultType.SUCCESS;
+		}
+		else
+		{
+			return ActionResultType.PASS;
 		}
 	}
 }

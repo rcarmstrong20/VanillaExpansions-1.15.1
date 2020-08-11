@@ -24,7 +24,6 @@ public class VePointOfInterestTypes
 	private static final Constructor<PointOfInterestType> POINT_OF_INTEREST_CONSTRUCTOR = ObfuscationReflectionHelper.findConstructor(PointOfInterestType.class, String.class, Set.class, int.class, int.class);
 	private static final List<PointOfInterestType> POINT_OF_INTEREST_TYPES = new ArrayList<>();
 	
-	
 	public static final PointOfInterestType LUMBERJACK = register("lumberjack", getAllStates(VeBlocks.woodcutter), 1, 1);
 	
 	private static PointOfInterestType register(String name, Set<BlockState> blockState, int p_221051_2_, int p_221051_4_)

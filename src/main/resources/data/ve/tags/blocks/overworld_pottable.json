@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values":
+  [
+    "minecraft:wheat",
+	"minecraft:beetroots",
+	"minecraft:potatoes",
+	"minecraft:carrots",
+	"minecraft:sweet_berry_bush",
+	"minecraft:dandelion",
+	"minecraft:poppy",
+	"minecraft:blue_orchid",
+	"minecraft:allium",
+	"minecraft:azure_bluet",
+	"minecraft:red_tulip",
+	"minecraft:orange_tulip",
+	"minecraft:white_tulip",
+	"minecraft:pink_tulip",
+	"minecraft:oxeye_daisy",
+	"minecraft:cornflower",
+	"minecraft:lily_of_the_valley",
+	"minecraft:wither_rose",
+	"ve:bok_choy",
+	"ve:garlic",
+	"ve:green_onions",
+	"ve:quinoa",
+	"ve:blueberry_bush",
+	"ve:cranberry_bush",
+	"ve:witchs_cradle"
+  ]
+}
