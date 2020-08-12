@@ -403,37 +403,37 @@ public class VeBlocks
     public static Block woodcutter = register("woodcutter", true,
             new VeWoodcutterBlock(Block.Properties.from(Blocks.STONECUTTER)));
     public static Block white_campfire = register("white_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.white_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block orange_campfire = register("orange_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.orange_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block magenta_campfire = register("magenta_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.magenta_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block light_blue_campfire = register("light_blue_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.light_blue_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block yellow_campfire = register("yellow_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.yellow_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block lime_campfire = register("lime_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.lime_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block pink_campfire = register("pink_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.pink_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block gray_campfire = register("gray_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.gray_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block light_gray_campfire = register("light_gray_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.light_gray_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block cyan_campfire = register("cyan_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.cyan_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block purple_campfire = register("purple_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.purple_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block blue_campfire = register("blue_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.blue_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block brown_campfire = register("brown_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.brown_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block green_campfire = register("green_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.green_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block red_campfire = register("red_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.red_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block black_campfire = register("black_campfire", true,
-            new VeColoredCampfireBlock(Block.Properties.from(Blocks.CAMPFIRE)));
+            new VeColoredCampfireBlock(VeParticleTypes.black_spark, Block.Properties.from(Blocks.CAMPFIRE)));
     public static Block witchs_cradle = register("witchs_cradle", false,
             new VeBerryBushBlock(Block.Properties.from(Blocks.SWEET_BERRY_BUSH)));
     public static Block void_liquid = register("void", false,
