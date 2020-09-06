@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures":
-	{
-        "end": "ve:block/chiseled_nephilite_top",
-        "side": "ve:block/chiseled_nephilite"
-    }
-}
