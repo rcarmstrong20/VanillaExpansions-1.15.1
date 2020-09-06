@@ -1,6 +1,7 @@
 package rcarmstrong20.vanilla_expansions;
 
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,7 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.LavaParticle;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -39,6 +41,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -55,6 +59,7 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeDripParticle;
 import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidParticle;
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
+import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
@@ -275,25 +280,34 @@ public class VanillaExpansions
         return age.getAllowedValues().size() - 1;
     }
 
+    /**
+     * Called when the vanilla loot tables load.
+     *
+     * @param event A new instance of the LootTableLoadEvent.
+     */
     @SubscribeEvent
     public void onLootLoad(final LootTableLoadEvent event)
     {
-        ResourceLocation customJungleChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID,
-                "chests/jungle_temple");
-        ResourceLocation vanillaJungleChestLocation = new ResourceLocation("chests/jungle_temple");
-        ResourceLocation customDesertChestLocation = new ResourceLocation(VanillaExpansions.MOD_ID,
-                "chests/desert_pyramid");
-        ResourceLocation vanillaDesertChestLocation = new ResourceLocation("chests/desert_pyramid");
+        addPoolToTable(event, "jungle_temple");
+        addPoolToTable(event, "desert_pyramid");
+        addPoolToTable(event, "nether_bridge");
+    }
 
-        if (event.getName().equals(vanillaJungleChestLocation))
+    /**
+     * A helper method that adds a new pool to a vanilla table.
+     *
+     * @param event    An instance of the current loot table event.
+     * @param lootName The name of the loot table that should be added to.
+     */
+    private void addPoolToTable(LootTableLoadEvent event, String lootName)
+    {
+        String lootPath = "chests/" + lootName;
+        ResourceLocation modLocation = new ResourceLocation(VanillaExpansions.MOD_ID, lootPath);
+        ResourceLocation vanillaLocation = new ResourceLocation(lootPath);
+
+        if (event.getName().equals(vanillaLocation))
         {
-            event.getTable()
-                    .addPool(LootPool.builder().addEntry(TableLootEntry.builder(customJungleChestLocation)).build());
-        }
-        else if (event.getName().equals(vanillaDesertChestLocation))
-        {
-            event.getTable()
-                    .addPool(LootPool.builder().addEntry(TableLootEntry.builder(customDesertChestLocation)).build());
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(modLocation)).build());
         }
     }
 
@@ -339,7 +353,7 @@ public class VanillaExpansions
      * entity, then either sets the rabbit type to 99 or 1.
      */
     @SubscribeEvent
-    public void onNameBunnyEntity(final PlayerInteractEvent.EntityInteractSpecific event)
+    public void onEntityInteract(final PlayerInteractEvent.EntityInteractSpecific event)
     {
         if (event.getTarget() instanceof RabbitEntity)
         {
@@ -364,6 +378,62 @@ public class VanillaExpansions
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Called when a living entity is falling.
+     *
+     * @param event An instance of the LivingFallEvent.
+     */
+    @SubscribeEvent
+    public void onEntityFall(final LivingFallEvent event)
+    {
+        LivingEntity entity = event.getEntityLiving();
+
+        if (VeEntityConfig.enableSaveTheBunnies.get() && entity instanceof RabbitEntity)
+        {
+            event.setCanceled(true);
+        }
+    }
+
+    /**
+     * Called when the player attempts to use bone meal on a block.
+     *
+     * @param event A new instance of the BonemealEvent.
+     */
+    @SubscribeEvent
+    public void onBonemeal(final BonemealEvent event)
+    {
+        World world = event.getWorld();
+        BlockPos pos = event.getPos();
+        Random random = new Random();
+
+        // Used to add functionality for growing snapdragons on end stone when using
+        // bone meal.
+        if (event.getBlock().getBlock() == Blocks.END_STONE)
+        {
+            if (!world.isRemote) // Only place the snapdragon blocks on the server
+            {
+                for (int i = 0; i < 128; ++i)
+                {
+                    BlockPos blockpos = pos;
+                    BlockState blockstate = VeBlocks.snapdragon.getDefaultState();
+
+                    for (int j = 0; j < i / 16; ++j)
+                    {
+                        blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2,
+                                random.nextInt(3) - 1);
+
+                        if (world.getBlockState(blockpos.down()).getBlock() == Blocks.END_STONE
+                                && world.getBlockState(blockpos).isAir(world, blockpos))
+                        {
+                            world.setBlockState(blockpos, blockstate);
+                        }
+                    }
+                }
+            }
+            event.setResult(Result.ALLOW);
         }
     }
 }
