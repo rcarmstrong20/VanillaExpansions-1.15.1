@@ -92,9 +92,8 @@ public class VeBiomes
                     .whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
     public static final BigMushroomFeatureConfig BIG_PURPLE_MUSHROOM_CONFIG = new BigMushroomFeatureConfig(
             new SimpleBlockStateProvider(PURPLE_MUSHROOM_BLOCK), new SimpleBlockStateProvider(MUSHROOM_STEM), 2);
-    public static final VillageConfig TAIGA_CABIN_CONFIG = new VillageConfig("ve:taiga_cabin", 3);
-    public static final VillageConfig BIRCH_FOREST_CABIN_CONFIG = new VillageConfig("ve:birch_forest_cabin", 3);
-    public static final VillageConfig FOREST_CABIN_CONFIG = new VillageConfig("ve:forest_cabin", 4);
+    public static final VillageConfig TAIGA_CABIN_CONFIG = new VillageConfig("ve:cabins/taiga_cabin", 3);
+    public static final VillageConfig FOREST_CABIN_CONFIG = new VillageConfig("ve:cabins/forest_cabin", 4);
 
     @SubscribeEvent
     public static void registerBiomes(final RegistryEvent.Register<Biome> event)
@@ -148,8 +147,6 @@ public class VeBiomes
                 VeFeatureGenConfig.enableSnapdragonSpawns.get(), END_CITY_BIOMES);
         addStructure(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN, TAIGA_CABIN_CONFIG,
                 VeFeatureGenConfig.enableTaigaCabinSpawns.get(), Category.TAIGA);
-        addStructure(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN, BIRCH_FOREST_CABIN_CONFIG,
-                VeFeatureGenConfig.enableBirchForestCabinSpawns.get(), BIRCH_CABIN_BIOMES);
         addStructure(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN, FOREST_CABIN_CONFIG,
                 VeFeatureGenConfig.enableForestCabinSpawns.get(), FOREST_CABIN_BIOME);
 

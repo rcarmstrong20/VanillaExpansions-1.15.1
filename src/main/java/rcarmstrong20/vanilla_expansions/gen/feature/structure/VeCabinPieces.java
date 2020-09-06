@@ -117,11 +117,6 @@ public class VeCabinPieces
                 LockableLootTileEntity.setLootTable(world, rand, pos.down(),
                         new ResourceLocation(VanillaExpansions.MOD_ID, "chests/forest_cabin"));
             }
-            else if ("birch_forest_cabin_chest".equals(function))
-            {
-                LockableLootTileEntity.setLootTable(world, rand, pos.down(),
-                        new ResourceLocation(VanillaExpansions.MOD_ID, "chests/birch_forest_cabin"));
-            }
             else if ("cabin_flowers".equals(function))
             {
                 world.setBlockState(pos.down(), BlockTags.FLOWER_POTS.getRandomElement(rand).getDefaultState(), 3);
