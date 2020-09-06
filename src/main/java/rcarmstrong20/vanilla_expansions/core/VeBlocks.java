@@ -376,22 +376,6 @@ public class VeBlocks
             () -> VeBlocks.packed_snow_block.getDefaultState(), Block.Properties.from(VeBlocks.packed_snow_block)));
     public static Block packed_snow_slab = register("packed_snow_slab", true,
             new SlabBlock(Block.Properties.from(VeBlocks.packed_snow_block)));
-    public static Block spider_glass = register("spider_glass", true,
-            new VeGlassBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block spider_glass_pane = register("spider_glass_pane", true,
-            new VePaneBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block black_spider_glass = register("black_spider_glass", true,
-            new VeGlassBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block black_spider_glass_pane = register("black_spider_glass_pane", true,
-            new VePaneBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block fancy_spider_glass = register("fancy_spider_glass", true,
-            new VeGlassBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block fancy_spider_glass_pane = register("fancy_spider_glass_pane", true,
-            new VePaneBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block black_fancy_spider_glass = register("black_fancy_spider_glass", true,
-            new VeGlassBlock(Block.Properties.from(Blocks.GLASS)));
-    public static Block black_fancy_spider_glass_pane = register("black_fancy_spider_glass_pane", true,
-            new VePaneBlock(Block.Properties.from(Blocks.GLASS)));
     public static Block turkey = register("turkey", true, new VeTurkeyBlock(Block.Properties
             .create(Material.CAKE, MaterialColor.BROWN).hardnessAndResistance(0.5F).sound(SoundType.CLOTH)), 1);
     public static Block glass_of_darkness = register("glass_of_darkness", true,
@@ -464,7 +448,7 @@ public class VeBlocks
             new StairsBlock(() -> VeBlocks.nephilite.getDefaultState(), Block.Properties.from(VeBlocks.nephilite)));
     public static Block nephilite_brick_wall = register("nephilite_brick_wall", true,
             new WallBlock(Block.Properties.from(VeBlocks.nephilite)));
-    public static Block chiseled_nephilite = register("chiseled_nephilite", true,
+    public static Block chiseled_nephilite_bricks = register("chiseled_nephilite_bricks", true,
             new Block(Block.Properties.from(VeBlocks.nephilite)));
     public static Block easel = register("easel", true, new VeEaselBlock(
             Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid()));
