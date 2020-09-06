@@ -24,12 +24,13 @@ displayName="Vanilla Expansions" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="ve.png" #optional
 # A text field displayed in the mod UI
-credits="Thank you, TidalDrop and kacoal, for your contributions to this mod. I used the Jump SFX sound by jalastream on freesound.org for the mushroom bounce sound." #optional
+credits="Thank you, TidalDrop and kacoal, for your contributions to this mod." #optional
 # A text field displayed in the mod UI
 authors="rcarmstrong20" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod improves vanilla minecraft by adding vanilla style blocks and items that will enrich your gameplay experience.
+When most people think of Minecraft as a whole most would say it's a great game, but they wish it had a certain new addition.
+This mod tries to answer that with a plethera of blocks, items, structures, and more.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.ve]] #optional
