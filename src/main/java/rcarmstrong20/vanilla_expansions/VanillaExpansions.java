@@ -60,6 +60,7 @@ import rcarmstrong20.vanilla_expansions.client.renderer.particle.VeUndervoidPart
 import rcarmstrong20.vanilla_expansions.config.VeConfig;
 import rcarmstrong20.vanilla_expansions.config.VeCropConfig;
 import rcarmstrong20.vanilla_expansions.config.VeEntityConfig;
+import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
@@ -165,7 +166,7 @@ public class VanillaExpansions
         // Campfire properties
         BooleanProperty isLit = CampfireBlock.LIT;
 
-        if (!event.getWorld().isRemote)
+        if (!event.getWorld().isRemote())
         {
             // If the block your clicking is a crop and your not using bone meal return
             // true.
@@ -409,16 +410,15 @@ public class VanillaExpansions
         BlockPos pos = event.getPos();
         Random random = new Random();
 
-        // Used to add functionality for growing snapdragons on end stone when using
+        // Used to add functionality for growing end plants on end stone when using
         // bone meal.
         if (event.getBlock().getBlock() == Blocks.END_STONE)
         {
-            if (!world.isRemote) // Only place the snapdragon blocks on the server
+            if (!world.isRemote) // Only place the plant blocks on the server
             {
                 for (int i = 0; i < 128; ++i)
                 {
                     BlockPos blockpos = pos;
-                    BlockState blockstate = VeBlocks.snapdragon.getDefaultState();
 
                     for (int j = 0; j < i / 16; ++j)
                     {
@@ -428,7 +428,8 @@ public class VanillaExpansions
                         if (world.getBlockState(blockpos.down()).getBlock() == Blocks.END_STONE
                                 && world.getBlockState(blockpos).isAir(world, blockpos))
                         {
-                            world.setBlockState(blockpos, blockstate);
+                            world.setBlockState(blockpos,
+                                    VeBlockTags.END_BONEMEAL_PLANTS.getRandomElement(random).getDefaultState());
                         }
                     }
                 }

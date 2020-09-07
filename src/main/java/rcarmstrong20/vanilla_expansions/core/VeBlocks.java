@@ -28,6 +28,7 @@ import rcarmstrong20.vanilla_expansions.block.VeBerryBushBlock;
 import rcarmstrong20.vanilla_expansions.block.VeColoredCampfireBlock;
 import rcarmstrong20.vanilla_expansions.block.VeDirectionalBlock;
 import rcarmstrong20.vanilla_expansions.block.VeEaselBlock;
+import rcarmstrong20.vanilla_expansions.block.VeEnderGrassBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFlowingVoidBlock;
 import rcarmstrong20.vanilla_expansions.block.VeFrameBlock;
 import rcarmstrong20.vanilla_expansions.block.VeGlassBlock;
@@ -463,6 +464,8 @@ public class VeBlocks
             new VeSnapdragonBlock(Effects.LUCK, 8, Block.Properties.from(Blocks.POPPY).lightValue(4)));
     public static Block potted_snapdragon = register("potted_snapdragon", false,
             new VePottedSnapdragonBlock(VeBlocks.snapdragon, Block.Properties.from(Blocks.POTTED_POPPY).lightValue(4)));
+    public static Block ender_grass = register("ender_grass", true,
+            new VeEnderGrassBlock(Block.Properties.from(Blocks.GRASS).lightValue(4)));
 
     /*
      * Registers a normal block that has default properties.

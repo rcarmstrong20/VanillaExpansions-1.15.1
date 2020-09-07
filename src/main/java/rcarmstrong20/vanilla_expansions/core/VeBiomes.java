@@ -16,6 +16,7 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
@@ -74,6 +75,7 @@ public class VeBiomes
     public static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
     public static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
     public static final BlockState SNAPDRAGON = VeBlocks.snapdragon.getDefaultState();
+    public static final BlockState ENDER_GRASS = VeBlocks.ender_grass.getDefaultState();
     public static final BlockState PURPLE_MUSHROOM_BLOCK = VeBlocks.purple_mushroom_block.getDefaultState()
             .with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
     public static final BlockState MUSHROOM_STEM = Blocks.MUSHROOM_STEM.getDefaultState()
@@ -84,9 +86,11 @@ public class VeBiomes
     public static final BlockClusterFeatureConfig CRANBERRY_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
             new SimpleBlockStateProvider(CRANBERRY_BUSH), new SimpleBlockPlacer())).tries(64)
                     .whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
-    public static final BlockClusterFeatureConfig SNAPDRAGON_CONFIG = (new BlockClusterFeatureConfig.Builder(
-            new SimpleBlockStateProvider(SNAPDRAGON), new SimpleBlockPlacer())).tries(64)
-                    .whitelist(ImmutableSet.of(END_STONE.getBlock())).func_227317_b_().build();
+    public static final BlockClusterFeatureConfig END_SNAPDRAGON_AND_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(
+            (new WeightedBlockStateProvider()).addWeightedBlockstate(ENDER_GRASS, 2).addWeightedBlockstate(SNAPDRAGON,
+                    1),
+            new SimpleBlockPlacer())).tries(64).whitelist(ImmutableSet.of(END_STONE.getBlock())).func_227317_b_()
+                    .build();
     public static final BlockClusterFeatureConfig WITCHS_CRADLE_CONFIG = (new BlockClusterFeatureConfig.Builder(
             new SimpleBlockStateProvider(WITCHS_CRADLE), new SimpleBlockPlacer())).tries(64)
                     .whitelist(ImmutableSet.of(GRASS_BLOCK.getBlock())).func_227317_b_().build();
@@ -142,8 +146,8 @@ public class VeBiomes
                         .withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(4))),
                 VeFeatureGenConfig.enableVoidLakeSpawns.get(), END_CITY_BIOMES);
         addFeature(Decoration.VEGETAL_DECORATION,
-                Feature.FLOWER.withConfiguration(SNAPDRAGON_CONFIG)
-                        .withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(2))),
+                Feature.FLOWER.withConfiguration(END_SNAPDRAGON_AND_GRASS_CONFIG)
+                        .withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(4))),
                 VeFeatureGenConfig.enableSnapdragonSpawns.get(), END_CITY_BIOMES);
         addStructure(Decoration.SURFACE_STRUCTURES, VeFeature.CABIN, TAIGA_CABIN_CONFIG,
                 VeFeatureGenConfig.enableTaigaCabinSpawns.get(), Category.TAIGA);

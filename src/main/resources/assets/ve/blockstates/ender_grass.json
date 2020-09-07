@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "ve:block/ender_grass"
+    }
+  }
+}
