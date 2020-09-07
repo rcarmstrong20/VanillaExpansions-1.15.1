@@ -299,7 +299,7 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
          * topWest3State = world.getBlockState(pos.up().west(3));
          */
 
-        if (!world.isRemote)
+        if (!world.isRemote())
         {
             // Two block tall paintings start.
             if (VeTwoBlockPainting.getTopPaintingMap().containsKey(heldItem.getItem())
@@ -443,16 +443,20 @@ public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
         TileEntity bottomFrameXCorner = world.getTileEntity(bottomXCorner);
         TileEntity bottomFrameZCorner = world.getTileEntity(bottomZCorner);
 
-        if (topFrameCorner.getBlockState().getBlock() == bottomFrameXCorner.getBlockState().getBlock()
-                && matchesFacing(topFrameCorner.getBlockState(), bottomFrameXCorner.getBlockState())
-                && isEmpty(topFrameCorner) && isEmpty(bottomFrameXCorner))
-        {
-            /*
-             * for() { for() {
-             * 
-             * } }
-             */
-        }
+        // if (topFrameCorner.getBlockState().getBlock() ==
+        // bottomFrameXCorner.getBlockState().getBlock()
+        // && matchesFacing(topFrameCorner.getBlockState(),
+        // bottomFrameXCorner.getBlockState())
+        // && isEmpty(topFrameCorner) && isEmpty(bottomFrameXCorner))
+        // {
+        // for()
+        // {
+        // for()
+        // {
+
+        // }
+        // }
+        // }
     }
     /*
      * if(!world.isRemote && tileEntity instanceof VeFrameTileEntity) {
