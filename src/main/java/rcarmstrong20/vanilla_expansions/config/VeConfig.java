@@ -10,6 +10,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Bus.MOD)
 public class VeConfig
 {

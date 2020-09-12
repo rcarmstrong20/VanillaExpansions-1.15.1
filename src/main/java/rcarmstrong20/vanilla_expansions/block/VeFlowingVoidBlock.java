@@ -27,6 +27,11 @@ import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeFluidTags;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeFlowingVoidBlock extends FlowingFluidBlock
 {
     public VeFlowingVoidBlock(Supplier<? extends FlowingFluid> supplier, Properties builder)

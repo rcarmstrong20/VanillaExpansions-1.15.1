@@ -12,30 +12,35 @@ import net.minecraft.world.server.ServerWorld;
 import rcarmstrong20.vanilla_expansions.core.VeBiomes;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeMushroomBlock extends MushroomBlock
 {
-	public VeMushroomBlock(Properties properties)
-	{
-		super(properties);
-	}
-	
-	@Override
-	public boolean func_226940_a_(ServerWorld serverWorld, BlockPos blockPos, BlockState blockState, Random random)
-	{
-		serverWorld.removeBlock(blockPos, false);
-		ConfiguredFeature<BigMushroomFeatureConfig, ?> configuredfeature;
-		if (this == VeBlocks.purple_mushroom)
-		{
-			configuredfeature = Feature.HUGE_RED_MUSHROOM.withConfiguration(VeBiomes.BIG_PURPLE_MUSHROOM_CONFIG);
-		}
-		else
-		{
-			return super.func_226940_a_(serverWorld, blockPos, blockState, random);
-		}
-		if (configuredfeature.place(serverWorld, serverWorld.getChunkProvider().getChunkGenerator(), random, blockPos))
-		{
-			return true;
-		}
-		return super.func_226940_a_(serverWorld, blockPos, blockState, random);
-	}
+    public VeMushroomBlock(Properties properties)
+    {
+        super(properties);
+    }
+
+    @Override
+    public boolean func_226940_a_(ServerWorld serverWorld, BlockPos blockPos, BlockState blockState, Random random)
+    {
+        serverWorld.removeBlock(blockPos, false);
+        ConfiguredFeature<BigMushroomFeatureConfig, ?> configuredfeature;
+        if (this == VeBlocks.purple_mushroom)
+        {
+            configuredfeature = Feature.HUGE_RED_MUSHROOM.withConfiguration(VeBiomes.BIG_PURPLE_MUSHROOM_CONFIG);
+        }
+        else
+        {
+            return super.func_226940_a_(serverWorld, blockPos, blockState, random);
+        }
+        if (configuredfeature.place(serverWorld, serverWorld.getChunkProvider().getChunkGenerator(), random, blockPos))
+        {
+            return true;
+        }
+        return super.func_226940_a_(serverWorld, blockPos, blockState, random);
+    }
 }

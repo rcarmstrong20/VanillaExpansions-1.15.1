@@ -16,8 +16,10 @@ import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.fluid.VeVoidFluid;
 
-/*
- * Author: rcarmstrong20
+/**
+ *
+ * @author Ryan
+ *
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeFluids

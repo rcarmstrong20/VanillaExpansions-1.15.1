@@ -9,32 +9,37 @@ import net.minecraft.util.IItemProvider;
 import rcarmstrong20.vanilla_expansions.core.VeBlocks;
 import rcarmstrong20.vanilla_expansions.core.VeItems;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeSevenStageCropBlock extends CropsBlock
 {
-	public VeSevenStageCropBlock(Block.Properties properties) 
-	{
-		super(properties);
-	}
-	
-	@Override
+    public VeSevenStageCropBlock(Block.Properties properties)
+    {
+        super(properties);
+    }
+
+    @Override
     protected IItemProvider getSeedsItem()
     {
-		Block block = this.getBlock();
-		
-    	if(block == VeBlocks.bok_choy)
-    	{
-    		return VeItems.bok_choy_seeds;
-    	}
-    	else if(block == VeBlocks.quinoa)
-    	{
-    		return VeItems.quinoa;
-    	}
-		return Items.WHEAT_SEEDS;
+        Block block = this.getBlock();
+
+        if (block == VeBlocks.bok_choy)
+        {
+            return VeItems.bok_choy_seeds;
+        }
+        else if (block == VeBlocks.quinoa)
+        {
+            return VeItems.quinoa;
+        }
+        return Items.WHEAT_SEEDS;
     }
-	
-	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder)
-	{
-		builder.add(this.getAgeProperty());
-	}
+
+    @Override
+    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    {
+        builder.add(this.getAgeProperty());
+    }
 }

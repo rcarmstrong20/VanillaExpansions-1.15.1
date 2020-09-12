@@ -16,6 +16,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import rcarmstrong20.vanilla_expansions.core.VeBlockTags;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeEnderGrassBlock extends BushBlock
 {
     protected static final VoxelShape ENDER_GRASS = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D);

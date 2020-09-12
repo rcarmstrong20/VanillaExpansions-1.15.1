@@ -9,6 +9,11 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VePottedSnapdragonBlock extends FlowerPotBlock
 {
     @SuppressWarnings("deprecation")

@@ -50,6 +50,11 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeFrameTileEntity;
 import rcarmstrong20.vanilla_expansions.util.VeCollisionUtil;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeFrameBlock extends ContainerBlock implements IWaterLoggable
 {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;

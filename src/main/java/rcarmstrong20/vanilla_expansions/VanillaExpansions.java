@@ -67,6 +67,11 @@ import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 import rcarmstrong20.vanilla_expansions.proxy.ClientProxy;
 import rcarmstrong20.vanilla_expansions.proxy.CommonProxy;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 @Mod("ve")
 public class VanillaExpansions
 {

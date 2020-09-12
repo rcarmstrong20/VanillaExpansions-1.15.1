@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "##",
+    "##"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:nephilite"
+    }
+  },
+  "result":
+  {
+    "item": "ve:nephilite_bricks",
+	"count": 4
+  }
+}

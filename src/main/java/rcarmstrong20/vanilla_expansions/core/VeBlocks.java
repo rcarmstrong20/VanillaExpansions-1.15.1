@@ -49,8 +49,10 @@ import rcarmstrong20.vanilla_expansions.block.VeThreeStageCropsBlock;
 import rcarmstrong20.vanilla_expansions.block.VeTurkeyBlock;
 import rcarmstrong20.vanilla_expansions.block.VeWoodcutterBlock;
 
-/*
- * Author: rcarmstrong20
+/**
+ *
+ * @author Ryan
+ *
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeBlocks

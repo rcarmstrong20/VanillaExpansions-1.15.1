@@ -3,6 +3,11 @@ package rcarmstrong20.vanilla_expansions.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeEntityConfig
 {
     public static BooleanValue enableSaveTheBunnies;

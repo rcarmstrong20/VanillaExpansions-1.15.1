@@ -7,12 +7,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeModels
 {
-	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event)
-	{
-		ModelLoader.addSpecialModel(ResourceLocation.tryCreate("ve:models/block/double_slab.obj"));
-	}
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event)
+    {
+        ModelLoader.addSpecialModel(ResourceLocation.tryCreate("ve:models/block/double_slab.obj"));
+    }
 }

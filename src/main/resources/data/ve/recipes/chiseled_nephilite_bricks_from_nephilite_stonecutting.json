@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:nephilite"
+  },
+  "result": "ve:chiseled_nephilite_bricks",
+  "count": 1
+}

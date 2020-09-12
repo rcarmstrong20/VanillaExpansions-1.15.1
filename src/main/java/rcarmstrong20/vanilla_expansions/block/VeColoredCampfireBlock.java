@@ -31,6 +31,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import rcarmstrong20.vanilla_expansions.tile_entity.VeColoredCampfireTileEntity;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeColoredCampfireBlock extends CampfireBlock
 {
     private final IParticleData particle;

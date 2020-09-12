@@ -17,6 +17,11 @@ import rcarmstrong20.vanilla_expansions.core.VeTileEntityType;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerProfessions;
 import rcarmstrong20.vanilla_expansions.core.VeVillagerTrades;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class ClientProxy extends CommonProxy
 {
     @Override

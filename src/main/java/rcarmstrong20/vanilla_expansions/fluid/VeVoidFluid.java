@@ -30,6 +30,11 @@ import rcarmstrong20.vanilla_expansions.core.VeItems;
 import rcarmstrong20.vanilla_expansions.core.VeParticleTypes;
 import rcarmstrong20.vanilla_expansions.core.VeSoundEvents;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public abstract class VeVoidFluid extends WaterFluid
 {
     @Override

@@ -17,42 +17,54 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.inventory.container.VeEaselContainer;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeEaselBlock extends HorizontalBlock
 {
-	private static final TranslationTextComponent EASEL_CONTAINER_NAME = new TranslationTextComponent("container.easel");
-	
-	public VeEaselBlock(Properties properties)
-	{
-		super(properties);
-	}
-	
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_) {
-		if (worldIn.isRemote)
-		{
-			return ActionResultType.SUCCESS;
-		}
-		else
-		{
-			player.openContainer(state.getContainer(worldIn, pos));
-			return ActionResultType.SUCCESS;
-		}
-	}
-	
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos)
-	{
-		return new SimpleNamedContainerProvider((p_220254_2_, p_220254_3_, p_220254_4_) ->
-		{
-			return new VeEaselContainer(p_220254_2_, p_220254_3_, IWorldPosCallable.of(worldIn, pos));
-		}, EASEL_CONTAINER_NAME);
-	}
-	
-	public BlockState getStateForPlacement(BlockItemUseContext context)
-	{
-		return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
-	}
-	
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
-	{
-		builder.add(HORIZONTAL_FACING);
-	}
+    private static final TranslationTextComponent EASEL_CONTAINER_NAME = new TranslationTextComponent(
+            "container.easel");
+
+    public VeEaselBlock(Properties properties)
+    {
+        super(properties);
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+            Hand handIn, BlockRayTraceResult p_225533_6_)
+    {
+        if (worldIn.isRemote)
+        {
+            return ActionResultType.SUCCESS;
+        }
+        else
+        {
+            player.openContainer(state.getContainer(worldIn, pos));
+            return ActionResultType.SUCCESS;
+        }
+    }
+
+    @Override
+    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos)
+    {
+        return new SimpleNamedContainerProvider((p_220254_2_, p_220254_3_, p_220254_4_) ->
+        {
+            return new VeEaselContainer(p_220254_2_, p_220254_3_, IWorldPosCallable.of(worldIn, pos));
+        }, EASEL_CONTAINER_NAME);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    {
+        builder.add(HORIZONTAL_FACING);
+    }
 }

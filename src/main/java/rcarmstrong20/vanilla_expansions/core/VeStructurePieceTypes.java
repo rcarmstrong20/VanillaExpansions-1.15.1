@@ -8,18 +8,21 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.gen.feature.structure.VeCabinPieces;
 
 /**
- * Author: rcarmstrong20
+ *
+ * @author Ryan
+ *
  */
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeStructurePieceTypes
 {
-	public static final IStructurePieceType CABIN_PIECE = register(VanillaExpansions.MOD_ID, "cabin", VeCabinPieces.VePiece::new);
-	
-	/**
-	 * A registry method for registering new structure pieces.
-	 */
-	private static IStructurePieceType register(String id, String name, IStructurePieceType type)
-	{
-		return Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(id, name), type);
-	}
+    public static final IStructurePieceType CABIN_PIECE = register(VanillaExpansions.MOD_ID, "cabin",
+            VeCabinPieces.VePiece::new);
+
+    /**
+     * A registry method for registering new structure pieces.
+     */
+    private static IStructurePieceType register(String id, String name, IStructurePieceType type)
+    {
+        return Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(id, name), type);
+    }
 }

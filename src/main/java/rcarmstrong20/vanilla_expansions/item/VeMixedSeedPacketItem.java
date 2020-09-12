@@ -11,6 +11,11 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import rcarmstrong20.vanilla_expansions.core.VeItemTags;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeMixedSeedPacketItem extends Item
 {
     public VeMixedSeedPacketItem(Properties properties)

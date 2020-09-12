@@ -8,28 +8,35 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeTranslucentBlock extends Block
 {
-	public VeTranslucentBlock(Block.Properties properties)
-	{
-		super(properties);
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return 1.0F;
-	}
-	
-	@Override
-	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
-	{
-		return true;
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
-	{
-		return adjacentBlockState.getBlock() == this ? true : false;
-	}
+    public VeTranslucentBlock(Block.Properties properties)
+    {
+        super(properties);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
+    {
+        return 1.0F;
+    }
+
+    @Override
+    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
+    {
+        return true;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
+    {
+        return adjacentBlockState.getBlock() == this ? true : false;
+    }
 }

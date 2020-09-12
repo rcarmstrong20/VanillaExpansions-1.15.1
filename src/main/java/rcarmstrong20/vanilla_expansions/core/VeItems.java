@@ -32,9 +32,10 @@ import rcarmstrong20.vanilla_expansions.item.VeSoupItem;
 import rcarmstrong20.vanilla_expansions.item.VeSwordItem;
 
 /**
- * Author: rcarmstrong20
+ *
+ * @author Ryan
+ *
  */
-
 @Mod.EventBusSubscriber(modid = VanillaExpansions.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class VeItems
 {

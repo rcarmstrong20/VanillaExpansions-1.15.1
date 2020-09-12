@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern":
+  [
+    "#",
+    "#"
+  ],
+  "key":
+  {
+    "#":
+	{
+      "item": "ve:nephilite_brick_slab"
+    }
+  },
+  "result":
+  {
+    "item": "ve:chiseled_nephilite_bricks"
+  }
+}

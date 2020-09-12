@@ -25,11 +25,15 @@ import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeStructurePieceTypes;
 
 /**
+ *
  * Pieces are where the structure is actually added to the world, a structure
  * can have one or more of them TemplateStructurePieces is just one type of
  * piece, that makes using structure blocks easier Pieces are very customisable,
  * see vanilla classes for different ways they can be used This particular class
  * layout is similar to what vanilla uses for more recent structures
+ *
+ * @author Ryan
+ *
  */
 public class VeCabinPieces
 {
@@ -46,7 +50,7 @@ public class VeCabinPieces
 
         /**
          * This is the constructor we use ourselves, the other constructor is needed for
-         * the piece type
+         * the piece type.
          *
          * @return
          */
@@ -62,7 +66,7 @@ public class VeCabinPieces
 
         /**
          * This constructor must always be implemented, so that the piece type can be
-         * created
+         * created.
          */
         public VePiece(TemplateManager templateManager, CompoundNBT nbt)
         {
@@ -73,7 +77,7 @@ public class VeCabinPieces
         }
 
         /**
-         * Setup and prepare the template for placement
+         * Setup and prepare the template for placement.
          */
         private void setupTemplate(TemplateManager templateManager)
         {
@@ -85,7 +89,7 @@ public class VeCabinPieces
 
         /**
          * Where to save things to nbt You might get away with simply using Write, but
-         * this is what vanilla uses
+         * this is what vanilla uses.
          */
         @Override
         protected void readAdditional(CompoundNBT nbt)
@@ -97,10 +101,10 @@ public class VeCabinPieces
 
         /**
          * This method is called for every structure block set to the 'data' mode inside
-         * the structure It is mainly used to add loot to chests
+         * the structure It is mainly used to add loot to chests.
          *
-         * @param function the string inside the data structure block
-         * @param pos      the position of the structure block in the world
+         * @param function The string inside the data structure block.
+         * @param pos      The position of the structure block in the world.
          */
 
         @Override

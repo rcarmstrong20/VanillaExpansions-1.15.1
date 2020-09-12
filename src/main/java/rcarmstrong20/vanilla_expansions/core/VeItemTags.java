@@ -6,6 +6,11 @@ import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeItemTags
 {
     public static final Tag<Item> PAINTINGS = new ItemTags.Wrapper(

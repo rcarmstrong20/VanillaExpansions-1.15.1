@@ -17,6 +17,11 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import rcarmstrong20.vanilla_expansions.VanillaExpansions;
 import rcarmstrong20.vanilla_expansions.core.VeFeature;
 
+/**
+ *
+ * @author Ryan
+ *
+ */
 public class VeCabinStructure extends ScatteredStructure<VillageConfig>
 {
     public VeCabinStructure(Function<Dynamic<?>, ? extends VillageConfig> config)
