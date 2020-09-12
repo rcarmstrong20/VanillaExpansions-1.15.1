@@ -79,7 +79,7 @@ public class VanillaExpansions
     public static final Logger LOGGER = LogManager.getLogger(VanillaExpansions.MOD_ID);
     public static final String MOD_ID = "ve";
     public static final VeItemGroup VE_GROUP = new VeItemGroup(VanillaExpansions.MOD_ID);
-    public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public VanillaExpansions()
     {
@@ -119,6 +119,7 @@ public class VanillaExpansions
      * This takes care of registering the particle factories if they are not
      * registered under the particle factory event there will be a bug.
      */
+    @SuppressWarnings("resource")
     @OnlyIn(Dist.CLIENT)
     private void onRegisterParticle(ParticleFactoryRegisterEvent event)
     {
@@ -317,47 +318,6 @@ public class VanillaExpansions
         }
     }
 
-    /*
-     * @SubscribeEvent public void onRightClickSlab(final
-     * PlayerInteractEvent.RightClickBlock event) { BlockPos pos = event.getPos();
-     * World world = event.getWorld(); Direction direction = event.getFace();
-     *
-     * BlockState worldState = event.getWorld().getBlockState(pos); BlockState
-     * worldStateUp = event.getWorld().getBlockState(pos.up()); Item item =
-     * event.getItemStack().getItem(); Block itemBlock =
-     * Block.getBlockFromItem(item.getItem());
-     *
-     * if(worldState.getBlock() instanceof SlabBlock && itemBlock instanceof
-     * SlabBlock) { if(worldState.getMaterial() ==
-     * itemBlock.getDefaultState().getMaterial()) { SlabType slabtype =
-     * worldState.get(SlabBlock.TYPE);
-     *
-     * if(slabtype != SlabType.DOUBLE && worldState.getBlock() != itemBlock) { if
-     * (slabtype == SlabType.BOTTOM && direction == Direction.UP ||
-     * direction.getAxis().isHorizontal()) {
-     * System.out.print("Placed top on bottom");
-     * VeDoubleSlabBlock.fillInventory(itemBlock, worldState.getBlock()); } else if
-     * (slabtype == SlabType.TOP && direction == Direction.DOWN ||
-     * direction.getAxis().isHorizontal()) {
-     * System.out.print("Placed bottom under top");
-     * VeDoubleSlabBlock.fillInventory(worldState.getBlock(), itemBlock); }
-     * world.setBlockState(pos, VeBlocks.double_slab.getDefaultState());
-     * event.setResult(Result.ALLOW); event.setCanceled(true); } } } else
-     * if(worldStateUp.getBlock() instanceof SlabBlock && itemBlock instanceof
-     * SlabBlock) { if(worldStateUp.getMaterial() ==
-     * itemBlock.getDefaultState().getMaterial()) { SlabType slabtypeUp =
-     * worldStateUp.get(SlabBlock.TYPE);
-     *
-     * if(slabtypeUp != SlabType.DOUBLE && worldState.getBlock() != itemBlock) { if
-     * (slabtypeUp == SlabType.TOP && direction == Direction.UP) {
-     * System.out.print("Placed bottom on top from bottom");
-     * VeDoubleSlabBlock.fillInventory(itemBlock, worldStateUp.getBlock());
-     * world.setBlockState(pos.up(), VeBlocks.double_slab.getDefaultState());
-     * event.setResult(Result.ALLOW); event.setCanceled(true); } } } } }
-     *
-     * /** Individually tracks the naming behavior for each white or killer rabbit
-     * entity, then either sets the rabbit type to 99 or 1.
-     */
     @SubscribeEvent
     public void onEntityInteract(final PlayerInteractEvent.EntityInteractSpecific event)
     {

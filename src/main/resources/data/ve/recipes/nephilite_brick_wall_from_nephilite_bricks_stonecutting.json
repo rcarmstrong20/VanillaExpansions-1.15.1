@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:nephilite_bricks"
+  },
+  "result": "ve:nephilite_brick_wall",
+  "count": 1
+}

@@ -247,7 +247,7 @@ public class VeColoredCampfireTileEntity extends TileEntity implements IClearabl
 
     public void dropAllItems()
     {
-        if (!this.getWorld().isRemote)
+        if (!this.getWorld().isRemote())
         {
             InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
         }

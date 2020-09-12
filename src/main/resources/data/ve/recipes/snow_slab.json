@@ -2,7 +2,7 @@
   "type": "crafting_shaped",
   "pattern":
   [
-    "###"
+    "##"
   ],
   "key":
   {
@@ -16,6 +16,6 @@
   "result":
   {
     "item": "ve:snow_slab",
-    "count": 6
+    "count": 4
   }
 }

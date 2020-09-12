@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient":
+  {
+    "item": "ve:nephilite"
+  },
+  "result": "ve:nephilite_stairs",
+  "count": 1
+}

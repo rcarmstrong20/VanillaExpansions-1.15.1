@@ -1,0 +1,40 @@
+{
+  "pools":
+  [
+    {
+      "rolls":
+      {
+        "min": 1,
+        "max": 2
+      },
+      "entries":
+      [
+        {
+          "type": "item",
+          "weight": 2,
+          "name": "ve:ruby_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 8,
+          "name": "minecraft:golden_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 5,
+          "name": "minecraft:iron_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 3,
+          "name": "minecraft:diamond_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 10,
+          "name": "minecraft:saddle"
+        }
+      ]
+    }
+  ]
+}
