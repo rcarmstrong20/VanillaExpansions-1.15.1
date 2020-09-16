@@ -114,7 +114,7 @@ public class VeBiomes
                 Feature.ORE
                         .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK,
                                 NETHER_RUBY_ORE, VeOreGenConfig.netherRubyOreVeinSize.get()))
-                        .withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))),
+                        .withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(16, 0, 0, 128))),
                 VeOreGenConfig.enableNetherRubyOreSpawns.get(), Category.NETHER);
         addFeature(Decoration.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.withConfiguration(BLUEBERRY_BUSH_CONFIG)
